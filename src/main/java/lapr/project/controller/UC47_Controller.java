@@ -3,7 +3,7 @@ package lapr.project.controller;
 import java.util.List;
 import lapr.project.model.Event;
 import lapr.project.model.EventCenter;
-import lapr.project.model.RegisterEvent;
+import lapr.project.model.ApplicationRegister;
 
 /*
  * Controller of UC47
@@ -34,10 +34,10 @@ public class UC47_Controller {
     
     /**
      * Method to get a submission global mean rating of the event
-     * @param e - Event
+     * @param ar - ApplicationRegister
      * @return submission global mean rating (double)
      */
-    public double getGlobalMeanRating(Event e){
-//        return e.getApplicationList.getGlobalMeanRating();
+    public double getGlobalMeanRating(ApplicationRegister ar){
+        return ar.getGlobalMeanRating();
     }
 }

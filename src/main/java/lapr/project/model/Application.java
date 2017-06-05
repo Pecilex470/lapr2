@@ -22,9 +22,11 @@ public class Application implements Importable<Application>, Exportable {
 	private static final String ROOT_ELEMENT_NAME = "application";
 	private static final String DESCRIPTION_ELEMENT_NAME = "description";
 	private static final String KEYWORDS_ELEMENT_NAME = "keywords";
+        private static final int DEFAULT_DECISION=0;
 	private final List<Keyword> keywordList = new ArrayList<>();
 	private String description = "";
         private int submissionRating;
+        private int decision;
 
 	/**
 	 * Constructor for Application
@@ -36,6 +38,7 @@ public class Application implements Importable<Application>, Exportable {
 		this.description = description;
 		this.keywordList.addAll(keywordList);
                 this.submissionRating = submissionRating;
+                this.decision=DEFAULT_DECISION;
 	}
 
 	/**
@@ -178,4 +181,8 @@ public class Application implements Importable<Application>, Exportable {
         public int getSubmissionRating(){
         return this.submissionRating;
     }
+        
+        public int getDecision(){
+            return this.decision;
+        }
 }
