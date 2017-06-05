@@ -16,7 +16,7 @@ public class Event {
     private List<Application> applicationRegister;
     private List<FAE> faeRegister;
     private List<Organizer> OrganizerRegister;
-    
+
     public Event(String title, String location, String description, Date startDate, Date endDate, Date submissionStartDate, Date submissionEndDate, String eventType, ApplicationRegister applicationRegister, FAERegister faeRegister, OrganizerRegister organizerRegister) {
         this.title = title;
         this.location = location;
@@ -26,9 +26,9 @@ public class Event {
         this.submissionStartDate = submissionStartDate;
         this.submissionEndDate = submissionEndDate;
         this.eventType = eventType;
-        this.applicationRegister = new ApplicationRegister();
-        this.faeRegister = new FAERegister();
-        this.OrganizerRegister = new OrganizerRegister();
+//        this.applicationRegister = new ApplicationRegister();
+//        this.faeRegister = new FAERegister();
+//        this.OrganizerRegister = new OrganizerRegister();
     }
 
     /**
@@ -76,56 +76,56 @@ public class Event {
     /**
      * @return the startDate
      */
-    public String getStartDate() {
+    public Date getStartDate() {
         return startDate;
     }
 
     /**
      * @param startDate the startDate to set
      */
-    public void setStartDate(String startDate) {
+    public void setStartDate(Date startDate) {
         this.startDate = startDate;
     }
 
     /**
      * @return the endDate
      */
-    public String getEndDate() {
+    public Date getEndDate() {
         return endDate;
     }
 
     /**
      * @param endDate the endDate to set
      */
-    public void setEndDate(String endDate) {
+    public void setEndDate(Date endDate) {
         this.endDate = endDate;
     }
 
     /**
      * @return the submissionStartDate
      */
-    public String getSubmissionStartDate() {
+    public Date getSubmissionStartDate() {
         return submissionStartDate;
     }
 
     /**
      * @param submissionStartDate the submissionStartDate to set
      */
-    public void setSubmissionStartDate(String submissionStartDate) {
+    public void setSubmissionStartDate(Date submissionStartDate) {
         this.submissionStartDate = submissionStartDate;
     }
 
     /**
      * @return the submissionEndDate
      */
-    public String getSubmissionEndDate() {
+    public Date getSubmissionEndDate() {
         return submissionEndDate;
     }
 
     /**
      * @param submissionEndDate the submissionEndDate to set
      */
-    public void setSubmissionEndDate(String submissionEndDate) {
+    public void setSubmissionEndDate(Date submissionEndDate) {
         this.submissionEndDate = submissionEndDate;
     }
 
@@ -142,48 +142,8 @@ public class Event {
     public void setEventType(String eventType) {
         this.eventType = eventType;
     }
-
-    /**
-     * @return the listaCandidaturas
-     */
-    public ApplicationRegister getListaCandidaturas() {
-        return listaCandidaturas;
-    }
-
-    /**
-     * @param listaCandidaturas the listaCandidaturas to set
-     */
-    public void setListaCandidaturas(ApplicationRegister listaCandidaturas) {
-        this.listaCandidaturas = listaCandidaturas;
-    }
-
-    /**
-     * @return the listaFAE
-     */
-    public FAERegister getListaFAE() {
-        return listaFAE;
-    }
-
-    /**
-     * @param listaFAE the listaFAE to set
-     */
-    public void setListaFAE(FAERegister listaFAE) {
-        this.listaFAE = listaFAE;
-    }
-
-    /**
-     * @return the listaOrganizadores
-     */
-    public OrganizerRegister getListaOrganizadores() {
-        return listaOrganizadores;
-    }
-
-    /**
-     * @param listaOrganizadores the listaOrganizadores to set
-     */
-    public void setListaOrganizadores(OrganizerRegister listaOrganizadores) {
-        this.listaOrganizadores = listaOrganizadores;
-    }
     
-    
+    public List<Application> getApplicationList() {
+        return applicationRegister;
+    }
 }

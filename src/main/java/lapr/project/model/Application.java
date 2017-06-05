@@ -24,6 +24,7 @@ public class Application implements Importable<Application>, Exportable {
 	private static final String KEYWORDS_ELEMENT_NAME = "keywords";
 	private final List<Keyword> keywordList = new ArrayList<>();
 	private String description = "";
+        private int submissionRating;
 
 	/**
 	 * Constructor for Application
@@ -31,9 +32,10 @@ public class Application implements Importable<Application>, Exportable {
 	 * @param description CandidaturaDescription
 	 * @param keywordList Keyword List
 	 */
-	public Application(String description, List<Keyword> keywordList) {
+	public Application(String description, List<Keyword> keywordList, int submissionRating) {
 		this.description = description;
 		this.keywordList.addAll(keywordList);
+                this.submissionRating = submissionRating;
 	}
 
 	/**
@@ -172,4 +174,8 @@ public class Application implements Importable<Application>, Exportable {
 		return getKeywordList().equals(that.getKeywordList());
 
 	}
+        
+        public int getSubmissionRating(){
+        return this.submissionRating;
+    }
 }
