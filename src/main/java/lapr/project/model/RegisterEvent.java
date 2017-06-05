@@ -9,17 +9,16 @@ import java.util.List;
 
 /**
  *
- * @author Pedro
+ * @author Cerqueira
  */
-public class Event {
+public class RegisterEvent {
+    private List<Event> el;
     
-    private ListApplications listApplications;
-    
-    public Event(){
+    public RegisterEvent(){
         
     }
     
-    public ListApplications getListApplications(){
-        return listApplications;
+    public List<Event> getEventList(){
+        return el;
     }
 }

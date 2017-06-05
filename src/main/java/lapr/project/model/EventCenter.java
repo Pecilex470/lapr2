@@ -5,21 +5,18 @@
  */
 package lapr.project.model;
 
-import java.util.List;
-
 /**
  *
- * @author Pedro
+ * @author Cerqueira
  */
-public class Event {
+public class EventCenter {
+    private RegisterEvent re;
     
-    private ListApplications listApplications;
-    
-    public Event(){
+    public EventCenter(){
         
     }
     
-    public ListApplications getListApplications(){
-        return listApplications;
+    public RegisterEvent getRegisterEvent(){
+        return this.re;
     }
 }

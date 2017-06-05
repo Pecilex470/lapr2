@@ -5,21 +5,18 @@
  */
 package lapr.project.model;
 
-import java.util.List;
-
 /**
  *
- * @author Pedro
+ * @author Cerqueira
  */
-public class Event {
+public class Applications {
+    private int submissionRating;
     
-    private ListApplications listApplications;
-    
-    public Event(){
+    public Applications(){
         
     }
     
-    public ListApplications getListApplications(){
-        return listApplications;
+    public int getSubmissionRating(){
+        return this.submissionRating;
     }
 }
