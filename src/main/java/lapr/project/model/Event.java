@@ -17,7 +17,7 @@ public class Event {
     private List<FAE> faeRegister;
     private List<Organizer> OrganizerRegister;
 
-    public Event(String title, String location, String description, Date startDate, Date endDate, Date submissionStartDate, Date submissionEndDate, String eventType, ApplicationRegister applicationRegister, FAERegister faeRegister, OrganizerRegister organizerRegister) {
+    public Event(String title, String location, String description, Date startDate, Date endDate, Date submissionStartDate, Date submissionEndDate, String eventType, ApplicationRegister applicationRegister, FAEList faeRegister, OrganizerList organizerRegister) {
         this.title = title;
         this.location = location;
         this.description = description;

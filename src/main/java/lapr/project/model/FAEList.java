@@ -9,6 +9,6 @@ package lapr.project.model;
  *
  * @author Pedro
  */
-class FAERegister {
+class FAEList {
     
 }
