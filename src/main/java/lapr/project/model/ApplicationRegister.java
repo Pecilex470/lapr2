@@ -7,12 +7,8 @@ public class ApplicationRegister {
 
     public List<Application> applicationRegister;
 
-    public ApplicationRegister(ArrayList<Application> applicationRegister) {
-        this.applicationRegister = new ArrayList(applicationRegister);
-    }
-
-    public ApplicationRegister() {
-        applicationRegister = new ArrayList();
+    public ApplicationRegister(List<Application> applicationRegister) {
+        this.applicationRegister = applicationRegister;
     }
 
     public ArrayList<Application> getApplicationList() {
@@ -21,18 +17,22 @@ public class ApplicationRegister {
 
     public double getGlobalMeanRating() {
         double total = 0;
-        for (Application a : applicationRegister) {
-            total += a.getSubmissionRating();
+        if (!applicationRegister.isEmpty()) {
+            for (Application a : applicationRegister) {
+                total += a.getSubmissionRating();
+            }
+            return total / applicationRegister.size();
         }
-        return total / applicationRegister.size();
+        return -1;
     }
-    
+
     /**
      * Method Incomplet - Values only for tests
+     *
      * @param e - Event
      * @return Mean deviation
      */
-    public double getMeanDeviation(Event e){
+    public double getMeanDeviation(Event e) {
         return 23;
     }
 }

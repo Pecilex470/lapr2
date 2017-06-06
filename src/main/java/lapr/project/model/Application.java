@@ -34,10 +34,9 @@ public class Application implements Importable<Application>, Exportable {
 	 * @param description CandidaturaDescription
 	 * @param keywordList Keyword List
 	 */
-	public Application(String description, List<Keyword> keywordList, int submissionRating) {
+	public Application(String description, List<Keyword> keywordList) {
 		this.description = description;
 		this.keywordList.addAll(keywordList);
-                this.submissionRating = submissionRating;
                 this.decision=DEFAULT_DECISION;
 	}
 
