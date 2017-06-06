@@ -2,7 +2,6 @@ package lapr.project.model;
 
 import java.util.ArrayList;
 import java.util.List;
-import lapr.project.model.Application;
 
 public class ApplicationRegister {
 
@@ -16,17 +15,24 @@ public class ApplicationRegister {
         applicationRegister = new ArrayList();
     }
 
-    public List<Application> getApplicationList() {
+    public ArrayList<Application> getApplicationList() {
         return new ArrayList<>(this.applicationRegister);
     }
 
     public double getGlobalMeanRating() {
         double total = 0;
         for (Application a : applicationRegister) {
-            if (a.getDecision() == 0) {
-                total += a.getSubmissionRating();
-            }
+            total += a.getSubmissionRating();
         }
         return total / applicationRegister.size();
+    }
+    
+    /**
+     * Method Incomplet - Values only for tests
+     * @param e - Event
+     * @return Mean deviation
+     */
+    public double getMeanDeviation(Event e){
+        return 23;
     }
 }

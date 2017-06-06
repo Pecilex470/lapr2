@@ -10,6 +10,7 @@ import lapr.project.model.ApplicationRegister;
  */
 
 /**
+ * 
  *
  * @author João Oliveira
  */
@@ -18,7 +19,8 @@ public class UC47_Controller {
 
     private EventCenter ec;
     
-    public UC47_Controller(){
+    public UC47_Controller(EventCenter ec){
+        this.ec=ec;
     }
       
 
