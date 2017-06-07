@@ -19,169 +19,169 @@ import java.util.List;
  * @author by Nuno Bettencourt [nmb@isep.ipp.pt] on 29/05/16.
  */
 public class Application implements Importable<Application>, Exportable {
-	private static final String ROOT_ELEMENT_NAME = "application";
-	private static final String DESCRIPTION_ELEMENT_NAME = "description";
-	private static final String KEYWORDS_ELEMENT_NAME = "keywords";
-        private static final int DEFAULT_DECISION=0;
-	private final List<Keyword> keywordList = new ArrayList<>();
-	private String description = "";
-        private int submissionRating;
-        private int decision;
 
-	/**
-	 * Constructor for Application
-	 *
-	 * @param description CandidaturaDescription
-	 * @param keywordList Keyword List
-	 */
-	public Application(String description, List<Keyword> keywordList) {
-		this.description = description;
-		this.keywordList.addAll(keywordList);
-                this.decision=DEFAULT_DECISION;
-	}
+    private static final String ROOT_ELEMENT_NAME = "application";
+    private static final String DESCRIPTION_ELEMENT_NAME = "description";
+    private static final String KEYWORDS_ELEMENT_NAME = "keywords";
+    private static final int DEFAULT_DECISION = 0;
+    private final List<Keyword> keywordList = new ArrayList<>();
+    private String description = "";
+    private int submissionRating;
+    private int decision;
 
-	/**
-	 * Default public constructor.
-	 */
-	public Application() {
+    /**
+     * Constructor for Application
+     *
+     * @param description CandidaturaDescription
+     * @param keywordList Keyword List
+     */
+    public Application(String description, List<Keyword> keywordList) {
+        this.description = description;
+        this.keywordList.addAll(keywordList);
+        this.decision = DEFAULT_DECISION;
+    }
 
-	}
+    /**
+     * Default public constructor.
+     */
+    public Application() {
 
-	/**
-	 * Obtain Candidatura's description.
-	 *
-	 * @return Candidatura description
-	 */
-	private String getDescription() {
-		return description;
-	}
+    }
 
-	/**
-	 * Add a keyword to Candidatura.
-	 *
-	 * @param keyword Keyword to be added.
-	 */
-	public void addKeyword(Keyword keyword) {
-		getKeywordList().add(keyword);
-	}
+    /**
+     * Obtain Candidatura's description.
+     *
+     * @return Candidatura description
+     */
+    private String getDescription() {
+        return description;
+    }
 
-	/**
-	 * Obtain the list of existing keywords.
-	 *
-	 * @return A list of existing keywords.
-	 */
-	public List<Keyword> getKeywordList() {
-		return keywordList;
+    /**
+     * Add a keyword to Candidatura.
+     *
+     * @param keyword Keyword to be added.
+     */
+    public void addKeyword(Keyword keyword) {
+        getKeywordList().add(keyword);
+    }
 
-	}
+    /**
+     * Obtain the list of existing keywords.
+     *
+     * @return A list of existing keywords.
+     */
+    public List<Keyword> getKeywordList() {
+        return keywordList;
 
-	@Override
-	public Node exportContentToXMLNode() throws ParserConfigurationException {
-		Node rootNode = null;
+    }
 
-		DocumentBuilderFactory factory =
-				DocumentBuilderFactory.newInstance();
-		//Create document builder
-		DocumentBuilder builder = factory.newDocumentBuilder();
+    @Override
+    public Node exportContentToXMLNode() throws ParserConfigurationException {
+        Node rootNode = null;
 
-		//Obtain a new document
-		Document document = builder.newDocument();
+        DocumentBuilderFactory factory
+                = DocumentBuilderFactory.newInstance();
+        //Create document builder
+        DocumentBuilder builder = factory.newDocumentBuilder();
 
-		//Create root element
-		Element elementCandidatura = document.createElement(ROOT_ELEMENT_NAME);
+        //Obtain a new document
+        Document document = builder.newDocument();
 
-		//Create a sub-element
-		Element elementDescription = document.createElement(DESCRIPTION_ELEMENT_NAME);
+        //Create root element
+        Element elementCandidatura = document.createElement(ROOT_ELEMENT_NAME);
 
-		//Set the sub-element value
-		elementDescription.setTextContent(getDescription());
+        //Create a sub-element
+        Element elementDescription = document.createElement(DESCRIPTION_ELEMENT_NAME);
 
-		//Add sub-element to root element
-		elementCandidatura.appendChild(elementDescription);
+        //Set the sub-element value
+        elementDescription.setTextContent(getDescription());
 
-		//Create a sub-element
-		Element elementKeywords = document.createElement(KEYWORDS_ELEMENT_NAME);
-		elementCandidatura.appendChild(elementKeywords);
+        //Add sub-element to root element
+        elementCandidatura.appendChild(elementDescription);
 
-		//iterate over keywords
-		for (Keyword keyword : getKeywordList()
-				) {
-			Node keywordNode = keyword.exportContentToXMLNode();
-			elementKeywords.appendChild(document.importNode(keywordNode, true));
-		}
+        //Create a sub-element
+        Element elementKeywords = document.createElement(KEYWORDS_ELEMENT_NAME);
+        elementCandidatura.appendChild(elementKeywords);
 
-		//Add root element to document
-		document.appendChild(elementCandidatura);
+        //iterate over keywords
+        for (Keyword keyword : getKeywordList()) {
+            Node keywordNode = keyword.exportContentToXMLNode();
+            elementKeywords.appendChild(document.importNode(keywordNode, true));
+        }
 
-		//It exports only the element representation to XMÇ, ommiting the XML header
-		rootNode = elementCandidatura;
+        //Add root element to document
+        document.appendChild(elementCandidatura);
 
-		return rootNode;
-	}
+        //It exports only the element representation to XMÇ, ommiting the XML header
+        rootNode = elementCandidatura;
 
-	@Override
-	public Application importContentFromXMLNode(Node node) throws ParserConfigurationException {
+        return rootNode;
+    }
 
-		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+    @Override
+    public Application importContentFromXMLNode(Node node) throws ParserConfigurationException {
 
-		//Create document builder
-		DocumentBuilder builder = factory.newDocumentBuilder();
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 
-		//Obtain a new document
-		Document document = builder.newDocument();
-		document.appendChild(document.importNode(node, true));
+        //Create document builder
+        DocumentBuilder builder = factory.newDocumentBuilder();
 
-		NodeList elementsCandidatura = document.getElementsByTagName(ROOT_ELEMENT_NAME);
+        //Obtain a new document
+        Document document = builder.newDocument();
+        document.appendChild(document.importNode(node, true));
 
-		Node elementCandidatura = elementsCandidatura.item(0);
+        NodeList elementsCandidatura = document.getElementsByTagName(ROOT_ELEMENT_NAME);
 
-		//Get description
-		this.description = elementCandidatura.getFirstChild().getFirstChild().getNodeValue();
+        Node elementCandidatura = elementsCandidatura.item(0);
 
-		NodeList elementsKeywords = document.getElementsByTagName(KEYWORDS_ELEMENT_NAME);
+        //Get description
+        this.description = elementCandidatura.getFirstChild().getFirstChild().getNodeValue();
 
-		NodeList keywords = elementsKeywords.item(0).getChildNodes();
-		for (int position = 0; position < keywords.getLength(); position++) {
-			Node keyword = keywords.item(position);
-			Keyword keywordExample = new Keyword();
+        NodeList elementsKeywords = document.getElementsByTagName(KEYWORDS_ELEMENT_NAME);
 
-			keywordExample = keywordExample.importContentFromXMLNode(keyword);
-			addKeyword(keywordExample);
-		}
+        NodeList keywords = elementsKeywords.item(0).getChildNodes();
+        for (int position = 0; position < keywords.getLength(); position++) {
+            Node keyword = keywords.item(position);
+            Keyword keywordExample = new Keyword();
 
-		return this;
-	}
+            keywordExample = keywordExample.importContentFromXMLNode(keyword);
+            addKeyword(keywordExample);
+        }
 
-	@Override
-	public int hashCode() {
-		int result = getDescription().hashCode();
-		result = 31 * result + getKeywordList().hashCode();
-		return result;
-	}
+        return this;
+    }
 
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) {
-			return true;
-		}
-		if (!(o instanceof Application)) {
-			return false;
-		}
+    @Override
+    public int hashCode() {
+        int result = getDescription().hashCode();
+        result = 31 * result + getKeywordList().hashCode();
+        return result;
+    }
 
-		Application that = (Application) o;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Application)) {
+            return false;
+        }
 
-		if (!getDescription().equals(that.getDescription())) {
-			return false;
-		}
-		return getKeywordList().equals(that.getKeywordList());
+        Application that = (Application) o;
 
-	}
-        
-        public int getSubmissionRating(){
+        if (!getDescription().equals(that.getDescription())) {
+            return false;
+        }
+        return getKeywordList().equals(that.getKeywordList());
+
+    }
+
+    public int getSubmissionRating() {
         return this.submissionRating;
     }
-        
-        public int getDecision(){
-            return this.decision;
-        }
+
+    public int getDecision() {
+        return this.decision;
+    }
 }

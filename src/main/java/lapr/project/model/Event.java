@@ -1,5 +1,8 @@
 package lapr.project.model;
 
+import lapr.project.model.register.FAEList;
+import lapr.project.model.register.OrganizerList;
+import lapr.project.model.register.ApplicationRegister;
 import java.util.Date;
 import java.util.List;
 
@@ -13,9 +16,9 @@ public class Event {
     private Date submissionStartDate;
     private Date submissionEndDate;
     private String eventType;
-    private List<Application> applicationRegister;
-    private List<FAE> faeRegister;
-    private List<Organizer> OrganizerRegister;
+    private ApplicationRegister applicationRegister;
+    private FAEList faeRegister;
+    private OrganizerList OrganizerRegister;
 
     public Event(String title, String location, String description, Date startDate, Date endDate, Date submissionStartDate, Date submissionEndDate, String eventType, ApplicationRegister applicationRegister, FAEList faeRegister, OrganizerList organizerRegister) {
         this.title = title;
@@ -26,7 +29,7 @@ public class Event {
         this.submissionStartDate = submissionStartDate;
         this.submissionEndDate = submissionEndDate;
         this.eventType = eventType;
-//        this.applicationRegister = new ApplicationRegister();
+        this.applicationRegister = new ApplicationRegister();
 //        this.faeRegister = new FAERegister();
 //        this.OrganizerRegister = new OrganizerRegister();
     }
@@ -142,8 +145,8 @@ public class Event {
     public void setEventType(String eventType) {
         this.eventType = eventType;
     }
-    
+
     public List<Application> getApplicationList() {
-        return applicationRegister;
+        return applicationRegister.getApplicationList();
     }
 }

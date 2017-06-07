@@ -1,14 +1,20 @@
-package lapr.project.model;
+package lapr.project.model.register;
 
 import java.util.ArrayList;
 import java.util.List;
+import lapr.project.model.Application;
+import lapr.project.model.Event;
 
 public class ApplicationRegister {
 
-    public List<Application> applicationRegister;
+    private List<Application> applicationRegister;
 
-    public ApplicationRegister(List<Application> applicationRegister) {
-        this.applicationRegister = applicationRegister;
+    public ApplicationRegister() {
+        this.applicationRegister = new ArrayList();
+    }
+
+    public ApplicationRegister(ArrayList<Application> arrayList) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     public ArrayList<Application> getApplicationList() {
