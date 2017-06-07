@@ -149,4 +149,21 @@ public class Event {
     public List<Application> getApplicationList() {
         return applicationRegister.getApplicationList();
     }
+
+    /**
+     * This method calculates and returns the acceptance rate of an event
+     *
+     * @return acceptance rate of an event
+     */
+
+    public double getAcceptanceRate() {
+
+        int accepted = applicationRegister.getAcceptedApplicationRegister().size();
+        int total = applicationRegister.getApplicationList().size();
+
+        double acceptanceRate = (accepted * 100) / total;
+
+        return acceptanceRate;
+
+    }
 }

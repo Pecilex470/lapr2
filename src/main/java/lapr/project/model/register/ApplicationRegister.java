@@ -41,4 +41,24 @@ public class ApplicationRegister {
     public double getMeanDeviation(Event e) {
         return 23;
     }
+    
+      /**
+     *
+     * This method calculates and returns the accepted applications list using
+     * the getDecision method for each application.
+     *
+     * @return accepted applications list
+     */
+    public List<Application> getAcceptedApplicationRegister() {
+
+        List<Application> acceptedApplicationRegister = new ArrayList<>();
+
+        for (Application a : applicationRegister) {
+            if (a.getDecision() == 1) {
+                acceptedApplicationRegister.add(a);
+            }
+        }
+
+        return acceptedApplicationRegister;
+    }
 }
