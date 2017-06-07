@@ -10,7 +10,6 @@ public class ApplicationRegister {
     private List<Application> applicationRegister;
 
     public ApplicationRegister() {
-        this.applicationRegister = new ArrayList();
     }
 
     public ApplicationRegister(ArrayList<Application> arrayList) {
