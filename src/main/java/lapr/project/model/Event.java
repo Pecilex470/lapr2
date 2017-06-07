@@ -1,9 +1,9 @@
 package lapr.project.model;
 
+import java.util.Calendar;
 import lapr.project.model.register.FAEList;
 import lapr.project.model.register.OrganizerList;
 import lapr.project.model.register.ApplicationRegister;
-import java.util.Date;
 import java.util.List;
 
 public class Event {
@@ -11,16 +11,16 @@ public class Event {
     private String title;
     private String location;
     private String description;
-    private Date startDate;
-    private Date endDate;
-    private Date submissionStartDate;
-    private Date submissionEndDate;
+    private Calendar startDate;
+    private Calendar endDate;
+    private Calendar submissionStartDate;
+    private Calendar submissionEndDate;
     private String eventType;
     private ApplicationRegister applicationRegister;
     private FAEList faeRegister;
     private OrganizerList OrganizerRegister;
 
-    public Event(String title, String location, String description, Date startDate, Date endDate, Date submissionStartDate, Date submissionEndDate, String eventType, ApplicationRegister applicationRegister, FAEList faeRegister, OrganizerList organizerRegister) {
+    public Event(String title, String location, String description, Calendar startDate, Calendar endDate, Calendar submissionStartDate, Calendar submissionEndDate, String eventType, ApplicationRegister applicationRegister, FAEList faeRegister, OrganizerList organizerRegister) {
         this.title = title;
         this.location = location;
         this.description = description;
@@ -79,56 +79,56 @@ public class Event {
     /**
      * @return the startDate
      */
-    public Date getStartDate() {
+    public Calendar getStartDate() {
         return startDate;
     }
 
     /**
      * @param startDate the startDate to set
      */
-    public void setStartDate(Date startDate) {
+    public void setStartDate(Calendar startDate) {
         this.startDate = startDate;
     }
 
     /**
      * @return the endDate
      */
-    public Date getEndDate() {
+    public Calendar getEndDate() {
         return endDate;
     }
 
     /**
      * @param endDate the endDate to set
      */
-    public void setEndDate(Date endDate) {
+    public void setEndDate(Calendar endDate) {
         this.endDate = endDate;
     }
 
     /**
      * @return the submissionStartDate
      */
-    public Date getSubmissionStartDate() {
+    public Calendar getSubmissionStartDate() {
         return submissionStartDate;
     }
 
     /**
      * @param submissionStartDate the submissionStartDate to set
      */
-    public void setSubmissionStartDate(Date submissionStartDate) {
+    public void setSubmissionStartDate(Calendar submissionStartDate) {
         this.submissionStartDate = submissionStartDate;
     }
 
     /**
      * @return the submissionEndDate
      */
-    public Date getSubmissionEndDate() {
+    public Calendar getSubmissionEndDate() {
         return submissionEndDate;
     }
 
     /**
      * @param submissionEndDate the submissionEndDate to set
      */
-    public void setSubmissionEndDate(Date submissionEndDate) {
+    public void setSubmissionEndDate(Calendar submissionEndDate) {
         this.submissionEndDate = submissionEndDate;
     }
 

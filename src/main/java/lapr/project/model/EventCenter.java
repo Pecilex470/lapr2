@@ -14,7 +14,7 @@ public class EventCenter {
 
     }
 
-    public EventRegister getRegisterEvent() {
+    public EventRegister getEventRegister() {
         return this.re;
     }
 }

@@ -28,7 +28,7 @@ public class UC47_Controller {
      * @return List
      */
     public List<Event> getEventList(EventCenter ec) {
-        return ec.getRegisterEvent().getEventList();
+        return ec.getEventRegister().getEventList();
     }
 
     /**

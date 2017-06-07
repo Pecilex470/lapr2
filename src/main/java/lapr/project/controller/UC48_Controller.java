@@ -26,7 +26,7 @@ public class UC48_Controller {
     }
     
     public List<Event> getEventList(){
-        return ec.getRegisterEvent().getEventList();
+        return ec.getEventRegister().getEventList();
     }
     
     public double getMeanDeviation(Event e){

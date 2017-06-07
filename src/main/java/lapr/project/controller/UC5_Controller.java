@@ -1,5 +1,7 @@
 package lapr.project.controller;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import lapr.project.model.Event;
 import lapr.project.model.EventCenter;
@@ -12,9 +14,10 @@ public class UC5_Controller {
         this.ec = ec;
     }
     
-//    public List<Event> getAvailableEvents(EventCenter ec) {
-//        ec.getRegisterEvent().getEventList();
-//        
+//    public ArrayList<Event> getAvailableEvents(EventCenter ec) {
+//        for (Event e : ec.getEventRegister().getEventList()) {
+//            if (e.getSubmissionEndDate() 
+//        }
 //    }
     
 }

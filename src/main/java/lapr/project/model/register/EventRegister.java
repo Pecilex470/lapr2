@@ -6,13 +6,13 @@ import lapr.project.model.Event;
 
 public class EventRegister {
 
-    private List<Event> eventRegister;
+    private ArrayList<Event> eventRegister;
     
     public EventRegister(){
         this.eventRegister = new ArrayList();
     }
     
-    public List<Event> getEventList(){
+    public ArrayList<Event> getEventList(){
         return eventRegister;
     }
     
