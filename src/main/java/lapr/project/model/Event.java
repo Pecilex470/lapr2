@@ -17,8 +17,8 @@ public class Event {
     private Calendar submissionEndDate;
     private String eventType;
     private ApplicationRegister applicationRegister;
-    private FAEList faeRegister;
-    private OrganizerList OrganizerRegister;
+    private FAEList faeList;
+    private OrganizerList OrganizerList;
 
     public Event(String title, String location, String description, Calendar startDate, Calendar endDate, Calendar submissionStartDate, Calendar submissionEndDate, String eventType, ApplicationRegister applicationRegister, FAEList faeRegister, OrganizerList organizerRegister) {
         this.title = title;
@@ -30,8 +30,8 @@ public class Event {
         this.submissionEndDate = submissionEndDate;
         this.eventType = eventType;
         this.applicationRegister = new ApplicationRegister();
-//        this.faeRegister = new FAERegister();
-//        this.OrganizerRegister = new OrganizerRegister();
+        this.faeList = new FAEList();
+        this.OrganizerList = new OrganizerList();
     }
 
     /**
@@ -146,6 +146,11 @@ public class Event {
         this.eventType = eventType;
     }
 
+    /**
+     * This method returns the list of applications for this event
+     * 
+     * @return list of applications
+     */
     public List<Application> getApplicationList() {
         return applicationRegister.getApplicationList();
     }

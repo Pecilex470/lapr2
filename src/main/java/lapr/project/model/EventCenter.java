@@ -11,7 +11,7 @@ public class EventCenter {
     private EventRegister er;
 
     public EventCenter() {
-
+        this.er = new EventRegister();
     }
 
     public EventRegister getEventRegister() {
