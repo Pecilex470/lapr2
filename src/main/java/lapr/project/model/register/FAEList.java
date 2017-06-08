@@ -19,4 +19,8 @@ public class FAEList {
         return false;//only for tests
     }
     
+    public boolean testDifference(FAE fae){
+        return false;//only for tests
+    }
+    
 }
