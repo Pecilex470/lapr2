@@ -171,4 +171,10 @@ public class Event {
         return acceptanceRate;
 
     }
+    
+    public FAEList getFaeList(){
+        return this.faeList;
+    }
+
+
 }

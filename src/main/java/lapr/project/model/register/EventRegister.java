@@ -1,17 +1,17 @@
 package lapr.project.model.register;
 
-import java.util.ArrayList;
+import java.util.List;
 import lapr.project.model.Event;
 
 public class EventRegister {
 
-    private ArrayList<Event> eventRegister;
+    private List<Event> eventRegister;
     
     
     public EventRegister(){
     }
     
-    public ArrayList<Event> getEventList(){
+    public List<Event> getEventList(){
         return eventRegister;
     }
     
