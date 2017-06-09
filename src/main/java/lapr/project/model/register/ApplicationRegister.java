@@ -24,7 +24,7 @@ public class ApplicationRegister {
         double total = 0;
         if (!applicationRegister.isEmpty()) {
             for (Application a : applicationRegister) {
-                total += a.getSubmissionRating();
+                total += a.getSubmissionMeanRating();
             }
             return total / applicationRegister.size();
         }

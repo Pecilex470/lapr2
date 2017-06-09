@@ -26,7 +26,7 @@ public class Application implements Importable<Application>, Exportable {
     private static final int DEFAULT_DECISION = 0;
     private final List<Keyword> keywordList = new ArrayList<>();
     private String description = "";
-    private int submissionRating;
+    private int submissionMeanRating;
     private int decision;
 
     /**
@@ -177,8 +177,8 @@ public class Application implements Importable<Application>, Exportable {
 
     }
 
-    public int getSubmissionRating() {
-        return this.submissionRating;
+    public int getSubmissionMeanRating() {
+        return this.submissionMeanRating;
     }
 
     public int getDecision() {
