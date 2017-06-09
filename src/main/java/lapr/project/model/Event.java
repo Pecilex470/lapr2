@@ -1,9 +1,6 @@
 package lapr.project.model;
 
 import java.util.Calendar;
-import lapr.project.model.register.FAEList;
-import lapr.project.model.register.OrganizerList;
-import lapr.project.model.register.ApplicationRegister;
 import java.util.List;
 
 public class Event {
@@ -16,11 +13,11 @@ public class Event {
     private Calendar submissionStartDate;
     private Calendar submissionEndDate;
     private String eventType;
-    private ApplicationRegister applicationRegister;
+    private ListApplication applicationRegister;
     private FAEList faeList;
     private OrganizerList OrganizerList;
 
-    public Event(String title, String location, String description, Calendar startDate, Calendar endDate, Calendar submissionStartDate, Calendar submissionEndDate, String eventType, ApplicationRegister applicationRegister, FAEList faeRegister, OrganizerList organizerRegister) {
+    public Event(String title, String location, String description, Calendar startDate, Calendar endDate, Calendar submissionStartDate, Calendar submissionEndDate, String eventType, ListApplication al, FAEList fl, OrganizerList ol) {
         this.title = title;
         this.location = location;
         this.description = description;
@@ -29,9 +26,9 @@ public class Event {
         this.submissionStartDate = submissionStartDate;
         this.submissionEndDate = submissionEndDate;
         this.eventType = eventType;
-        this.applicationRegister = new ApplicationRegister();
-        this.faeList = new FAEList();
-        this.OrganizerList = new OrganizerList();
+        this.applicationRegister = al; 
+        this.faeList = fl;
+        this.OrganizerList = ol; 
     }
 
     /**
@@ -152,7 +149,7 @@ public class Event {
      * @return list of applications
      */
     public List<Application> getApplicationList() {
-        return applicationRegister.getApplicationList();
+        return applicationRegister.getApplication();
     }
 
     /**
@@ -164,7 +161,7 @@ public class Event {
     public double getAcceptanceRate() {
 
         int accepted = applicationRegister.getAcceptedApplicationRegister().size();
-        int total = applicationRegister.getApplicationList().size();
+        int total = applicationRegister.getApplication().size();
 
         double acceptanceRate = (accepted * 100) / total;
 

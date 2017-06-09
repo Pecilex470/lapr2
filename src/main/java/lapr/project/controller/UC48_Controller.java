@@ -3,9 +3,8 @@ package lapr.project.controller;
 import java.util.ArrayList;
 import java.util.List;
 import lapr.project.model.Application;
-import lapr.project.model.register.ApplicationRegister;
-import lapr.project.model.Event;
-import lapr.project.model.EventCenter;
+import lapr.project.model.*;
+
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -30,7 +29,7 @@ public class UC48_Controller {
     }
     
     public double getMeanDeviation(Event e){
-        ApplicationRegister ar = new ApplicationRegister((ArrayList<Application>) e.getApplicationList());
+        ListApplication ar = new ListApplication((ArrayList<Application>) e.getApplicationList());
         return ar.getMeanDeviation(e);
     }
     

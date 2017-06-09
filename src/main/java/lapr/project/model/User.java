@@ -5,7 +5,6 @@
  */
 package lapr.project.model;
 
-import java.io.Serializable;
 
 /**
  *
@@ -13,7 +12,7 @@ import java.io.Serializable;
  */
 public class User {
     
-   public class Utilizador implements Serializable { 
+
     public String name;
 
     /**
@@ -39,7 +38,7 @@ public class User {
      * @param username User identification 
      * @param password User Acess password
      */
-    public Utilizador(String name, String email, String username, String password) {
+    public User(String name, String email, String username, String password) {
         this.name = name;
         this.email = email;
         this.username = username;
@@ -125,7 +124,7 @@ public class User {
         if (obj == null || this.getClass() != obj.getClass()) {
             return false;
         }
-        Utilizador outroUtil = (Utilizador) obj;
+        User outroUtil = (User) obj;
         return (this.name.equalsIgnoreCase(outroUtil.name)
                 && this.email.equalsIgnoreCase(outroUtil.email)
                 && this.username.equalsIgnoreCase(outroUtil.username)
@@ -133,4 +132,4 @@ public class User {
     }
    }
     
-}
+
