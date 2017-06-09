@@ -1,5 +1,8 @@
 package lapr.project.model;
 
+import lapr.project.model.register.FAEList;
+import lapr.project.model.register.ApplicationRegister;
+import lapr.project.model.register.OrganizerList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -13,11 +16,11 @@ public class Event {
     private Calendar submissionStartDate;
     private Calendar submissionEndDate;
     private String eventType;
-    private ListApplication applicationRegister;
+    private ApplicationRegister applicationRegister;
     private FAEList faeList;
     private OrganizerList OrganizerList;
 
-    public Event(String title, String location, String description, Calendar startDate, Calendar endDate, Calendar submissionStartDate, Calendar submissionEndDate, String eventType, ListApplication al, FAEList fl, OrganizerList ol) {
+    public Event(String title, String location, String description, Calendar startDate, Calendar endDate, Calendar submissionStartDate, Calendar submissionEndDate, String eventType, ApplicationRegister al, FAEList fl, OrganizerList ol) {
         this.title = title;
         this.location = location;
         this.description = description;

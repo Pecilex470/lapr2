@@ -1,5 +1,6 @@
 package lapr.project.controller;
 
+import lapr.project.model.register.ApplicationRegister;
 import java.util.ArrayList;
 import java.util.List;
 import lapr.project.model.Application;
@@ -29,7 +30,7 @@ public class UC48_Controller {
     }
     
     public double getMeanDeviation(Event e){
-        ListApplication ar = new ListApplication((ArrayList<Application>) e.getApplicationList());
+        ApplicationRegister ar = new ApplicationRegister((ArrayList<Application>) e.getApplicationList());
         return ar.getMeanDeviation(e);
     }
     

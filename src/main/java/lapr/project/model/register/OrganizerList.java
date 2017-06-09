@@ -1,7 +1,8 @@
-package lapr.project.model;
+package lapr.project.model.register;
 
 import java.util.ArrayList;
 import java.util.List;
+import lapr.project.model.Organizer;
 
 public class OrganizerList {
 

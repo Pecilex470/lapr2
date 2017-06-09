@@ -1,5 +1,9 @@
 package lapr.project.model;
 
+import lapr.project.model.register.EventRegister;
+import lapr.project.model.register.UserRegister;
+import lapr.project.model.register.RepresentativeList;
+
 /**
  *
  * @author Cerqueira
