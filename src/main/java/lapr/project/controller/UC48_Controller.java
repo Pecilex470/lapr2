@@ -1,11 +1,11 @@
 package lapr.project.controller;
 
+import lapr.project.model.register.ApplicationRegister;
 import java.util.ArrayList;
 import java.util.List;
 import lapr.project.model.Application;
-import lapr.project.model.register.ApplicationRegister;
-import lapr.project.model.Event;
-import lapr.project.model.EventCenter;
+import lapr.project.model.*;
+
 
 /*
  * To change this license header, choose License Headers in Project Properties.

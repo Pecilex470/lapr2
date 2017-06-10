@@ -5,10 +5,55 @@
  */
 package lapr.project.model;
 
-/**
- *
- * @author Pedro
- */
-class Organizer {
-    
+public class Organizer {
+
+    /**
+     * User that received the role of Organizer of a certain event.
+     */
+    private User userOrg;
+
+    /**
+     *Creates an Organizer instance, receiving a user that will perform the duty of organizer.
+     *
+     * @param user User that received the role of organizer of a certain event.
+     */
+    public Organizer(User user) {
+        userOrg = user;
+    }
+
+    /**
+     * @return User that received the role of organizer of a certain event.
+     */
+    public User getUtilizadorOrganizador() {
+        return userOrg;
+    }
+
+    /**
+     * Method that allows to define the user that received the role of Organizer of a certain event.
+     *
+     * @param user User that received the role of organizer of a certain event.
+     */
+    public void setUtilizadorOrganizador(User user) {
+        this.userOrg = user;
+    }
+
+    /**
+     * Method that compares 2 objects and verifies are equal to each other
+     *
+     * @param obj Object to be compared with the one that invokes the method.
+     * @return "True" - The 2 FAE are equals; "False" - Otherwise 
+     * 
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || this.getClass() != obj.getClass()) {
+            return false;
+        }
+        Organizer outroOrganizador = (Organizer) obj;
+        return (this.userOrg.equals(outroOrganizador.getUtilizadorOrganizador()));
+    }
+
 }
