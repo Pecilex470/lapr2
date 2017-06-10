@@ -47,6 +47,10 @@ public class User {
     /**
      * @return The name of the respective user
      */
+    public String getName() {
+        return this.name;
+    }
+
     /**
      * @return The email of the respective user
      */
@@ -71,9 +75,6 @@ public class User {
     /**
      * @return The name of the respective user
      */
-    public String getName() {
-        return name;
-    }
 
     /**
      * Method that allows to define the name of the user
