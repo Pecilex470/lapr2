@@ -155,6 +155,14 @@ public class Event {
         return applicationRegister.getApplicationList();
     }
 
+     /**
+     * This method returns the ApplicationRegister for this event
+     * 
+     * @return list of applications
+     */
+    public ApplicationRegister getApllicationRegister(){
+        return applicationRegister;
+    }
     /**
      * This method calculates and returns the acceptance rate of an event
      *
