@@ -52,7 +52,7 @@ public class User {
     /**
      * @return The name of the respective user
      */
-    public String getNome() {
+    public String getName() {
         return name;
     }
 

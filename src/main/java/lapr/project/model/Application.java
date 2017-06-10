@@ -26,8 +26,11 @@ public class Application implements Importable<Application>, Exportable {
     private static final int DEFAULT_DECISION = 0;
     private final List<Keyword> keywordList = new ArrayList<>();
     private String description = "";
+    private Attribution attribution;
     private int submissionMeanRating;
     private int decision;
+    private String companyName;
+    private int numberOfDecisions;
 
     /**
      * Constructor for Application
@@ -74,6 +77,10 @@ public class Application implements Importable<Application>, Exportable {
     public List<Keyword> getKeywordList() {
         return keywordList;
 
+    }
+
+    public Attribution getAttribution() {
+        return this.attribution;
     }
 
     @Override
@@ -184,4 +191,9 @@ public class Application implements Importable<Application>, Exportable {
     public int getDecision() {
         return this.decision;
     }
+
+    public String getCompanyName() {
+        return this.companyName;
+    }
+
 }
