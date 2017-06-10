@@ -5,20 +5,19 @@ import java.util.List;
 
 public class Attribution {
 
-    private Application app;
+    private Application a;
     private List<FAE> l_FAE;
-    
 
     public Attribution() {
         this.l_FAE = new ArrayList<>();
     }
 
-    public Attribution(Application c) {
+    public Attribution(Application a) {
         this.l_FAE = new ArrayList<>();
     }
 
-    public Attribution(Application c, List<FAE> fae) {
-        this.app = c;
+    public Attribution(Application a, List<FAE> fae) {
+        this.a = a;
         this.l_FAE = fae;
     }
 
@@ -28,54 +27,52 @@ public class Attribution {
     }
 
     /**
-     * Devolve a lista de FAE definida para a avaliação
+     * Returns the list of FAE's that will evaluate the application
      *
-     * @return lista de FAE
+     * @return FAE list
      */
     public List<FAE> getFAEs() {
         return l_FAE;
     }
 
     /**
-     * Devolve a candidatura à qual corresponde a atribuição
+     * Return the application that corresponds to the attribution
      *
-     * @return candidatura
+     * @return application
      */
-    public Application getCandidatura() {
-        return app;
+    public Application getApplication() {
+        return a;
     }
 
     /**
-     * Verifica se a atribuição é respectiva à candidatura
+     * Verifies is the attribution is relative to the application
      *
-     * @param c candidatura a verificar
-     * @return true se corresponder, senão false
+     * @param a application to check
+     * @return true if relative, false if not
      */
-    public boolean eDaCandidatura(Application c) {
-        return app.equals(c);
+    public boolean isFromAttribution(Application a) {
+        return a.equals(a);
     }
 
     /**
-     * Verifica se o FAE foi atribuido
+     * Checks if the FAE was attributed
      *
-     * @param fae FAE a verificar
-     * @return true em caso afirmativo, senão false
+     * @param fae FAE to check
+     * @return true attributed, false if not
      */
-    public boolean atribuidoAoFAE(FAE fae) {
+    public boolean attributedToFAE(FAE fae) {
         return l_FAE.contains(fae);
     }
 
     @Override
     public String toString() {
         String s = "";
-        s = app.getCompanyName() + " atribuida a ";
+        s = a.getCompanyName() + " attributed to ";
         for (FAE fae : l_FAE) {
             s += fae.getName() + " | ";
         }
 
         return s;
     }
-
-  
 
 }
