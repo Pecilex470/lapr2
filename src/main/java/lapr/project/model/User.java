@@ -44,6 +44,10 @@ public class User {
         this.username = username;
         this.password = password;
     }
+    
+    public User(){
+        
+    }
 
     /**
      * @return The name of the respective user

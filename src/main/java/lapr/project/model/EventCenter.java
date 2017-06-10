@@ -1,5 +1,7 @@
 package lapr.project.model;
 
+import java.util.ArrayList;
+import java.util.List;
 import lapr.project.model.register.EventRegister;
 import lapr.project.model.register.UserRegister;
 import lapr.project.model.register.RepresentativeList;
@@ -114,6 +116,23 @@ public class EventCenter {
 
         return globalAcceptanceRate / er.getEventList().size();
 
+    }
+    /**
+     * 
+     * @param u user that we want to check where plays a roll as a FAE
+     * @return list of events where the user u is FAE
+     */
+    
+    
+    public List<Event> getEventsWhereUserIsFAE(User u){
+        
+        List<Event> eventsWhereUserIsFAE = new ArrayList<>();
+        for (Event e: er.getEventList()) {
+            if (e.isFAE(u)) {
+                eventsWhereUserIsFAE.add(e);
+            }
+        }
+        return eventsWhereUserIsFAE;
     }
 
 }
