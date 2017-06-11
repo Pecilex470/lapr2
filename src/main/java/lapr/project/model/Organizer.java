@@ -37,12 +37,5 @@ public class Organizer {
         this.userOrg = user;
     }
 
-    /**
-     * Method that compares 2 objects and verifies are equal to each other
-     *
-     * @param obj Object to be compared with the one that invokes the method.
-     * @return "True" - The 2 FAE are equals; "False" - Otherwise 
-     * 
-     */
     
 }
