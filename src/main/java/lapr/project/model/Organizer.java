@@ -44,16 +44,5 @@ public class Organizer {
      * @return "True" - The 2 FAE are equals; "False" - Otherwise 
      * 
      */
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null || this.getClass() != obj.getClass()) {
-            return false;
-        }
-        Organizer outroOrganizador = (Organizer) obj;
-        return (this.userOrg.equals(outroOrganizador.getUtilizadorOrganizador()));
-    }
-
+    
 }

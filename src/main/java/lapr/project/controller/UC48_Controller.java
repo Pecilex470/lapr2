@@ -29,8 +29,8 @@ public class UC48_Controller {
         return ec.getEventRegister().getEventList();
     }
     
-    public double getMeanDeviation(Event e, Application app){
-        return e.getApllicationRegister().getMeanDeviation(e, app);
+    public double getMeanDeviation(Event e, FAE fae){
+        return fae.getMeanDeviation(e);
     }
     
 }

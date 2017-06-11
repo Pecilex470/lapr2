@@ -46,4 +46,26 @@ public class FAE {
         return this.ratingList;
     }
 
+    /**
+     * Method that compute the mean deviation between FAEs’ average ratings for
+     * each submission and global mean rating
+     *
+     * @param e - Event
+     * @return Mean deviation
+     */
+    public double getMeanDeviation(Event e) {
+        double total = 0;
+        int cont = 0;
+        double global = e.getApllicationRegister().getGlobalMeanRating();
+        for (Rating rat : this.ratingList) {
+            if (rat.getEvent().equals(e)) {
+                total += Math.abs(rat.getRating() - global);
+                cont++;
+            }
+        }
+        if (cont != 0) {
+            return total / cont;
+        }
+        return -1;
+    }
 }
