@@ -5,11 +5,13 @@
  */
 package lapr.project.model;
 
+
 /**
  *
  * @author Utilizador
  */
 public class User {
+    
 
     public String name;
 
@@ -29,12 +31,11 @@ public class User {
     public String password;
 
     /**
-     * Creates a User instance receiving the name, email, username, and password
-     * of the new user to be created.
+     * Creates a User instance receiving the name, email, username, and password of the new user to be created.
      *
      * @param name User civil name
      * @param email User email
-     * @param username User identification
+     * @param username User identification 
      * @param password User Acess password
      */
     public User(String name, String email, String username, String password) {
@@ -43,12 +44,16 @@ public class User {
         this.username = username;
         this.password = password;
     }
+    
+    public User(){
+        
+    }
 
     /**
      * @return The name of the respective user
      */
     public String getName() {
-        return this.name;
+        return name;
     }
 
     /**
@@ -73,20 +78,16 @@ public class User {
     }
 
     /**
-     * @return The name of the respective user
-     */
-
-    /**
      * Method that allows to define the name of the user
      *
-     * @param name The user name in question to be defined.
+     * @param name  The user name in question to be defined.
      */
     public void setName(String name) {
         this.name = name;
     }
 
     /**
-     * Method that allows to define the email of the user
+     *Method that allows to define the email of the user
      *
      * @param email The user email in question to be defined
      */
@@ -112,4 +113,27 @@ public class User {
         this.password = password;
     }
 
-}
+    /**
+     * Method that verifies if 2 variavels are equal to each other.
+     * 
+     * @param obj Object to be compared with the one that invokes the method.
+     * 
+     * @return "True" - The 2 users are equal;  "False" - Otherwise
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || this.getClass() != obj.getClass()) {
+            return false;
+        }
+        User outroUtil = (User) obj;
+        return (this.name.equalsIgnoreCase(outroUtil.name)
+                && this.email.equalsIgnoreCase(outroUtil.email)
+                && this.username.equalsIgnoreCase(outroUtil.username)
+                && this.password.equalsIgnoreCase(outroUtil.password));
+    }
+   }
+    
+

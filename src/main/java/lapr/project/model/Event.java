@@ -29,9 +29,9 @@ public class Event {
         this.submissionStartDate = submissionStartDate;
         this.submissionEndDate = submissionEndDate;
         this.eventType = eventType;
-        this.applicationRegister = al; 
+        this.applicationRegister = al;
         this.faeList = fl;
-        this.OrganizerList = ol; 
+        this.OrganizerList = ol;
     }
 
     /**
@@ -148,7 +148,7 @@ public class Event {
 
     /**
      * This method returns the list of applications for this event
-     * 
+     *
      * @return list of applications
      */
     public List<Application> getApplicationList() {
@@ -168,7 +168,6 @@ public class Event {
      *
      * @return acceptance rate of an event
      */
-
     public double getAcceptanceRate() {
 
         int accepted = applicationRegister.getAcceptedApplicationRegister().size();
@@ -179,10 +178,51 @@ public class Event {
         return acceptanceRate;
 
     }
-    
-    public FAEList getFaeList(){
+
+    public FAEList getFaeList() {
         return this.faeList;
     }
+    
+    /**
+     * 
+     * @param u user associated with FAE
+     * @return the FAE associated with user u
+     */
+    
+    public FAE getFAE(User u){
+        FAE f = null;
+        
+        for (FAE fae: faeList.getFAEList()) {
+            if (fae.getUtilizadorFAE().getUsername().equals(u.getUsername())) {
+                f = fae;
+            }
+        }
+        
+        return f;
+    }
 
+    /**
+     * 
+     * @param u user that we want to check if it is FAE in this event
+     * @return true if the user u is FAE in this event, false if it's not
+     */
+    
+    public boolean isFAE(User u) {
+        
+        boolean isFAE = false;
+        for (FAE f : faeList.getFAEList()) {
+            if (f.getUtilizadorFAE().getUsername().equals(u.getUsername())) {
+                isFAE = true;
+            }
+        }
+        
+        return isFAE;
+    }
+    
+    //public double getFAEMeanRating(FAE f){ POR FAZER
+        
+        
+        
+    
 
 }
