@@ -37,7 +37,7 @@ public class UC46_Controller {
         for(Event e: eventsWhereUserIsFAE){
             
             FAE f = e.getFAE(u);
-            //FAEMeanRating += e.getFAEMeanRating(f);
+            FAEMeanRating += f.getMeanRating();
         }
         
         return FAEMeanRating/eventsWhereUserIsFAE.size();

@@ -13,7 +13,7 @@ import lapr.project.model.Application;
  *
  * @author Utilizador
  */
-public class ApplicationRegister {
+public class ApplicationList {
 
     /**
      * List that contains all the applications that were submitted to a specific event.
@@ -25,7 +25,7 @@ public class ApplicationRegister {
      *
      * @param applications List that contains all the applications that were submitted to a specific event.
      */
-    public ApplicationRegister(List<Application> applications) {
+    public ApplicationList(List<Application> applications) {
         this.applications = applications;
     }
 

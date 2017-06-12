@@ -7,7 +7,7 @@ package lapr.project.model;
 
 import java.util.List;
 import lapr.project.controller.UC47_Controller;
-import lapr.project.model.register.ApplicationRegister;
+import lapr.project.model.register.ApplicationList;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
@@ -32,7 +32,7 @@ public class UC47_Test {
         EventCenter ec= new EventCenter();
         double globalMeanRatingExpected= 4.00;
         UC47_Controller uc= new UC47_Controller(ec);
-        ApplicationRegister ar= ec.getEventRegister().getEventList().get(0).getApllicationRegister();
+        ApplicationList ar= ec.getEventRegister().getEventList().get(0).getApllicationRegister();
         assertEquals(globalMeanRatingExpected, uc.getGlobalMeanRating(ar));
     }
     

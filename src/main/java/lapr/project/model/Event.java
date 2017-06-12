@@ -1,10 +1,11 @@
 package lapr.project.model;
 
 import lapr.project.model.register.FAEList;
-import lapr.project.model.register.ApplicationRegister;
+import lapr.project.model.register.ApplicationList;
 import lapr.project.model.register.OrganizerList;
 import java.util.Calendar;
 import java.util.List;
+import lapr.project.model.register.AttributionList;
 
 public class Event {
 
@@ -16,16 +17,17 @@ public class Event {
     private Calendar submissionStartDate;
     private Calendar submissionEndDate;
     private String eventType;
-    private ApplicationRegister applicationRegister;
+    private ApplicationList applicationList;
     private FAEList faeList;
     private OrganizerList OrganizerList;
+    private AttributionList attributionList;
 
     
     public Event(){
         
     }
     
-    public Event(String title, String location, String description, Calendar startDate, Calendar endDate, Calendar submissionStartDate, Calendar submissionEndDate, String eventType, ApplicationRegister al, FAEList fl, OrganizerList ol) {
+    public Event(String title, String location, String description, Calendar startDate, Calendar endDate, Calendar submissionStartDate, Calendar submissionEndDate, String eventType, ApplicationList al, FAEList fl, OrganizerList ol) {
         this.title = title;
         this.location = location;
         this.description = description;
@@ -34,7 +36,7 @@ public class Event {
         this.submissionStartDate = submissionStartDate;
         this.submissionEndDate = submissionEndDate;
         this.eventType = eventType;
-        this.applicationRegister = al;
+        this.applicationList = al;
         this.faeList = fl;
         this.OrganizerList = ol;
     }
@@ -159,7 +161,7 @@ public class Event {
      * @return list of applications
      */
     public List<Application> getApplicationList() {
-        return applicationRegister.getApplication();
+        return applicationList.getApplication();
     }
 
      /**
@@ -167,8 +169,8 @@ public class Event {
      * 
      * @return list of applications
      */
-    public ApplicationRegister getApllicationRegister(){
-        return applicationRegister;
+    public ApplicationList getApllicationRegister(){
+        return applicationList;
     }
     /**
      * This method calculates and returns the acceptance rate of an event
@@ -177,8 +179,8 @@ public class Event {
      */
     public double getAcceptanceRate() {
 
-        int accepted = applicationRegister.getAcceptedApplicationRegister().size();
-        int total = applicationRegister.getApplication().size();
+        int accepted = applicationList.getAcceptedApplicationRegister().size();
+        int total = applicationList.getApplication().size();
 
         double acceptanceRate = (accepted * 100) / total;
 
@@ -226,7 +228,11 @@ public class Event {
         return isFAE;
     }
     
-    //public double getFAEMeanRating(FAE f){ POR FAZER
+    public void addAttribution(Attribution a){
+        attributionList.addAttribution(a);
+    }
+    
+    
         
         
         

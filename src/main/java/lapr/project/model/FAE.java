@@ -42,32 +42,10 @@ public class FAE {
         return userFAE.getName();
     }
 
-    public List<Attribution> getRatingList() {
+    public List<Attribution> getAttributionList() {
         return this.attributionList;
     }
 
-    /**
-     * Method that compute the mean deviation between FAEs’ average ratings for
-     * each submission and global mean rating
-     *
-     * @param e - Event
-     * @return Mean deviation
-     */
-    public double getMeanDeviation(Event e) {
-        double total = 0;
-        int cont = 0;
-        double global = e.getApllicationRegister().getGlobalMeanRating();
-        for (Attribution att : this.attributionList) {
-            if (e.isFAE(att.getFAE().getUtilizadorFAE())) {
-                total += Math.abs(att.getEvaluation().getMeanRating() - global);
-                cont++;
-            }
-        }
-        if (cont != 0) {
-            return total / cont;
-        }
-        return -1;
-    }
 
     /**
      * Method to get the fae mean rating

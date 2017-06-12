@@ -44,7 +44,7 @@ public class UC48_Controller {
      * @return mean deviation
      */
     public double getMeanDeviation(Event e, FAE fae){
-        return fae.getMeanDeviation(e);
+        return e.getFaeList().getMeanDeviation(e, fae);
     }
     
 }
