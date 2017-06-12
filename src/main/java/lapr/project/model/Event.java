@@ -24,11 +24,24 @@ public class Event {
     private int availableArea;
     private List<Stand> standL;
 
-    
-    public Event(){
-        
+    public Event() {
+
     }
-    
+
+    /**
+     * Constructor
+     * @param title - String
+     * @param location - String
+     * @param description - String
+     * @param startDate - Date
+     * @param endDate - Date
+     * @param submissionStartDate - Date
+     * @param submissionEndDate - Date
+     * @param eventType - String
+     * @param fl - List
+     * @param ol - List
+     * @param availableArea - int
+     */
     public Event(String title, String location, String description, Date startDate, Date endDate, Date submissionStartDate, Date submissionEndDate, String eventType, FAEList fl, OrganizerList ol, int availableArea) {
         this.title = title;
         this.location = location;
@@ -40,7 +53,7 @@ public class Event {
         this.eventType = eventType;
         this.faeList = fl;
         this.OrganizerList = ol;
-        this.availableArea=availableArea;
+        this.availableArea = availableArea;
     }
 
     /**
@@ -154,8 +167,6 @@ public class Event {
     public void setEventType(String eventType) {
         this.eventType = eventType;
     }
-    
-    
 
     /**
      * This method returns the list of applications for this event
@@ -166,14 +177,15 @@ public class Event {
         return applicationList.getApplication();
     }
 
-     /**
+    /**
      * This method returns the ApplicationRegister for this event
-     * 
+     *
      * @return list of applications
      */
-    public ApplicationList getApllicationRegister(){
+    public ApplicationList getApllicationRegister() {
         return applicationList;
     }
+
     /**
      * This method calculates and returns the acceptance rate of an event
      *
@@ -190,63 +202,78 @@ public class Event {
 
     }
 
+    /**
+     * 
+     * @return FAEList
+     */
     public FAEList getFaeList() {
         return this.faeList;
     }
-    
+
     /**
-     * 
+     *
      * @param u user associated with FAE
      * @return the FAE associated with user u
      */
-    
-    public FAE getFAE(User u){
+    public FAE getFAE(User u) {
         FAE f = null;
-        
-        for (FAE fae: faeList.getFAEList()) {
+
+        for (FAE fae : faeList.getFAEList()) {
             if (fae.getUtilizadorFAE().getUsername().equals(u.getUsername())) {
                 f = fae;
             }
         }
-        
+
         return f;
     }
 
     /**
-     * 
+     *
      * @param u user that we want to check if it is FAE in this event
      * @return true if the user u is FAE in this event, false if it's not
      */
-    
     public boolean isFAE(User u) {
-        
+
         boolean isFAE = false;
         for (FAE f : faeList.getFAEList()) {
             if (f.getUtilizadorFAE().getUsername().equals(u.getUsername())) {
                 isFAE = true;
             }
         }
-        
+
         return isFAE;
     }
-    
-    public void addAttribution(Attribution a){
+
+    /**
+     * Method that adds an attibuition
+     * @param a - Attribution
+     */
+    public void addAttribution(Attribution a) {
         attributionList.addAttribution(a);
     }
-    
-    public int getAvailableArea(){
+
+    /**
+     * 
+     * @return availableArea
+     */
+    public int getAvailableArea() {
         return this.availableArea;
     }
-    
-    public void setAvailableArea(int area){
-        this.availableArea=area;
-    }    
-    
-    public void addStand(Stand stand){
+
+    /**
+     * 
+     * @param area - available area
+     */
+    public void setAvailableArea(int area) {
+        this.availableArea = area;
+    }
+
+    /**
+     * Method that adds a stand to event
+     * @param stand - Stand
+     */
+    public void addStand(Stand stand) {
         standL.add(stand);
     }
-        
-        
-    
 
 }
