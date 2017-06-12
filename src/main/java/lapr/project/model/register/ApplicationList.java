@@ -28,6 +28,10 @@ public class ApplicationList {
     public ApplicationList(List<Application> applications) {
         this.applications = applications;
     }
+    
+    public ApplicationList(){
+        
+    }
 
     /**
      * @return List that contains all the applications that were submitted to a specific event.

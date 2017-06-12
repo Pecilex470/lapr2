@@ -19,13 +19,18 @@ public class OrganizerList {
     public OrganizerList(List<Organizer> organizers) {
         this.organizers = organizers;
     }
-
+    
+    public OrganizerList(){
+        
+    }
+    
     /**
      * @return  List that contains all the FAE from a specific event.
      */
     public List<Organizer> getOrganizadores() {
         return organizers;
     }
+    
 
     /**
      * Allows to define a list that contains all the organizers belonging to an certain event

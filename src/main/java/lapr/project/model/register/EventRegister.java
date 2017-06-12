@@ -41,7 +41,10 @@ public class EventRegister {
 //            if (event.getSubmissionStartDate())
 //        }
 //    }
-
+    
+    public void setEventList(List<Event> el){
+        this.events = el;
+    }
   
   
 }

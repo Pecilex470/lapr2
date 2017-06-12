@@ -29,6 +29,10 @@ public class FAEList {
     public FAEList(List<FAE> listaFAE) {
         FAE = listaFAE;
     }
+    
+    public FAEList(){
+        
+    }
 
     /**
      * @return List that contains all the FAE from a specific event.
