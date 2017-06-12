@@ -5,10 +5,9 @@
  */
 package lapr.project.controller;
 
-import java.util.List;
-import lapr.project.model.Application;
 import lapr.project.model.Event;
 import lapr.project.model.EventCenter;
+import lapr.project.model.Stand;
 import lapr.project.model.Stand.typeStand;
 
 /**
@@ -16,24 +15,33 @@ import lapr.project.model.Stand.typeStand;
  * @author Cerqueira
  */
 public class UC20_Controller {
-    
+
     private EventCenter ec;
-    
-    public UC20_Controller(EventCenter ec){
-        this.ec=ec;
+
+    /**
+     * Constructor
+     *
+     * @param ec - Event Center
+     */
+    public UC20_Controller(EventCenter ec) {
+        this.ec = ec;
     }
     
-    public List<Event> getEventList(){
-        return ec.getEventRegister().getEventList();
+    /**
+     * Method that creats new stand
+     * @param stand - Stand
+     * @return Stand
+     */
+    public Stand newStand(typeStand stand){
+        return new Stand(stand);
     }
     
-    public int getAvailableArea(Event e){
-        return e.getAvailableArea();
+    /**
+     * Method that saves stand in event class
+     * @param e - Event
+     * @param stand - Stand
+     */
+    public void saveStand(Event e, Stand stand){
+        e.addStand(stand);
     }
-    
-    public void addStand(Event e, typeStand stand, Application app){
-        app.addStand(stand);
-        e.setAvailableArea(e.getAvailableArea()-stand.getArea());
-    }
-    
 }

@@ -22,6 +22,7 @@ public class Event {
     private OrganizerList OrganizerList;
     private AttributionList attributionList;
     private int availableArea;
+    private List<Stand> standL;
 
     
     public Event(){
@@ -241,6 +242,9 @@ public class Event {
         this.availableArea=area;
     }    
     
+    public void addStand(Stand stand){
+        standL.add(stand);
+    }
         
         
     

@@ -13,6 +13,9 @@ public class Stand {
     
     private typeStand area;
     
+    /**
+     * Enum that lists the possivel stands
+     */
     public enum typeStand{
 
         SMALL_STAND("Small Stand", 10),
