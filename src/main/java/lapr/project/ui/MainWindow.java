@@ -9,6 +9,7 @@ package lapr.project.ui;
  *
  * @author Pedro
  */
+@SuppressWarnings("serial")
 public class MainWindow extends javax.swing.JFrame {
 
     /**

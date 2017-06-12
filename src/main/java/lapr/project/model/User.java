@@ -113,27 +113,6 @@ public class User {
         this.password = password;
     }
 
-    /**
-     * Method that verifies if 2 variavels are equal to each other.
-     * 
-     * @param obj Object to be compared with the one that invokes the method.
-     * 
-     * @return "True" - The 2 users are equal;  "False" - Otherwise
-     */
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null || this.getClass() != obj.getClass()) {
-            return false;
-        }
-        User outroUtil = (User) obj;
-        return (this.name.equalsIgnoreCase(outroUtil.name)
-                && this.email.equalsIgnoreCase(outroUtil.email)
-                && this.username.equalsIgnoreCase(outroUtil.username)
-                && this.password.equalsIgnoreCase(outroUtil.password));
-    }
    }
     
 

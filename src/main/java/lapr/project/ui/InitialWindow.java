@@ -5,14 +5,17 @@
  */
 package lapr.project.ui;
 
+import javax.swing.JOptionPane;
+import static javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE;
 import lapr.project.model.EventCenter;
 
 /**
  *
  * @author Pedro
  */
+@SuppressWarnings("serial")
 public class InitialWindow extends javax.swing.JFrame {
-    
+
     /**
      * Variable that contains the whole EventCenter information
      */
@@ -20,11 +23,23 @@ public class InitialWindow extends javax.swing.JFrame {
 
     /**
      * Creates new form InitialWindow
+     *
      * @param ec the EventCenter that contains all the information
      */
     public InitialWindow(EventCenter ec) {
         this.ec = ec;
         initComponents();
+        this.setVisible(true);
+        setLocationRelativeTo(null);
+        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+        this.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+                if (JOptionPane.showConfirmDialog(InitialWindow.this, "Do you wish to exit?", "Close", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
+                    dispose();
+                }
+            }
+        });
     }
 
     /**

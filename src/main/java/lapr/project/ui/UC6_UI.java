@@ -13,6 +13,7 @@ import lapr.project.model.EventCenter;
  *
  * @author Pedro
  */
+@SuppressWarnings("serial")
 public class UC6_UI extends javax.swing.JDialog {
     
     private EventCenter ec;
@@ -27,7 +28,7 @@ public class UC6_UI extends javax.swing.JDialog {
         initComponents();
         this.setVisible(true);
         setLocationRelativeTo(null);
-        setDefaultCloseOperation(this.DO_NOTHING_ON_CLOSE);
+        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         this.addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
             public void windowClosing(java.awt.event.WindowEvent windowEvent) {

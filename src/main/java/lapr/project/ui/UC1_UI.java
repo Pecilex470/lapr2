@@ -9,7 +9,10 @@ package lapr.project.ui;
  *
  * @author Pedro
  */
-public class UC1_UI extends javax.swing.JDialog {
+@SuppressWarnings("serial")
+public class UC1_UI extends javax.swing.JDialog   {
+
+    
 
     /**
      * Creates new form UC1_Dialog
