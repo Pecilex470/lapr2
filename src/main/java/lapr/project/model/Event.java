@@ -150,6 +150,8 @@ public class Event {
     public void setEventType(String eventType) {
         this.eventType = eventType;
     }
+    
+    
 
     /**
      * This method returns the list of applications for this event

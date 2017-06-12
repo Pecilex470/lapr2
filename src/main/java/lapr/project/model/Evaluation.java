@@ -10,12 +10,13 @@ package lapr.project.model;
  * @author Utilizador
  */
 public class Evaluation {
-    
+
     /**
-     * 
+     *
      */
-    
     private int knowledge, adequancy, quantity, overall;
+
+    private int NUMBER_OF_CRITERIA = 4;
 
     /**
      * Boolean representative of the decision taken by an FAE in relation to a
@@ -39,6 +40,10 @@ public class Evaluation {
     public Evaluation(boolean decision, String justification, int knowledge, int adequancy, int quantity, int overall) {
         this.decision = decision;
         this.justification = justification;
+        this.knowledge = knowledge;
+        this.adequancy = adequancy;
+        this.quantity = quantity;
+        this.overall = overall;
     }
 
     /**
@@ -83,6 +88,16 @@ public class Evaluation {
      */
     public void setJustificacao(String justification) {
         this.justification = justification;
+    }
+
+    /**
+     * 
+     * @return the mean rating of this evaluation
+     */
+    
+    public double getMeanRating() {
+
+        return (adequancy + overall + knowledge + quantity) / NUMBER_OF_CRITERIA;
     }
 
 }
