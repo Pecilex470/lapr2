@@ -10,25 +10,48 @@ package lapr.project.model;
  * @author Cerqueira
  */
 public class Rating {
+
     private Event event;
     private Application application;
     private double rating;
-    
-    public Rating(Application app, double rat, Event event){
-        this.application=app;
-        this.rating=rat;
-        this.event=event;
+
+    /**
+     * Constructor
+     *
+     * @param app - Application
+     * @param rat - Rating
+     * @param event - Event
+     */
+    public Rating(Application app, double rat, Event event) {
+        this.application = app;
+        this.rating = rat;
+        this.event = event;
     }
-    
-    public Application getApplication(){
+
+    /**
+     * Obtain the application for which the rating is intended
+     *
+     * @return application.
+     */
+    public Application getApplication() {
         return application;
     }
-    
-    public double getRating(){
+
+    /**
+     * Obtain the rating
+     *
+     * @return rating.
+     */
+    public double getRating() {
         return rating;
     }
-    
-    public Event getEvent(){
+
+    /**
+     * Obtain the event for which the rating is intended
+     *
+     * @return event.
+     */
+    public Event getEvent() {
         return this.event;
     }
 }

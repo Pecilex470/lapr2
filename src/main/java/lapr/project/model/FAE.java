@@ -68,4 +68,20 @@ public class FAE {
         }
         return -1;
     }
+
+    /**
+     * Method to get the fae mean rating
+     *
+     * @return fae mean deviation
+     */
+    public double getMeanRantig() {
+        double total = 0;
+        if (!this.ratingList.isEmpty()) {
+            for (Rating rat : this.ratingList) {
+                total += rat.getRating();
+            }
+            return total / this.ratingList.size();
+        }
+        return -1;
+    }
 }

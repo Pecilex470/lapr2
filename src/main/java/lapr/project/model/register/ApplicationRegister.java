@@ -8,9 +8,6 @@ package lapr.project.model.register;
 import java.util.ArrayList;
 import java.util.List;
 import lapr.project.model.Application;
-import lapr.project.model.Attribution;
-import lapr.project.model.Event;
-import lapr.project.model.FAE;
 
 /**
  *
@@ -49,6 +46,12 @@ public class ApplicationRegister {
         this.applications = applications;
     }
     
+    /**
+     *
+     * This method calculates and returns the global mean rating using
+     *
+     * @return accepted applications list
+     */
     public double getGlobalMeanRating() {
         double total = 0;
         if (!applications.isEmpty()) {
