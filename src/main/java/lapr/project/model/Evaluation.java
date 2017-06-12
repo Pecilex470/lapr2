@@ -10,8 +10,16 @@ package lapr.project.model;
  * @author Utilizador
  */
 public class Evaluation {
-  /**
-     * Boolean representative of the decision taken by an FAE in relation to a given application.
+    
+    /**
+     * 
+     */
+    
+    private int knowledge, adequancy, quantity, overall;
+
+    /**
+     * Boolean representative of the decision taken by an FAE in relation to a
+     * given application.
      */
     private Boolean decision;
 
@@ -21,12 +29,14 @@ public class Evaluation {
     private String justification;
 
     /**
-     * Creates a Evaluation instance, by receiveing the decision and justification. 
+     * Creates a Evaluation instance, by receiveing the decision and
+     * justification.
      *
-     * @param decision Boolean representative of the decision taken by an FAE in relation to a given application.
+     * @param decision Boolean representative of the decision taken by an FAE in
+     * relation to a given application.
      * @param justification Text supporting the decision taken.
      */
-    public Evaluation(boolean decision, String justification) {
+    public Evaluation(boolean decision, String justification, int knowledge, int adequancy, int quantity, int overall) {
         this.decision = decision;
         this.justification = justification;
     }
@@ -35,11 +45,12 @@ public class Evaluation {
      * Creates a Evalution instance with no parameters.
      */
     public Evaluation() {
-        
+
     }
 
     /**
-     * @return Boolean representative of the decision taken by an FAE in relation to a given application. 
+     * @return Boolean representative of the decision taken by an FAE in
+     * relation to a given application.
      */
     public boolean decisionApplication() {
         return decision;
@@ -53,16 +64,19 @@ public class Evaluation {
     }
 
     /**
-     * Define the decision taken by the FAE in relation with a certain Application.
+     * Define the decision taken by the FAE in relation with a certain
+     * Application.
      *
-     * @param decision Boolean "true" if application is accepted;  "false" if refused
+     * @param decision Boolean "true" if application is accepted; "false" if
+     * refused
      */
     public void setDecision(boolean decision) {
         this.decision = decision;
     }
 
     /**
-     * Define the justification text for the made decision in relation with a certain application
+     * Define the justification text for the made decision in relation with a
+     * certain application
      *
      * @param justification Novo texto justificativo para a decisão tomada em
      * relação a uma determinada candidatura
@@ -70,5 +84,5 @@ public class Evaluation {
     public void setJustificacao(String justification) {
         this.justification = justification;
     }
-  
+
 }
