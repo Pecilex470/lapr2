@@ -20,6 +20,11 @@ public class Event {
     private FAEList faeList;
     private OrganizerList OrganizerList;
 
+    
+    public Event(){
+        
+    }
+    
     public Event(String title, String location, String description, Calendar startDate, Calendar endDate, Calendar submissionStartDate, Calendar submissionEndDate, String eventType, ApplicationRegister al, FAEList fl, OrganizerList ol) {
         this.title = title;
         this.location = location;
