@@ -72,17 +72,17 @@ public class UserRegister {
      * Method that will search and return a user that correspond to the id and
      * pass passed as parameters
      *
-     * @param id Identification (username or email) of the user that is trying
+     * @param username Identification (username or email) of the user that is trying
      * to start session.
-     * @param pass User pass that is trying to start session. sessão
+     * @param password User pass that is trying to start session. sessão
      * @return User object
      */
-    public User obterUtilizador(String id, String pass) {
-        if (id.contains("@")) {
+    public User getUser(String username, String password) {
+        if (username.contains("@")) {
             for (User userA : users) {
                 String utilAtualEmail = userA.getEmail();
                 String utilAtualPass = userA.getPassword();
-                if (utilAtualEmail.equalsIgnoreCase(id) && utilAtualPass.equalsIgnoreCase(pass)) {
+                if (utilAtualEmail.equalsIgnoreCase(username) && utilAtualPass.equalsIgnoreCase(password)) {
                     return userA;
                 }
             }
@@ -90,7 +90,7 @@ public class UserRegister {
             for (User utilAtual : users) {
                 String utilAtualUsername = utilAtual.getUsername();
                 String utilAtualPass = utilAtual.getPassword();
-                if (utilAtualUsername.equalsIgnoreCase(id) && utilAtualPass.equalsIgnoreCase(pass)) {
+                if (utilAtualUsername.equalsIgnoreCase(username) && utilAtualPass.equalsIgnoreCase(password)) {
                     return utilAtual;
                 }
             }

@@ -14,6 +14,7 @@ import lapr.project.model.Event;
  * @author Utilizador
  */
 public class EventRegister {
+
     /**
      * List of events in charge of a given Event Center.
      */
@@ -22,7 +23,8 @@ public class EventRegister {
     /**
      * Creates an instance of EventRegister receiving an event list.
      *
-     * @param events Event list to be saved on the EventRegister instance being created 
+     * @param events Event list to be saved on the EventRegister instance being
+     * created
      */
     public EventRegister(List<Event> events) {
         this.events = events;
@@ -34,14 +36,11 @@ public class EventRegister {
     public List<Event> getEventList() {
         return events;
     }
-    
+
     //    public List<Event> getAvailableEvents() {
 //        Date
 //        for (Event event : eventRegister) {
 //            if (event.getSubmissionStartDate())
 //        }
 //    }
-
-  
-  
 }
