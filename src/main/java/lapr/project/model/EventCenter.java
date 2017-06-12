@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import lapr.project.model.register.EventRegister;
 import lapr.project.model.register.UserRegister;
-import lapr.project.model.register.RepresentativeList;
+import lapr.project.model.register.RepresentativeRegister;
 
 /**
  *
@@ -27,7 +27,7 @@ public class EventCenter {
      * Variavel that saves the data of each representative of the respective
      * event center.
      */
-    private RepresentativeList rl;
+    private RepresentativeRegister rr;
 
     /**
      * Creates an instance of EventCenter that receives the event and users
@@ -36,13 +36,13 @@ public class EventCenter {
      *
      * @param er Object of the class EventRegister.
      * @param ur Object of the class UserRegister.
-     * @param rl Object of the class RepresentativeList
+     * @param rr Object of the class RepresentativeList
      *
      */
-    public EventCenter(EventRegister er, UserRegister ur, RepresentativeList rl) {
+    public EventCenter(EventRegister er, UserRegister ur, RepresentativeRegister rr) {
         this.er = er;
         this.ur = ur;
-        this.rl = rl;
+        this.rr = rr;
     }
 
     /**
@@ -68,8 +68,8 @@ public class EventCenter {
     /**
      * @return Object of the class RepresentativeList.
      */
-    public RepresentativeList getRepresentativeList() {
-        return rl;
+    public RepresentativeRegister getRepresentativeList() {
+        return rr;
     }
 
     /**
@@ -94,10 +94,10 @@ public class EventCenter {
      * Allows to define all the representatives that are related with the Event
      * Center.
      *
-     * @param rl Variable that saves the object of the class RepresentativeList.
+     * @param rr Variable that saves the object of the class RepresentativeList.
      */
-    public void setRepresentativeList(RepresentativeList rl) {
-        this.rl = rl;
+    public void setRepresentativeList(RepresentativeRegister rr) {
+        this.rr = rr;
     }
 
     /**

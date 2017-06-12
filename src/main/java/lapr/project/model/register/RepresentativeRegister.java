@@ -14,7 +14,7 @@ import lapr.project.model.Representative;
  *
  * @author Utilizador
  */
-public class RepresentativeList {
+public class RepresentativeRegister {
    /**
      * List that contains all the representatives from a specific event center.
      */
@@ -26,7 +26,7 @@ public class RepresentativeList {
      *
      * @param representatives List that contains all the representatives from a specific event center.
      */
-    public RepresentativeList(List<Representative> representatives) {
+    public RepresentativeRegister(List<Representative> representatives) {
         this.representatives = representatives;
     }
     
