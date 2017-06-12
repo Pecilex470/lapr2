@@ -1,6 +1,6 @@
 package lapr.project.controller;
 
-import lapr.project.model.register.ApplicationRegister;
+import lapr.project.model.register.ApplicationList;
 import java.util.List;
 import lapr.project.model.*;
 
@@ -36,7 +36,7 @@ public class UC47_Controller {
      * @param ar - ApplicationRegister
      * @return submission global mean rating (double)
      */
-    public double getGlobalMeanRating(ApplicationRegister ar) {
+    public double getGlobalMeanRating(ApplicationList ar) {
         return ar.getGlobalMeanRating();
     }
 }
