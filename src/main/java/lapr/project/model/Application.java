@@ -12,6 +12,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.util.ArrayList;
 import java.util.List;
+import lapr.project.model.Stand.typeStand;
 
 /**
  * Candidatura class.
@@ -31,6 +32,7 @@ public class Application implements Importable<Application>, Exportable {
     private int decision;
     private String companyName;
     private int numberOfDecisions;
+    private typeStand stand;
 
     /**
      * Constructor for Application
@@ -196,4 +198,7 @@ public class Application implements Importable<Application>, Exportable {
         return this.companyName;
     }
 
+    public void addStand(typeStand stand){
+        this.stand=stand;
+    }
 }

@@ -3,7 +3,6 @@ package lapr.project.model;
 import lapr.project.model.register.FAEList;
 import lapr.project.model.register.ApplicationList;
 import lapr.project.model.register.OrganizerList;
-import java.util.Calendar;
 import java.util.List;
 import lapr.project.model.register.AttributionList;
 import lapr.project.utils.Date;
@@ -22,13 +21,14 @@ public class Event {
     private FAEList faeList;
     private OrganizerList OrganizerList;
     private AttributionList attributionList;
+    private int availableArea;
 
     
     public Event(){
         
     }
     
-    public Event(String title, String location, String description, Date startDate, Date endDate, Date submissionStartDate, Date submissionEndDate, String eventType, FAEList fl, OrganizerList ol) {
+    public Event(String title, String location, String description, Date startDate, Date endDate, Date submissionStartDate, Date submissionEndDate, String eventType, FAEList fl, OrganizerList ol, int availableArea) {
         this.title = title;
         this.location = location;
         this.description = description;
@@ -39,6 +39,7 @@ public class Event {
         this.eventType = eventType;
         this.faeList = fl;
         this.OrganizerList = ol;
+        this.availableArea=availableArea;
     }
 
     /**
@@ -232,8 +233,14 @@ public class Event {
         attributionList.addAttribution(a);
     }
     
+    public int getAvailableArea(){
+        return this.availableArea;
+    }
     
-        
+    public void setAvailableArea(int area){
+        this.availableArea=area;
+    }    
+    
         
         
     
