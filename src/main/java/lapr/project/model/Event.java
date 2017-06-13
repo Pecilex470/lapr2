@@ -276,4 +276,17 @@ public class Event {
         standL.add(stand);
     }
 
+    /**
+     * Method that returns a list of available stands of event
+     * @return List of stands available
+     */
+    public List<Stand> getAvailableStands(){
+        List<Stand> aL=null;
+        for (Stand stand: this.standL){
+            if(stand.getAvailable()==true){
+                aL.add(stand);
+            }
+        }
+        return aL;
+    }
 }

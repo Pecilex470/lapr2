@@ -43,5 +43,6 @@ public class UC20_Controller {
      */
     public void saveStand(Event e, Stand stand){
         e.addStand(stand);
+        e.setAvailableArea(e.getAvailableArea() - stand.getArea());
     }
 }

@@ -32,7 +32,7 @@ public class Application implements Importable<Application>, Exportable {
     private int decision;
     private String companyName;
     private int numberOfDecisions;
-    private typeStand stand;
+    private Stand stand;
 
     /**
      * Constructor for Application
@@ -198,7 +198,10 @@ public class Application implements Importable<Application>, Exportable {
         return this.companyName;
     }
 
-    public void addStand(typeStand stand){
-        this.stand=stand;
+    public void addStand(Stand stand) {
+        if (stand.getAvailable() == true) {
+            this.stand = stand;
+            stand.setAvailable(false);
+        }
     }
 }

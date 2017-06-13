@@ -12,6 +12,7 @@ package lapr.project.model;
 public class Stand {
     
     private typeStand area;
+    private boolean available=true; 
     
     /**
      * Enum that lists the possivel stands
@@ -56,5 +57,21 @@ public class Stand {
          */
         public int getArea(){
             return area.getArea();
+        }
+        
+        /**
+         * 
+         * @return availability of stand
+         */
+        public boolean getAvailable(){
+            return this.available;
+        }
+        
+        /**
+         * set the availability of event
+         * @param available (boolean)
+         */
+        public void setAvailable(boolean available){
+            this.available=available;
         }
     }

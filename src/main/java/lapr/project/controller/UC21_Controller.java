@@ -33,13 +33,13 @@ public class UC21_Controller {
     }
 
     /**
-     * Method that return the available area of event
+     * Method that return the available stands of event
      *
      * @param e - Event
      * @return available area (int)
      */
-    public int getAvailableArea(Event e) {
-        return e.getAvailableArea();
+    public List<Stand> getAvailableStand(Event e) {
+        return e.getAvailableStands();
     }
 
     /**
@@ -59,9 +59,8 @@ public class UC21_Controller {
      * @param stand - typeStand
      * @param app - Application
      */
-    public void addStand(Event e, Stand.typeStand stand, Application app) {
+    public void addStand(Event e, Stand stand, Application app) {
         app.addStand(stand);
-        e.setAvailableArea(e.getAvailableArea() - stand.getArea());
     }
 
 }
