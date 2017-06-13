@@ -6,6 +6,8 @@
 package lapr.project.ui;
 
 import javax.swing.JOptionPane;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import lapr.project.controller.UC6_Controller;
 import lapr.project.model.EventCenter;
 
@@ -15,15 +17,18 @@ import lapr.project.model.EventCenter;
  */
 @SuppressWarnings("serial")
 public class UC6_UI extends javax.swing.JDialog {
-    
+
     private EventCenter ec;
+    private UC6_Controller c;
 
     /**
      * Creates new form UC6_UI
+     *
+     * @param ec Receives the instance of the EventCenter
+     * @param c Receives the instance of this UI's Controller
      */
-    public UC6_UI(java.awt.Frame parent, boolean modal, EventCenter ec) {
-        super(parent, modal);
-        UC6_Controller c = new UC6_Controller(ec);
+    public UC6_UI(EventCenter ec) {
+        this.c = new UC6_Controller(ec);
         this.ec = ec;
         initComponents();
         this.setVisible(true);
@@ -68,6 +73,7 @@ public class UC6_UI extends javax.swing.JDialog {
         representativeCheckBox = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("New User");
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel1.setText("Insert all your data:");
@@ -93,8 +99,18 @@ public class UC6_UI extends javax.swing.JDialog {
         });
 
         confirmButton.setText("Confirm");
+        confirmButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                confirmButtonActionPerformed(evt);
+            }
+        });
 
         cancelButton.setText("Cancel");
+        cancelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelButtonActionPerformed(evt);
+            }
+        });
 
         representativeCheckBox.setText("I'm a Representative");
         representativeCheckBox.addActionListener(new java.awt.event.ActionListener() {
@@ -110,34 +126,31 @@ public class UC6_UI extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(31, 31, 31)
-                        .addComponent(confirmButton, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel8))
-                        .addGap(27, 27, 27)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jLabel1)
-                                .addComponent(nameTextField)
-                                .addComponent(emailTextField)
-                                .addComponent(usernameTextField)
-                                .addComponent(confirmPasswordTextField)
-                                .addComponent(preferredLanguageTextField)
-                                .addComponent(preferredTimeZoneTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 284, Short.MAX_VALUE))
-                            .addComponent(passwordTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(representativeCheckBox)
-                                .addGap(28, 28, 28)))))
-                .addContainerGap(36, Short.MAX_VALUE))
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel8))
+                .addGap(31, 31, 31)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(passwordTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(representativeCheckBox)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(31, 31, 31)
+                            .addComponent(confirmButton, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel1)
+                            .addComponent(nameTextField)
+                            .addComponent(emailTextField)
+                            .addComponent(usernameTextField)
+                            .addComponent(confirmPasswordTextField)
+                            .addComponent(preferredLanguageTextField)
+                            .addComponent(preferredTimeZoneTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 284, Short.MAX_VALUE))))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -174,11 +187,11 @@ public class UC6_UI extends javax.swing.JDialog {
                     .addComponent(preferredTimeZoneTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(representativeCheckBox)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+                .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(confirmButton)
                     .addComponent(cancelButton))
-                .addGap(18, 18, 18))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
 
         pack();
@@ -191,6 +204,24 @@ public class UC6_UI extends javax.swing.JDialog {
     private void representativeCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_representativeCheckBoxActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_representativeCheckBoxActionPerformed
+
+    private void confirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmButtonActionPerformed
+
+        if (!(nameTextField.getText().equals("") || emailTextField.getText().equals("") || usernameTextField.getText().equals("") || passwordTextField.getText().equals(""))) {
+            if (JOptionPane.showConfirmDialog(UC6_UI.this, "Are you sure you want to register with this Data?", "Confirm", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
+                c.registerUser(nameTextField.getText(), emailTextField.getText(), usernameTextField.getText(), passwordTextField.getText());
+                dispose();
+            }
+        } else {
+            JOptionPane.showMessageDialog(UC6_UI.this, "Please fill in all the fields", "Missing data", JOptionPane.OK_OPTION);
+        }
+    }//GEN-LAST:event_confirmButtonActionPerformed
+
+    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
+        if (JOptionPane.showConfirmDialog(UC6_UI.this, "Do you wish to exit without saving?", "Close", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
+            dispose();
+        }
+    }//GEN-LAST:event_cancelButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelButton;

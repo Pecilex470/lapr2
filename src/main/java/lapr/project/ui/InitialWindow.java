@@ -7,6 +7,7 @@ package lapr.project.ui;
 
 import javax.swing.JOptionPane;
 import static javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE;
+import lapr.project.controller.LoginController;
 import lapr.project.model.EventCenter;
 
 /**
@@ -28,6 +29,7 @@ public class InitialWindow extends javax.swing.JFrame {
      */
     public InitialWindow(EventCenter ec) {
         this.ec = ec;
+        LoginController c = new LoginController(ec);
         initComponents();
         this.setVisible(true);
         setLocationRelativeTo(null);
@@ -162,7 +164,7 @@ public class InitialWindow extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void registerUserButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerUserButtonActionPerformed
-        // TODO add your handling code here:
+        new UC6_UI(ec);
     }//GEN-LAST:event_registerUserButtonActionPerformed
 
     private void passwordTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordTextFieldActionPerformed
