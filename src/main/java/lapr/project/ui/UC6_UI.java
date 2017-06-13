@@ -225,9 +225,9 @@ public class UC6_UI extends javax.swing.JDialog {
             if (passwordField.getText().equals(confirmPasswordField.getText())) {
                 if (c.verifyPassword(passwordField.getText()) == true) {
                     if (JOptionPane.showConfirmDialog(UC6_UI.this, "Are you sure you want to register with this Data?", "Confirm", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
-                        String password =c.encryptPassword(passwordField.getText(), usernameTextField.getText());
-//                        c.registerUser(nameTextField.getText(), emailTextField.getText(), usernameTextField.getText());
-//                        c.registerUser();
+                        String password = c.encryptPassword(passwordField.getText());
+                        c.registerUser(c.twoLayerEncription(nameTextField.getText()), c.twoLayerEncription(emailTextField.getText()), c.twoLayerEncription(usernameTextField.getText()), password);
+                        ec.getUserRegister().getUserByUsername(usernameTextField.getText());
                         dispose();
                     }
                 } else {

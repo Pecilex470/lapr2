@@ -21,8 +21,16 @@ public class Encryption {
      * Variable that stores the Username from the user that the shift is
      * asscoaited to
      */
-    private String username;
+    private User user;
     
+    /**
+     * Attribute that stores the keyword input by the user to use on the encryptation
+     */
+    private String keyword;
+
+    /**
+     * Instance of the registry of all Encryptions
+     */
     private EncryptionRegister enr;
 
     /**
@@ -34,12 +42,12 @@ public class Encryption {
      * Constructor that creates the instance of an encryption
      *
      * @param shift the shift the encryption has on set user
-     * @param username the username of the user
+     * @param user the user this encryption is associated to
      * @param enr the encryption registry
      */
-    public Encryption(int shift, String username, EncryptionRegister enr) {
+    public Encryption(int shift, User user, EncryptionRegister enr) {
         this.shift = shift;
-        this.username = username;
+        this.user = user;
         this.enr = enr;
     }
 
@@ -58,27 +66,26 @@ public class Encryption {
     }
 
     /**
-     * @return the username
+     * @return the user
      */
-    public String getUsername() {
-        return username;
+    public User getUser() {
+        return user;
     }
 
     /**
-     * @param username the username to set
+     * @param user the user to set
      */
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     /**
      * This method encrypts the password and saves the shift that is generated
      *
      * @param password the unencrypted password
-     * @param username the username relative to the user
      * @return returns the encrypted password
      */
-    public static String encryptPassword(String password, String username) {
+    public static String encryptPassword(String password) {
         int num = ThreadLocalRandom.current().nextInt(1, 66 + 1);
         String encryptedPassword = "";
 
@@ -99,11 +106,16 @@ public class Encryption {
                 }
             }
         }
-        
-        
+
         return encryptedPassword;
     }
-    
+
+    /**
+     * Method that encrypts data using a substitution algorithm
+     *
+     * @param param the String to be encrypted
+     * @return returns de encrypted piece of Data
+     */
     public static String encryptData(String param) {
         return "hello";
     }

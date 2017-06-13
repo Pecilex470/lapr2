@@ -48,13 +48,13 @@ public class UC6_Controller {
      * @param password the password the user inserted
      * @return returns the encrypted password
      */
-    public String encryptPassword(String password, String username) {
-        return Encryption.encryptPassword(password, username);
+    public String encryptPassword(String password) {
+        return Encryption.encryptPassword(password);
     }
     
-    public String twoLayerEncription(String param, String username) {
+    public String twoLayerEncription(String param) {
         String temp = Encryption.encryptData(param);
-        return Encryption.encryptPassword(param, username);
+        return Encryption.encryptPassword(param);
     }
     
     
