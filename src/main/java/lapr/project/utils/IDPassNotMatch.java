@@ -14,7 +14,7 @@ public class IDPassNotMatch extends RuntimeException {
     static final long serialVersionUID = -7034897190745766939L;
     
     public IDPassNotMatch() {
-        super("A palavra-passe inserida está incorreta.");
+        super("The inserted password does not match");
     }
 
 }

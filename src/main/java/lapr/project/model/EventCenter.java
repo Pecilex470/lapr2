@@ -2,6 +2,7 @@ package lapr.project.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import lapr.project.model.register.EncryptionRegister;
 import lapr.project.model.register.EventRegister;
 import lapr.project.model.register.UserRegister;
 import lapr.project.model.register.RepresentativeRegister;
@@ -13,21 +14,26 @@ import lapr.project.model.register.RepresentativeRegister;
 public class EventCenter {
 
     /**
-     * Variavel that saves the data of each event of the respective event
+     * Variable that saves the data of each event of the respective event
      * center.
      */
     private EventRegister er;
 
     /**
-     * Variavel that saves the data of each user of the respective event center.
+     * Variable that saves the data of each user of the respective event center.
      */
     private UserRegister ur;
 
     /**
-     * Variavel that saves the data of each representative of the respective
+     * Variable that saves the data of each representative of the respective
      * event center.
      */
     private RepresentativeRegister rr;
+    
+    /**
+     * Variable that saves all the data needed from the password encryption
+     */
+    private EncryptionRegister enr;
 
     /**
      * Creates an instance of EventCenter that receives the event and users
@@ -39,10 +45,11 @@ public class EventCenter {
      * @param rr Object of the class RepresentativeList
      *
      */
-    public EventCenter(EventRegister er, UserRegister ur, RepresentativeRegister rr) {
+    public EventCenter(EventRegister er, UserRegister ur, RepresentativeRegister rr, EncryptionRegister enr) {
         this.er = er;
         this.ur = ur;
         this.rr = rr;
+        this.enr = enr;
     }
 
     /**
@@ -71,6 +78,10 @@ public class EventCenter {
     public RepresentativeRegister getRepresentativeList() {
         return rr;
     }
+    
+    public EncryptionRegister getEncryptionRegister() {
+        return enr;
+    }
 
     /**
      * Allows to define all the events that are related with the Event Center.
@@ -98,6 +109,10 @@ public class EventCenter {
      */
     public void setRepresentativeList(RepresentativeRegister rr) {
         this.rr = rr;
+    }
+    
+    public void setEncryptionRegister(EncryptionRegister enr) {
+        this.enr = enr;
     }
 
     /**

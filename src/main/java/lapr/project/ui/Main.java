@@ -35,12 +35,14 @@ public class Main {
         List<Event> er = new ArrayList();
         List<User> ur = new ArrayList();
         List<Representative> rr = new ArrayList();
+        List<Encryption> enr = new ArrayList();
         
         EventRegister eventRegister = new EventRegister(er);
         UserRegister userRegister = new UserRegister(ur);
         RepresentativeRegister representativeRegister = new RepresentativeRegister(rr);
+        EncryptionRegister encryptionRegister = new EncryptionRegister(enr);
         
-        return new EventCenter(eventRegister, userRegister, representativeRegister);
+        return new EventCenter(eventRegister, userRegister, representativeRegister, encryptionRegister);
     }
 
 }
