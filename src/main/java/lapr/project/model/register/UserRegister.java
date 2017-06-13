@@ -77,7 +77,7 @@ public class UserRegister {
      * @param password User pass that is trying to start session. sessão
      * @return User object
      */
-    public User getUser(String username, String password) {
+    public User getUserByLogin(String username, String password) {
         if (username.contains("@")) {
             for (User userA : users) {
                 String utilAtualEmail = userA.getEmail();
@@ -87,11 +87,11 @@ public class UserRegister {
                 }
             }
         } else {
-            for (User utilAtual : users) {
-                String utilAtualUsername = utilAtual.getUsername();
-                String utilAtualPass = utilAtual.getPassword();
-                if (utilAtualUsername.equalsIgnoreCase(username) && utilAtualPass.equalsIgnoreCase(password)) {
-                    return utilAtual;
+            for (User userB : users) {
+                String utilBUsername = userB.getUsername();
+                String utilBPass = userB.getPassword();
+                if (utilBUsername.equalsIgnoreCase(username) && utilBPass.equalsIgnoreCase(password)) {
+                    return userB;
                 }
             }
         }

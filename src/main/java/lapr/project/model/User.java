@@ -12,23 +12,25 @@ package lapr.project.model;
  */
 public class User {
     
-
-    public String name;
+    /**
+     * The user's full name
+     */
+    private String name;
 
     /**
      * User email address
      */
-    public String email;
+    private String email;
 
     /**
      * User Identification
      */
-    public String username;
+    private String username;
 
     /**
      * User Acess password
      */
-    public String password;
+    private String password;
 
     /**
      * Creates a User instance receiving the name, email, username, and password of the new user to be created.

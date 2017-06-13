@@ -32,9 +32,9 @@ public class Main {
      */
     public static EventCenter createInitialComponents() {
         
-        List<Event> er = null;
-        List<User> ur = null;
-        List<Representative> rr = null;
+        List<Event> er = new ArrayList();
+        List<User> ur = new ArrayList();
+        List<Representative> rr = new ArrayList();
         
         EventRegister eventRegister = new EventRegister(er);
         UserRegister userRegister = new UserRegister(ur);

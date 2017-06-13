@@ -23,8 +23,8 @@ public class LoginController {
     }
     
     public User getUser(String username, String password) {
-        UserRegister userRegister = ec.getUserRegister();
-        return userRegister.getUser(username, password);
+        return ec.getUserRegister().getUserByLogin(username, password);
     }
+    
     
 }
