@@ -5,13 +5,12 @@
  */
 package lapr.project.model;
 
-
 /**
  *
  * @author Utilizador
  */
 public class User {
-    
+
     /**
      * The user's full name
      */
@@ -33,11 +32,12 @@ public class User {
     private String password;
 
     /**
-     * Creates a User instance receiving the name, email, username, and password of the new user to be created.
+     * Creates a User instance receiving the name, email, username, and password
+     * of the new user to be created.
      *
      * @param name User civil name
      * @param email User email
-     * @param username User identification 
+     * @param username User identification
      * @param password User Acess password
      */
     public User(String name, String email, String username, String password) {
@@ -46,9 +46,9 @@ public class User {
         this.username = username;
         this.password = password;
     }
-    
-    public User(){
-        
+
+    public User() {
+
     }
 
     /**
@@ -82,14 +82,14 @@ public class User {
     /**
      * Method that allows to define the name of the user
      *
-     * @param name  The user name in question to be defined.
+     * @param name The user name in question to be defined.
      */
     public void setName(String name) {
         this.name = name;
     }
 
     /**
-     *Method that allows to define the email of the user
+     * Method that allows to define the email of the user
      *
      * @param email The user email in question to be defined
      */
@@ -115,6 +115,40 @@ public class User {
         this.password = password;
     }
 
-   }
-    
+    public static boolean verifyPassword(String password) {
+        boolean specialChars = false;
+        boolean upperCase = false;
+        boolean lowerCase = false;
+        boolean number = false;
 
+        String chars = ".,;:-";
+        for (int i = 0; i < password.length() - 1; i++) {
+            if (chars.contains(password.substring(i, i + 1))) {
+                specialChars = true;
+            }
+        }
+
+        for (int i = 0; i < password.length(); i++) {
+            if (Character.isUpperCase(password.charAt(i))) {
+                upperCase = true;
+            }
+            if (Character.isLowerCase(password.charAt(i))) {
+                lowerCase = true;
+            }
+        }
+
+        String numbers = "1234567890";
+        for (int i = 0; i < password.length() - 1; i++) {
+            if (numbers.contains(password.substring(i, i + 1))) {
+                number = true;
+            }
+        }
+
+        if (specialChars == true && upperCase == true && lowerCase == true && number == true) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+}
