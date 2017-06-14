@@ -46,36 +46,55 @@ public class UC6_Controller {
      * provided for further logins
      *
      * @param password the password the user inserted
+     * @param shift the shift to be used in the encryptation
+     * @param abc the abecedary of characters
      * @return returns the encrypted password
      */
-    public String encryptPassword(String password) {
-        return Encryption.encryptPassword(password);
+    public String encryptPassword(String password, int shift, String abc) {
+        return Encryption.encryptPassword(password, shift, abc);
     }
-    
-    public String twoLayerEncription(String param) {
-        String temp = Encryption.encryptData(param);
-        return Encryption.encryptPassword(param);
+
+    /**
+     * This method encrypts the user data in a safe way by performing a two-step encryption
+     * @param param the data string to be processed
+     * @param shift the shift to be used
+     * @param keyword the keyword to use in the substitution encryption
+     * @param abc the full character abecedary
+     * @return returns the encrypted data string
+     */
+    public String twoLayerEncription(String param, int shift, String keyword, String abc) {
+        String temp = Encryption.encryptData(param, keyword);
+        return Encryption.encryptPassword(param, shift, abc);
     }
-    
-    
-    
+
     /**
      * This method gets the EncryptionRegister instance
-     * 
+     *
      * @return returns the EncryptionRegister instance
      */
     public EncryptionRegister getEncryptionRegister() {
         return ec.getEncryptionRegister();
     }
-    
+
     /**
-     * Method that verifies if the password 
-     * 
+     * Method that verifies if the password
+     *
      * @param password
-     * @return 
+     * @return
      */
     public boolean verifyPassword(String password) {
         return User.verifyPassword(password);
     }
+
+    /**
+     * Method that assembles the char array rteceived into a String
+     * 
+     * @param chars the array received
+     * @return the assembled String
+     */
+    public String assemblePassword(char[] chars) {
+        return Encryption.assemblePassword(chars);
+    }
+
 
 }

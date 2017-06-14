@@ -38,7 +38,7 @@ public class Representative {
      * @param user User that is associated with the role of Representative
      */
     public void setUserRepre(User user) {
-        this.userRepre = userRepre;
+        this.userRepre = user;
     }
   
 }

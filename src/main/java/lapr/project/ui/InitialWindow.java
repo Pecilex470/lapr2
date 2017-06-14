@@ -5,10 +5,14 @@
  */
 package lapr.project.ui;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import static javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE;
 import lapr.project.controller.LoginController;
 import lapr.project.model.EventCenter;
+import lapr.project.model.User;
+import lapr.project.utils.PasswordDoesNotMatch;
 
 /**
  *
@@ -21,6 +25,8 @@ public class InitialWindow extends javax.swing.JFrame {
      * Variable that contains the whole EventCenter information
      */
     private EventCenter ec;
+    
+    private LoginController c;
 
     /**
      * Creates new form InitialWindow
@@ -29,7 +35,7 @@ public class InitialWindow extends javax.swing.JFrame {
      */
     public InitialWindow(EventCenter ec) {
         this.ec = ec;
-        LoginController c = new LoginController(ec);
+        this.c = new LoginController(ec);
         initComponents();
         this.setVisible(true);
         setLocationRelativeTo(null);
@@ -172,7 +178,15 @@ public class InitialWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_passwordTextFieldActionPerformed
 
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
-        // TODO add your handling code here:
+        String username = usernameTextField.getText();
+        char[] password = passwordTextField.getPassword();
+        try {
+            User u = c.verifyLogin(username, password);
+            dispose();
+            new MainWindow(u, ec);
+        } catch (PasswordDoesNotMatch ex) {
+            Logger.getLogger(InitialWindow.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_loginButtonActionPerformed
 
     private void usernameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usernameTextFieldActionPerformed

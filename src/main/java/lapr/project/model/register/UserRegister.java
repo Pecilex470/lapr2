@@ -8,7 +8,7 @@ package lapr.project.model.register;
 import java.util.ArrayList;
 import java.util.List;
 import lapr.project.model.User;
-import lapr.project.utils.IDPassNotMatch;
+import lapr.project.utils.PasswordDoesNotMatch;
 
 /**
  *
@@ -76,13 +76,14 @@ public class UserRegister {
      * to start session.
      * @param password User pass that is trying to start session. sessão
      * @return User object
+     * @throws lapr.project.utils.PasswordDoesNotMatch
      */
-    public User getUserByLogin(String username, String password) {
+    public User getUserByLogin(String username, String password) throws PasswordDoesNotMatch {
         if (username.contains("@")) {
             for (User userA : users) {
-                String utilAtualEmail = userA.getEmail();
-                String utilAtualPass = userA.getPassword();
-                if (utilAtualEmail.equalsIgnoreCase(username) && utilAtualPass.equalsIgnoreCase(password)) {
+                String userAEmail = userA.getEmail();
+                String userAPassword = userA.getPassword();
+                if (userAEmail.equalsIgnoreCase(username) && userAPassword.equalsIgnoreCase(password)) {
                     return userA;
                 }
             }
@@ -95,7 +96,7 @@ public class UserRegister {
                 }
             }
         }
-        throw new IDPassNotMatch();
+        throw new PasswordDoesNotMatch();
     }
 
 }

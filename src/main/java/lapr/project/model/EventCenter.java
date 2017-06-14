@@ -75,7 +75,7 @@ public class EventCenter {
     /**
      * @return Object of the class RepresentativeList.
      */
-    public RepresentativeRegister getRepresentativeList() {
+    public RepresentativeRegister getRepresentativeRegister() {
         return rr;
     }
 

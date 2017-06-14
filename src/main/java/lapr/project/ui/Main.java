@@ -23,7 +23,7 @@ public class Main {
     public static void main(String[] args) {
         
         EventCenter ec = createInitialComponents();
-        InitialWindow initialWindow = new InitialWindow(ec);
+        new InitialWindow(ec);
 
     }
     
@@ -32,10 +32,10 @@ public class Main {
      */
     public static EventCenter createInitialComponents() {
         
-        List<Event> er = new ArrayList();
-        List<User> ur = new ArrayList();
-        List<Representative> rr = new ArrayList();
-        List<Encryption> enr = new ArrayList();
+        List<Event> er = new ArrayList<>();
+        List<User> ur = new ArrayList<>();
+        List<Representative> rr = new ArrayList<>();
+        List<Encryption> enr = new ArrayList<>();
         
         EventRegister eventRegister = new EventRegister(er);
         UserRegister userRegister = new UserRegister(ur);
