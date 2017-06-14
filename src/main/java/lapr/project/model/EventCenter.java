@@ -29,7 +29,7 @@ public class EventCenter {
      * event center.
      */
     private RepresentativeRegister rr;
-    
+
     /**
      * Variable that saves all the data needed from the password encryption
      */
@@ -78,7 +78,7 @@ public class EventCenter {
     public RepresentativeRegister getRepresentativeList() {
         return rr;
     }
-    
+
     public EncryptionRegister getEncryptionRegister() {
         return enr;
     }
@@ -110,7 +110,7 @@ public class EventCenter {
     public void setRepresentativeList(RepresentativeRegister rr) {
         this.rr = rr;
     }
-    
+
     public void setEncryptionRegister(EncryptionRegister enr) {
         this.enr = enr;
     }
@@ -132,22 +132,66 @@ public class EventCenter {
         return globalAcceptanceRate / er.getEventList().size();
 
     }
+
     /**
-     * 
+     *
      * @param u user that we want to check where plays a roll as a FAE
      * @return list of events where the user u is FAE
      */
-    
-    
-    public List<Event> getEventsWhereUserIsFAE(User u){
-        
+
+    public List<Event> getEventsWhereUserIsFAE(User u) {
+
         List<Event> eventsWhereUserIsFAE = new ArrayList<>();
-        for (Event e: er.getEventList()) {
+        for (Event e : er.getEventList()) {
             if (e.isFAE(u)) {
                 eventsWhereUserIsFAE.add(e);
             }
         }
         return eventsWhereUserIsFAE;
+    }
+
+    /**
+     *
+     * @param u user that we want to check if it's a FAE in any event or not
+     * @return true if the user u is a FAE in any event, false if he isn't a FAE
+     * in any event
+     */
+    public boolean checkIFUserIsFAE(User u) {
+
+        try {
+            er.getEventList();
+        } catch (NullPointerException e) {
+            return false;
+        }
+
+        for (Event e : er.getEventList()) {
+            if (e.isFAE(u)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    /**
+     *
+     * @param u user that we want to check if it's a FAE in any event or not
+     * @return true if the user u is a FAE in any event, false if he isn't a FAE
+     * in any event
+     */
+    public boolean checkIFUserIsOrganizer(User u) {
+
+        try {
+            er.getEventList();
+        } catch (NullPointerException e) {
+            return false;
+        }
+
+        for (Event e : er.getEventList()) {
+            if (e.isOrganizer(u)) {
+                return true;
+            }
+        }
+        return false;
     }
 
 }

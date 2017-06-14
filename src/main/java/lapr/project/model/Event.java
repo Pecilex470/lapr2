@@ -19,7 +19,7 @@ public class Event {
     private String eventType;
     private ApplicationList applicationList;
     private FAEList faeList;
-    private OrganizerList OrganizerList;
+    private OrganizerList organizerList;
     private AttributionList attributionList;
     private int availableArea;
     private List<Stand> standL;
@@ -52,7 +52,7 @@ public class Event {
         this.submissionEndDate = submissionEndDate;
         this.eventType = eventType;
         this.faeList = fl;
-        this.OrganizerList = ol;
+        this.organizerList = ol;
         this.availableArea = availableArea;
     }
 
@@ -242,6 +242,23 @@ public class Event {
         }
 
         return isFAE;
+    }
+    
+    /**
+     *
+     * @param u user that we want to check if it is an Organizer in this event
+     * @return true if the user u is an Organizer in this event, false if it's not
+     */
+    public boolean isOrganizer(User u) {
+
+        boolean isOrganizer = false;
+        for (Organizer o : organizerList.getOrganizadores()) {
+            if (o.getUtilizadorOrganizador().getUsername().equals(u.getUsername())) {
+                isOrganizer = true;
+            }
+        }
+
+        return isOrganizer;
     }
 
     /**

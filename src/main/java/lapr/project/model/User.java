@@ -27,9 +27,12 @@ public class User {
     private String username;
 
     /**
-     * User Acess password
+     * User Access password
      */
     private String password;
+    
+    private boolean isEventManager;
+    private boolean isRepresentative;
 
     /**
      * Creates a User instance receiving the name, email, username, and password
@@ -149,6 +152,14 @@ public class User {
         } else {
             return false;
         }
+    }
+    
+    public boolean isEventManager(){
+        return isEventManager;
+    }
+    
+    public boolean isRepresentative(){
+        return isRepresentative;
     }
 
 }
