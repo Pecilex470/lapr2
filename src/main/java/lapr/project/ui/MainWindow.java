@@ -5,17 +5,38 @@
  */
 package lapr.project.ui;
 
+import javax.swing.JOptionPane;
+import static javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE;
+import lapr.project.model.EventCenter;
+import lapr.project.model.User;
+
 /**
  *
  * @author Pedro
  */
 public class MainWindow extends javax.swing.JFrame {
 
+    User u;
+    EventCenter ec;
+
     /**
      * Creates new form MainWindow
      */
-    public MainWindow() {
+    public MainWindow(User u, EventCenter ec) {
+        this.u = u;
+        this.ec = ec;
         initComponents();
+        this.setVisible(true);
+        setLocationRelativeTo(null);
+        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+        this.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+                if (JOptionPane.showConfirmDialog(MainWindow.this, "Do you wish to exit?", "Close", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
+                    dispose();
+                }
+            }
+        });
     }
 
     /**
@@ -27,21 +48,140 @@ public class MainWindow extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonOrganizer = new javax.swing.JButton();
+        buttonFAE = new javax.swing.JButton();
+        buttonEventManager = new javax.swing.JButton();
+        buttonRepresentative = new javax.swing.JButton();
+        buttonBack = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        buttonOrganizer.setText("Organizer Actions");
+        buttonOrganizer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonOrganizerActionPerformed(evt);
+            }
+        });
+
+        buttonFAE.setText("FAE Actions");
+        buttonFAE.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonFAEActionPerformed(evt);
+            }
+        });
+
+        buttonEventManager.setText("Event Manager Actions");
+        buttonEventManager.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonEventManagerActionPerformed(evt);
+            }
+        });
+
+        buttonRepresentative.setText("Representative Actions");
+        buttonRepresentative.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonRepresentativeActionPerformed(evt);
+            }
+        });
+
+        buttonBack.setText("Back");
+
+        jLabel1.setText("Choose the type of use cases you want to do:");
+
+        jLabel2.setText("Hi " + u.getName() + "!");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 856, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(buttonBack)
+                .addGap(17, 17, 17))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(14, 14, 14)
+                        .addComponent(buttonOrganizer, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(buttonRepresentative, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(14, 14, 14)
+                        .addComponent(buttonFAE, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(buttonEventManager, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(32, 32, 32)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 488, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(7, 7, 7)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(buttonEventManager, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonFAE, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(buttonOrganizer, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonRepresentative, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(buttonBack)
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+
+    private void buttonFAEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonFAEActionPerformed
+
+        if (ec.checkIFUserIsFAE(u)) {
+
+        } else {
+            JOptionPane.showMessageDialog(null, "You are not FAE in any event!");
+        }
+
+    }//GEN-LAST:event_buttonFAEActionPerformed
+
+    private void buttonEventManagerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEventManagerActionPerformed
+
+        if (u.isEventManager()) {
+
+        } else {
+            JOptionPane.showMessageDialog(null, "You are not an Event Manager");
+        }
+
+    }//GEN-LAST:event_buttonEventManagerActionPerformed
+
+    private void buttonOrganizerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonOrganizerActionPerformed
+
+        if (ec.checkIFUserIsOrganizer(u)) {
+
+        } else {
+            JOptionPane.showMessageDialog(null, "You are not organizer in any event!");
+        }
+    }//GEN-LAST:event_buttonOrganizerActionPerformed
+
+    private void buttonRepresentativeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRepresentativeActionPerformed
+
+        if (u.isRepresentative()) {
+
+        } else {
+            JOptionPane.showMessageDialog(null, "You are not a Representative");
+        }
+
+
+    }//GEN-LAST:event_buttonRepresentativeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -73,11 +213,18 @@ public class MainWindow extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MainWindow().setVisible(true);
+                new MainWindow(new User("Luis Azevedo", "123", "123", "123"), new EventCenter()).setVisible(true); //APENAS PARA TESTE
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton buttonBack;
+    private javax.swing.JButton buttonEventManager;
+    private javax.swing.JButton buttonFAE;
+    private javax.swing.JButton buttonOrganizer;
+    private javax.swing.JButton buttonRepresentative;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables
 }
