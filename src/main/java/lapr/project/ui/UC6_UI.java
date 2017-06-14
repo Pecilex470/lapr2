@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import lapr.project.controller.UC6_Controller;
+import lapr.project.model.Encryption;
 import lapr.project.model.EventCenter;
 
 /**
@@ -216,7 +217,7 @@ public class UC6_UI extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void representativeCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_representativeCheckBoxActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_representativeCheckBoxActionPerformed
 
     private void confirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmButtonActionPerformed
@@ -227,7 +228,7 @@ public class UC6_UI extends javax.swing.JDialog {
                     if (JOptionPane.showConfirmDialog(UC6_UI.this, "Are you sure you want to register with this Data?", "Confirm", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
                         String password = c.encryptPassword(passwordField.getText());
                         c.registerUser(c.twoLayerEncription(nameTextField.getText()), c.twoLayerEncription(emailTextField.getText()), c.twoLayerEncription(usernameTextField.getText()), password);
-                        ec.getUserRegister().getUserByUsername(usernameTextField.getText());
+//                        ec.getEncryptionRegister().addEncryption(new Encryption(ec.getUserRegister().getUserByUsername(usernameTextField.getText())),);
                         dispose();
                     }
                 } else {

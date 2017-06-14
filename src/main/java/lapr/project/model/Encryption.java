@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
+import javax.swing.JOptionPane;
 import lapr.project.model.register.EncryptionRegister;
 
 /**
@@ -45,10 +46,11 @@ public class Encryption {
      * @param user the user this encryption is associated to
      * @param enr the encryption registry
      */
-    public Encryption(int shift, User user, EncryptionRegister enr) {
+    public Encryption(int shift, User user, EncryptionRegister enr, String keyword) {
         this.shift = shift;
         this.user = user;
         this.enr = enr;
+        this.keyword = keyword;
     }
 
     /**
@@ -103,10 +105,10 @@ public class Encryption {
             for (int j = 0; j < abecedary.size(); j++) {
                 if (password.substring(i, i + 1).equals(abecedary.get(j))) {
                     encryptedPassword = encryptedPassword + rotated.get(j);
+                    System.out.println(encryptedPassword);
                 }
             }
         }
-
         return encryptedPassword;
     }
 
