@@ -47,7 +47,7 @@ public class Keyword implements Exportable, Importable<Keyword> {
 	 *
 	 * @return Keyword Value
 	 */
-	private String getValue() {
+	public String getValue() {
 		return this.value;
 	}
 
