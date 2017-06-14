@@ -180,8 +180,9 @@ public class InitialWindow extends javax.swing.JFrame {
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
         String username = usernameTextField.getText();
         char[] password = passwordTextField.getPassword();
+        User user = ec.getUserRegister().getUserByUsername(username);
         try {
-            User u = c.verifyLogin(username, password);
+            User u = c.verifyLogin(username, password, user);
             dispose();
             new MainWindow(u, ec);
         } catch (PasswordDoesNotMatch ex) {

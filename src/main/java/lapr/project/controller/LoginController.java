@@ -28,13 +28,14 @@ public class LoginController {
      * this method gets the user that the inserted credentials refer to, and verirfies the login
      * @param username the inserted username
      * @param pass the inserted password
+     * @param user
      * @return returns the user
      * @throws PasswordDoesNotMatch 
      */
-    public User verifyLogin(String username, char[] pass) throws PasswordDoesNotMatch {
+    public User verifyLogin(String username, char[] pass, User user) throws PasswordDoesNotMatch {
         int shift = ec.getEncryptionRegister().getEncryptionByUser(ec.getUserRegister().getUserByUsername(username)).getShift();
         String password = Encryption.encryptPassword(Encryption.assemblePassword(pass), shift, Encryption.ABC);
-        return ec.getUserRegister().getUserByLogin(username, password);
+        return ec.getUserRegister().getUserByLogin(username, password, user);
     }
     
     

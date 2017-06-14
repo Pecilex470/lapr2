@@ -7,7 +7,9 @@ package lapr.project.model.register;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import lapr.project.model.User;
+import lapr.project.ui.InitialWindow;
 import lapr.project.utils.PasswordDoesNotMatch;
 
 /**
@@ -50,11 +52,10 @@ public class UserRegister {
     }
 
     /**
-     * 
+     *
      * @param username username of the user
      * @return an object User with the username given as username
      */
-    
     public User getUserByUsername(String username) {
 
         User userByUsername = new User();
@@ -64,7 +65,7 @@ public class UserRegister {
                 userByUsername = u;
             }
         }
-        
+
         return userByUsername;
     }
 
@@ -72,31 +73,19 @@ public class UserRegister {
      * Method that will search and return a user that correspond to the id and
      * pass passed as parameters
      *
-     * @param username Identification (username or email) of the user that is trying
-     * to start session.
+     * @param username Identification (username or email) of the user that is
+     * trying to start session.
      * @param password User pass that is trying to start session. sessão
+     * @param user
      * @return User object
      * @throws lapr.project.utils.PasswordDoesNotMatch
      */
-    public User getUserByLogin(String username, String password) throws PasswordDoesNotMatch {
-        if (username.contains("@")) {
-            for (User userA : users) {
-                String userAEmail = userA.getEmail();
-                String userAPassword = userA.getPassword();
-                if (userAEmail.equalsIgnoreCase(username) && userAPassword.equalsIgnoreCase(password)) {
-                    return userA;
-                }
-            }
-        } else {
-            for (User userB : users) {
-                String utilBUsername = userB.getUsername();
-                String utilBPass = userB.getPassword();
-                if (utilBUsername.equalsIgnoreCase(username) && utilBPass.equalsIgnoreCase(password)) {
-                    return userB;
-                }
-            }
-        }
-        throw new PasswordDoesNotMatch();
+    public User getUserByLogin(String username, String password, User user) throws PasswordDoesNotMatch {
+
+        if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
+            return user;
+        } else
+        throw new PasswordDoesNotMatch("Incorrect login credentials");
     }
 
 }

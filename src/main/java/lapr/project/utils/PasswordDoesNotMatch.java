@@ -5,6 +5,9 @@
  */
 package lapr.project.utils;
 
+import javax.swing.JOptionPane;
+import lapr.project.ui.InitialWindow;
+
 /**
  *
  * @author Pedro Pinho
@@ -25,8 +28,10 @@ public class PasswordDoesNotMatch extends Exception {
      * specified detail message.
      *
      * @param msg the detail message.
+     * @param parentFrame
      */
     public PasswordDoesNotMatch(String msg) {
         super("Incorrect login Data");
+        JOptionPane.showMessageDialog(null, "Wrong username or password", "Error", JOptionPane.OK_OPTION);
     }
 }
