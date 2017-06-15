@@ -12,7 +12,7 @@ package lapr.project.model;
 public class Evaluation {
 
     /**
-     *
+     * Parameters that the FAE will use to evaluate the application
      */
     private int knowledge, adequancy, quantity, overall;
 

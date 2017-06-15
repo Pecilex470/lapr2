@@ -154,7 +154,7 @@ public class MainWindow extends javax.swing.JFrame {
     private void buttonFAEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonFAEActionPerformed
 
         if (ec.checkIFUserIsFAE(u)) {
-
+            new FAEActions(ec, u);
         } else {
             JOptionPane.showMessageDialog(null, "You are not FAE in any event!");
         }

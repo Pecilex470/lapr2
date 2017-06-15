@@ -170,7 +170,7 @@ public class InitialWindow extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void registerUserButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerUserButtonActionPerformed
-        new UC6_UI(ec);
+        new RegisterUser(ec);
     }//GEN-LAST:event_registerUserButtonActionPerformed
 
     private void passwordTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordTextFieldActionPerformed
