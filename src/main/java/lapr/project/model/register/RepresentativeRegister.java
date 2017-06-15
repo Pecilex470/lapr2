@@ -34,7 +34,7 @@ public class RepresentativeRegister {
      * 
      * @return List that contains all the representatives from a specific event center. 
      */
-    public List<Representative> getRepresentative(){
+    public List<Representative> getRepresentativeList(){
         return representatives;
     }
     
@@ -43,8 +43,16 @@ public class RepresentativeRegister {
      * 
      * @param representatives List that contains all the representatives from a specific event center. 
      */
-    public void setRepresentative(List<Representative> representatives){
+    public void setRepresentativeRegister(List<Representative> representatives){
      this.representatives=representatives; 
+    }
+    
+    /**
+     * This method adds a Representative to the Registry
+     * @param r the representative to be added
+     */
+    public void addRepresentative(Representative r) {
+        representatives.add(r);
     }
 
    

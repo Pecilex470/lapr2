@@ -3,6 +3,7 @@ package lapr.project.model.register;
 import java.util.ArrayList;
 import java.util.List;
 import lapr.project.model.Encryption;
+import lapr.project.model.User;
 
 /**
  *
@@ -13,7 +14,7 @@ public class EncryptionRegister {
     /**
      * List that stores all the data from the user password encryptions
      */
-    private List<Encryption> enr = new ArrayList();
+    private List<Encryption> enr = new ArrayList<>();
 
     /**
      * Constructor for the EncryptionRegister object
@@ -34,6 +35,15 @@ public class EncryptionRegister {
 
     public void addEncryption(Encryption e) {
         enr.add(e);
+    }
+
+    public Encryption getEncryptionByUser(User user) {
+        for (Encryption encryption : enr) {
+            if (encryption.getUser().equals(user)) {
+                return encryption;
+            }
+        }
+        return null;
     }
 
 }

@@ -1,8 +1,10 @@
 package lapr.project.controller;
 
+import lapr.project.model.Encryption;
 import lapr.project.model.EventCenter;
 import lapr.project.model.User;
 import lapr.project.model.register.UserRegister;
+import lapr.project.utils.PasswordDoesNotMatch;
 
 /**
  *
@@ -22,8 +24,18 @@ public class LoginController {
         this.ec = ec;
     }
     
-    public User getUser(String username, String password) {
-        return ec.getUserRegister().getUserByLogin(username, password);
+    /**
+     * this method gets the user that the inserted credentials refer to, and verirfies the login
+     * @param username the inserted username
+     * @param pass the inserted password
+     * @param user
+     * @return returns the user
+     * @throws PasswordDoesNotMatch 
+     */
+    public User verifyLogin(String username, char[] pass, User user) throws PasswordDoesNotMatch {
+        int shift = ec.getEncryptionRegister().getEncryptionByUser(ec.getUserRegister().getUserByUsername(username)).getShift();
+        String password = Encryption.encryptPassword(Encryption.assemblePassword(pass), shift, Encryption.ABC);
+        return ec.getUserRegister().getUserByLogin(username, password, user);
     }
     
     

@@ -43,6 +43,7 @@ public class EventCenter {
      * @param er Object of the class EventRegister.
      * @param ur Object of the class UserRegister.
      * @param rr Object of the class RepresentativeList
+     * @param enr Object of the class EncryptionRegister
      *
      */
     public EventCenter(EventRegister er, UserRegister ur, RepresentativeRegister rr, EncryptionRegister enr) {
@@ -75,7 +76,7 @@ public class EventCenter {
     /**
      * @return Object of the class RepresentativeList.
      */
-    public RepresentativeRegister getRepresentativeList() {
+    public RepresentativeRegister getRepresentativeRegister() {
         return rr;
     }
 

@@ -19,12 +19,14 @@ public class Date {
      * @param year 
      */
     public Date(int day, int month, int year) {
-//        setDate(day, month, year);
+        setDate(day, month, year);
     }
     
-//    public Date setDate(int day, int month, int year) {
-//        Date hello;
-//        return hello;
-//    }
+    public Date setDate(int day, int month, int year) {
+        this.day = day;
+        this.month = month;
+        this.year = year;
+        return Date.this;
+    }
     
 }

@@ -42,7 +42,7 @@
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <Group type="103" groupAlignment="1" max="-2" attributes="0">
@@ -60,7 +60,7 @@
                   <Component id="passwordField" alignment="0" max="32767" attributes="0"/>
                   <Component id="confirmPasswordField" alignment="0" max="32767" attributes="0"/>
                   <Component id="timezoneComboBox" max="32767" attributes="0"/>
-                  <Component id="keywordField" max="32767" attributes="0"/>
+                  <Component id="keywordTextField" max="32767" attributes="0"/>
               </Group>
               <EmptySpace pref="27" max="32767" attributes="0"/>
           </Group>
@@ -104,24 +104,23 @@
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="keywordField" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="keywordTextField" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="representativeCheckBox" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
                       <Component id="jScrollPane1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="confirmButton" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="cancelButton" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
+                  <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="15" max="32767" attributes="0"/>
+              <EmptySpace pref="17" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -208,6 +207,7 @@
       <SubComponents>
         <Component class="javax.swing.JTextArea" name="errorTextArea">
           <Properties>
+            <Property name="editable" type="boolean" value="false"/>
             <Property name="columns" type="int" value="20"/>
             <Property name="rows" type="int" value="5"/>
             <Property name="text" type="java.lang.String" value="The password must have at least one special&#xa;character (, . : ; -), and at least one uppercase&#xa;letter and one lowercase letter, as well as at least&#xa;one number"/>
@@ -235,7 +235,7 @@
         <Property name="text" type="java.lang.String" value="Data encryption keyword:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="keywordField">
+    <Component class="javax.swing.JTextField" name="keywordTextField">
     </Component>
   </SubComponents>
 </Form>

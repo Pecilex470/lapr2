@@ -6,19 +6,21 @@
 package lapr.project.ui;
 
 import java.awt.Color;
+import java.util.concurrent.ThreadLocalRandom;
 import javax.swing.JOptionPane;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import lapr.project.controller.UC6_Controller;
 import lapr.project.model.Encryption;
 import lapr.project.model.EventCenter;
+import lapr.project.model.Representative;
 
 /**
  *
  * @author Pedro
  */
 @SuppressWarnings("serial")
-public class UC6_UI extends javax.swing.JDialog {
+public class RegisterUser extends javax.swing.JDialog {
 
     private EventCenter ec;
     private UC6_Controller c;
@@ -29,7 +31,7 @@ public class UC6_UI extends javax.swing.JDialog {
      * @param ec Receives the instance of the EventCenter
      * @param c Receives the instance of this UI's Controller
      */
-    public UC6_UI(EventCenter ec) {
+    public RegisterUser(EventCenter ec) {
         this.c = new UC6_Controller(ec);
         this.ec = ec;
         initComponents();
@@ -39,7 +41,7 @@ public class UC6_UI extends javax.swing.JDialog {
         this.addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
             public void windowClosing(java.awt.event.WindowEvent windowEvent) {
-                if (JOptionPane.showConfirmDialog(UC6_UI.this, "Do you wish to exit without saving?", "Close", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
+                if (JOptionPane.showConfirmDialog(RegisterUser.this, "Do you wish to exit without saving?", "Close", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
                     dispose();
                 }
             }
@@ -75,7 +77,7 @@ public class UC6_UI extends javax.swing.JDialog {
         jLabel9 = new javax.swing.JLabel();
         timezoneComboBox = new javax.swing.JComboBox<>();
         jLabel7 = new javax.swing.JLabel();
-        keywordField = new javax.swing.JTextField();
+        keywordTextField = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("New User");
@@ -116,6 +118,7 @@ public class UC6_UI extends javax.swing.JDialog {
             }
         });
 
+        errorTextArea.setEditable(false);
         errorTextArea.setColumns(20);
         errorTextArea.setRows(5);
         errorTextArea.setText("The password must have at least one special\ncharacter (, . : ; -), and at least one uppercase\nletter and one lowercase letter, as well as at least\none number");
@@ -147,7 +150,7 @@ public class UC6_UI extends javax.swing.JDialog {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel9)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 284, Short.MAX_VALUE)
                     .addComponent(representativeCheckBox, javax.swing.GroupLayout.Alignment.LEADING)
@@ -162,7 +165,7 @@ public class UC6_UI extends javax.swing.JDialog {
                     .addComponent(passwordField, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(confirmPasswordField, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(timezoneComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(keywordField))
+                    .addComponent(keywordTextField))
                 .addContainerGap(27, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -197,20 +200,19 @@ public class UC6_UI extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(keywordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(keywordTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(representativeCheckBox)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(12, 12, 12)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel9)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(confirmButton)
-                            .addComponent(cancelButton))))
-                .addContainerGap(15, Short.MAX_VALUE))
+                            .addComponent(cancelButton)))
+                    .addComponent(jLabel9))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         pack();
@@ -222,29 +224,37 @@ public class UC6_UI extends javax.swing.JDialog {
 
     private void confirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmButtonActionPerformed
 
-        if (!(nameTextField.getText().equals("") || emailTextField.getText().equals("") || usernameTextField.getText().equals("") || passwordField.getText().equals(""))) {
-            if (passwordField.getText().equals(confirmPasswordField.getText())) {
-                if (c.verifyPassword(passwordField.getText()) == true) {
-                    if (JOptionPane.showConfirmDialog(UC6_UI.this, "Are you sure you want to register with this Data?", "Confirm", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
-                        String password = c.encryptPassword(passwordField.getText());
-                        c.registerUser(c.twoLayerEncription(nameTextField.getText()), c.twoLayerEncription(emailTextField.getText()), c.twoLayerEncription(usernameTextField.getText()), password);
-//                        ec.getEncryptionRegister().addEncryption(new Encryption(ec.getUserRegister().getUserByUsername(usernameTextField.getText())),);
-                        dispose();
+        if (!(nameTextField.getText().equals("") || emailTextField.getText().equals("") || usernameTextField.getText().equals("") || c.assemblePassword(passwordField.getPassword()).equals("") || keywordTextField.getText().equals(""))) {
+            if (c.assemblePassword(passwordField.getPassword()).equals(c.assemblePassword(confirmPasswordField.getPassword()))) {
+                if (4 <= keywordTextField.getText().length() && 7 >= keywordTextField.getText().length()) {
+                    if (c.verifyPassword(c.assemblePassword(passwordField.getPassword())) == true) {
+                        if (JOptionPane.showConfirmDialog(RegisterUser.this, "Are you sure you want to register with this Data?", "Confirm", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
+                            int shift = ThreadLocalRandom.current().nextInt(1, 66 + 1);
+                            String password = c.encryptPassword(c.assemblePassword(passwordField.getPassword()), shift, Encryption.ABC);
+                            c.registerUser(c.twoLayerEncription(nameTextField.getText(), shift, keywordTextField.getText(), Encryption.ABC), c.twoLayerEncription(emailTextField.getText(), shift, keywordTextField.getText(), Encryption.ABC),usernameTextField.getText(), password);
+                            ec.getEncryptionRegister().addEncryption(new Encryption(shift, ec.getUserRegister().getUserByUsername(usernameTextField.getText()), keywordTextField.getText()));
+                            if (representativeCheckBox.isSelected()) {
+                                ec.getRepresentativeRegister().addRepresentative(new Representative(ec.getUserRegister().getUserByUsername(usernameTextField.getText())));
+                            }
+                            dispose();
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(RegisterUser.this, "Missing password requirements", "Error", JOptionPane.OK_OPTION);
+                        errorTextArea.setForeground(Color.red);
                     }
                 } else {
-                    JOptionPane.showMessageDialog(UC6_UI.this, "Missing password requirements", "Error", JOptionPane.OK_OPTION);
-                    errorTextArea.setForeground(Color.red);
+                    JOptionPane.showMessageDialog(RegisterUser.this, "The Keyword must be between 4 and 7 characters", "Error", JOptionPane.OK_OPTION);
                 }
             } else {
-                JOptionPane.showMessageDialog(UC6_UI.this, "Passwords don´t match, please try again", "Error", JOptionPane.OK_OPTION);
+                JOptionPane.showMessageDialog(RegisterUser.this, "Passwords don´t match, please try again", "Error", JOptionPane.OK_OPTION);
             }
         } else {
-            JOptionPane.showMessageDialog(UC6_UI.this, "Please fill in all the fields", "Missing data", JOptionPane.OK_OPTION);
+            JOptionPane.showMessageDialog(RegisterUser.this, "Please fill in all the fields", "Missing data", JOptionPane.OK_OPTION);
         }
     }//GEN-LAST:event_confirmButtonActionPerformed
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
-        if (JOptionPane.showConfirmDialog(UC6_UI.this, "Do you wish to exit without saving?", "Close", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
+        if (JOptionPane.showConfirmDialog(RegisterUser.this, "Do you wish to exit without saving?", "Close", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
             dispose();
         }
     }//GEN-LAST:event_cancelButtonActionPerformed
@@ -265,7 +275,7 @@ public class UC6_UI extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField keywordField;
+    private javax.swing.JTextField keywordTextField;
     private javax.swing.JTextField nameTextField;
     private javax.swing.JPasswordField passwordField;
     private javax.swing.JCheckBox representativeCheckBox;
