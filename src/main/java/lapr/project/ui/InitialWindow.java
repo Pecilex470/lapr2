@@ -10,9 +10,10 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import static javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE;
 import lapr.project.controller.LoginController;
+import lapr.project.model.Encryption;
 import lapr.project.model.EventCenter;
 import lapr.project.model.User;
-import lapr.project.utils.PasswordDoesNotMatch;
+import lapr.project.utils.LoginDataIncorrect;
 
 /**
  *
@@ -25,7 +26,7 @@ public class InitialWindow extends javax.swing.JFrame {
      * Variable that contains the whole EventCenter information
      */
     private EventCenter ec;
-    
+
     private LoginController c;
 
     /**
@@ -170,7 +171,7 @@ public class InitialWindow extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void registerUserButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerUserButtonActionPerformed
-        new RegisterUser(ec);
+        new UC6_UI(ec);
     }//GEN-LAST:event_registerUserButtonActionPerformed
 
     private void passwordTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordTextFieldActionPerformed
@@ -178,15 +179,25 @@ public class InitialWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_passwordTextFieldActionPerformed
 
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
-        String username = usernameTextField.getText();
-        char[] password = passwordTextField.getPassword();
-        User user = ec.getUserRegister().getUserByUsername(username);
+        String username;
+        String password;
+        User u;
+
         try {
-            User u = c.verifyLogin(username, password, user);
-            dispose();
-            new MainWindow(u, ec);
-        } catch (PasswordDoesNotMatch ex) {
-            Logger.getLogger(InitialWindow.class.getName()).log(Level.SEVERE, null, ex);
+            if (!(usernameTextField.getText().isEmpty() || Encryption.assemblePassword(passwordTextField.getPassword()).isEmpty())) {
+                username = usernameTextField.getText();
+                password = Encryption.assemblePassword(passwordTextField.getPassword());
+                u = ec.getUserRegister().getUserByUsername(username);
+                u = c.verifyLogin(username, password, u);
+                if (!(u.getUsername().equals("null"))) {
+                    dispose();
+                    new MainWindow(u, ec);
+                }
+            } else {
+                throw new LoginDataIncorrect("Incorrect username or password");
+            }
+        } catch (LoginDataIncorrect e) {
+
         }
     }//GEN-LAST:event_loginButtonActionPerformed
 

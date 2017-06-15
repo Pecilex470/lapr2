@@ -51,7 +51,7 @@ public class User {
     }
 
     public User() {
-
+        this.username = "null";
     }
 
     /**

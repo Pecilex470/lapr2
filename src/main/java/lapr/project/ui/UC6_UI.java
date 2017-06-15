@@ -20,7 +20,7 @@ import lapr.project.model.Representative;
  * @author Pedro
  */
 @SuppressWarnings("serial")
-public class RegisterUser extends javax.swing.JDialog {
+public class UC6_UI extends javax.swing.JDialog {
 
     private EventCenter ec;
     private UC6_Controller c;
@@ -31,7 +31,7 @@ public class RegisterUser extends javax.swing.JDialog {
      * @param ec Receives the instance of the EventCenter
      * @param c Receives the instance of this UI's Controller
      */
-    public RegisterUser(EventCenter ec) {
+    public UC6_UI(EventCenter ec) {
         this.c = new UC6_Controller(ec);
         this.ec = ec;
         initComponents();
@@ -41,7 +41,7 @@ public class RegisterUser extends javax.swing.JDialog {
         this.addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
             public void windowClosing(java.awt.event.WindowEvent windowEvent) {
-                if (JOptionPane.showConfirmDialog(RegisterUser.this, "Do you wish to exit without saving?", "Close", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
+                if (JOptionPane.showConfirmDialog(UC6_UI.this, "Do you wish to exit without saving?", "Close", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
                     dispose();
                 }
             }
@@ -228,7 +228,7 @@ public class RegisterUser extends javax.swing.JDialog {
             if (c.assemblePassword(passwordField.getPassword()).equals(c.assemblePassword(confirmPasswordField.getPassword()))) {
                 if (4 <= keywordTextField.getText().length() && 7 >= keywordTextField.getText().length()) {
                     if (c.verifyPassword(c.assemblePassword(passwordField.getPassword())) == true) {
-                        if (JOptionPane.showConfirmDialog(RegisterUser.this, "Are you sure you want to register with this Data?", "Confirm", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
+                        if (JOptionPane.showConfirmDialog(UC6_UI.this, "Are you sure you want to register with this Data?", "Confirm", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
                             int shift = ThreadLocalRandom.current().nextInt(1, 66 + 1);
                             String password = c.encryptPassword(c.assemblePassword(passwordField.getPassword()), shift, Encryption.ABC);
                             c.registerUser(c.twoLayerEncription(nameTextField.getText(), shift, keywordTextField.getText(), Encryption.ABC), c.twoLayerEncription(emailTextField.getText(), shift, keywordTextField.getText(), Encryption.ABC),usernameTextField.getText(), password);
@@ -239,22 +239,22 @@ public class RegisterUser extends javax.swing.JDialog {
                             dispose();
                         }
                     } else {
-                        JOptionPane.showMessageDialog(RegisterUser.this, "Missing password requirements", "Error", JOptionPane.OK_OPTION);
+                        JOptionPane.showMessageDialog(UC6_UI.this, "Missing password requirements", "Error", JOptionPane.OK_OPTION);
                         errorTextArea.setForeground(Color.red);
                     }
                 } else {
-                    JOptionPane.showMessageDialog(RegisterUser.this, "The Keyword must be between 4 and 7 characters", "Error", JOptionPane.OK_OPTION);
+                    JOptionPane.showMessageDialog(UC6_UI.this, "The Keyword must be between 4 and 7 characters", "Error", JOptionPane.OK_OPTION);
                 }
             } else {
-                JOptionPane.showMessageDialog(RegisterUser.this, "Passwords don´t match, please try again", "Error", JOptionPane.OK_OPTION);
+                JOptionPane.showMessageDialog(UC6_UI.this, "Passwords don´t match, please try again", "Error", JOptionPane.OK_OPTION);
             }
         } else {
-            JOptionPane.showMessageDialog(RegisterUser.this, "Please fill in all the fields", "Missing data", JOptionPane.OK_OPTION);
+            JOptionPane.showMessageDialog(UC6_UI.this, "Please fill in all the fields", "Missing data", JOptionPane.OK_OPTION);
         }
     }//GEN-LAST:event_confirmButtonActionPerformed
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
-        if (JOptionPane.showConfirmDialog(RegisterUser.this, "Do you wish to exit without saving?", "Close", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
+        if (JOptionPane.showConfirmDialog(UC6_UI.this, "Do you wish to exit without saving?", "Close", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
             dispose();
         }
     }//GEN-LAST:event_cancelButtonActionPerformed
