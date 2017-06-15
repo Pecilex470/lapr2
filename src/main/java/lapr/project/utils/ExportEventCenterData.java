@@ -18,6 +18,8 @@ import lapr.project.model.Attribution;
 import lapr.project.model.Event;
 import lapr.project.model.EventCenter;
 import lapr.project.model.FAE;
+import lapr.project.model.Organizer;
+import lapr.project.model.Stand;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
@@ -47,7 +49,6 @@ public class ExportEventCenterData {
 
             Element eventReg = docXML.createElement("Event Register");
             Element eventList = docXML.createElement("Event List");
-            
 
             TransformerFactory transFactory = TransformerFactory.newInstance();
             Transformer trans;
@@ -59,22 +60,20 @@ public class ExportEventCenterData {
             StreamResult docFinal = new StreamResult(new File("teste.xml"));
 
             trans.transform(docSource, docFinal);
+
         } catch (TransformerException ex) {
 
         }
     }
 
-
-    
     public Element writeEventList() {
         Element eventList = docXML.createElement("eventList");
         for (Event event : ec.getEventRegister().getEventList()) {
-            
+
             Element title = docXML.createElement("title");
             title.appendChild(docXML.createTextNode(event.getTitle()));
             eventList.appendChild(title);
 
-            
             Element location = docXML.createElement("location");
             location.appendChild(docXML.createTextNode(event.getLocation()));
             eventList.appendChild(location);
@@ -109,9 +108,9 @@ public class ExportEventCenterData {
 
 //            writeFaeList();
 //            writeApplicationList();
-//            writeOrganizerList();
+//            writeOrganizerList(); v
 //            writeAttributionList();
-//            writeStandList();
+//            writeStandList(); v
         }
         return eventList;
     }
@@ -123,8 +122,7 @@ public class ExportEventCenterData {
             Element user = docXML.createElement(fae.getUtilizadorFAE().getUsername());
             faeList.appendChild(user);
 
-          //  writeAttributionList();
-
+            //  writeAttributionList();
         }
         return faeList;
     }
@@ -137,5 +135,34 @@ public class ExportEventCenterData {
 //            faeList.appendChild(user);
 //        }
 //    }
+//    public Element writeApplicationList() {
+//        return Element;
+//    }
 
+    public Element writeOrganizerList(Event e) {
+
+        Element orgList = docXML.createElement("Organizer List");
+
+        for (Organizer org : e.getOrganizerList().getOrganizadores()) {
+            Element user = docXML.createElement(org.getUtilizadorOrganizador().getUsername());
+            orgList.appendChild(user);
+
+        }
+        return orgList;
+    }
+    
+    public Element writeStandList(Event e){
+        Element standList = docXML.createElement("Stand List");
+
+        for (Stand stand : e.getStandList()) {
+            Element typeStand = docXML.createElement("typeStand");
+            typeStand.appendChild(docXML.createTextNode(stand.getArea()+""));
+            standList.appendChild(typeStand);
+            Element ava = docXML.createElement("available");
+            ava.appendChild(docXML.createTextNode(stand.getAvailable()+""));
+            standList.appendChild(ava);
+        }
+        return standList;
+    }
+    
 }

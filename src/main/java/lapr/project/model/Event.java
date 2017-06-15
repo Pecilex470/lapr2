@@ -261,6 +261,10 @@ public class Event {
         return isOrganizer;
     }
 
+    
+    public OrganizerList getOrganizerList(){
+        return this.organizerList;
+    }
     /**
      * Method that adds an attibuition
      * @param a - Attribution
@@ -305,5 +309,9 @@ public class Event {
             }
         }
         return aL;
+    }
+    
+    public List<Stand> getStandList(){
+        return this.standL;
     }
 }
