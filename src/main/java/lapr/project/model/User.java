@@ -14,24 +14,25 @@ public class User {
     /**
      * The user's full name
      */
-    private String name;
+    String name;
 
     /**
      * User email address
      */
-    private String email;
+    String email;
 
     /**
      * User Identification
      */
-    private String username;
+    String username;
 
     /**
      * User Access password
      */
-    private String password;
+    String password;
     
     private boolean isEventManager;
+    
     private boolean isRepresentative;
 
     /**

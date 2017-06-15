@@ -91,4 +91,13 @@ public class UserRegister {
         }
         return new User();
     }
+    
+    public boolean verifyUsername(String username) {
+        for (User user : users) {
+            if (user.getUsername().equals(username)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
