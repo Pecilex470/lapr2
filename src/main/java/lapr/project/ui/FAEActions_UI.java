@@ -16,7 +16,8 @@ import lapr.project.model.User;
  * @author Luis
  */
 public class FAEActions_UI extends javax.swing.JFrame {
-
+    
+    static final long serialVersionUID = 42L;
     EventCenter ec;
     User u;
     
@@ -77,6 +78,7 @@ public class FAEActions_UI extends javax.swing.JFrame {
         jLabel1.setText("Applications assigned to you:");
 
         listApplications.setModel(new javax.swing.AbstractListModel<String>() {
+            static final long serialVersionUID = 42L;
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
