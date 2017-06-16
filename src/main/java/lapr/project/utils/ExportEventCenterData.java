@@ -27,6 +27,7 @@ import lapr.project.model.Stand;
 import lapr.project.model.User;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 
 /**
  *
@@ -86,7 +87,7 @@ public class ExportEventCenterData {
         }
     }
 
-    public Element writeEventList(EventCenter ec) {
+    public Node writeEventList(EventCenter ec) {
         Element eventList = docXML.createElement("eventList");
         for (Event event : ec.getEventRegister().getEventList()) {
 
@@ -125,39 +126,46 @@ public class ExportEventCenterData {
             Element availableArea = docXML.createElement("availableArea");
             availableArea.appendChild(docXML.createTextNode(event.getAvailableArea() + ""));
             availableArea.appendChild(availableArea);
-            writeStandList(event);
-            writeOrganizerList(event);
+            
+            
+            eventList.appendChild(writeStandList(event));
+            eventList.appendChild(writeOrganizerList(event));
 
-            writeFaeList(event);
-            writeApplicationList(event);
+            eventList.appendChild(writeFaeList(event));
+            eventList.appendChild(writeApplicationList(event));
+            
         }
         return eventList;
     }
 
-    public Element writeFaeList(Event e) {
-        Element faeList = docXML.createElement("FAE List");
+    public Node writeFaeList(Event e) {
+        Element faeList = docXML.createElement("FAEList");
 
         for (FAE fae : e.getFaeList().getFAEList()) {
+            Element f = docXML.createElement("fae");
             Element user = docXML.createElement(fae.getUtilizadorFAE().getUsername());
-            faeList.appendChild(user);
+            f.appendChild(user);
+            faeList.appendChild(f);
             writeAttributionList(fae);
         }
         return faeList;
     }
 
-    public Element writeAttributionList(FAE fae) {
-        Element attList = docXML.createElement("Attribution List");
+    public Node writeAttributionList(FAE fae) {
+        Element attList = docXML.createElement("AttributionList");
 
         for (Attribution a : fae.getAttributionList()) {
+            Element attr = docXML.createElement("attribution");
             Element att = docXML.createElement("application");
             att.appendChild(docXML.createTextNode(a.getApplication().toString()));
-            attList.appendChild(att);
+            attr.appendChild(att);
+            attList.appendChild(attr);
         }
         return attList;
     }
 
-    public Element writeApplicationList(Event e) {
-        Element appList = docXML.createElement("Application List");
+    public Node writeApplicationList(Event e) {
+        Element appList = docXML.createElement("ApplicationList");
 
         for (Application a : e.getApplicationList()) {
             Element app = docXML.createElement("application");
@@ -194,7 +202,7 @@ public class ExportEventCenterData {
         return appList;
     }
 
-    public Element writeKeywordsList(Application app) {
+    public Node writeKeywordsList(Application app) {
         Element keyList = docXML.createElement("keywordList");
 
         for (Keyword key : app.getKeywordList()) {
@@ -208,20 +216,22 @@ public class ExportEventCenterData {
         return keyList;
     }
 
-    public Element writeOrganizerList(Event e) {
+    public Node writeOrganizerList(Event e) {
 
-        Element orgList = docXML.createElement("Organizer List");
+        Element orgList = docXML.createElement("OrganizerList");
 
         for (Organizer org : e.getOrganizerList().getOrganizadores()) {
+            Element o = docXML.createElement("organizer");
             Element user = docXML.createElement(org.getUtilizadorOrganizador().getUsername());
-            orgList.appendChild(user);
+            o.appendChild(user);
+            orgList.appendChild(o);
 
         }
         return orgList;
     }
 
-    public Element writeStandList(Event e) {
-        Element standList = docXML.createElement("Stand List");
+    public Node writeStandList(Event e) {
+        Element standList = docXML.createElement("StandList");
 
         for (Stand stand : e.getStandList()) {
             Element typeStand = docXML.createElement("typeStand");
@@ -234,7 +244,7 @@ public class ExportEventCenterData {
         return standList;
     }
 
-    public Element writeUserRegister(EventCenter ec){
+    public Node writeUserRegister(EventCenter ec){
         Element userList=docXML.createElement("userList");
         
         for(User user: ec.getUserRegister().getUsers()){
@@ -263,7 +273,7 @@ public class ExportEventCenterData {
         return userList;
     }
     
-    public Element writeRepList(EventCenter ec){
+    public Node writeRepList(EventCenter ec){
         Element repList = docXML.createElement("repList");
         
         for(Representative rep : ec.getRepresentativeRegister().getRepresentativeList()){
@@ -276,7 +286,7 @@ public class ExportEventCenterData {
         return repList;
     }
     
-    public Element writeEncReg(EventCenter ec){
+    public Node writeEncReg(EventCenter ec){
         
         Element encList = docXML.createElement("encList");
         
