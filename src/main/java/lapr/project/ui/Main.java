@@ -23,7 +23,7 @@ public class Main {
     public static void main(String[] args) {
         
         EventCenter ec = createInitialComponents();
-        new InitialWindow(ec);
+        new InitialWindow_UI(ec);
 
     }
     

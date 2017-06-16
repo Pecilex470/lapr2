@@ -15,15 +15,15 @@ import lapr.project.model.User;
  *
  * @author Luis
  */
-public class FAEActions extends javax.swing.JFrame {
+public class FAEActions_UI extends javax.swing.JFrame {
 
     EventCenter ec;
     User u;
-
+    
     /**
      * Creates new form FAEActions
      */
-    public FAEActions(EventCenter ec, User u) {
+    public FAEActions_UI(EventCenter ec, User u) {
         this.ec = ec;
         this.u = u;
         initComponents();
@@ -33,13 +33,13 @@ public class FAEActions extends javax.swing.JFrame {
         this.addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
             public void windowClosing(java.awt.event.WindowEvent windowEvent) {
-                if (JOptionPane.showConfirmDialog(FAEActions.this, "Do you wish to exit?", "Close", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
+                if (JOptionPane.showConfirmDialog(FAEActions_UI.this, "Do you wish to exit?", "Close", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
                     dispose();
                 }
             }
         });
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

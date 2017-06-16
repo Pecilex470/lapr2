@@ -20,7 +20,7 @@ import lapr.project.utils.LoginDataIncorrect;
  * @author Pedro
  */
 @SuppressWarnings("serial")
-public class InitialWindow extends javax.swing.JFrame {
+public class InitialWindow_UI extends javax.swing.JFrame {
 
     /**
      * Variable that contains the whole EventCenter information
@@ -34,7 +34,7 @@ public class InitialWindow extends javax.swing.JFrame {
      *
      * @param ec the EventCenter that contains all the information
      */
-    public InitialWindow(EventCenter ec) {
+    public InitialWindow_UI(EventCenter ec) {
         this.ec = ec;
         this.c = new LoginController(ec);
         initComponents();
@@ -44,7 +44,7 @@ public class InitialWindow extends javax.swing.JFrame {
         this.addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
             public void windowClosing(java.awt.event.WindowEvent windowEvent) {
-                if (JOptionPane.showConfirmDialog(InitialWindow.this, "Do you wish to exit?", "Close", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
+                if (JOptionPane.showConfirmDialog(InitialWindow_UI.this, "Do you wish to exit?", "Close", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
                     dispose();
                 }
             }
@@ -70,7 +70,7 @@ public class InitialWindow extends javax.swing.JFrame {
         loginButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Event Center");
+        setTitle("Event Center - Login");
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel1.setText("New here?");

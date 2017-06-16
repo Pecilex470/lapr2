@@ -99,6 +99,7 @@ public class UC1_UI extends javax.swing.JDialog   {
         });
 
         descriptionTextArea.setColumns(20);
+        descriptionTextArea.setLineWrap(true);
         descriptionTextArea.setRows(5);
         jScrollPane1.setViewportView(descriptionTextArea);
 
