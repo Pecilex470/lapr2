@@ -50,6 +50,9 @@ public class Stand {
             this.area = area;
         }
 
+        public Stand(){
+            
+        }
         /**
          * Method to return the area of stand
          *

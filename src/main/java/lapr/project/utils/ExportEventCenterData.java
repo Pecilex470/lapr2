@@ -47,7 +47,7 @@ public class ExportEventCenterData {
         this.docXML = docB.newDocument();
     }
 
-    public void testePutaQuePareu(EventCenter ec) {
+    public void writeEventCenter(EventCenter ec) {
         try {
 
             Element root = docXML.createElement("EventCenter");
