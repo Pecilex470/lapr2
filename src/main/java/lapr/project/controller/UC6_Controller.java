@@ -77,13 +77,23 @@ public class UC6_Controller {
     }
 
     /**
-     * Method that verifies if the password
+     * Method that verifies if the password is inside the especified parameters
      *
      * @param password
      * @return
      */
     public boolean verifyPassword(String password) {
         return User.verifyPassword(password);
+    }
+    
+    /**
+     * Method that verifies if the email is legit
+     *
+     * @param email
+     * @return
+     */
+    public boolean verifyEmail(String email) {
+        return User.verifyEmail(email);
     }
 
     /**

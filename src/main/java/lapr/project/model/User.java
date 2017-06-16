@@ -30,9 +30,9 @@ public class User {
      * User Access password
      */
     String password;
-    
+
     private boolean isEventManager;
-    
+
     private boolean isRepresentative;
 
     /**
@@ -126,7 +126,7 @@ public class User {
         boolean number = false;
 
         String chars = ".,;:-";
-        for (int i = 0; i < password.length() - 1; i++) {
+        for (int i = 0; i < password.length(); i++) {
             if (chars.contains(password.substring(i, i + 1))) {
                 specialChars = true;
             }
@@ -142,7 +142,7 @@ public class User {
         }
 
         String numbers = "1234567890";
-        for (int i = 0; i < password.length() - 1; i++) {
+        for (int i = 0; i < password.length(); i++) {
             if (numbers.contains(password.substring(i, i + 1))) {
                 number = true;
             }
@@ -154,12 +154,41 @@ public class User {
             return false;
         }
     }
-    
-    public boolean isEventManager(){
+
+    /**
+     *
+     * @param email
+     * @return true if the string email has only one "@" and has atleast one "."
+     * after the "@"
+     */
+    public static boolean verifyEmail(String email) {
+
+        int atPosition = 0;
+        int flag = 0;
+
+        for (int i = 0; i < email.length() - 1; i++) {
+            if ("@".contains(email.substring(i, i + 1))) {
+                atPosition = i;
+                flag++;
+            }
+        }
+
+        if (flag == 1) {
+
+            for (int i = atPosition; i < email.length() - 2; i++) {
+                if (".".contains(email.substring(i, i + 1))) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public boolean isEventManager() {
         return isEventManager;
     }
-    
-    public boolean isRepresentative(){
+
+    public boolean isRepresentative() {
         return isRepresentative;
     }
 
