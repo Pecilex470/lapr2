@@ -10,6 +10,8 @@ package lapr.project.ui;
  * @author Luis
  */
 public class RepresentativeActions extends javax.swing.JFrame {
+    
+    static final long serialVersionUID = -3387516993124229948L;
 
     /**
      * Creates new form RepresentativeActions

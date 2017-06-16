@@ -12,6 +12,8 @@ import javax.swing.JOptionPane;
  * @author Pedro Pinho
  */
 public class LoginDataIncorrect extends Exception {
+    
+    static final long serialVersionUID = -3387516993124229948L;
 
     /**
      * Creates a new instance of <code>LoginDataIncorrect</code> without detail

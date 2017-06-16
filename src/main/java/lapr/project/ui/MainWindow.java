@@ -62,6 +62,7 @@ public class MainWindow extends javax.swing.JFrame {
         logoutButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Event Center");
 
         buttonOrganizer.setText("Organizer Actions");
         buttonOrganizer.addActionListener(new java.awt.event.ActionListener() {
@@ -132,9 +133,9 @@ public class MainWindow extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(43, 43, 43)
                 .addComponent(jLabel2)
-                .addGap(18, 18, 18)
+                .addGap(39, 39, 39)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(54, 54, 54)
+                .addGap(33, 33, 33)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(buttonFAE, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(buttonEventManager, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -154,7 +155,7 @@ public class MainWindow extends javax.swing.JFrame {
     private void buttonFAEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonFAEActionPerformed
 
         if (ec.checkIFUserIsFAE(u)) {
-            new FAEActions(ec, u);
+            new FAEActions_UI(ec, u);
         } else {
             JOptionPane.showMessageDialog(null, "You are not FAE in any event!");
         }
@@ -193,7 +194,7 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void logoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutButtonActionPerformed
         dispose();
-        new InitialWindow(ec);
+        new InitialWindow_UI(ec);
     }//GEN-LAST:event_logoutButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

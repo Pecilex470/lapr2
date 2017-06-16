@@ -15,15 +15,16 @@ import lapr.project.model.User;
  *
  * @author Luis
  */
-public class FAEActions extends javax.swing.JFrame {
-
+public class FAEActions_UI extends javax.swing.JFrame {
+    
+    static final long serialVersionUID = 42L;
     EventCenter ec;
     User u;
-
+    
     /**
      * Creates new form FAEActions
      */
-    public FAEActions(EventCenter ec, User u) {
+    public FAEActions_UI(EventCenter ec, User u) {
         this.ec = ec;
         this.u = u;
         initComponents();
@@ -33,13 +34,13 @@ public class FAEActions extends javax.swing.JFrame {
         this.addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
             public void windowClosing(java.awt.event.WindowEvent windowEvent) {
-                if (JOptionPane.showConfirmDialog(FAEActions.this, "Do you wish to exit?", "Close", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
+                if (JOptionPane.showConfirmDialog(FAEActions_UI.this, "Do you wish to exit?", "Close", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
                     dispose();
                 }
             }
         });
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -77,6 +78,7 @@ public class FAEActions extends javax.swing.JFrame {
         jLabel1.setText("Applications assigned to you:");
 
         listApplications.setModel(new javax.swing.AbstractListModel<String>() {
+            static final long serialVersionUID = 42L;
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
