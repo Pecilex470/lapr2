@@ -9,8 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import lapr.project.model.User;
-import lapr.project.ui.InitialWindow;
-import lapr.project.utils.PasswordDoesNotMatch;
+import lapr.project.utils.LoginDataIncorrect;
 
 /**
  *
@@ -78,14 +77,27 @@ public class UserRegister {
      * @param password User pass that is trying to start session. sessão
      * @param user
      * @return User object
-     * @throws lapr.project.utils.PasswordDoesNotMatch
      */
-    public User getUserByLogin(String username, String password, User user) throws PasswordDoesNotMatch {
+    public User getUserByLogin(String username, String password, User user) {
 
+        try {
         if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
             return user;
-        } else
-        throw new PasswordDoesNotMatch("Incorrect login credentials");
+        } else {
+            throw new LoginDataIncorrect("Incorrect username or password");
+        }
+        } catch (LoginDataIncorrect e) {
+            
+        }
+        return new User();
     }
-
+    
+    public boolean verifyUsername(String username) {
+        for (User user : users) {
+            if (user.getUsername().equals(username)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
