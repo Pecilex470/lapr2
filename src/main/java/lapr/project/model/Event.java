@@ -20,7 +20,6 @@ public class Event {
     private ApplicationList applicationList;
     private FAEList faeList;
     private OrganizerList organizerList;
-    private AttributionList attributionList;
     private int availableArea;
     private List<Stand> standL;
 
@@ -265,13 +264,7 @@ public class Event {
     public OrganizerList getOrganizerList(){
         return this.organizerList;
     }
-    /**
-     * Method that adds an attibuition
-     * @param a - Attribution
-     */
-    public void addAttribution(Attribution a) {
-        attributionList.addAttribution(a);
-    }
+
 
     /**
      * 
