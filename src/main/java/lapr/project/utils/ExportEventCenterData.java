@@ -105,12 +105,12 @@ public class ExportEventCenterData {
             Element availableArea = docXML.createElement("availableArea");
             availableArea.appendChild(docXML.createTextNode(event.getAvailableArea() + ""));
             availableArea.appendChild(availableArea);
+            writeStandList(event);
+            writeOrganizerList(event);
 
 //            writeFaeList();
 //            writeApplicationList();
-//            writeOrganizerList(); v
 //            writeAttributionList();
-//            writeStandList(); v
         }
         return eventList;
     }
@@ -138,7 +138,6 @@ public class ExportEventCenterData {
 //    public Element writeApplicationList() {
 //        return Element;
 //    }
-
     public Element writeOrganizerList(Event e) {
 
         Element orgList = docXML.createElement("Organizer List");
@@ -150,19 +149,19 @@ public class ExportEventCenterData {
         }
         return orgList;
     }
-    
-    public Element writeStandList(Event e){
+
+    public Element writeStandList(Event e) {
         Element standList = docXML.createElement("Stand List");
 
         for (Stand stand : e.getStandList()) {
             Element typeStand = docXML.createElement("typeStand");
-            typeStand.appendChild(docXML.createTextNode(stand.getArea()+""));
+            typeStand.appendChild(docXML.createTextNode(stand.getArea() + ""));
             standList.appendChild(typeStand);
             Element ava = docXML.createElement("available");
-            ava.appendChild(docXML.createTextNode(stand.getAvailable()+""));
+            ava.appendChild(docXML.createTextNode(stand.getAvailable() + ""));
             standList.appendChild(ava);
         }
         return standList;
     }
-    
+
 }

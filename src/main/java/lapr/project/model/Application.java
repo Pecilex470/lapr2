@@ -27,7 +27,6 @@ public class Application implements Importable<Application>, Exportable {
     private static final int DEFAULT_DECISION = 0;
     private final List<Keyword> keywordList = new ArrayList<>();
     private String description = "";
-    private Attribution attribution;
     private int submissionMeanRating;
     private int decision;
     private String companyName;
@@ -81,9 +80,6 @@ public class Application implements Importable<Application>, Exportable {
 
     }
 
-    public Attribution getAttribution() {
-        return this.attribution;
-    }
 
     @Override
     public Node exportContentToXMLNode() throws ParserConfigurationException {
