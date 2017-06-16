@@ -45,6 +45,9 @@ public class Encryption {
         this.user = user;
         this.keyword = keyword;
     }
+    
+    public Encryption(){
+    }
 
     /**
      * @return the shift

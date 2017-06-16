@@ -24,6 +24,9 @@ public class Representative {
         userRepre = user;
     }
 
+    public Representative(){
+        userRepre=null;
+    }
     /**
      * @return  User that is associated with the role of Representative
      *
