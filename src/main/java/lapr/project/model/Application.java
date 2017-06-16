@@ -57,7 +57,7 @@ public class Application implements Importable<Application>, Exportable {
      *
      * @return Candidatura description
      */
-    private String getDescription() {
+    public String getDescription() {
         return description;
     }
 
@@ -199,5 +199,14 @@ public class Application implements Importable<Application>, Exportable {
             this.stand = stand;
             stand.setAvailable(false);
         }
+    }
+    
+    public int getNumberOfDecisions(){
+        return this.numberOfDecisions;
+    }
+
+    
+    public Stand getStand(){
+        return this.stand;
     }
 }
