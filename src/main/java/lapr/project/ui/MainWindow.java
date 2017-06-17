@@ -184,12 +184,11 @@ public class MainWindow extends javax.swing.JFrame {
     private void buttonRepresentativeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRepresentativeActionPerformed
 
         if (u.isRepresentative()) {
-
+            new RepresentativeActions(ec, u);
+            dispose();
         } else {
             JOptionPane.showMessageDialog(null, "You are not a Representative");
         }
-
-
     }//GEN-LAST:event_buttonRepresentativeActionPerformed
 
     private void logoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutButtonActionPerformed

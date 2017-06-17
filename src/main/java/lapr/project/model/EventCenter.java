@@ -139,7 +139,6 @@ public class EventCenter {
      * @param u user that we want to check where plays a roll as a FAE
      * @return list of events where the user u is FAE
      */
-
     public List<Event> getEventsWhereUserIsFAE(User u) {
 
         List<Event> eventsWhereUserIsFAE = new ArrayList<>();
