@@ -234,12 +234,18 @@ public class ExportEventCenterData {
         Element standList = docXML.createElement("StandList");
 
         for (Stand stand : e.getStandList()) {
-            Element typeStand = docXML.createElement("typeStand");
-            typeStand.appendChild(docXML.createTextNode(stand.getArea() + ""));
-            standList.appendChild(typeStand);
+            Element s = docXML.createElement("stand");
+            Element areaStand = docXML.createElement("areaStand");
+            areaStand.appendChild(docXML.createTextNode(stand.getArea() + ""));
+            s.appendChild(areaStand);
+            Element nameStand = docXML.createElement("nameStand");
+            areaStand.appendChild(docXML.createTextNode(stand.getName()));
+            s.appendChild(areaStand);
+            
             Element ava = docXML.createElement("available");
             ava.appendChild(docXML.createTextNode(stand.getAvailable() + ""));
-            standList.appendChild(ava);
+            s.appendChild(ava);
+            standList.appendChild(s);
         }
         return standList;
     }

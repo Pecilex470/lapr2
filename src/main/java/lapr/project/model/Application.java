@@ -80,7 +80,6 @@ public class Application implements Importable<Application>, Exportable {
 
     }
 
-
     @Override
     public Node exportContentToXMLNode() throws ParserConfigurationException {
         Node rootNode = null;
@@ -200,13 +199,32 @@ public class Application implements Importable<Application>, Exportable {
             stand.setAvailable(false);
         }
     }
-    
-    public int getNumberOfDecisions(){
+
+    public int getNumberOfDecisions() {
         return this.numberOfDecisions;
     }
 
-    
-    public Stand getStand(){
+    public Stand getStand() {
         return this.stand;
+    }
+
+    public void setDescription(String des) {
+        this.description = des;
+    }
+
+    public void setSubmissionMeanRating(int value) {
+        this.submissionMeanRating = value;
+    }
+
+    public void setDecision(int dec) {
+        this.decision = dec;
+    }
+
+    public void setCompanyName(String name) {
+        this.companyName = name;
+    }
+
+    public void setNumberOfDecisions(int num) {
+        this.numberOfDecisions = num;
     }
 }

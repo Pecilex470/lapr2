@@ -20,6 +20,9 @@ public class FAE {
         userFAE = use;
     }
 
+    public FAE(){
+        
+    }
     /**
      * @return User that received the role of FAE of a certain event.
      */

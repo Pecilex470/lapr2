@@ -21,10 +21,12 @@ import javax.xml.transform.stream.StreamResult;
 import lapr.project.model.Application;
 import lapr.project.model.Attribution;
 import lapr.project.model.Encryption;
+import lapr.project.model.Evaluation;
 import lapr.project.model.Event;
 import lapr.project.model.EventCenter;
 import lapr.project.model.FAE;
 import lapr.project.model.Keyword;
+import lapr.project.model.KeywordList;
 import lapr.project.model.Organizer;
 import lapr.project.model.Representative;
 import lapr.project.model.Stand;
@@ -197,28 +199,152 @@ public class ImportEventCenterData {
         return enc;
 
     }
-    
-    public List<Stand> readStandList(NodeList standAtributes){
-        List<Stand> standL=null;
-        
+
+    public Stand readStandList(NodeList standAtributes) {
+
+        Stand stand = new Stand();
+
         for (int i = 0; i < standAtributes.getLength(); i++) {
 
-            Stand stand = new Stand();
             Element atr = (Element) standAtributes.item(i);
             switch (atr.getTagName()) {
 
-                case "typeStand":
-//                    stand.setArea(atr.getTextContent());
+                case "areaStand":
+                    stand.setArea(Integer.parseInt(atr.getTextContent()));
                     break;
-                case "shift":
-                   
+                case "nameStand":
+                    stand.setName(atr.getTextContent());
+                    break;
+                case "available":
+                    if (atr.getTextContent().equals("true")) {
+                        stand.setAvailable(true);
+                    } else {
+                        stand.setAvailable(false);
+                    }
+                    break;
             }
 
         }
+
+        return stand;
+    }
+
+    public FAE readFAEList(NodeList faeAtributes, UserRegister ur) {
+        FAE fae = new FAE();
+
+        for (int i = 0; i < faeAtributes.getLength(); i++) {
+            Element atr = (Element) faeAtributes.item(i);
+            switch (atr.getTagName()) {
+
+                case "user":
+                    fae.setUtilizadorFAE(ur.getUserByUsername(atr.getTextContent()));
+                    break;
+                case "AttributionList":
+                    //readAttributionList();
+                    break;
+            }
+        }
+
+        return fae;
+    }
+
+    public Attribution readAtributionList(NodeList list) {
+        Attribution attr = new Attribution();
+
+        for (int i = 0; i < list.getLength(); i++) {
+            Element atr = (Element) list.item(i);
+            switch (atr.getTagName()) {
+
+                case "applications":
+                    readApplication(atr.getElementsByTagName(atr.getTextContent()));
+                    break;
+                case "evaluation":
+                    //readEvaluation(atr);
+                    break;
+            }
+        }
+        return attr;
+    }
+
+    public Application readApplication(NodeList list) {
+        Application app = new Application();
+
+        for (int i = 0; i < list.getLength(); i++) {
+            Element atr = (Element) list.item(i);
+
+            switch (atr.getTagName()) {
+                case "keywordList":
+                    //readKeywordList()
+                    break;
+                case "description":
+                    app.setDescription(atr.getTextContent());
+                    break;
+                case "submissionMeanRating":
+                    app.setSubmissionMeanRating(Integer.parseInt(atr.getTextContent()));
+                    break;
+                case "decision":
+                    app.setDecision(Integer.parseInt(atr.getTextContent()));
+                    break;
+                case "companyName":
+                    app.setCompanyName(atr.getTagName());
+                    break;
+                case "numberOfDecisions":
+                    app.setNumberOfDecisions(Integer.parseInt(atr.getTextContent()));
+                    break;
+                case "stand":
+                    readStandList(atr.getElementsByTagName(atr.getTagName()));
+                    break;
+            }
+        }
+        return app;
+    }
+
+    public Evaluation readEvaluation(NodeList list) {
+        Evaluation eva = new Evaluation();
+
+        for (int i = 0; i < list.getLength(); i++) {
+            Element atr = (Element) list.item(i);
+
+            switch (atr.getTagName()) {
+                case "decision":
+                    if (atr.getTextContent().equals("true")) {
+                        eva.setDecision(true);
+                    } else {
+                        eva.setDecision(false);
+                    }
+                    break;
+                case "justification":
+                    eva.setJustificacao(atr.getTextContent());
+                    break;
+                case "knowledge":
+                    eva.setKnowledge(Integer.parseInt(atr.getTextContent()));
+                    break;
+                case "adequancy":
+                    eva.setAdequancy(Integer.parseInt(atr.getTextContent()));
+                    break;
+                case "quantity":
+                    eva.setQuantity(Integer.parseInt(atr.getTextContent()));
+                    break;
+                case "overall":
+                    eva.setOverall(Integer.parseInt(atr.getTextContent()));
+                    break;
+            }
+        }
+        return eva;
+    }
+    
+    public KeywordList readKeywordList(NodeList list){
+        KeywordList keyList = new KeywordList();
         
-        
-        
-        
-        return standL;
+        for (int i = 0; i < list.getLength(); i++) {
+            
+            Element atr = (Element) list.item(i);
+            
+            switch (atr.getTagName()) {
+                //case ""
+            }
+            
+        }
+        return keyList;
     }
 }

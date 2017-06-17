@@ -6,8 +6,6 @@
 package lapr.project.model;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -31,6 +29,10 @@ public class KeywordList {
      */
     public KeywordList(List<List<Keyword>> keywords) {
         this.keywords = keywords;
+    }
+    
+    public KeywordList(){
+        
     }
 
     /**
