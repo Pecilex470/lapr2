@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -100,4 +101,20 @@ public class Evaluation {
         return (adequancy + overall + knowledge + quantity) / NUMBER_OF_CRITERIA;
     }
 
+    
+    public void setKnowledge(int know){
+        this.knowledge= know;
+    }
+    
+    public void setAdequancy(int ade){
+        this.adequancy=ade;
+    }
+    
+    public void setOverall(int ove){
+        this.overall=ove;
+    }
+    
+    public void setQuantity(int qua){
+        this.quantity=qua;
+    }
 }

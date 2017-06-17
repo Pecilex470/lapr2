@@ -11,7 +11,7 @@ package lapr.project.model;
  */
 public class Stand {
     
-    private typeStand area;
+    private typeStand type;
     private boolean available=true; 
     
     /**
@@ -24,11 +24,11 @@ public class Stand {
         BIG_STAND("Big Stand", 40),
         PREMIUM_STAND("Premium Stand", 80);
 
-        private final int area;
-        private final String nome;
+        private int area;
+        private String name;
 
         typeStand(String nome, int area) {
-            this.nome = nome;
+            this.name = nome;
             this.area = area;
         }
 
@@ -36,18 +36,26 @@ public class Stand {
             return this.area;
         }
 
-        public String getNome() {
-            return this.nome;
+        public String getName() {
+            return this.name;
+        }
+        
+        public void setArea(int area){
+            this.area=area;
+        }
+        
+        public void setName(String name){
+            this.name = name;
         }
     }
 
         /**
          * Constructor
          *
-         * @param area - area of stand
+         * @param type - type of stand
          */
-        public Stand(typeStand area) {
-            this.area = area;
+        public Stand(typeStand type) {
+            this.type = type;
         }
 
         public Stand(){
@@ -59,7 +67,7 @@ public class Stand {
          * @return area (int)
          */
         public int getArea(){
-            return area.getArea();
+            return type.getArea();
         }
         
         /**
@@ -76,5 +84,17 @@ public class Stand {
          */
         public void setAvailable(boolean available){
             this.available=available;
+        }
+        
+        public String getName(){
+            return this.type.getName();
+        }
+        
+        public void setArea(int area){
+            this.type.area=area;
+        }
+        
+        public void setName(String name){
+            this.type.name = name;
         }
     }

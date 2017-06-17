@@ -25,13 +25,14 @@ public class Application implements Importable<Application>, Exportable {
     private static final String DESCRIPTION_ELEMENT_NAME = "description";
     private static final String KEYWORDS_ELEMENT_NAME = "keywords";
     private static final int DEFAULT_DECISION = 0;
-    private final List<Keyword> keywordList = new ArrayList<>();
+    private List<Keyword> keywordList = new ArrayList<>();
     private String description = "";
     private int submissionMeanRating;
     private int decision;
     private String companyName;
     private int numberOfDecisions;
     private Stand stand;
+    private User representative;
 
     /**
      * Constructor for Application
@@ -39,10 +40,13 @@ public class Application implements Importable<Application>, Exportable {
      * @param description CandidaturaDescription
      * @param keywordList Keyword List
      */
-    public Application(String description, List<Keyword> keywordList) {
+    public Application(String description, List<Keyword> keywordList, String companyName, Stand stand, User representative) {
         this.description = description;
         this.keywordList.addAll(keywordList);
         this.decision = DEFAULT_DECISION;
+        this.companyName = companyName;
+        this.stand = stand;
+        this.representative = representative;
     }
 
     /**
@@ -59,6 +63,10 @@ public class Application implements Importable<Application>, Exportable {
      */
     public String getDescription() {
         return description;
+    }
+
+    public User getRepresentative() {
+        return representative;
     }
 
     /**
@@ -79,7 +87,6 @@ public class Application implements Importable<Application>, Exportable {
         return keywordList;
 
     }
-
 
     @Override
     public Node exportContentToXMLNode() throws ParserConfigurationException {
@@ -141,7 +148,7 @@ public class Application implements Importable<Application>, Exportable {
         Node elementCandidatura = elementsCandidatura.item(0);
 
         //Get description
-        this.description = elementCandidatura.getFirstChild().getFirstChild().getNodeValue();
+        this.setDescription(elementCandidatura.getFirstChild().getFirstChild().getNodeValue());
 
         NodeList elementsKeywords = document.getElementsByTagName(KEYWORDS_ELEMENT_NAME);
 
@@ -196,17 +203,63 @@ public class Application implements Importable<Application>, Exportable {
 
     public void addStand(Stand stand) {
         if (stand.getAvailable() == true) {
-            this.stand = stand;
+            this.setStand(stand);
             stand.setAvailable(false);
         }
     }
-    
-    public int getNumberOfDecisions(){
+
+    public int getNumberOfDecisions() {
         return this.numberOfDecisions;
     }
 
-    
-    public Stand getStand(){
+    public Stand getStand() {
         return this.stand;
+    }
+
+    public void setSubmissionMeanRating(int value) {
+        this.submissionMeanRating = value;
+    }
+
+    public void setDecision(int dec) {
+        this.decision = dec;
+    }
+
+    public void setNumberOfDecisions(int num) {
+        this.numberOfDecisions = num;
+    }
+
+    /**
+     * @param keywordList the keywordList to set
+     */
+    public void setKeywordList(List<Keyword> keywordList) {
+        this.keywordList = keywordList;
+    }
+
+    /**
+     * @param description the description to set
+     */
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    /**
+     * @param companyName the companyName to set
+     */
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
+    }
+
+    /**
+     * @param stand the stand to set
+     */
+    public void setStand(Stand stand) {
+        this.stand = stand;
+    }
+
+    /**
+     * @param representative the representative to set
+     */
+    public void setRepresentative(User representative) {
+        this.representative = representative;
     }
 }
