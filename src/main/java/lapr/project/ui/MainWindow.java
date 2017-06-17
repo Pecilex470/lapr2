@@ -184,7 +184,7 @@ public class MainWindow extends javax.swing.JFrame {
     private void buttonRepresentativeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRepresentativeActionPerformed
 
         if (u.isRepresentative()) {
-
+           
         } else {
             JOptionPane.showMessageDialog(null, "You are not a Representative");
         }
