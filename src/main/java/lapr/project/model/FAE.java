@@ -49,7 +49,6 @@ public class FAE {
         return this.attributionList;
     }
 
-
     /**
      * Method to get the fae mean rating
      *

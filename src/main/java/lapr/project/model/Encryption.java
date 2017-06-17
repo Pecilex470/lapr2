@@ -158,9 +158,15 @@ public class Encryption {
             substitution.add(abecedary.get(i));
         }
 
+        for (int i = 0; i < param.length(); i++) {
+            for (int j = 0; j < abecedary.size(); j++) {
+                if (param.substring(i, i + 1).equals(abecedary.get(j))) {
+                    encryptedParam = encryptedParam + substitution.get(j);
+                }
+            }
+        }
         
-
-        return "hello";
+        return encryptedParam;
     }
 
     /**

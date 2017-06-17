@@ -21,7 +21,7 @@ import lapr.project.model.Representative;
  */
 @SuppressWarnings("serial")
 public class UC6_UI extends javax.swing.JDialog {
-
+    
     private EventCenter ec;
     private UC6_Controller c;
 
@@ -223,38 +223,44 @@ public class UC6_UI extends javax.swing.JDialog {
     }//GEN-LAST:event_representativeCheckBoxActionPerformed
 
     private void confirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmButtonActionPerformed
-
+        
         if (!(nameTextField.getText().equals("") || emailTextField.getText().equals("") || usernameTextField.getText().equals("") || c.assemblePassword(passwordField.getPassword()).equals("") || keywordTextField.getText().equals(""))) {
             if (ec.getUserRegister().verifyUsername(usernameTextField.getText()) == false) {
-                if (c.assemblePassword(passwordField.getPassword()).equals(c.assemblePassword(confirmPasswordField.getPassword()))) {
-                    if (4 <= keywordTextField.getText().length() && 7 >= keywordTextField.getText().length()) {
-                        if (c.verifyPassword(c.assemblePassword(passwordField.getPassword())) == true) {
-                            if (JOptionPane.showConfirmDialog(UC6_UI.this, "Are you sure you want to register with this Data?", "Confirm", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
-                                int shift = ThreadLocalRandom.current().nextInt(1, 66 + 1);
-                                String password = c.encryptPassword(c.assemblePassword(passwordField.getPassword()), shift, Encryption.ABC);
-                                c.registerUser(c.twoLayerEncription(nameTextField.getText(), shift, keywordTextField.getText(), Encryption.ABC), c.twoLayerEncription(emailTextField.getText(), shift, keywordTextField.getText(), Encryption.ABC), usernameTextField.getText(), password);
-                                ec.getEncryptionRegister().addEncryption(new Encryption(shift, ec.getUserRegister().getUserByUsername(usernameTextField.getText()), keywordTextField.getText()));
-                                if (representativeCheckBox.isSelected()) {
-                                    ec.getRepresentativeRegister().addRepresentative(new Representative(ec.getUserRegister().getUserByUsername(usernameTextField.getText())));
+                if (c.verifyEmail(emailTextField.getText())) {                
+                    if (c.assemblePassword(passwordField.getPassword()).equals(c.assemblePassword(confirmPasswordField.getPassword()))) {
+                        if (4 <= keywordTextField.getText().length() && 7 >= keywordTextField.getText().length()) {
+                            if (c.verifyPassword(c.assemblePassword(passwordField.getPassword())) == true) {
+                                if (JOptionPane.showConfirmDialog(UC6_UI.this, "Are you sure you want to register with this Data?", "Confirm", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
+                                    int shift = ThreadLocalRandom.current().nextInt(1, 66 + 1);
+                                    String password = c.encryptPassword(c.assemblePassword(passwordField.getPassword()), shift, Encryption.ABC);
+                                    if (representativeCheckBox.isSelected()) {
+                                        c.registerUser(c.twoLayerEncription(nameTextField.getText(), shift, keywordTextField.getText(), Encryption.ABC), c.twoLayerEncription(emailTextField.getText(), shift, keywordTextField.getText(), Encryption.ABC), usernameTextField.getText(), password, false, true);
+                                    } else {
+                                        c.registerUser(c.twoLayerEncription(nameTextField.getText(), shift, keywordTextField.getText(), Encryption.ABC), c.twoLayerEncription(emailTextField.getText(), shift, keywordTextField.getText(), Encryption.ABC), usernameTextField.getText(), password, false, false);
+                                    }
+                                    ec.getEncryptionRegister().addEncryption(new Encryption(shift, ec.getUserRegister().getUserByUsername(usernameTextField.getText()), keywordTextField.getText()));
+                                    dispose();
                                 }
-                                dispose();
+                            } else {
+                                JOptionPane.showMessageDialog(UC6_UI.this, "Missing password requirements", "Error", JOptionPane.OK_OPTION);
+                                errorTextArea.setForeground(Color.red);
                             }
                         } else {
-                            JOptionPane.showMessageDialog(UC6_UI.this, "Missing password requirements", "Error", JOptionPane.OK_OPTION);
-                            errorTextArea.setForeground(Color.red);
+                            JOptionPane.showMessageDialog(UC6_UI.this, "The Keyword must be between 4 and 7 characters", "Error", JOptionPane.OK_OPTION);
                         }
                     } else {
-                        JOptionPane.showMessageDialog(UC6_UI.this, "The Keyword must be between 4 and 7 characters", "Error", JOptionPane.OK_OPTION);
+                        JOptionPane.showMessageDialog(UC6_UI.this, "Passwords don´t match, please try again", "Error", JOptionPane.OK_OPTION);
                     }
                 } else {
-                    JOptionPane.showMessageDialog(UC6_UI.this, "Passwords don´t match, please try again", "Error", JOptionPane.OK_OPTION);
-                }
+                    JOptionPane.showMessageDialog(UC6_UI.this, "Email is not in the example@example.domain format", "Error", JOptionPane.OK_OPTION);
+                }                
             } else {
                 JOptionPane.showMessageDialog(UC6_UI.this, "This username is already taken", "Error", JOptionPane.OK_OPTION);
             }
         } else {
             JOptionPane.showMessageDialog(UC6_UI.this, "Please fill in all the fields", "Missing data", JOptionPane.OK_OPTION);
         }
+        
     }//GEN-LAST:event_confirmButtonActionPerformed
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed

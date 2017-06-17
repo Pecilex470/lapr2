@@ -36,9 +36,11 @@ public class UC6_Controller {
      * system
      * @param password The user's password, that has been encrypted before being
      * stored under the User object
+     * @param isEventManager checks if the user is event manager
+     * @param isRepresentative checks if the user is a Representative
      */
-    public void registerUser(String name, String email, String username, String password) {
-        ec.getUserRegister().getUsers().add(new User(name, email, username, password));
+    public void registerUser(String name, String email, String username, String password, boolean isEventManager, boolean isRepresentative) {
+        ec.getUserRegister().getUsers().add(new User(name, email, username, password, isEventManager, isRepresentative));
     }
 
     /**
@@ -77,13 +79,23 @@ public class UC6_Controller {
     }
 
     /**
-     * Method that verifies if the password
+     * Method that verifies if the password is inside the especified parameters
      *
      * @param password
      * @return
      */
     public boolean verifyPassword(String password) {
         return User.verifyPassword(password);
+    }
+    
+    /**
+     * Method that verifies if the email is legit
+     *
+     * @param email
+     * @return
+     */
+    public boolean verifyEmail(String email) {
+        return User.verifyEmail(email);
     }
 
     /**
