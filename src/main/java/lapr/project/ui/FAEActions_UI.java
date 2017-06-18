@@ -74,6 +74,7 @@ public class FAEActions_UI extends javax.swing.JFrame {
         backButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("UC4 - Decide Application");
 
         jLabel1.setText("Applications assigned to you:");
 
