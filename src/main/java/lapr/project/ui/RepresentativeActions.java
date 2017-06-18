@@ -67,6 +67,11 @@ public class RepresentativeActions extends javax.swing.JFrame {
         });
 
         uc11Button.setText("UC11 - Change/Remove Application");
+        uc11Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                uc11ButtonActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel1.setText("Representative Actions:");
@@ -118,6 +123,11 @@ public class RepresentativeActions extends javax.swing.JFrame {
         dispose();
         new MainWindow(u, ec);
     }//GEN-LAST:event_backButtonActionPerformed
+
+    private void uc11ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uc11ButtonActionPerformed
+        dispose();
+        new UC11_UI(ec, u);
+    }//GEN-LAST:event_uc11ButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

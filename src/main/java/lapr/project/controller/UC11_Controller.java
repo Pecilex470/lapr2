@@ -44,17 +44,17 @@ public class UC11_Controller {
         
     }
     
-    public List<Application> getApplicationListFromThisUser(User u, List<Event> eventsWhereRepresentativeHasApplications) {
+    public List<Application> getApplicationsFromThisUserInThisEvent(User u, Event e) {
         
         List<Application> applicationList = null;
         
-        for (Event e : eventsWhereRepresentativeHasApplications) {
+       
             for (Application a : e.getApplicationList()) {
                 if (a.getRepresentative().getUsername().equals(u.getUsername())) {
                     applicationList.add(a);
                 }
             }
-        }
+        
         
         return applicationList;
     }

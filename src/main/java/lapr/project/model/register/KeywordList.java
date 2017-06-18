@@ -33,6 +33,10 @@ public class KeywordList {
     public KeywordList(List<List<Keyword>> keywords) {
         this.keywords = keywords;
     }
+    
+    public KeywordList(){
+        
+    }
 
     /**
      * @return List that contains all the keywoards that were submitted to a
