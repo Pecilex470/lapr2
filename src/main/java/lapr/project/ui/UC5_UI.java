@@ -22,6 +22,8 @@ import lapr.project.model.User;
  * @author Pedro
  */
 public class UC5_UI extends javax.swing.JFrame {
+    
+    static final long serialVersionUID = -3387516993124229948L;
 
     private EventCenter ec;
     private User u;
@@ -95,6 +97,7 @@ public class UC5_UI extends javax.swing.JFrame {
         jLabel1.setText("Choose an Event to apply to:");
 
         listEvent.setModel(new javax.swing.AbstractListModel<String>() {
+            static final long serialVersionUID = -3387516993124229948L;
             String[] strings = nameList();
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }

@@ -45,8 +45,8 @@ public class Encryption {
         this.user = user;
         this.keyword = keyword;
     }
-    
-    public Encryption(){
+
+    public Encryption() {
     }
 
     /**
@@ -112,7 +112,7 @@ public class Encryption {
         }
 
         Collections.rotate(rotated, num);
-        
+
         for (int i = 0; i < password.length(); i++) {
             for (int j = 0; j < abecedary.size(); j++) {
                 if (password.substring(i, i + 1).equals(abecedary.get(j))) {
@@ -122,18 +122,19 @@ public class Encryption {
         }
         return encryptedPassword;
     }
-    
+
     /**
      * this method deEncrypts a password
+     *
      * @param password the password to deEncrypt
      * @param num the shift that was used in the encryption
      * @param abc the abecedary of characters
      * @return returns the deencrypted password
      */
     public static String deEncryptPassword(String password, int num, String abc) {
-        
+
         String deEncryptedPassword = "";
-        
+
         List<String> abecedary = new ArrayList<>();
         List<String> rotated = new ArrayList<>();
 
@@ -143,7 +144,7 @@ public class Encryption {
         }
 
         Collections.rotate(rotated, num);
-        
+
         for (int i = 0; i < password.length(); i++) {
             for (int j = 0; j < rotated.size(); j++) {
                 if (password.substring(i, i + 1).equals(rotated.get(j))) {
@@ -169,19 +170,18 @@ public class Encryption {
 
         List<String> abecedary = new ArrayList<>();
         List<String> substitution = new ArrayList<>();
+        List<String> comparator = new ArrayList<>();
 
         for (int i = 0; i < ABC.length(); i++) {
             abecedary.add(ABC.substring(i, i + 1));
+            comparator.add(ABC.substring(i, i + 1));
         }
-
+        
         for (int i = 0; i < key.length(); i++) {
             substitution.add(key.substring(i, i + 1));
-            cont++;
         }
         
-        System.out.print(substitution);
-        
-       for (int i = 0; i < key.length(); i++) {
+        for (int i = 0; i < key.length(); i++) {
             for (int j = 0; j < abecedary.size(); j++) {
                 if (key.substring(i, i + 1).equals(abecedary.get(j))) {
                     abecedary.remove(j);
@@ -189,23 +189,24 @@ public class Encryption {
             }
         }
 
-        for (int i = cont; i < abecedary.size(); i++) {
+        for (int i = 0; i < abecedary.size(); i++) {
             substitution.add(abecedary.get(i));
         }
 
         for (int i = 0; i < param.length(); i++) {
-            for (int j = 0; j < abecedary.size(); j++) {
-                if (param.substring(i, i + 1).equals(abecedary.get(j))) {
+            for (int j = 0; j < comparator.size(); j++) {
+                if (param.substring(i, i + 1).equals(comparator.get(j))) {
                     encryptedParam = encryptedParam + substitution.get(j);
                 }
             }
         }
-        
+
         return encryptedParam;
     }
-    
+
     /**
      * This method deencrypts the two-step encrypted user data
+     *
      * @param param the parameter do deencrypt
      * @param key the keyword used on the encryption
      * @return returns the deencrypted parameter
@@ -216,9 +217,11 @@ public class Encryption {
 
         List<String> abecedary = new ArrayList<>();
         List<String> substitution = new ArrayList<>();
+        List<String> comparator = new ArrayList<>();
 
         for (int i = 0; i < ABC.length(); i++) {
             abecedary.add(ABC.substring(i, i + 1));
+            comparator.add(ABC.substring(i, i + 1));
         }
 
         for (int i = cont; i < key.length(); i++) {
@@ -237,11 +240,11 @@ public class Encryption {
         for (int i = 0; i < abecedary.size(); i++) {
             substitution.add(abecedary.get(i));
         }
-        
+
         for (int i = 0; i < param.length(); i++) {
             for (int j = 0; j < substitution.size(); j++) {
                 if (param.substring(i, i + 1).equals(substitution.get(j))) {
-                    deEncryptedParam = deEncryptedParam + abecedary.get(j);
+                    deEncryptedParam = deEncryptedParam + comparator.get(j);
                 }
             }
         }
