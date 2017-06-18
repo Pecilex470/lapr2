@@ -1,5 +1,6 @@
 package lapr.project.controller;
 
+import javax.swing.JTextField;
 import lapr.project.model.Encryption;
 import lapr.project.model.EventCenter;
 import lapr.project.model.User;
@@ -55,6 +56,19 @@ public class UC6_Controller {
     public String encryptPassword(String password, int shift, String abc) {
         return Encryption.encryptPassword(password, shift, abc);
     }
+    
+    /**
+     * this method deencrypts the password that was provided by the user
+     * when he first registered himself
+     * 
+     * @param password the password to be deencrypted
+     * @param shift the shift used in the encryption
+     * @param abc the full abecedary of characters to encrypt
+     * @return returns the deencrypted password
+     */
+    public String deEncryptPassword(String password, int shift, String abc) {
+        return Encryption.deEncryptPassword(password, shift, abc);
+    }
 
     /**
      * This method encrypts the user data in a safe way by performing a two-step encryption
@@ -66,7 +80,12 @@ public class UC6_Controller {
      */
     public String twoLayerEncription(String param, int shift, String keyword, String abc) {
         String temp = Encryption.encryptData(param, keyword);
-        return Encryption.encryptPassword(param, shift, abc);
+        return Encryption.encryptPassword(temp, shift, abc);
+    }
+    
+    public String twoLayerDeencryption(String param, int shift, String keyword, String abc) {
+        String temp = Encryption.deEncryptPassword(param, shift, abc);
+        return Encryption.deEncryptData(temp, keyword);
     }
 
     /**
@@ -106,6 +125,16 @@ public class UC6_Controller {
      */
     public String assemblePassword(char[] chars) {
         return Encryption.assemblePassword(chars);
+    }
+    
+    /**
+     * This method creates a new encryption that is vinculated to a certain user
+     * @param shift the shift used in the one step encryptation
+     * @param username
+     * @param keyword
+     */
+    public void addEncryption(int shift, String username, String keyword) {
+        ec.getEncryptionRegister().addEncryption(new Encryption(shift, ec.getUserRegister().getUserByUsername(username), keyword));
     }
 
 

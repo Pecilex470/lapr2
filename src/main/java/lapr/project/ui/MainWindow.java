@@ -7,6 +7,8 @@ package lapr.project.ui;
 
 import javax.swing.JOptionPane;
 import static javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE;
+import lapr.project.controller.UC6_Controller;
+import lapr.project.model.Encryption;
 import lapr.project.model.EventCenter;
 import lapr.project.model.User;
 
@@ -20,6 +22,7 @@ public class MainWindow extends javax.swing.JFrame {
 
     User u;
     EventCenter ec;
+    UC6_Controller c = new UC6_Controller(ec);
 
     /**
      * Creates new form MainWindow
@@ -30,6 +33,7 @@ public class MainWindow extends javax.swing.JFrame {
     public MainWindow(User u, EventCenter ec) {
         this.u = u;
         this.ec = ec;
+        this.c = c;
         initComponents();
         this.setVisible(true);
         setLocationRelativeTo(null);
@@ -94,7 +98,7 @@ public class MainWindow extends javax.swing.JFrame {
 
         jLabel1.setText("What do you want to do?");
 
-        jLabel2.setText("Hi " + u.getUsername() + "!");
+        jLabel2.setText("Hi " + c.twoLayerDeencryption(u.getName(), ec.getEncryptionRegister().getEncryptionByUser(u).getShift(), ec.getEncryptionRegister().getEncryptionByUser(u).getKeyword(), Encryption.ABC)+ "!");
 
         logoutButton.setText("Logout");
         logoutButton.addActionListener(new java.awt.event.ActionListener() {

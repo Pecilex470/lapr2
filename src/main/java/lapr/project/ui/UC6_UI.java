@@ -231,14 +231,14 @@ public class UC6_UI extends javax.swing.JDialog {
                         if (4 <= keywordTextField.getText().length() && 7 >= keywordTextField.getText().length()) {
                             if (c.verifyPassword(c.assemblePassword(passwordField.getPassword())) == true) {
                                 if (JOptionPane.showConfirmDialog(UC6_UI.this, "Are you sure you want to register with this Data?", "Confirm", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
-                                    int shift = ThreadLocalRandom.current().nextInt(1, 66 + 1);
+                                    int shift = ThreadLocalRandom.current().nextInt(1, 74);
                                     String password = c.encryptPassword(c.assemblePassword(passwordField.getPassword()), shift, Encryption.ABC);
                                     if (representativeCheckBox.isSelected()) {
                                         c.registerUser(c.twoLayerEncription(nameTextField.getText(), shift, keywordTextField.getText(), Encryption.ABC), c.twoLayerEncription(emailTextField.getText(), shift, keywordTextField.getText(), Encryption.ABC), usernameTextField.getText(), password, false, true);
                                     } else {
                                         c.registerUser(c.twoLayerEncription(nameTextField.getText(), shift, keywordTextField.getText(), Encryption.ABC), c.twoLayerEncription(emailTextField.getText(), shift, keywordTextField.getText(), Encryption.ABC), usernameTextField.getText(), password, false, false);
                                     }
-                                    ec.getEncryptionRegister().addEncryption(new Encryption(shift, ec.getUserRegister().getUserByUsername(usernameTextField.getText()), keywordTextField.getText()));
+                                    c.addEncryption(shift, usernameTextField.getText(), keywordTextField.getText());
                                     dispose();
                                 }
                             } else {

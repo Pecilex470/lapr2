@@ -117,14 +117,14 @@ public class UC5_UI extends javax.swing.JFrame {
 
         public String[] nameList() {
 
-        String[] listaEventos = new String[ec.getEventRegister().getEventList().size()];
+        String[] eventList = new String[ec.getEventRegister().getEventList().size()];
         int cont = 0;
         for (Event e : ec.getEventRegister().getEventList()) {
-            listaEventos[cont] = e.getTitle();
+            eventList[cont] = e.getTitle();
             cont++;
         }
 
-        return listaEventos;
+        return eventList;
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
