@@ -22,11 +22,19 @@ public class Date {
         setDate(day, month, year);
     }
     
+    /**
+     * Sets a specific date
+     * @param day the day to set
+     * @param month the month to set
+     * @param year the year to set
+     * @return returns the final object
+     */
     public Date setDate(int day, int month, int year) {
         this.day = day;
         this.month = month;
         this.year = year;
         return Date.this;
     }
+    
     
 }

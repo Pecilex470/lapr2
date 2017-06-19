@@ -22,7 +22,7 @@ public class Event {
     private FAEList faeList;
     private OrganizerList organizerList;
     private int availableArea;
-    private List<Stand> standL;
+    private List<Stand> standList;
 
     public Event() {
 
@@ -292,7 +292,7 @@ public class Event {
      * @param stand - Stand
      */
     public void addStand(Stand stand) {
-        standL.add(stand);
+        standList.add(stand);
     }
 
     /**
@@ -301,7 +301,7 @@ public class Event {
      */
     public List<Stand> getAvailableStands(){
         List<Stand> aL=null;
-        for (Stand stand: this.standL){
+        for (Stand stand: this.standList){
             if(stand.getAvailable()==true){
                 aL.add(stand);
             }
@@ -310,7 +310,7 @@ public class Event {
     }
     
     public List<Stand> getStandList(){
-        return this.standL;
+        return this.standList;
     }
     
     public double getZUni() {

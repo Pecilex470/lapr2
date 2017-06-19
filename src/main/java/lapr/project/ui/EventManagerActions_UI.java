@@ -20,7 +20,6 @@ public class EventManagerActions_UI extends javax.swing.JFrame {
     static final long serialVersionUID = -3387516993124229948L;
     
     private EventCenter ec;
-    private UC1_Controller c;
     private User u;
 
     /**
@@ -31,7 +30,6 @@ public class EventManagerActions_UI extends javax.swing.JFrame {
     public EventManagerActions_UI(EventCenter ec, User u) {
         this.ec = ec;
         this.u = u;
-        this.c = new UC1_Controller();
         initComponents();
         this.setVisible(true);
         setLocationRelativeTo(null);
