@@ -48,13 +48,15 @@ public class ImportEventData {
     DocumentBuilderFactory factory;
     DocumentBuilder builder;
     Document docXML;
+    Node event;
 
     public ImportEventData() {
         try {
             this.factory = DocumentBuilderFactory.newInstance();
             this.builder = factory.newDocumentBuilder();
             ec = null;
-            this.docXML = builder.parse("inserir nome do ficheiro");
+            this.docXML = builder.parse("exposicao1_v0.1.xml");
+            this.event= docXML.getFirstChild();
         } catch (SAXException ex) {
             Logger.getLogger(ImportEventData.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
@@ -64,13 +66,13 @@ public class ImportEventData {
         }
     }
 
-    public Event readEvent(Node event) {
+    public Event readEvent() {
 
         Event newEvent = new Event();
-        NodeList eventAtributes = event.getChildNodes();
+        NodeList eventAtributes = this.event.getChildNodes();
 
         for (int i = 0; i < eventAtributes.getLength(); i++) {
-
+            
             Element element = (Element) eventAtributes.item(i);
 
             switch (element.getTagName()) {

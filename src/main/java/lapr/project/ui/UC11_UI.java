@@ -371,7 +371,7 @@ public class UC11_UI extends javax.swing.JFrame {
                     }
                 }
 
-                c.changeApplication(c.getApplicationsFromThisUserInThisEvent(u, c.getEventsWhereRepresentativeHasApplications(u).get(listEvent.getSelectedIndex())).get(listApplication.getSelectedIndex()), description.getText(), keywordList, companyNameTextField.getText(), new Stand(Integer.parseInt(standArea.getText())), u);
+                c.changeApplication(c.getApplicationsFromThisUserInThisEvent(u, c.getEventsWhereRepresentativeHasApplications(u).get(listEvent.getSelectedIndex())).get(listApplication.getSelectedIndex()), description.getText(), keywordList, companyNameTextField.getText(), new Stand(Integer.parseInt(standArea.getText()), ""), u);
 
                 JOptionPane.showMessageDialog(UC11_UI.this, "Application Changed", "Information", JOptionPane.INFORMATION_MESSAGE);
 
@@ -418,7 +418,7 @@ public class UC11_UI extends javax.swing.JFrame {
     }//GEN-LAST:event_companyNameTextFieldActionPerformed
 
     private void listApplicationMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listApplicationMouseClicked
-
+  
         this.selectedApplication = c.getApplicationsFromThisUserInThisEvent(u, selectedEvent).get(listApplication.getSelectedIndex());
 
         companyNameTextField.setText(selectedApplication.getCompanyName());
