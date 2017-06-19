@@ -10,55 +10,63 @@ package lapr.project.model;
  * @author Cerqueira
  */
 public class Stand {
-    
+
     private int area;
-    private boolean available=true; 
-    
+    private boolean available = true;
+    private String description = "";
+
     /**
      * Enum that lists the possivel stands
      */
-    
-
-        /**
-         * Constructor
-         *
-         * @param type - type of stand
-         */
-        public Stand(int area) {
-            this.area = area;
-        }
-
-        public Stand(){
-            
-        }
-        /**
-         * Method to return the area of stand
-         *
-         * @return area (int)
-         */
-        public int getArea(){
-            return this.area;
-        }
-        
-        /**
-         * 
-         * @return availability of stand
-         */
-        public boolean getAvailable(){
-            return this.available;
-        }
-        
-        /**
-         * set the availability of event
-         * @param available (boolean)
-         */
-        public void setAvailable(boolean available){
-            this.available=available;
-        }
-        
-        
-        public void setArea(int area){
-            this.area=area;
-        }
-        
+    /**
+     * Constructor
+     *
+     * @param type - type of stand
+     */
+    public Stand(int area, String description) {
+        this.area = area;
+        this.description=description;
     }
+
+    public Stand() {
+
+    }
+
+    /**
+     * Method to return the area of stand
+     *
+     * @return area (int)
+     */
+    public int getArea() {
+        return this.area;
+    }
+
+    /**
+     *
+     * @return availability of stand
+     */
+    public boolean getAvailable() {
+        return this.available;
+    }
+
+    /**
+     * set the availability of event
+     *
+     * @param available (boolean)
+     */
+    public void setAvailable(boolean available) {
+        this.available = available;
+    }
+
+    public void setArea(int area) {
+        this.area = area;
+    }
+    
+    public void setDescription(String des){
+        this.description=des;
+    }
+
+    public String getDescription(){
+        return this.description;
+    }
+}

@@ -4,7 +4,6 @@ import lapr.project.model.register.FAEList;
 import lapr.project.model.register.ApplicationList;
 import lapr.project.model.register.OrganizerList;
 import java.util.List;
-import lapr.project.model.register.AttributionList;
 import lapr.project.utils.Date;
 import org.apache.commons.math3.distribution.NormalDistribution;
 
@@ -377,5 +376,9 @@ public class Event {
         } else {
             return "No";
         }
+    }
+    
+    public void setStandList(List<Stand> list){
+        this.standL=list;
     }
 }
