@@ -6,6 +6,7 @@ import lapr.project.model.register.OrganizerList;
 import java.util.List;
 import lapr.project.model.register.AttributionList;
 import lapr.project.utils.Date;
+import org.apache.commons.math3.distribution.NormalDistribution;
 
 public class Event {
 
@@ -310,5 +311,71 @@ public class Event {
     
     public List<Stand> getStandList(){
         return this.standL;
+    }
+    
+    public double getZUni() {
+        double Ho = 0.5;
+        double acceptanceRate = (getAcceptanceRate() / 100.);
+        int total = getApllicationRegister().getApplication().size();
+        double z = (acceptanceRate - Ho) / Math.sqrt((Ho * (1 - Ho)) / total);
+        return z;
+    }
+
+    public double getZBil(Event e) {
+        double acceptanceRate1 = (getAcceptanceRate() / 100.);
+        double acceptanceRate2 = (e.getAcceptanceRate() / 100.);
+        double Ho = acceptanceRate1 - acceptanceRate2;
+        int total1 = getApllicationRegister().getApplication().size();
+        int total2 = e.getApllicationRegister().getApplication().size();
+        double z = Ho / (Math.sqrt((acceptanceRate1 * (1 - acceptanceRate1)) / total1) + Math.sqrt((acceptanceRate2 * (1 - acceptanceRate2)) / total2));
+        return z;
+    }
+
+    public String testAcceptanceRate50a1() {
+        NormalDistribution p = new NormalDistribution();
+        double a = 0.01;
+        double zc = p.inverseCumulativeProbability(1 - a);
+        double z = getZUni();
+        if (z > zc) {
+            return "Yes";
+        } else {
+            return "No";
+        }
+    }
+
+    public String testAcceptanceRate50a5() {
+        NormalDistribution p = new NormalDistribution();
+        double a = 0.05;
+        double zc = p.inverseCumulativeProbability(1 - a);
+        double z = getZUni();
+        if (z > zc) {
+            return "Yes";
+        } else {
+            return "No";
+        }
+    }
+
+    public String testDifferenceTwoEventsAccepRateA1(Event e) {
+        NormalDistribution p = new NormalDistribution();
+        double a = 0.01;
+        double zc = p.inverseCumulativeProbability(1 - (a / 2.));
+        double z =getZBil(e);
+        if (z < -zc && z > zc) {
+            return "Yes";
+        } else {
+            return "No";
+        }
+    }
+
+    public String testDifferenceTwoEventsAccepRateA5(Event e) {
+        NormalDistribution p = new NormalDistribution();
+        double a = 0.05;
+        double zc = p.inverseCumulativeProbability(1 - (a / 2.));
+        double z = getZBil(e);
+        if (z < -zc && z > zc) {
+            return "Yes";
+        } else {
+            return "No";
+        }
     }
 }
