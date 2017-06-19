@@ -134,6 +134,11 @@ public class User {
         this.password = password;
     }
 
+    /**
+     * This method verifies if the password has the minimum requirements
+     * @param password the password received to test
+     * @return returns if it has the requirements or not
+     */
     public static boolean verifyPassword(String password) {
         boolean specialChars = false;
         boolean upperCase = false;
@@ -199,12 +204,20 @@ public class User {
         return false;
     }
 
+    /**
+     * Checks if the user is an event manager
+     * @return returns a boolean
+     */
     public boolean isEventManager() {
         return isEventManager;
     }
 
+    /**
+     * Checks if the user is a representative
+     * @return returns a boolean
+     */
     public boolean isRepresentative() {
         return isRepresentative;
     }
-
+    
 }

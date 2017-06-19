@@ -30,7 +30,7 @@ public class Encryption {
     /**
      * All the characters that can be used
      */
-    public final static String ABC = " abcdefghijklmnopqrstuvwxyzãõêç*+ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890,;.:-";
+    public final static String ABC = " abcdefghijklmnopqrstuvwxyzãõêç*+ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890,;.:-@";
 
     /**
      * Constructor that creates the instance of an encryption

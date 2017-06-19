@@ -40,17 +40,10 @@ public class UC11_Controller {
 
                 for (Application a : e.getApplicationList()) {
 
-                    System.out.println("antes do if " + a.getRepresentative().getUsername());
-                    System.out.println("antes do if " + u.getUsername());
-
                     if (a.getRepresentative().getUsername().equals(u.getUsername())) {
 
-                        System.out.println("depois do if " + a.getRepresentative().getUsername());
-                        System.out.println("depois do if " + u.getUsername());
                         eventsWhereRepresentativeHasApplications.add(e);
 
-                        System.out.println("UC11111");
-                        System.out.println("UC11111");
                         break;
                     }
                 }

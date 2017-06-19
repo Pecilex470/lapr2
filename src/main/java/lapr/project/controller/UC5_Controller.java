@@ -14,10 +14,6 @@ public class UC5_Controller {
         this.ec = ec;
     }
     
-//    public ArrayList<Event> getAvailableEvents(EventCenter ec) {
-//        for (Event e : ec.getEventRegister().getEventList()) {
-//            if (e.getSubmissionEndDate() 
-//        }
-//    }
+    
     
 }
