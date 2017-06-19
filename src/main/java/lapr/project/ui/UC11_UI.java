@@ -15,7 +15,6 @@ import lapr.project.model.Event;
 import lapr.project.model.EventCenter;
 import lapr.project.model.Keyword;
 import lapr.project.model.Stand;
-import lapr.project.model.Stand.typeStand;
 import lapr.project.model.User;
 
 /**
@@ -355,7 +354,7 @@ public class UC11_UI extends javax.swing.JFrame {
 
                 String typeOfStand = (String) stand.getSelectedItem();
 
-                c.changeApplication(c.getApplicationsFromThisUserInThisEvent(u, c.getEventsWhereRepresentativeHasApplications(u).get(listEvent.getSelectedIndex())).get(listApplication.getSelectedIndex()), description.getText(), keywordList, companyNameTextField.getText(), new Stand(typeStand.valueOf(typeOfStand)), u);
+//                c.changeApplication(c.getApplicationsFromThisUserInThisEvent(u, c.getEventsWhereRepresentativeHasApplications(u).get(listEvent.getSelectedIndex())).get(listApplication.getSelectedIndex()), description.getText(), keywordList, companyNameTextField.getText(), new Stand(typeStand.valueOf(typeOfStand)), u);
                 
                 JOptionPane.showMessageDialog(UC11_UI.this, "Application Changed", "Information", JOptionPane.INFORMATION_MESSAGE);
                 

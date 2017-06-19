@@ -25,8 +25,8 @@ public class EventManagerActions_UI extends javax.swing.JFrame {
 
     /**
      * Creates new form EventCenterActions_UI
-     * @param ec
-     * @param c
+     * @param ec the instance of the event center
+     * @param u the user 
      */
     public EventManagerActions_UI(EventCenter ec, User u) {
         this.ec = ec;
@@ -55,17 +55,17 @@ public class EventManagerActions_UI extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
-        jButton8 = new javax.swing.JButton();
-        jButton9 = new javax.swing.JButton();
-        jButton10 = new javax.swing.JButton();
-        jButton11 = new javax.swing.JButton();
+        uc1Button = new javax.swing.JButton();
+        uc42Button = new javax.swing.JButton();
+        uc43Button = new javax.swing.JButton();
+        uc44Button = new javax.swing.JButton();
+        uc45Button = new javax.swing.JButton();
+        uc46Button = new javax.swing.JButton();
+        uc50Button = new javax.swing.JButton();
+        uc48Button = new javax.swing.JButton();
+        uc47Button = new javax.swing.JButton();
+        uc32Button = new javax.swing.JButton();
+        uc49Button = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Event Manager Actions");
@@ -73,166 +73,139 @@ public class EventManagerActions_UI extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel1.setText("Event Manager Actions:");
 
-        jButton1.setText("UC1 - Create Event");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        uc1Button.setText("UC1 - Create Event");
+        uc1Button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                uc1ButtonActionPerformed(evt);
             }
         });
 
-        jButton2.setText("UC42 - Show Event acceptance rate");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        uc42Button.setText("UC42 - Show Event acceptance rate");
+        uc42Button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                uc42ButtonActionPerformed(evt);
             }
         });
 
-        jButton3.setText("UC43 - Show Global Acceptance Rate");
+        uc43Button.setText("UC43 - Show Global Acceptance Rate");
 
-        jButton4.setText("UC44 - Test if Event acceptance rate is over 50%");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        uc44Button.setText("UC44 - Test if Event acceptance rate is over 50%");
+        uc44Button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                uc44ButtonActionPerformed(evt);
             }
         });
 
-        jButton5.setText("UC48 - Show the mean deviation between FAEs' average ratings and global mean rating");
+        uc45Button.setText("UC45 - Test the difference between two Events acceptance rate");
 
-        jButton6.setText("UC45 - Test the difference between two Events acceptance rate");
+        uc46Button.setText("UC46 - Show a FAE mean rating");
 
-        jButton7.setText("UC46 - Show a FAE mean rating");
-
-        jButton8.setText("UC50 - Test the difference between two FAEs mean deviations");
-        jButton8.addActionListener(new java.awt.event.ActionListener() {
+        uc50Button.setText("UC50 - Test the difference between two FAEs mean deviations");
+        uc50Button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton8ActionPerformed(evt);
+                uc50ButtonActionPerformed(evt);
             }
         });
 
-        jButton9.setText("UC48 - Show the mean deviation between FAEs' average ratings and global mean rating");
+        uc48Button.setText("UC48 - Show the mean deviation between FAEs' average ratings and global mean rating");
 
-        jButton10.setText("UC47 - Show submission global mean rating");
+        uc47Button.setText("UC47 - Show submission global mean rating");
 
-        jButton11.setText("jButton11");
+        uc32Button.setText("UC32 - Import Event Data from file");
+
+        uc49Button.setText("UC49 - Test the difference between the mean deviation and a theoretical value for a FAE average rating");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton4)
-                        .addGap(647, 647, 647))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(239, 239, 239)
-                        .addComponent(jButton11)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton8)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton5)
-                .addGap(683, 683, 683))
-            .addGroup(layout.createSequentialGroup()
+                .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
+                        .addGap(45, 45, 45)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(uc47Button)
+                            .addComponent(uc46Button)
+                            .addComponent(uc45Button)
+                            .addComponent(uc44Button)
+                            .addComponent(uc43Button)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton1)
-                                .addGap(159, 159, 159)
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(44, 44, 44)
-                                .addComponent(jButton9))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(85, 85, 85)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jButton3)
-                            .addComponent(jButton10))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(uc1Button)
+                                    .addComponent(uc32Button)
+                                    .addComponent(uc42Button))
+                                .addGap(158, 158, 158)))
+                        .addGap(21, 21, 21)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(40, 40, 40)
-                                .addComponent(jButton7))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(30, 30, 30)
-                                .addComponent(jButton6)))))
-                .addGap(540, 784, Short.MAX_VALUE))
+                            .addComponent(uc50Button)
+                            .addComponent(uc49Button)
+                            .addComponent(uc48Button))))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(34, 34, 34)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(jButton9))
-                .addGap(20, 20, 20)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(33, 33, 33)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton4)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(39, 39, 39)
-                                .addComponent(jButton10)
-                                .addGap(27, 27, 27))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton7)
-                                .addGap(18, 18, 18)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton6)
-                            .addComponent(jButton3))
-                        .addGap(33, 33, 33)
-                        .addComponent(jButton5)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton8)
-                        .addGap(0, 15, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton11)))
-                .addContainerGap())
+                .addComponent(jLabel1)
+                .addGap(31, 31, 31)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(uc1Button)
+                    .addComponent(uc48Button))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(uc32Button)
+                    .addComponent(uc49Button))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(uc42Button)
+                    .addComponent(uc50Button))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(uc43Button)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(uc44Button)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(uc45Button)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(uc46Button)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(uc47Button)
+                .addContainerGap(56, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void uc1ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uc1ButtonActionPerformed
+        new UC1_UI(ec);
+    }//GEN-LAST:event_uc1ButtonActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void uc42ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uc42ButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_uc42ButtonActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void uc44ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uc44ButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_uc44ButtonActionPerformed
 
-    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+    private void uc50ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uc50ButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton8ActionPerformed
+    }//GEN-LAST:event_uc50ButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton10;
-    private javax.swing.JButton jButton11;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
-    private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton uc1Button;
+    private javax.swing.JButton uc32Button;
+    private javax.swing.JButton uc42Button;
+    private javax.swing.JButton uc43Button;
+    private javax.swing.JButton uc44Button;
+    private javax.swing.JButton uc45Button;
+    private javax.swing.JButton uc46Button;
+    private javax.swing.JButton uc47Button;
+    private javax.swing.JButton uc48Button;
+    private javax.swing.JButton uc49Button;
+    private javax.swing.JButton uc50Button;
     // End of variables declaration//GEN-END:variables
 }

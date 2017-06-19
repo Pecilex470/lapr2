@@ -5,9 +5,14 @@
  */
 package lapr.project.ui;
 
+import java.awt.dnd.DropTarget;
 import java.util.List;
+import javax.swing.DefaultListModel;
+import javax.swing.DropMode;
 import javax.swing.JOptionPane;
+import javax.swing.ListModel;
 import static javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE;
+import lapr.project.model.Encryption;
 import lapr.project.model.EventCenter;
 import lapr.project.model.Organizer;
 import lapr.project.model.User;
@@ -17,16 +22,20 @@ import lapr.project.model.User;
  * @author Pedro
  */
 @SuppressWarnings("serial")
-public class UC1_UI extends javax.swing.JDialog   {
+public class UC1_UI extends javax.swing.JDialog {
 
     private EventCenter ec;
+    private String[] pickedList;
 
     /**
      * Creates new form UC1_Dialog
+     *
      * @param ec the instance of the event center
      */
     public UC1_UI(EventCenter ec) {
-        
+        this.ec = ec;
+        this.pickedList = new String[ec.getUserRegister().getUsers().size()];
+
         initComponents();
         this.setVisible(true);
         setLocationRelativeTo(null);
@@ -86,12 +95,13 @@ public class UC1_UI extends javax.swing.JDialog   {
         submissionEndDateDay = new javax.swing.JTextField();
         jLabel22 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        pickedUserList = new javax.swing.JList<>();
         jScrollPane4 = new javax.swing.JScrollPane();
         userList = new javax.swing.JList<>();
-        unpickButton = new javax.swing.JButton();
+        clear = new javax.swing.JButton();
         pickButton = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        pickedUserList = new javax.swing.JList<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("UC1 - Create Event");
@@ -173,13 +183,6 @@ public class UC1_UI extends javax.swing.JDialog   {
 
         jLabel11.setText("Pick at least 2 organizers for the Event:");
 
-        pickedUserList.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = userList();
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane3.setViewportView(pickedUserList);
-
         userList.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = userList();
             public int getSize() { return strings.length; }
@@ -192,7 +195,12 @@ public class UC1_UI extends javax.swing.JDialog   {
         });
         jScrollPane4.setViewportView(userList);
 
-        unpickButton.setText("Unpick");
+        clear.setText("Clear");
+        clear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clearActionPerformed(evt);
+            }
+        });
 
         pickButton.setText("Pick");
         pickButton.addActionListener(new java.awt.event.ActionListener() {
@@ -200,6 +208,27 @@ public class UC1_UI extends javax.swing.JDialog   {
                 pickButtonActionPerformed(evt);
             }
         });
+
+        pickedUserList.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = {".........."};
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane2.setViewportView(pickedUserList);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                .addContainerGap())
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -277,19 +306,19 @@ public class UC1_UI extends javax.swing.JDialog   {
                         .addComponent(nextButton)
                         .addGap(61, 61, 61)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(38, 38, 38)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel11)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(28, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(pickButton, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(40, 40, 40)
-                        .addComponent(unpickButton)
-                        .addGap(75, 75, 75))))
+                        .addComponent(clear)
+                        .addGap(75, 75, 75))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(38, 38, 38)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 273, Short.MAX_VALUE))
+                        .addContainerGap(28, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -326,20 +355,22 @@ public class UC1_UI extends javax.swing.JDialog   {
                                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(7, 7, 7)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(unpickButton)
+                                    .addComponent(clear)
                                     .addComponent(pickButton))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(26, 26, 26)
+                                .addGap(46, 46, 46)
                                 .addComponent(jLabel7)
                                 .addGap(18, 18, 18)
                                 .addComponent(eventTypeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(40, 40, 40)
+                                .addGap(20, 20, 20)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(nextButton)
                                     .addComponent(cancelButton)))
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(15, 15, 15)
+                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(18, 18, 18)
@@ -389,34 +420,162 @@ public class UC1_UI extends javax.swing.JDialog   {
     }//GEN-LAST:event_eventTypeComboBoxActionPerformed
 
     private void userListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_userListMouseClicked
-        // TODO add your handling code here:
+
+
     }//GEN-LAST:event_userListMouseClicked
 
     private void pickButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pickButtonActionPerformed
-        pickedUserList.add(userList.getComponent(userList.getSelectedIndex()));
+
+        String temp = userList.getSelectedValue();
+
+        userList.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = userListExcept(userList.getSelectedValue());
+
+            public int getSize() {
+                return strings.length;
+            }
+
+            public String getElementAt(int i) {
+                return strings[i];
+            }
+        });
+
+        addUserToPickedList(temp);
+
+        pickedUserList.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = returnPickedList();
+
+            public int getSize() {
+                return strings.length;
+            }
+
+            public String getElementAt(int i) {
+                return strings[i];
+            }
+        });
+
+
     }//GEN-LAST:event_pickButtonActionPerformed
 
+    private void clearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearActionPerformed
+
+        pickedUserList.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = {""};
+
+            public int getSize() {
+                return strings.length;
+            }
+
+            public String getElementAt(int i) {
+                return strings[i];
+            }
+        });
+
+        userList.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = userList();
+
+            public int getSize() {
+                return strings.length;
+            }
+
+            public String getElementAt(int i) {
+                return strings[i];
+            }
+        });
+        
+        for (int i = 0; i < pickedList.length; i++) {
+            pickedList[i]=null;
+        }
+
+
+    }//GEN-LAST:event_clearActionPerformed
+
     /**
-     * method that retrieves the full list of registered users to allow the event manager to choose organizers for the new event
+     * method that retrieves the full list of registered users to allow the
+     * event manager to choose organizers for the new event
+     *
      * @return a String array to fill the JList
      */
     public String[] userList() {
-             
-        String[] userList = new String[ec.getUserRegister().getUsers().size()];
+
+        String[] list = new String[ec.getUserRegister().getUsers().size()];
         int cont = 0;
         for (User u : ec.getUserRegister().getUsers()) {
-            userList[cont] = u.getName();
+            String name = Encryption.deEncryptPassword(u.getName(), ec.getEncryptionRegister().getEncryptionByUser(u).getShift(), Encryption.ABC);
+            name = Encryption.deEncryptData(name, ec.getEncryptionRegister().getEncryptionByUser(u).getKeyword());
+            list[cont] = name;
             cont++;
         }
-        return userList;
+        return list;
     }
-    
+
+    public String[] userListExcept(String uName) {
+
+        String[] list = new String[ec.getUserRegister().getUsers().size()];
+        int cont = 0;
+
+        for (User u : ec.getUserRegister().getUsers()) {
+            String name = Encryption.deEncryptPassword(u.getName(), ec.getEncryptionRegister().getEncryptionByUser(u).getShift(), Encryption.ABC);
+            name = Encryption.deEncryptData(name, ec.getEncryptionRegister().getEncryptionByUser(u).getKeyword());
+            if (uName.equals(list[cont])) {
+                list[cont] = name;
+                cont++;
+            }
+        }
+        return list;
+
+    }
+
+    public String[] pickedUserListExcept(String uName) {
+
+        String[] list = new String[pickedList.length];
+
+        int cont = 0;
+
+        for (int i = 0; i < pickedList.length; i++) {
+            if (!pickedList[i].equals(uName)) {
+                list[i] = pickedList[i];
+            }
+        }
+
+        return list;
+
+    }
+
+    public void addUserToPickedList(String pickedUser) {
+
+        String[] temp = new String[pickedList.length];
+
+        for (int i = 0; i < pickedList.length; i++) {
+            try {
+                if (pickedList[i].isEmpty()) {
+                 
+                    
+                } else {
+                    temp[i] = pickedUser;
+                }
+            } catch (NullPointerException e) {
+
+                temp[i] = pickedUser;
+            }
+        }
+
+        pickedList = temp;
+
+    }
+
+    public String[] returnPickedList() {
+
+        return pickedList;
+    }
+
     /**
      * @param args the command line arguments
      */
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelButton;
+    private javax.swing.JButton clear;
     private javax.swing.JTextArea descriptionTextArea;
     private javax.swing.JTextField endDateDay;
     private javax.swing.JTextField endDateMonth;
@@ -439,8 +598,9 @@ public class UC1_UI extends javax.swing.JDialog   {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTextField locationTextField;
     private javax.swing.JButton nextButton;
@@ -456,7 +616,6 @@ public class UC1_UI extends javax.swing.JDialog   {
     private javax.swing.JTextField submissionStartDateMonth;
     private javax.swing.JTextField submissionStartDateYear;
     private javax.swing.JTextField titleTextField;
-    private javax.swing.JButton unpickButton;
     private javax.swing.JList<String> userList;
     // End of variables declaration//GEN-END:variables
 }
