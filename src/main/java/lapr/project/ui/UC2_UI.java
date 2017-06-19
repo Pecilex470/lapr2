@@ -10,6 +10,8 @@ package lapr.project.ui;
  * @author Luis
  */
 public class UC2_UI extends javax.swing.JFrame {
+    
+    static final long serialVersionUID = -3387516993124229948L;
 
     /**
      * Creates new form UC2_UI
@@ -39,6 +41,7 @@ public class UC2_UI extends javax.swing.JFrame {
         jLabel1.setText("Choose an Event:");
 
         jList1.setModel(new javax.swing.AbstractListModel<String>() {
+            static final long serialVersionUID = -3387516993124229948L;
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
