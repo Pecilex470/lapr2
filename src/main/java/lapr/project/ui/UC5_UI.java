@@ -5,6 +5,7 @@
  */
 package lapr.project.ui;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import static javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE;
@@ -22,7 +23,7 @@ import lapr.project.model.User;
  * @author Pedro
  */
 public class UC5_UI extends javax.swing.JFrame {
-    
+
     static final long serialVersionUID = -3387516993124229948L;
 
     private EventCenter ec;
@@ -108,7 +109,7 @@ public class UC5_UI extends javax.swing.JFrame {
 
         jLabel3.setText("Stand:");
 
-        stand.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Small Stand", "Normal Stand", "Big Stand", "Premium Stand" }));
+        stand.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SMALL_STAND", "MEDIUM_STAND", "BIG_STAND", "PREMIUM_STAND" }));
 
         jLabel4.setText("Keywords:");
 
@@ -158,7 +159,7 @@ public class UC5_UI extends javax.swing.JFrame {
         });
 
         jLabel6.setFont(new java.awt.Font("Dialog", 0, 9)); // NOI18N
-        jLabel6.setText("SMALL = 10m^2  ||  NORMAL = 20m^2");
+        jLabel6.setText("SMALL = 10m^2  ||  MEDIUM = 20m^2");
 
         jLabel7.setFont(new java.awt.Font("Dialog", 0, 9)); // NOI18N
         jLabel7.setText("BIG = 40m^2  ||  PREMIUM = 80m^2");
@@ -265,32 +266,37 @@ public class UC5_UI extends javax.swing.JFrame {
     }//GEN-LAST:event_keyword4ActionPerformed
 
     private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitButtonActionPerformed
+        try {
+            if (numberOfKeywords() > 1) {
 
-        if (numberOfKeywords() > 1) {
-            if (JOptionPane.showConfirmDialog(UC5_UI.this, "Do you really want to submit this application?", "Confirmation", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
+                if (JOptionPane.showConfirmDialog(UC5_UI.this, "Do you really want to submit this application?", "Confirmation", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
 
-                Event e = ec.getEventRegister().getEventList().get(listEvent.getSelectedIndex());
+                    List<Keyword> keywordList = new ArrayList<>();
+                    String[] keywordArray = {keyword1.getText(), keyword2.getText(), keyword3.getText(), keyword4.getText(), keyword5.getText()};
 
-                List<Keyword> keywordList = null;
-                String[] keywordArray = {keyword1.getText(), keyword2.getText(), keyword3.getText(), keyword4.getText(), keyword5.getText()};
-
-                for (int i = 0; i < numberOfKeywords(); i++) {
-                    if (!keywordArray[i].isEmpty()) {
-                        i--;
-                    } else {
-                        keywordList.add(new Keyword(keywordArray[i]));
+                    for (int i = 0; i < keywordArray.length; i++) {
+                        if (!keywordArray[i].isEmpty()) {
+                            keywordList.add(new Keyword(keywordArray[i]));
+                        }
                     }
+
+                    String typeOfStand = (String) stand.getSelectedItem();
+
+                    Event e = ec.getEventRegister().getEventList().get(listEvent.getSelectedIndex());
+                    Application a = new Application(description.getText(), keywordList, companyNameTextField.getText(), new Stand(typeStand.valueOf(typeOfStand)), u);
+                    e.addApplication(a);
+                    JOptionPane.showMessageDialog(UC5_UI.this, "Application submitted!", "Information", JOptionPane.INFORMATION_MESSAGE);
+                    dispose();
+                    new RepresentativeActions(ec, u);
+
                 }
+            } else {
 
-                String typeOfStand = (String) stand.getSelectedItem();
-
-                e.getApplicationList().add(new Application(description.getText(), keywordList, companyNameTextField.getText(), new Stand(typeStand.valueOf(typeOfStand)), u));
+                JOptionPane.showMessageDialog(null, "At least 2 keywords needed");
 
             }
-        } else {
-
-            JOptionPane.showMessageDialog(null, "At least 2 keywords needed");
-
+        } catch (ArrayIndexOutOfBoundsException exc) {
+            JOptionPane.showMessageDialog(null, "Select an event");
         }
 
     }//GEN-LAST:event_submitButtonActionPerformed

@@ -39,7 +39,7 @@ public class UC11_UI extends javax.swing.JFrame {
     public UC11_UI(EventCenter ec, User u) {
         this.ec = ec;
         this.u = u;
-        this.c = new UC11_Controller(ec);
+        this.c = new UC11_Controller(ec, u);
         initComponents();
         this.setVisible(true);
         setLocationRelativeTo(null);
@@ -47,7 +47,7 @@ public class UC11_UI extends javax.swing.JFrame {
         this.addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
             public void windowClosing(java.awt.event.WindowEvent windowEvent) {
-                if (JOptionPane.showConfirmDialog(UC11_UI.this, "Do you wish to exit without saving?", "Close", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
+                if (JOptionPane.showConfirmDialog(UC11_UI.this, "Do you wish to exit?", "Close", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
                     dispose();
                 }
             }

@@ -41,6 +41,11 @@ public class ApplicationList {
         return applications;
     }
 
+    
+    public void addApplication(Application a){
+        applications.add(a);
+    }
+    
     /**
      * Allows to define a list that contains all the applications. 
      *

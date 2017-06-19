@@ -17,7 +17,7 @@ public class Event {
     private Date submissionStartDate;
     private Date submissionEndDate;
     private String eventType;
-    private ApplicationList applicationList;
+    private ApplicationList applicationList = new ApplicationList();
     private FAEList faeList;
     private OrganizerList organizerList;
     private int availableArea;
@@ -174,6 +174,10 @@ public class Event {
      */
     public List<Application> getApplicationList() {
         return applicationList.getApplication();
+    }
+    
+    public void addApplication(Application a){
+        applicationList.addApplication(a);
     }
 
     /**
