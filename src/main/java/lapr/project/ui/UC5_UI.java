@@ -302,7 +302,7 @@ public class UC5_UI extends javax.swing.JFrame {
                     }
 
                     
-                    Application a = new Application(description.getText(), keywordList, companyNameTextField.getText(), new Stand(Integer.parseInt(standArea.getText())), u);
+                    Application a = new Application(description.getText(), keywordList, companyNameTextField.getText(), new Stand(Integer.parseInt(standArea.getText()), " "), u, 0, 0);
                     eventSelected.addApplication(a);
                     JOptionPane.showMessageDialog(UC5_UI.this, "Application submitted!", "Information", JOptionPane.INFORMATION_MESSAGE);
                     dispose();

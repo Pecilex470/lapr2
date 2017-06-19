@@ -32,7 +32,7 @@ public class UC20_Controller {
      * @return Stand
      */
     public Stand newStand(int area){
-        return new Stand(area);
+        return new Stand(area, "");
     }
     
     /**
