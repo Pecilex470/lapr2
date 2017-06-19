@@ -128,6 +128,7 @@ public class UC5_UI extends javax.swing.JFrame {
         jLabel5.setText("Description:");
 
         description.setColumns(20);
+        description.setLineWrap(true);
         description.setRows(5);
         jScrollPane1.setViewportView(description);
 
