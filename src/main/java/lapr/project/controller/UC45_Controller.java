@@ -5,28 +5,28 @@
  */
 package lapr.project.controller;
 
-import lapr.project.model.EventCenter;
-import lapr.project.model.Event;
 import java.util.List;
+import lapr.project.model.Event;
+import lapr.project.model.EventCenter;
 
 /**
  *
  * @author Utilizador
  */
-public class UC40_Controller {
-   private EventCenter ec;
+public class UC45_Controller {
+  private EventCenter ec;
   
    private Event event;
    
    
    /**
     *   
-   * Creates an instance of UC40_Controller receiving Events Center to be considered for the management and organization of
+   * Creates an instance of UC45_Controller receiving Events Center to be considered for the management and organization of
    * your events through the current application.
    *
    * @param ec Events Center to be considered
    */
-   public UC40_Controller(EventCenter ec){
+   public UC45_Controller(EventCenter ec){
         this.ec=ec;
     }
     /**
@@ -45,6 +45,5 @@ public class UC40_Controller {
     public void setEvent(Event eve){
       this.event=eve; 
     }
-    
-    
+      
 }
