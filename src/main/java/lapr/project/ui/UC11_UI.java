@@ -125,7 +125,7 @@ public class UC11_UI extends javax.swing.JFrame {
 
         jLabel3.setText("Stand:");
 
-        stand.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Small Stand", "Normal Stand", "Big Stand", "Premium Stand" }));
+        stand.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SMALL_STAND", "MEDIUM_STAND", "BIG_STAND", "PREMIUM_STAND" }));
 
         jLabel4.setText("Keywords:");
 
@@ -175,7 +175,7 @@ public class UC11_UI extends javax.swing.JFrame {
         });
 
         jLabel6.setFont(new java.awt.Font("Dialog", 0, 9)); // NOI18N
-        jLabel6.setText("SMALL = 10m^2  ||  NORMAL = 20m^2");
+        jLabel6.setText("SMALL = 10m^2  ||  MEDIUM = 20m^2");
 
         jLabel7.setFont(new java.awt.Font("Dialog", 0, 9)); // NOI18N
         jLabel7.setText("BIG = 40m^2  ||  PREMIUM = 80m^2");
@@ -356,7 +356,12 @@ public class UC11_UI extends javax.swing.JFrame {
                 String typeOfStand = (String) stand.getSelectedItem();
 
                 c.changeApplication(c.getApplicationsFromThisUserInThisEvent(u, c.getEventsWhereRepresentativeHasApplications(u).get(listEvent.getSelectedIndex())).get(listApplication.getSelectedIndex()), description.getText(), keywordList, companyNameTextField.getText(), new Stand(typeStand.valueOf(typeOfStand)), u);
-
+                
+                JOptionPane.showMessageDialog(UC11_UI.this, "Application Changed", "Information", JOptionPane.INFORMATION_MESSAGE);
+                
+                
+                
+                
             }
         } else {
 
