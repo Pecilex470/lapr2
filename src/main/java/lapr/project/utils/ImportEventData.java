@@ -64,52 +64,307 @@ public class ImportEventData {
         }
     }
 
-    public EventCenter readEvent(Node event) {
+    public Event readEvent(Node event) {
 
-//        NodeList eventList = docXML.getElementsByTagName("event");
-
+        Event newEvent = new Event();
         NodeList eventAtributes = event.getChildNodes();
-        
-        for(int i=0; i<eventAtributes.getLength(); i++){
-           
+
+        for (int i = 0; i < eventAtributes.getLength(); i++) {
+
             Element element = (Element) eventAtributes.item(i);
-            
-            switch (element.getTagName()){
-                
+
+            switch (element.getTagName()) {
+
                 case "stands":
-                    
+                    newEvent.setStandList(readStands(element));
+                    break;
+                case "FAESet":
+                    newEvent.getFaeList().setFAE(readFAESet(element));
+                    break;
+                case "applicationSet":
+                    newEvent.getApllicationRegister().setApplication(readApplication(element));
+                    break;
             }
-            
-            
-            
-            
-            
-            
-            
-        }
-
-            
-            
-            
-            
-            
-            
-            
-            
-            
-        for (int i = 0; i < eventList.getLength(); i++) {
-
-            Node event = eventList.item(i);
-
-            NodeList eventAtributes = event.getChildNodes();
-
-            readEvent(eventAtributes);
 
         }
 
-        return ec;
+        return newEvent;
     }
 
+    public List<FAE> readFAESet(Element faeList) {
+
+        List<FAE> list = null;
+
+        NodeList fae = faeList.getElementsByTagName("fae");
+
+        for (int i = 0; i < fae.getLength(); i++) {
+
+            Element element = (Element) fae.item(i);
+
+            NodeList atributesList = element.getChildNodes();
+
+            for (int j = 0; j < atributesList.getLength(); j++) {
+
+                FAE newFae = new FAE();
+
+                switch (element.getTagName()) {
+
+                    case "user":
+
+                        User user = new User();
+
+                        NodeList userAtributes = element.getChildNodes();
+
+                        for (int w = 0; w < userAtributes.getLength(); w++) {
+
+                            Element el = (Element) userAtributes.item(w);
+
+                            switch (el.getTagName()) {
+
+                                case "name":
+                                    user.setName(el.getTextContent());
+                                    break;
+                                case "email":
+                                    user.setEmail(el.getTextContent());
+                                    break;
+                                case "username":
+                                    user.setUsername(el.getTextContent());
+                                    break;
+                                case "password":
+                                    user.setPassword(el.getTextContent());
+                                    break;
+                            }
+                        }
+                        newFae.setUtilizadorFAE(user);
+                        list.add(newFae);
+                        break;
+                }
+
+            }
+
+        }
+
+        return list;
+    }
+
+    public List<Stand> readStands(Element element) {
+        List<Stand> list = null;
+
+        NodeList standsList = element.getElementsByTagName("stand");
+
+        for (int i = 0; i < standsList.getLength(); i++) {
+
+            Stand stand = new Stand();
+
+            NodeList standAtributes = standsList.item(i).getChildNodes();
+
+            for (int j = 0; j < standAtributes.getLength(); j++) {
+
+                Element at = (Element) standAtributes.item(j);
+                switch (at.getTagName()) {
+
+                    case "description":
+                        stand.setDescription(at.getTextContent());
+                        break;
+                    case "area":
+                        try {
+                            stand.setArea(Integer.parseInt(at.getTextContent()));
+                        } catch (Exception ex) {
+                        }
+                        break;
+                }
+            }
+            list.add(stand);
+        }
+        return list;
+    }
+
+    public List<Application> readApplication(Element element) {
+        List<Application> list = null;
+
+        NodeList applicationList = element.getElementsByTagName("application");
+
+        for (int i = 0; i < applicationList.getLength(); i++) {
+
+            Element app = (Element) applicationList.item(i);
+
+            NodeList appAtributes = app.getChildNodes();
+
+            Application newApp = new Application();
+
+            for (int j = 0; j < appAtributes.getLength(); j++) {
+
+                Element el = (Element) appAtributes.item(i);
+
+                switch (el.getTagName()) {
+
+                    case "accepted":
+                        if (el.getTextContent().equalsIgnoreCase("true")) {
+                            newApp.setDecision(1);
+                        }
+                        if (el.getTextContent().equalsIgnoreCase("false")) {
+                            newApp.setDecision(-1);
+                        }
+                        break;
+                    case "description":
+                        newApp.setDescription(el.getTextContent());
+                        break;
+                    case "boothArea":
+                        try {
+                            newApp.setBoothArea(Integer.parseInt(el.getTextContent()));
+                        } catch (Exception ex) {
+                        }
+                        break;
+                    case "invitesQuantity":
+                        try {
+                            newApp.setInvitesQuantity(Integer.parseInt(el.getTextContent()));
+                        } catch (Exception ex) {
+                        }
+                        break;
+                    case "reviews":
+                        readReviews(el);
+                        break;
+                    case "keywords":
+                        readKeywords(el);
+                        break;
+                }
+
+            }
+
+        }
+
+        return list;
+    }
+
+    public List<Evaluation> readReviews(Element element) {
+        List<Evaluation> list = null;
+
+        NodeList evaList = element.getElementsByTagName("review");
+
+        for (int i = 0; i < evaList.getLength(); i++) {
+
+            Element el = (Element) evaList.item(i);
+
+            NodeList evaAtributes = el.getChildNodes();
+
+            Evaluation eva = new Evaluation();
+
+            for (int j = 0; j < evaAtributes.getLength(); j++) {
+
+                Element at = (Element) evaAtributes.item(j);
+                switch (at.getTagName()) {
+                    case "text":
+                        eva.setJustificacao(at.getTextContent());
+                        break;
+                    case "faeTopicKnowledge":
+                        try {
+                            eva.setKnowledge(Integer.parseInt(at.getTextContent()));
+                        } catch (Exception ex) {
+                        }
+                        break;
+                    case "eventAdequacy":
+                        try {
+                            eva.setAdequancy(Integer.parseInt(at.getTextContent()));
+                        } catch (Exception ex) {
+                        }
+                        break;
+                    case "inviteAdequacy":
+                        try {
+                            eva.setQuantity(Integer.parseInt(at.getTextContent()));
+                        } catch (Exception ex) {
+                        }
+                        break;
+                    case "recommendation":
+                        try {
+                            eva.setOverall(Integer.parseInt(at.getTextContent()));
+                        } catch (Exception ex) {
+                        }
+                        break;
+                    case "assignment":
+//                        readAssignment(Element element);
+                        break;
+                }
+            }
+            list.add(eva);
+        }
+
+        return list;
+    }
+
+    public Attribution readAssignment(Element element, UserRegister ur, Application app) {
+        Attribution att = new Attribution();
+
+        NodeList list = element.getElementsByTagName("fae");
+
+        for (int i = 0; i < list.getLength(); i++) {
+            Element el = (Element) list.item(i);
+
+            NodeList user = el.getElementsByTagName("user");
+
+            for (int j = 0; j < user.getLength(); i++) {
+
+                Element userEl = (Element) user.item(j);
+                NodeList userAtributes = userEl.getChildNodes();
+
+                for (int w = 0; w < userAtributes.getLength(); w++) {
+                    Element userAtributesEl = (Element) userAtributes.item(w);
+
+                    NodeList usernameList = userAtributesEl.getElementsByTagName("username");
+
+                    for (int a = 0; a < usernameList.getLength(); a++) {
+
+                        if (ur.verifyUsername(usernameList.item(a).getTextContent())) {
+                            att.setUser(usernameList.item(a).getTextContent());
+                        } else {
+
+                            User newUser = new User();
+                            for (int t = 0; t < userAtributes.getLength(); t++) {
+
+                                Element elAtributes = (Element) userAtributes.item(t);
+                                switch (elAtributes.getTagName()) {
+
+                                    case "name":
+                                        newUser.setName(elAtributes.getTextContent());
+                                        break;
+                                    case "email":
+                                        newUser.setEmail(elAtributes.getTextContent());
+                                        break;
+                                    case "username":
+                                        newUser.setUsername(elAtributes.getTextContent());
+                                        att.setUser(elAtributes.getTextContent());
+                                        break;
+                                    case "password":
+                                        newUser.setPassword(elAtributes.getTextContent());
+                                        break;
+                                }
+                            }
+                            ur.getUsers().add(newUser);
+
+                        }
+                    }
+                }
+            }
+        }
+        return att;
+    }
+
+    public List<Keyword> readKeywords(Element element) {
+        List<Keyword> list = null;
+
+        NodeList listKeyword = element.getElementsByTagName("keyword");
+
+        for (int i = 0; i < listKeyword.getLength(); i++) {
+            Element key = (Element) listKeyword.item(i);
+
+            switch (key.getTagName()) {
+                case "keyword":
+                    list.add(new Keyword(key.getTextContent()));
+                    break;
+            }
+        }
+
+        return list;
+    }
 //    public Event readEvent(NodeList eventAtributes) {
 //
 //        Event event = new Event();

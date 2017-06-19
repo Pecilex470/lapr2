@@ -13,6 +13,7 @@ public class Stand {
 
     private int area;
     private boolean available = true;
+    private String description = "";
 
     /**
      * Enum that lists the possivel stands
@@ -22,8 +23,9 @@ public class Stand {
      *
      * @param type - type of stand
      */
-    public Stand(int area) {
+    public Stand(int area, String description) {
         this.area = area;
+        this.description=description;
     }
 
     public Stand() {
@@ -59,5 +61,12 @@ public class Stand {
     public void setArea(int area) {
         this.area = area;
     }
+    
+    public void setDescription(String des){
+        this.description=des;
+    }
 
+    public String getDescription(){
+        return this.description;
+    }
 }

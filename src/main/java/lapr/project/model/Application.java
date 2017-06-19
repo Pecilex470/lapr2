@@ -32,6 +32,8 @@ public class Application implements Importable<Application>, Exportable {
     private int numberOfDecisions;
     private Stand stand;
     private User representative;
+    private int boothArea;
+    private int invitesQuantity;
 
     /**
      * Constructor for Application
@@ -39,13 +41,15 @@ public class Application implements Importable<Application>, Exportable {
      * @param description CandidaturaDescription
      * @param keywordList Keyword List
      */
-    public Application(String description, List<Keyword> keywordList, String companyName, Stand stand, User representative) {
+    public Application(String description, List<Keyword> keywordList, String companyName, Stand stand, User representative, int boothArea, int invitesQuantity) {
         this.description = description;
         this.keywordList.addAll(keywordList);
         this.decision = DEFAULT_DECISION;
         this.companyName = companyName;
         this.stand = stand;
         this.representative = representative;
+        this.boothArea=boothArea;
+        this.invitesQuantity=invitesQuantity;
     }
 
     /**
@@ -260,5 +264,13 @@ public class Application implements Importable<Application>, Exportable {
      */
     public void setRepresentative(User representative) {
         this.representative = representative;
+    }
+    
+    public void setBoothArea(int area){
+        this.boothArea=area;
+    }
+    
+    public void setInvitesQuantity(int invitesQuantity){
+        this.invitesQuantity=invitesQuantity;
     }
 }

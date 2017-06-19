@@ -157,6 +157,7 @@ public class MainWindow extends javax.swing.JFrame {
     private void buttonFAEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonFAEActionPerformed
 
         if (ec.checkIFUserIsFAE(u)) {
+            dispose();
             new FAEActions_UI(ec, u);
         } else {
             JOptionPane.showMessageDialog(null, "You are not FAE in any event!");
@@ -167,6 +168,7 @@ public class MainWindow extends javax.swing.JFrame {
     private void buttonEventManagerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEventManagerActionPerformed
 
         if (u.isEventManager()) {
+            dispose();
             new EventManagerActions_UI(ec, u);
         } else {
             JOptionPane.showMessageDialog(null, "You are not an Event Manager");

@@ -4,14 +4,16 @@ public class Attribution {
 
     private Application a;
     private Evaluation e;
+    private String faeUsername;
 
     public Attribution() {
 
     }
 
-    public Attribution(Application a, Evaluation e) {
+    public Attribution(Application a, Evaluation e, String faeUsername) {
         this.a = a;
         this.e = e;
+        this.faeUsername=faeUsername;
     }
 
     /**
@@ -40,4 +42,7 @@ public class Attribution {
         return e;
     }
 
+    public void setUser(String username){
+        this.faeUsername=username;
+    }
 }

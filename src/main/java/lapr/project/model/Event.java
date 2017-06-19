@@ -4,7 +4,6 @@ import lapr.project.model.register.FAEList;
 import lapr.project.model.register.ApplicationList;
 import lapr.project.model.register.OrganizerList;
 import java.util.List;
-import lapr.project.model.register.AttributionList;
 import lapr.project.utils.Date;
 import org.apache.commons.math3.distribution.NormalDistribution;
 
@@ -313,6 +312,15 @@ public class Event {
         return this.standL;
     }
     
+    public void setStandList(List<Stand> list){
+        this.standL=list;
+    }
+    
+     /**
+     * Method that returns the Z-test that is any statistical test for which the distribution of the test statistic under the null hypothesis can be approximated by a normal distribution.In this case, used a Z-test Unilateral for proportion.
+     * 
+     * @return Z-test 
+     */
     public double getZUni() {
         double Ho = 0.5;
         double acceptanceRate = (getAcceptanceRate() / 100.);
@@ -320,7 +328,12 @@ public class Event {
         double z = (acceptanceRate - Ho) / Math.sqrt((Ho * (1 - Ho)) / total);
         return z;
     }
-
+    /**
+     * Method that returns the Z-test that is any statistical test for which the distribution of the test statistic under the null hypothesis can be approximated by a normal distribution.In this case, used a Z-test Bilateral to compare two proportions.
+     * 
+     * @param e Second event to get the second proportion.
+     * @return Z-test 
+     */
     public double getZBil(Event e) {
         double acceptanceRate1 = (getAcceptanceRate() / 100.);
         double acceptanceRate2 = (e.getAcceptanceRate() / 100.);
@@ -330,7 +343,11 @@ public class Event {
         double z = Ho / (Math.sqrt((acceptanceRate1 * (1 - acceptanceRate1)) / total1) + Math.sqrt((acceptanceRate2 * (1 - acceptanceRate2)) / total2));
         return z;
     }
-
+    /**
+     * Method that returns the decision of the test where we check if the acceptance rate is over 50% with a significance level equal to 1%.
+     * 
+     * @return Decision(Yes or No) 
+     */
     public String testAcceptanceRate50a1() {
         NormalDistribution p = new NormalDistribution();
         double a = 0.01;
@@ -342,7 +359,11 @@ public class Event {
             return "No";
         }
     }
-
+    /**
+     * Method that returns the decision of the test where we check if the acceptance rate is over 50% with a significance level equal to 5%.
+     * 
+     * @return Decision(Yes or No)  
+     */
     public String testAcceptanceRate50a5() {
         NormalDistribution p = new NormalDistribution();
         double a = 0.05;
@@ -355,6 +376,13 @@ public class Event {
         }
     }
 
+    /**
+     * Method that returns the decision of the test where we check if the difference between two Events acceptance rate is equal or not with a significance level equal to 1%.
+     * 
+     * @param e Second event to get is Z-test.
+     * 
+     * @return Decision(Yes or No)
+     */
     public String testDifferenceTwoEventsAccepRateA1(Event e) {
         NormalDistribution p = new NormalDistribution();
         double a = 0.01;
@@ -367,6 +395,13 @@ public class Event {
         }
     }
 
+    /**
+     * Method that returns the decision of the test where we check if the difference between two Events acceptance rate is equal or not with a significance level equal to 5%.
+     * 
+     * @param e Second event to get is Z-test
+     * 
+     * @return Decision(Yes or No)
+     */
     public String testDifferenceTwoEventsAccepRateA5(Event e) {
         NormalDistribution p = new NormalDistribution();
         double a = 0.05;
@@ -378,4 +413,10 @@ public class Event {
             return "No";
         }
     }
+
+
+
+
+
+
 }
