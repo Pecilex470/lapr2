@@ -65,7 +65,7 @@ public class UC11_Controller {
 
     public List<Application> getApplicationsFromThisUserInThisEvent(User u, Event e) {
 
-        List<Application> applicationList = null;
+        List<Application> applicationList = new ArrayList<>();
 
         for (Application a : e.getApplicationList()) {
             if (a.getRepresentative().getUsername().equals(u.getUsername())) {
