@@ -5,27 +5,32 @@
  */
 package lapr.project.ui;
 
-import java.awt.dnd.DropTarget;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
-import javax.swing.DefaultListModel;
-import javax.swing.DropMode;
 import javax.swing.JOptionPane;
-import javax.swing.ListModel;
 import static javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE;
+import lapr.project.controller.UC1_Controller;
 import lapr.project.model.Encryption;
+import lapr.project.model.Event;
 import lapr.project.model.EventCenter;
+import lapr.project.model.FAE;
 import lapr.project.model.Organizer;
 import lapr.project.model.User;
+import lapr.project.model.register.FAEList;
+import lapr.project.model.register.OrganizerList;
+import lapr.project.utils.Date;
 
 /**
  *
  * @author Pedro
  */
-@SuppressWarnings("serial")
 public class UC1_UI extends javax.swing.JDialog {
 
     private EventCenter ec;
     private String[] pickedList;
+    SimpleDateFormat d = new SimpleDateFormat("dd/MM/yyyy");
+    private UC1_Controller c;
 
     /**
      * Creates new form UC1_Dialog
@@ -35,6 +40,7 @@ public class UC1_UI extends javax.swing.JDialog {
     public UC1_UI(EventCenter ec) {
         this.ec = ec;
         this.pickedList = new String[ec.getUserRegister().getUsers().size()];
+        this.c = new UC1_Controller(ec);
 
         initComponents();
         this.setVisible(true);
@@ -69,7 +75,7 @@ public class UC1_UI extends javax.swing.JDialog {
         jLabel8 = new javax.swing.JLabel();
         titleTextField = new javax.swing.JTextField();
         locationTextField = new javax.swing.JTextField();
-        nextButton = new javax.swing.JButton();
+        confirmButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         descriptionTextArea = new javax.swing.JTextArea();
@@ -102,6 +108,8 @@ public class UC1_UI extends javax.swing.JDialog {
         jPanel1 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         pickedUserList = new javax.swing.JList<>();
+        jLabel12 = new javax.swing.JLabel();
+        availableArea = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("UC1 - Create Event");
@@ -135,14 +143,19 @@ public class UC1_UI extends javax.swing.JDialog {
             }
         });
 
-        nextButton.setText("Next >");
-        nextButton.addActionListener(new java.awt.event.ActionListener() {
+        confirmButton.setText("Confirm");
+        confirmButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nextButtonActionPerformed(evt);
+                confirmButtonActionPerformed(evt);
             }
         });
 
         cancelButton.setText("Cancel");
+        cancelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelButtonActionPerformed(evt);
+            }
+        });
 
         descriptionTextArea.setColumns(20);
         descriptionTextArea.setLineWrap(true);
@@ -226,9 +239,11 @@ public class UC1_UI extends javax.swing.JDialog {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        jLabel12.setText("Available Area:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -271,14 +286,12 @@ public class UC1_UI extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(38, 38, 38)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jLabel4)
-                                .addComponent(jLabel6)
-                                .addComponent(jLabel7)
-                                .addComponent(locationTextField)
-                                .addComponent(eventTypeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel6)
+                            .addComponent(locationTextField)
+                            .addComponent(eventTypeComboBox, 0, 328, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(endDateDay, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -289,6 +302,7 @@ public class UC1_UI extends javax.swing.JDialog {
                                 .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(8, 8, 8)
                                 .addComponent(endDateYear, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel7)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(submissionEndDateDay, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -298,39 +312,46 @@ public class UC1_UI extends javax.swing.JDialog {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(8, 8, 8)
-                                .addComponent(submissionEndDateYear, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(submissionEndDateYear, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel12)
+                            .addComponent(availableArea)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(101, 101, 101)
                         .addComponent(cancelButton)
-                        .addGap(66, 66, 66)
-                        .addComponent(nextButton)
-                        .addGap(61, 61, 61)))
+                        .addGap(56, 56, 56)
+                        .addComponent(confirmButton)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(pickButton, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(40, 40, 40)
-                        .addComponent(clear)
-                        .addGap(75, 75, 75))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(38, 38, 38)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 273, Short.MAX_VALUE))
-                        .addContainerGap(28, Short.MAX_VALUE))))
+                        .addContainerGap(28, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(pickButton, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(40, 40, 40)
+                        .addComponent(clear)
+                        .addGap(76, 76, 76))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(26, 26, 26)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
                             .addComponent(jLabel11))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(clear)
+                                    .addComponent(pickButton))
+                                .addGap(10, 10, 10))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(locationTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(23, 23, 23)
@@ -344,33 +365,28 @@ public class UC1_UI extends javax.swing.JDialog {
                                     .addComponent(jLabel19))
                                 .addGap(27, 27, 27)
                                 .addComponent(jLabel6)
-                                .addGap(27, 27, 27)
+                                .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(submissionEndDateDay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(submissionEndDateMonth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(submissionEndDateYear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel22)
-                                    .addComponent(jLabel21)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(7, 7, 7)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(clear)
-                                    .addComponent(pickButton))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                                    .addComponent(jLabel21))
+                                .addGap(15, 15, 15)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(46, 46, 46)
                                 .addComponent(jLabel7)
                                 .addGap(18, 18, 18)
                                 .addComponent(eventTypeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(20, 20, 20)
+                                .addGap(32, 32, 32)
+                                .addComponent(jLabel12)
+                                .addGap(18, 18, 18)
+                                .addComponent(availableArea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(nextButton)
-                                    .addComponent(cancelButton)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(15, 15, 15)
-                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(cancelButton)
+                                    .addComponent(confirmButton)))))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(18, 18, 18)
@@ -397,15 +413,31 @@ public class UC1_UI extends javax.swing.JDialog {
                         .addComponent(jLabel8)
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void nextButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_nextButtonActionPerformed
+    private void confirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmButtonActionPerformed
+        List<FAE> faelist = new ArrayList<>();
+        List<Organizer> organizerList = new ArrayList<>();
+
+        if (!(titleTextField.getText().equals("") || locationTextField.getText().equals("") || descriptionTextArea.getText().equals("") || startDateDay.getText().equals("") || startDateMonth.getText().equals("") || startDateYear.getText().equals("") || endDateDay.getText().equals("") || endDateMonth.getText().equals("") || endDateYear.getText().equals("") || (submissionStartDateDay.getText().equals("") || submissionStartDateMonth.getText().equals("") || submissionStartDateYear.getText().equals("") || submissionEndDateDay.getText().equals("") || submissionEndDateMonth.getText().equals("") || submissionEndDateYear.getText().equals("") || availableArea.getText().equals("")))) {
+            if (c.validateEventData(titleTextField.getText(), locationTextField.getText(), descriptionTextArea.getText(), assembleDate(startDateDay.getText(), startDateMonth.getText(), startDateYear.getText()), assembleDate(endDateDay.getText(), endDateMonth.getText(), endDateYear.getText()), assembleDate(submissionStartDateDay.getText(), submissionStartDateMonth.getText(), submissionStartDateYear.getText()), assembleDate(submissionEndDateDay.getText(), submissionEndDateMonth.getText(), submissionEndDateYear.getText()), (String) eventTypeComboBox.getSelectedItem(), new FAEList(faelist), new OrganizerList(organizerList), Integer.parseInt(availableArea.getText()))) {
+                if (pickedUserList.getModel().getSize() >= 2) {
+                    if (JOptionPane.showConfirmDialog(UC1_UI.this, "Are you sure you want to create an Event with this Data?", "Confirm", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
+                        ec.getEventRegister().getEventList().add(new Event(titleTextField.getText(), locationTextField.getText(), descriptionTextArea.getText(), assembleDate(startDateDay.getText(), startDateMonth.getText(), startDateYear.getText()), assembleDate(endDateDay.getText(), endDateMonth.getText(), endDateYear.getText()), assembleDate(submissionStartDateDay.getText(), submissionStartDateMonth.getText(), submissionStartDateYear.getText()), assembleDate(submissionEndDateDay.getText(), submissionEndDateMonth.getText(), submissionEndDateYear.getText()), (String) eventTypeComboBox.getSelectedItem(), new FAEList(faelist), new OrganizerList(organizerList), Integer.parseInt(availableArea.getText())));
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(UC1_UI.this, "You must pick at least 2 organizers", "Error", JOptionPane.OK_OPTION);
+                }
+            }
+        } else {
+            JOptionPane.showMessageDialog(UC1_UI.this, "Please fill in all the fields", "Error", JOptionPane.OK_OPTION);
+        }
+
+    }//GEN-LAST:event_confirmButtonActionPerformed
 
     private void locationTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_locationTextFieldActionPerformed
         // TODO add your handling code here:
@@ -482,13 +514,23 @@ public class UC1_UI extends javax.swing.JDialog {
                 return strings[i];
             }
         });
-        
+
         for (int i = 0; i < pickedList.length; i++) {
-            pickedList[i]=null;
+            pickedList[i] = null;
         }
 
 
     }//GEN-LAST:event_clearActionPerformed
+
+    private Date assembleDate(String day, String month, String year) {
+        return new Date(Integer.parseInt(day), Integer.parseInt(month), Integer.parseInt(year));
+    }
+
+    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
+        if (JOptionPane.showConfirmDialog(UC1_UI.this, "Do you wish to exit without saving?", "Close", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
+            dispose();
+        }
+    }//GEN-LAST:event_cancelButtonActionPerformed
 
     /**
      * method that retrieves the full list of registered users to allow the
@@ -549,8 +591,7 @@ public class UC1_UI extends javax.swing.JDialog {
         for (int i = 0; i < pickedList.length; i++) {
             try {
                 if (pickedList[i].isEmpty()) {
-                 
-                    
+
                 } else {
                     temp[i] = pickedUser;
                 }
@@ -574,8 +615,10 @@ public class UC1_UI extends javax.swing.JDialog {
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField availableArea;
     private javax.swing.JButton cancelButton;
     private javax.swing.JButton clear;
+    private javax.swing.JButton confirmButton;
     private javax.swing.JTextArea descriptionTextArea;
     private javax.swing.JTextField endDateDay;
     private javax.swing.JTextField endDateMonth;
@@ -584,6 +627,7 @@ public class UC1_UI extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
@@ -603,7 +647,6 @@ public class UC1_UI extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTextField locationTextField;
-    private javax.swing.JButton nextButton;
     private javax.swing.JButton pickButton;
     private javax.swing.JList<String> pickedUserList;
     private javax.swing.JTextField startDateDay;

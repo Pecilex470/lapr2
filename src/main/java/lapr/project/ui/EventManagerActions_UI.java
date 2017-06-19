@@ -20,7 +20,6 @@ public class EventManagerActions_UI extends javax.swing.JFrame {
     static final long serialVersionUID = -3387516993124229948L;
     
     private EventCenter ec;
-    private UC1_Controller c;
     private User u;
 
     /**
@@ -31,7 +30,6 @@ public class EventManagerActions_UI extends javax.swing.JFrame {
     public EventManagerActions_UI(EventCenter ec, User u) {
         this.ec = ec;
         this.u = u;
-        this.c = new UC1_Controller();
         initComponents();
         this.setVisible(true);
         setLocationRelativeTo(null);
@@ -66,6 +64,7 @@ public class EventManagerActions_UI extends javax.swing.JFrame {
         uc47Button = new javax.swing.JButton();
         uc32Button = new javax.swing.JButton();
         uc49Button = new javax.swing.JButton();
+        backButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Event Manager Actions");
@@ -115,6 +114,13 @@ public class EventManagerActions_UI extends javax.swing.JFrame {
 
         uc49Button.setText("UC49 - Test the difference between the mean deviation and a theoretical value for a FAE average rating");
 
+        backButton.setText("Back");
+        backButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -131,17 +137,20 @@ public class EventManagerActions_UI extends javax.swing.JFrame {
                             .addComponent(uc45Button)
                             .addComponent(uc44Button)
                             .addComponent(uc43Button)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(uc1Button)
-                                    .addComponent(uc32Button)
-                                    .addComponent(uc42Button))
-                                .addGap(158, 158, 158)))
-                        .addGap(21, 21, 21)
+                            .addComponent(uc1Button)
+                            .addComponent(uc32Button)
+                            .addComponent(uc42Button))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(uc50Button)
-                            .addComponent(uc49Button)
-                            .addComponent(uc48Button))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(21, 21, 21)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(uc50Button)
+                                    .addComponent(uc49Button)
+                                    .addComponent(uc48Button)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(backButton)
+                                .addGap(59, 59, 59)))))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -170,7 +179,9 @@ public class EventManagerActions_UI extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(uc46Button)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(uc47Button)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(uc47Button)
+                    .addComponent(backButton))
                 .addContainerGap(56, Short.MAX_VALUE))
         );
 
@@ -193,8 +204,14 @@ public class EventManagerActions_UI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_uc50ButtonActionPerformed
 
+    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
+        dispose();
+        new MainWindow(u, ec);
+    }//GEN-LAST:event_backButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton backButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JButton uc1Button;
     private javax.swing.JButton uc32Button;
