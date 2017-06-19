@@ -8,7 +8,6 @@ package lapr.project.controller;
 import lapr.project.model.Event;
 import lapr.project.model.EventCenter;
 import lapr.project.model.Stand;
-import lapr.project.model.Stand.typeStand;
 
 /**
  *
@@ -32,8 +31,8 @@ public class UC20_Controller {
      * @param stand - Stand
      * @return Stand
      */
-    public Stand newStand(typeStand stand){
-        return new Stand(stand);
+    public Stand newStand(int area){
+        return new Stand(area);
     }
     
     /**
