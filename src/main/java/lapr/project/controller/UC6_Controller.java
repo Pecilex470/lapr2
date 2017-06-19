@@ -83,6 +83,14 @@ public class UC6_Controller {
         return Encryption.encryptPassword(temp, shift, abc);
     }
     
+    /**
+     * This method deencrypts the data that was 2-step encrypted
+     * @param param the parameter do deencrypt
+     * @param shift the shift used in the encryption
+     * @param keyword the keyword used in the encryption
+     * @param abc the abecedary of characters
+     * @return returns the deencrypted String
+     */
     public String twoLayerDeencryption(String param, int shift, String keyword, String abc) {
         String temp = Encryption.deEncryptPassword(param, shift, abc);
         return Encryption.deEncryptData(temp, keyword);
@@ -137,5 +145,13 @@ public class UC6_Controller {
         ec.getEncryptionRegister().addEncryption(new Encryption(shift, ec.getUserRegister().getUserByUsername(username), keyword));
     }
 
+    /**
+     * This method verifies if the inputted email already exists in the system
+     * @param email the email to be verified
+     * @return returns true or false accordingly
+     */
+    public boolean verifyExistingEmail(String email) {
+        return ec.getUserRegister().verifyExistingEmail(email, ec);
+    }
 
 }

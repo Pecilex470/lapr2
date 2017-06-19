@@ -7,7 +7,9 @@ package lapr.project.model.register;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.JOptionPane;
+import lapr.project.controller.UC6_Controller;
+import lapr.project.model.Encryption;
+import lapr.project.model.EventCenter;
 import lapr.project.model.User;
 import lapr.project.utils.LoginDataIncorrect;
 
@@ -92,9 +94,27 @@ public class UserRegister {
         return new User();
     }
     
+    /**
+     * This method verifies if the username already exists in the system
+     * @param username the username to verify
+     * @return returns if the condition is true or not
+     */
     public boolean verifyUsername(String username) {
         for (User user : users) {
             if (user.getUsername().equals(username)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    public boolean verifyExistingEmail(String email, EventCenter ec) {
+        String deEncryptedEmail;
+        
+        for (User user : users) {
+            deEncryptedEmail = Encryption.deEncryptPassword(user.getEmail(), ec.getEncryptionRegister().getEncryptionByUser(user).getShift(), Encryption.ABC);
+            deEncryptedEmail = Encryption.deEncryptData(deEncryptedEmail, ec.getEncryptionRegister().getEncryptionByUser(user).getKeyword());
+            if (deEncryptedEmail.equals(email)) {
                 return true;
             }
         }

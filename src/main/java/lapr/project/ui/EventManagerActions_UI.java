@@ -17,6 +17,8 @@ import lapr.project.model.User;
  */
 public class EventManagerActions_UI extends javax.swing.JFrame {
     
+    static final long serialVersionUID = -3387516993124229948L;
+    
     private EventCenter ec;
     private UC1_Controller c;
     private User u;
