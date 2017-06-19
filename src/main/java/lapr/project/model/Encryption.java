@@ -30,7 +30,7 @@ public class Encryption {
     /**
      * All the characters that can be used
      */
-    public final static String ABC = " abcdefghijklmnopqrstuvwxyzãõêç*+ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890,;.:-@";
+    public static final String ABC = " abcdefghijklmnopqrstuvwxyzãõêç*+ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890,;.:-@";
 
     /**
      * Constructor that creates the instance of an encryption
@@ -101,7 +101,7 @@ public class Encryption {
      */
     public static String encryptPassword(String password, int num, String abc) {
 
-        String encryptedPassword = "";
+        String encryptedString = "";
 
         List<String> abecedary = new ArrayList<>();
         List<String> rotated = new ArrayList<>();
@@ -116,11 +116,11 @@ public class Encryption {
         for (int i = 0; i < password.length(); i++) {
             for (int j = 0; j < abecedary.size(); j++) {
                 if (password.substring(i, i + 1).equals(abecedary.get(j))) {
-                    encryptedPassword = encryptedPassword + rotated.get(j);
+                    encryptedString = encryptedString + rotated.get(j);
                 }
             }
         }
-        return encryptedPassword;
+        return encryptedString;
     }
 
     /**
@@ -133,7 +133,7 @@ public class Encryption {
      */
     public static String deEncryptPassword(String password, int num, String abc) {
 
-        String deEncryptedPassword = "";
+        String deEncryptedString = "";
 
         List<String> abecedary = new ArrayList<>();
         List<String> rotated = new ArrayList<>();
@@ -148,11 +148,11 @@ public class Encryption {
         for (int i = 0; i < password.length(); i++) {
             for (int j = 0; j < rotated.size(); j++) {
                 if (password.substring(i, i + 1).equals(rotated.get(j))) {
-                    deEncryptedPassword = deEncryptedPassword + abecedary.get(j);
+                    deEncryptedString = deEncryptedString + abecedary.get(j);
                 }
             }
         }
-        return deEncryptedPassword;
+        return deEncryptedString;
     }
 
     /**
@@ -258,12 +258,12 @@ public class Encryption {
      * @return returns the converted String
      */
     public static String assemblePassword(char[] chars) {
-        String password = "";
+        String string = "";
 
         for (int i = 0; i < chars.length; i++) {
-            password = password + chars[i];
+            string = string + chars[i];
         }
-        return password;
+        return string;
     }
 
 }

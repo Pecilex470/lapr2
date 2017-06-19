@@ -199,7 +199,7 @@ public class Event {
         int accepted = applicationList.getAcceptedApplicationRegister().size();
         int total = applicationList.getApplication().size();
 
-        double acceptanceRate = (accepted * 100) / total;
+        double acceptanceRate = (double) (accepted * 100) / (double) total;
 
         return acceptanceRate;
 
