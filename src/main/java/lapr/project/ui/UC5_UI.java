@@ -28,6 +28,7 @@ public class UC5_UI extends javax.swing.JFrame {
     private EventCenter ec;
     private User u;
     private UC5_Controller c;
+    private Event eventSelected;
 
     /**
      * Creates new form UC5_UI
@@ -70,7 +71,6 @@ public class UC5_UI extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         companyNameTextField = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        stand = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
         keyword1 = new javax.swing.JTextField();
         keyword4 = new javax.swing.JTextField();
@@ -83,8 +83,12 @@ public class UC5_UI extends javax.swing.JFrame {
         description = new javax.swing.JTextArea();
         submitButton = new javax.swing.JButton();
         backButton = new javax.swing.JButton();
+        standArea = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
+        maxAreaAvailableStand = new javax.swing.JLabel();
 
         jMenuItem1.setText("jMenuItem1");
 
@@ -102,13 +106,16 @@ public class UC5_UI extends javax.swing.JFrame {
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
+        listEvent.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                listEventMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(listEvent);
 
         jLabel2.setText("Company's name:");
 
         jLabel3.setText("Stand:");
-
-        stand.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SMALL_STAND", "MEDIUM_STAND", "BIG_STAND", "PREMIUM_STAND" }));
 
         jLabel4.setText("Keywords:");
 
@@ -158,11 +165,21 @@ public class UC5_UI extends javax.swing.JFrame {
             }
         });
 
-        jLabel6.setFont(new java.awt.Font("Dialog", 0, 9)); // NOI18N
-        jLabel6.setText("SMALL = 10m^2  ||  MEDIUM = 20m^2");
+        standArea.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                standAreaActionPerformed(evt);
+            }
+        });
 
-        jLabel7.setFont(new java.awt.Font("Dialog", 0, 9)); // NOI18N
-        jLabel7.setText("BIG = 40m^2  ||  PREMIUM = 80m^2");
+        jLabel9.setText("m²");
+
+        jLabel10.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
+        jLabel10.setText("Please enter a number between ");
+
+        jLabel11.setText("1");
+
+        jLabel6.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
+        jLabel6.setText("and");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -173,7 +190,7 @@ public class UC5_UI extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
                             .addComponent(jLabel3)
@@ -201,12 +218,18 @@ public class UC5_UI extends javax.swing.JFrame {
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(submitButton)))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(stand, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(standArea, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(31, 31, 31))
+                        .addComponent(jLabel9)
+                        .addGap(27, 27, 27)
+                        .addComponent(jLabel10)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel11)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(maxAreaAvailableStand)))
+                .addGap(36, 36, 36))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -220,18 +243,16 @@ public class UC5_UI extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
                             .addComponent(companyNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(22, 22, 22)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel3)
-                                    .addComponent(stand, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel6)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel7)))
-                        .addGap(26, 26, 26)
+                        .addGap(23, 23, 23)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(standArea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel9)
+                            .addComponent(jLabel10)
+                            .addComponent(jLabel11)
+                            .addComponent(jLabel6)
+                            .addComponent(maxAreaAvailableStand))
+                        .addGap(27, 27, 27)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
                             .addComponent(keyword1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -280,14 +301,14 @@ public class UC5_UI extends javax.swing.JFrame {
                         }
                     }
 
-                    String typeOfStand = (String) stand.getSelectedItem();
-
-                    Event e = ec.getEventRegister().getEventList().get(listEvent.getSelectedIndex());
-                    Application a = new Application(description.getText(), keywordList, companyNameTextField.getText(), new Stand(typeStand.valueOf(typeOfStand)), u);
-                    e.addApplication(a);
+                    
+                    Application a = new Application(description.getText(), keywordList, companyNameTextField.getText(), new Stand(Integer.parseInt(standArea.getText())), u);
+                    eventSelected.addApplication(a);
                     JOptionPane.showMessageDialog(UC5_UI.this, "Application submitted!", "Information", JOptionPane.INFORMATION_MESSAGE);
                     dispose();
                     new RepresentativeActions(ec, u);
+                    
+                    
 
                 }
             } else {
@@ -307,6 +328,18 @@ public class UC5_UI extends javax.swing.JFrame {
         dispose();
 
     }//GEN-LAST:event_backButtonActionPerformed
+
+    private void standAreaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_standAreaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_standAreaActionPerformed
+
+    private void listEventMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listEventMouseClicked
+        
+        this.eventSelected = ec.getEventRegister().getEventList().get(listEvent.getSelectedIndex());
+        
+        maxAreaAvailableStand.setText(""+eventSelected.getAvailableArea());
+        
+    }//GEN-LAST:event_listEventMouseClicked
 
     public int numberOfKeywords() {
 
@@ -346,18 +379,21 @@ public class UC5_UI extends javax.swing.JFrame {
 
         return eventList;
     }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backButton;
     private javax.swing.JTextField companyNameTextField;
     private javax.swing.JTextArea description;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel jPanel1;
@@ -369,7 +405,8 @@ public class UC5_UI extends javax.swing.JFrame {
     private javax.swing.JTextField keyword4;
     private javax.swing.JTextField keyword5;
     private javax.swing.JList<String> listEvent;
-    private javax.swing.JComboBox<String> stand;
+    private javax.swing.JLabel maxAreaAvailableStand;
+    private javax.swing.JTextField standArea;
     private javax.swing.JButton submitButton;
     // End of variables declaration//GEN-END:variables
 }
