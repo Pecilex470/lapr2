@@ -27,6 +27,8 @@ import lapr.project.utils.Date;
  */
 public class UC1_UI extends javax.swing.JDialog {
 
+    static final long serialVersionUID = -3387516993124229948L;
+
     private EventCenter ec;
     private String[] pickedList;
     SimpleDateFormat d = new SimpleDateFormat("dd/MM/yyyy");
@@ -197,6 +199,7 @@ public class UC1_UI extends javax.swing.JDialog {
         jLabel11.setText("Pick at least 2 organizers for the Event:");
 
         userList.setModel(new javax.swing.AbstractListModel<String>() {
+            static final long serialVersionUID = -3387516993124229948L;
             String[] strings = userList();
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
@@ -223,6 +226,7 @@ public class UC1_UI extends javax.swing.JDialog {
         });
 
         pickedUserList.setModel(new javax.swing.AbstractListModel<String>() {
+            static final long serialVersionUID = -3387516993124229948L;
             String[] strings = {".........."};
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
@@ -462,6 +466,7 @@ public class UC1_UI extends javax.swing.JDialog {
 
         userList.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = userListExcept(userList.getSelectedValue());
+            static final long serialVersionUID = -3387516993124229948L;
 
             public int getSize() {
                 return strings.length;
@@ -476,6 +481,7 @@ public class UC1_UI extends javax.swing.JDialog {
 
         pickedUserList.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = returnPickedList();
+            static final long serialVersionUID = -3387516993124229948L;
 
             public int getSize() {
                 return strings.length;
@@ -493,6 +499,7 @@ public class UC1_UI extends javax.swing.JDialog {
 
         pickedUserList.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = {""};
+            static final long serialVersionUID = -3387516993124229948L;
 
             public int getSize() {
                 return strings.length;
@@ -505,6 +512,7 @@ public class UC1_UI extends javax.swing.JDialog {
 
         userList.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = userList();
+            static final long serialVersionUID = -3387516993124229948L;
 
             public int getSize() {
                 return strings.length;
