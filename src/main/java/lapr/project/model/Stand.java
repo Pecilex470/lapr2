@@ -10,14 +10,14 @@ package lapr.project.model;
  * @author Cerqueira
  */
 public class Stand {
-    
+
     private typeStand type;
-    private boolean available=true; 
-    
+    private boolean available = true;
+
     /**
      * Enum that lists the possivel stands
      */
-    public enum typeStand{
+    public enum typeStand {
 
         SMALL_STAND("Small Stand", 10),
         MEDIUM_STAND("Medium Stand", 20),
@@ -39,62 +39,85 @@ public class Stand {
         public String getName() {
             return this.name;
         }
-        
-        public void setArea(int area){
-            this.area=area;
+
+        public void setArea(int area) {
+            this.area = area;
         }
-        
-        public void setName(String name){
+
+        public void setName(String name) {
             this.name = name;
         }
     }
 
-        /**
-         * Constructor
-         *
-         * @param type - type of stand
-         */
-        public Stand(typeStand type) {
-            this.type = type;
+    /**
+     * Constructor
+     *
+     * @param type - type of stand
+     */
+    public Stand(typeStand type) {
+        this.type = type;
+    }
+
+    public Stand() {
+
+    }
+
+    /**
+     * Method to return the area of stand
+     *
+     * @return area (int)
+     */
+    public int getArea() {
+        return type.getArea();
+    }
+
+    /**
+     *
+     * @return availability of stand
+     */
+    public boolean getAvailable() {
+        return this.available;
+    }
+
+    /**
+     * set the availability of event
+     *
+     * @param available (boolean)
+     */
+    public void setAvailable(boolean available) {
+        this.available = available;
+    }
+
+    public String getName() {
+        return this.type.getName();
+    }
+
+    public void setArea(int area) {
+        this.type.area = area;
+    }
+
+    public void setName(String name) {
+        this.type.name = name;
+    }
+
+    public int getIndexStand() {
+
+        if (getName().equals("Small Stand")) {
+            return 0;
         }
 
-        public Stand(){
-            
-        }
-        /**
-         * Method to return the area of stand
-         *
-         * @return area (int)
-         */
-        public int getArea(){
-            return type.getArea();
+        if (getName().equals("Medium Stand")) {
+            return 1;
         }
         
-        /**
-         * 
-         * @return availability of stand
-         */
-        public boolean getAvailable(){
-            return this.available;
+        if (getName().equals("Big Stand")) {
+            return 2;
         }
         
-        /**
-         * set the availability of event
-         * @param available (boolean)
-         */
-        public void setAvailable(boolean available){
-            this.available=available;
+        if (getName().equals("Premium Stand")) {
+            return 3;
         }
-        
-        public String getName(){
-            return this.type.getName();
-        }
-        
-        public void setArea(int area){
-            this.type.area=area;
-        }
-        
-        public void setName(String name){
-            this.type.name = name;
-        }
+
+        return 0;
     }
+}

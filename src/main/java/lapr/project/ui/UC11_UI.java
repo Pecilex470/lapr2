@@ -5,6 +5,7 @@
  */
 package lapr.project.ui;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import static javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE;
@@ -144,6 +145,7 @@ public class UC11_UI extends javax.swing.JFrame {
         jLabel5.setText("Description:");
 
         description.setColumns(20);
+        description.setLineWrap(true);
         description.setRows(5);
         jScrollPane1.setViewportView(description);
 
@@ -342,16 +344,14 @@ public class UC11_UI extends javax.swing.JFrame {
 
                 Event e = ec.getEventRegister().getEventList().get(listEvent.getSelectedIndex());
 
-                List<Keyword> keywordList = null;
+                List<Keyword> keywordList = new ArrayList<>();
                 String[] keywordArray = {keyword1.getText(), keyword2.getText(), keyword3.getText(), keyword4.getText(), keyword5.getText()};
 
-                for (int i = 0; i < numberOfKeywords(); i++) {
-                    if (!keywordArray[i].isEmpty()) {
-                        i--;
-                    } else {
-                        keywordList.add(new Keyword(keywordArray[i]));
+                for (int i = 0; i < keywordArray.length; i++) {
+                        if (!keywordArray[i].isEmpty()) {
+                            keywordList.add(new Keyword(keywordArray[i]));
+                        }
                     }
-                }
 
                 String typeOfStand = (String) stand.getSelectedItem();
 
@@ -411,7 +411,7 @@ public class UC11_UI extends javax.swing.JFrame {
     private void listApplicationMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listApplicationMouseClicked
 
         companyNameTextField.setText(c.getApplicationsFromThisUserInThisEvent(u, c.getEventsWhereRepresentativeHasApplications(u).get(listEvent.getSelectedIndex())).get(listApplication.getSelectedIndex()).getCompanyName());
-        stand.setSelectedItem(c.getApplicationsFromThisUserInThisEvent(u, c.getEventsWhereRepresentativeHasApplications(u).get(listEvent.getSelectedIndex())).get(listApplication.getSelectedIndex()).getStand());
+        stand.setSelectedIndex(c.getApplicationsFromThisUserInThisEvent(u, c.getEventsWhereRepresentativeHasApplications(u).get(listEvent.getSelectedIndex())).get(listApplication.getSelectedIndex()).getStand().getIndexStand());
         keyword1.setText(c.getApplicationsFromThisUserInThisEvent(u, c.getEventsWhereRepresentativeHasApplications(u).get(listEvent.getSelectedIndex())).get(listApplication.getSelectedIndex()).getKeywordList().get(0).getValue());
         keyword2.setText(c.getApplicationsFromThisUserInThisEvent(u, c.getEventsWhereRepresentativeHasApplications(u).get(listEvent.getSelectedIndex())).get(listApplication.getSelectedIndex()).getKeywordList().get(1).getValue());
         keyword3.setText(c.getApplicationsFromThisUserInThisEvent(u, c.getEventsWhereRepresentativeHasApplications(u).get(listEvent.getSelectedIndex())).get(listApplication.getSelectedIndex()).getKeywordList().get(2).getValue());
