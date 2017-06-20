@@ -433,6 +433,7 @@ public class UC1_UI extends javax.swing.JDialog {
                 if (pickedUserList.getModel().getSize() >= 2) {
                     if (JOptionPane.showConfirmDialog(UC1_UI.this, "Are you sure you want to create an Event with this Data?", "Confirm", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
                         ec.getEventRegister().getEventList().add(new Event(titleTextField.getText(), locationTextField.getText(), descriptionTextArea.getText(), assembleDate(startDateDay.getText(), startDateMonth.getText(), startDateYear.getText()), assembleDate(endDateDay.getText(), endDateMonth.getText(), endDateYear.getText()), assembleDate(submissionStartDateDay.getText(), submissionStartDateMonth.getText(), submissionStartDateYear.getText()), assembleDate(submissionEndDateDay.getText(), submissionEndDateMonth.getText(), submissionEndDateYear.getText()), (String) eventTypeComboBox.getSelectedItem(), new FAEList(faelist), new OrganizerList(organizerList), Integer.parseInt(availableArea.getText())));
+                        dispose();
                     }
                 } else {
                     JOptionPane.showMessageDialog(UC1_UI.this, "You must pick at least 2 organizers", "Error", JOptionPane.OK_OPTION);

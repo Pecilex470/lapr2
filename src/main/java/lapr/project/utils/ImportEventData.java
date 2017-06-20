@@ -56,7 +56,7 @@ public class ImportEventData {
             this.builder = factory.newDocumentBuilder();
             ec = null;
             this.docXML = builder.parse("exposicao1_v0.1.xml");
-            this.event= docXML.getFirstChild();
+            this.event = docXML.getFirstChild();
         } catch (SAXException ex) {
             Logger.getLogger(ImportEventData.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
@@ -72,7 +72,7 @@ public class ImportEventData {
         NodeList eventAtributes = this.event.getChildNodes();
 
         for (int i = 0; i < eventAtributes.getLength(); i++) {
-            
+
             Element element = (Element) eventAtributes.item(i);
 
             switch (element.getTagName()) {
@@ -93,7 +93,7 @@ public class ImportEventData {
         return newEvent;
     }
 
-    public List<FAE> readFAESet(Element faeList) {
+    public List<FAE> readFAESet(Element faeList) throws NullPointerException{
 
         List<FAE> list = null;
 
@@ -138,7 +138,10 @@ public class ImportEventData {
                             }
                         }
                         newFae.setUtilizadorFAE(user);
-                        list.add(newFae);
+                        try{ 
+                            list.add(newFae);
+                        } catch (NullPointerException e) {
+                        }
                         break;
                 }
 
@@ -176,7 +179,10 @@ public class ImportEventData {
                         break;
                 }
             }
-            list.add(stand);
+            try{ 
+                list.add(stand);
+            } catch (NullPointerException e) {
+            }
         }
         return list;
     }
@@ -287,7 +293,10 @@ public class ImportEventData {
                         break;
                 }
             }
-            list.add(eva);
+            try{ 
+                list.add(eva);
+            } catch (NullPointerException e) {
+            }
         }
 
         return list;
@@ -360,7 +369,10 @@ public class ImportEventData {
 
             switch (key.getTagName()) {
                 case "keyword":
-                    list.add(new Keyword(key.getTextContent()));
+                    try{
+                        list.add(new Keyword(key.getTextContent()));
+                    } catch (NullPointerException e) {
+                    }
                     break;
             }
         }
