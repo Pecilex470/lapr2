@@ -16,7 +16,7 @@ import lapr.project.model.EventCenter;
 public class UC44_Controller {
  private EventCenter ec;
   
-   private Event event;
+   private List<Event> events;
    
    
    /**
@@ -40,10 +40,10 @@ public class UC44_Controller {
     /**
      * Method that allows to save the event choosed by the organizer that is using the aplication in the moment.
      * 
-     * @param eve Event choosed by the organizer.
+     * @param events Event choosed by the organizer.
      */
-    public void setEvent(Event eve){
-      this.event=eve; 
+    public void setEvent(List<Event> events){
+      this.events=events; 
     }
        
 }

@@ -45,7 +45,6 @@ public class EventRegister {
 //            if (event.getSubmissionStartDate())
 //        }
 //    }
-    
     /**
      * sets the event list from an existing list
      *
@@ -59,22 +58,16 @@ public class EventRegister {
         return true;
     }
 
-    /**
-     * This method iterates all saved Events and returns a list of the events in
-     * which the user is organizer
-     *
-     * @param u teh user to check
-     * @return returns the list of the events
-     */
-    public List<Event> getEventsWhereUserIsOrganizer(User u) {
+  
 
-        List<Event> eventsWhereUserIsOrganizer = new ArrayList<>();
+    public Event getEventByTitle(String title) {
+
         for (Event e : events) {
-            if (e.isOrganizer(u)) {
-                eventsWhereUserIsOrganizer.add(e);
+            if (e.getTitle().equals(title)) {
+                return e;
             }
         }
-        return eventsWhereUserIsOrganizer;
+        return null;
     }
 
 }

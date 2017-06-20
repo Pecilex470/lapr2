@@ -26,15 +26,14 @@ import lapr.project.utils.Date;
  * @author Pedro
  */
 public class UC1_UI extends javax.swing.JDialog {
-    
+
     static final long serialVersionUID = -3387516993124229948L;
-    
+
     private EventCenter ec;
     private String[] pickedList = new String[0];
     SimpleDateFormat d = new SimpleDateFormat("dd/MM/yyyy");
     private UC1_Controller c;
     private String[] topList;
-
 
     /**
      * Creates new form UC1_Dialog
@@ -46,7 +45,7 @@ public class UC1_UI extends javax.swing.JDialog {
         this.ec = ec;
         this.c = new UC1_Controller(ec);
         this.topList = initialUserList();
-        
+
         initComponents();
         this.setVisible(true);
         setLocationRelativeTo(null);
@@ -429,11 +428,11 @@ public class UC1_UI extends javax.swing.JDialog {
     private void confirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmButtonActionPerformed
         List<FAE> faelist = new ArrayList<>();
         List<Organizer> organizerList = new ArrayList<>();
+        for (int i = 0; i < pickedList.length; i++) {
+            organizerList.add(nameStringToOrganizer(pickedList[i]));
+        }
 
-        organizerList.add(nameStringToOrganizer(pickedList[0]));
-        organizerList.add(nameStringToOrganizer(pickedList[1]));
-        
-        if (!(titleTextField.getText().equals("") || locationTextField.getText().equals("") || descriptionTextArea.getText().equals("") || startDateDay.getText().equals("") || startDateMonth.getText().equals("") || startDateYear.getText().equals("") || endDateDay.getText().equals("") || endDateMonth.getText().equals("") || endDateYear.getText().equals("") || (submissionStartDateDay.getText().equals("") || submissionStartDateMonth.getText().equals("") || submissionStartDateYear.getText().equals("") || submissionEndDateDay.getText().equals("") || submissionEndDateMonth.getText().equals("") || submissionEndDateYear.getText().equals("") || availableArea.getText().equals("")))) {
+        if (!(("").equals(titleTextField.getText()) || locationTextField.getText().equals("") || descriptionTextArea.getText().equals("") || startDateDay.getText().equals("") || startDateMonth.getText().equals("") || startDateYear.getText().equals("") || endDateDay.getText().equals("") || endDateMonth.getText().equals("") || endDateYear.getText().equals("") || (submissionStartDateDay.getText().equals("") || submissionStartDateMonth.getText().equals("") || submissionStartDateYear.getText().equals("") || submissionEndDateDay.getText().equals("") || submissionEndDateMonth.getText().equals("") || submissionEndDateYear.getText().equals("") || availableArea.getText().equals("")))) {
             if (c.validateEventData(titleTextField.getText(), locationTextField.getText(), descriptionTextArea.getText(), assembleDate(startDateDay.getText(), startDateMonth.getText(), startDateYear.getText()), assembleDate(endDateDay.getText(), endDateMonth.getText(), endDateYear.getText()), assembleDate(submissionStartDateDay.getText(), submissionStartDateMonth.getText(), submissionStartDateYear.getText()), assembleDate(submissionEndDateDay.getText(), submissionEndDateMonth.getText(), submissionEndDateYear.getText()), (String) eventTypeComboBox.getSelectedItem(), new FAEList(faelist), new OrganizerList(organizerList), Integer.parseInt(availableArea.getText()))) {
                 if (pickedUserList.getModel().getSize() >= 2) {
                     if (JOptionPane.showConfirmDialog(UC1_UI.this, "Are you sure you want to create an Event with this Data?", "Confirm", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
@@ -463,40 +462,35 @@ public class UC1_UI extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_eventTypeComboBoxActionPerformed
 
-    private void userListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_userListMouseClicked
-        
-
-    }//GEN-LAST:event_userListMouseClicked
-
     private void pickButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pickButtonActionPerformed
-        
+
         String user = userList.getSelectedValue();
-        
+
         removeUserFromTopList(user);
-        
+
         userList.setModel(new javax.swing.AbstractListModel<String>() {
             static final long serialVersionUID = -3387516993124229948L;
             String[] strings = returnTopList();
-            
+
             public int getSize() {
                 return strings.length;
             }
-            
+
             public String getElementAt(int i) {
                 return strings[i];
             }
         });
-        
+
         addUserToPickedList(user);
-        
+
         pickedUserList.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = returnPickedList();
             static final long serialVersionUID = -3387516993124229948L;
-            
+
             public int getSize() {
                 return strings.length;
             }
-            
+
             public String getElementAt(int i) {
                 return strings[i];
             }
@@ -505,42 +499,42 @@ public class UC1_UI extends javax.swing.JDialog {
     }//GEN-LAST:event_pickButtonActionPerformed
 
     private void unpickButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_unpickButtonActionPerformed
-        
+
         String user = pickedUserList.getSelectedValue();
-        
+
         removeUserFromPickedList(user);
-        
+
         pickedUserList.setModel(new javax.swing.AbstractListModel<String>() {
             static final long serialVersionUID = -3387516993124229948L;
             String[] strings = returnPickedList();
-            
+
             public int getSize() {
                 return strings.length;
             }
-            
+
             public String getElementAt(int i) {
                 return strings[i];
             }
         });
-        
+
         addUserToTopList(user);
-        
+
         userList.setModel(new javax.swing.AbstractListModel<String>() {
             static final long serialVersionUID = -3387516993124229948L;
             String[] strings = returnTopList();
-            
+
             public int getSize() {
                 return strings.length;
             }
-            
+
             public String getElementAt(int i) {
                 return strings[i];
             }
         });
-        
+
 
     }//GEN-LAST:event_unpickButtonActionPerformed
-    
+
     private Date assembleDate(String day, String month, String year) {
         return new Date(Integer.parseInt(day), Integer.parseInt(month), Integer.parseInt(year));
     }
@@ -550,6 +544,10 @@ public class UC1_UI extends javax.swing.JDialog {
             dispose();
         }
     }//GEN-LAST:event_cancelButtonActionPerformed
+
+    private void userListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_userListMouseClicked
+
+    }//GEN-LAST:event_userListMouseClicked
 
     /**
      * method that retrieves the full list of registered users to allow the
@@ -568,107 +566,106 @@ public class UC1_UI extends javax.swing.JDialog {
         }
         return list;
     }
-    
+
     public void removeUserFromTopList(String uName) {
-        
+
         String[] list = new String[topList.length - 1];
-        
+
         int flag = 0;
         for (int i = 0; i < topList.length; i++) {
-            
+
             if (!uName.equals(topList[i])) {
                 list[i - flag] = topList[i];
             } else {
                 flag++;
             }
         }
-        
+
         topList = new String[topList.length - 1];
         topList = list;
-        
+
     }
-    
+
     public void removeUserFromPickedList(String uName) {
-        
+
         String[] list = new String[pickedList.length - 1];
-        
+
         int flag = 0;
         for (int i = 0; i < pickedList.length; i++) {
-            
+
             if (!uName.equals(pickedList[i])) {
                 list[i - flag] = pickedList[i];
             } else {
                 flag++;
             }
         }
-        
+
         pickedList = new String[pickedList.length - 1];
         pickedList = list;
-        
+
     }
-    
+
     public void addUserToPickedList(String pickedUser) {
-        
+
         String[] list = new String[pickedList.length + 1];
-        
+
         for (int i = 0; i < pickedList.length; i++) {
             list[i] = pickedList[i];
         }
-        
+
         list[list.length - 1] = pickedUser;
-        
+
         pickedList = new String[pickedList.length + 1];
         pickedList = list;
-        
+
     }
-    
+
     public void addUserToTopList(String topUser) {
-        
+
         String[] list = new String[topList.length + 1];
-        
+
         for (int i = 0; i < topList.length; i++) {
             list[i] = topList[i];
         }
-        
+
         list[list.length - 1] = topUser;
-        
+
         topList = new String[topList.length + 1];
         topList = list;
-        
+
     }
-    
+
     public String[] returnPickedList() {
-        
+
         return pickedList;
     }
-    
+
     public String[] returnTopList() {
         return topList;
     }
-    
+
     public Organizer nameStringToOrganizer(String name) {
-        
+
         String c;
         int count = 0;
         String username;
-        
+
         do {
             c = name.substring(count, count + 1);
             count++;
         } while (!c.equals("("));
-        
-        
+
         username = name.substring(count, name.length() - 1);
-       
+
         User org = null;
-        
+
         for (User u : ec.getUserRegister().getUsers()) {
-            if (username.equals(u.getUsername())) {    
+            if (username.equals(u.getUsername())) {
                 org = u;
                 break;
             }
         }
-        
+
         return new Organizer(org);
     }
 

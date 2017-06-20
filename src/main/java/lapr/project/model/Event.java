@@ -22,6 +22,7 @@ public class Event {
     private OrganizerList organizerList;
     private int availableArea;
     private List<Stand> standList;
+    private List<List<Keyword>> keywordList;
 
     public Event() {
 
@@ -179,6 +180,7 @@ public class Event {
 
     /**
      * this method adds an application to the event
+     *
      * @param a the application to be added
      */
     public void addApplication(Application a) {
@@ -216,6 +218,10 @@ public class Event {
      */
     public FAEList getFaeList() {
         return this.faeList;
+    }
+    
+    public List<List<Keyword>> getKeywordList(){
+        return this.keywordList;
     }
 
     /**
@@ -261,9 +267,10 @@ public class Event {
     public boolean isOrganizer(User u) {
 
         boolean isOrganizer = false;
-        for (Organizer o : organizerList.getOrganizadores()) {
+        for (Organizer o : organizerList.getOrganizers()) {
 
             if (o.getUserOrganizer().getUsername().equals(u.getUsername())) {
+
                 isOrganizer = true;
             }
         }
@@ -309,7 +316,7 @@ public class Event {
         List<Stand> aL = null;
         for (Stand stand : this.standList) {
             if (stand.getAvailable() == true) {
-                try{
+                try {
                     aL.add(stand);
                 } catch (NullPointerException e) {
                 }
@@ -360,6 +367,15 @@ public class Event {
         double z = Ho / (Math.sqrt((acceptanceRate1 * (1 - acceptanceRate1)) / total1) + Math.sqrt((acceptanceRate2 * (1 - acceptanceRate2)) / total2));
         return z;
     }
+    
+    public double criticalValueA1(){
+     NormalDistribution p = new NormalDistribution();
+        double a = 0.01;
+        double zc = p.inverseCumulativeProbability(1 - a);
+        return zc;
+    }
+    
+
 
     /**
      * Method that returns the decision of the test where we check if the
@@ -368,9 +384,7 @@ public class Event {
      * @return Decision(Yes or No)
      */
     public String testAcceptanceRate50a1() {
-        NormalDistribution p = new NormalDistribution();
-        double a = 0.01;
-        double zc = p.inverseCumulativeProbability(1 - a);
+        double zc =criticalValueA1();
         double z = getZUni();
         if (z > zc) {
             return "Yes";
@@ -437,6 +451,20 @@ public class Event {
         } else {
             return "No";
         }
+    }
+
+    public boolean checkIFUserIsFAE(User u) {
+        if (Event.this.isFAE(u)) {
+            return true;
+        }
+        return false;
+    }
+    
+    public boolean checkIFUserIsOrganizer(User u) {
+        if (Event.this.isOrganizer(u)) {
+            return true;
+        }
+        return false;
     }
 
 }
