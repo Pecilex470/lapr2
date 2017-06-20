@@ -5,9 +5,8 @@
  */
 package lapr.project.controller;
 
-import lapr.project.model.Event;
 import lapr.project.model.EventCenter;
-import lapr.project.model.User;
+import lapr.project.model.register.FAEList;
 
 /**
  *
@@ -28,5 +27,5 @@ public class UC2_Controller {
     public UC2_Controller(EventCenter ec) {
         this.ec = ec;
     }
-
+    
 }

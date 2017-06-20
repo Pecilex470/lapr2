@@ -32,14 +32,21 @@ public class UC2_UI extends javax.swing.JFrame {
     private UC2_Controller c;
 
     /**
+     * The user that is using this UC right now
+     */
+    private User u;
+
+    /**
      * Creates new form UC2_UI
      *
      * @param ec the instance of the eveentcenter
+     * @param u the user using the window
      */
-    public UC2_UI(EventCenter ec) {
+    public UC2_UI(EventCenter ec, User u) {
         initComponents();
         this.ec = ec;
         this.c = new UC2_Controller(ec);
+        this.u = u;
         this.setVisible(true);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
@@ -53,17 +60,17 @@ public class UC2_UI extends javax.swing.JFrame {
         });
     }
 
-//    private String[] eventList() {
-//
-//        String[] list = new String[ec.getEventRegister().getEventList()).size()];
-//        int cont = 0;
-//        for (Event e : ec.getEventRegister().getEventList()) {
-//            String name = e.getTitle();
-//            list[cont] = name;
-//            cont++;
-//        }
-//        return list;
-//    }
+    private String[] eventList() {
+
+        String[] list = new String[ec.getEventRegister().getEventsWhereUserIsOrganizer(u).size()];
+        int cont = 0;
+        for (Event e : ec.getEventRegister().getEventsWhereUserIsOrganizer(u)) {
+            String name = e.getTitle();
+            list[cont] = name;
+            cont++;
+        }
+        return list;
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -97,7 +104,7 @@ public class UC2_UI extends javax.swing.JFrame {
 
         eventList.setModel(new javax.swing.AbstractListModel<String>() {
             static final long serialVersionUID = -3387516993124229948L;
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            String[] strings = eventList();
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
