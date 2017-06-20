@@ -8,19 +8,17 @@ package lapr.project.ui;
 import java.awt.Color;
 import java.util.concurrent.ThreadLocalRandom;
 import javax.swing.JOptionPane;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
 import lapr.project.controller.UC6_Controller;
 import lapr.project.model.Encryption;
 import lapr.project.model.EventCenter;
-import lapr.project.model.Representative;
 
 /**
  *
  * @author Pedro
  */
-@SuppressWarnings("serial")
 public class UC6_UI extends javax.swing.JDialog {
+    
+    static final long serialVersionUID = -3387516993124229948L;
 
     private EventCenter ec;
     private UC6_Controller c;

@@ -6,6 +6,7 @@ import lapr.project.controller.UC6_Controller;
 import lapr.project.model.*;
 import lapr.project.model.register.*;
 import lapr.project.utils.Date;
+import lapr.project.utils.ImportEventData;
 
 /**
  * @author Nuno Bettencourt <nmb@isep.ipp.pt> on 24/05/16.
@@ -15,6 +16,7 @@ public class Main {
     /**
      * Private constructor to hide implicit public one.
      */
+
     private Main() {
 
     }
@@ -24,6 +26,7 @@ public class Main {
     private static final String ADMIN1 = "admin";
     private static final String ADMIN2 = "sicked";
     private static final String KEYWORD = "zebras";
+
 
     /**
      * @param args the command line arguments
@@ -66,8 +69,8 @@ public class Main {
         
         ///////// EVENT 3 //////////////////////////////////////////
         
-       // ImportEventData impEvent = new ImportEventData(); 
-       // eventRegister.getEventList().add(impEvent.readEvent());
+        ImportEventData impEvent = new ImportEventData(); 
+        eventRegister.getEventList().add(impEvent.readEvent());
         
          /////////////////////////////////////////////////////////////
         

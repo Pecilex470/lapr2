@@ -15,10 +15,10 @@ public class FAE {
      * Creates an FAE instance, receiving a user that will perform the duty of
      * FAE.
      *
-     * @param use User that will perform the role of FAE
+     * @param user user that will perform the role of FAE
      */
-    public FAE(User use) {
-        userFAE = use;
+    public FAE(User user) {
+        userFAE = user;
     }
 
     public FAE(){
@@ -27,7 +27,7 @@ public class FAE {
     /**
      * @return User that received the role of FAE of a certain event.
      */
-    public User getUtilizadorFAE() {
+    public User getUserFAE() {
         return userFAE;
     }
 

@@ -14,7 +14,6 @@ import lapr.project.model.Application;
 import lapr.project.model.Event;
 import lapr.project.model.EventCenter;
 import lapr.project.model.Keyword;
-import lapr.project.model.Stand;
 import lapr.project.model.User;
 
 /**

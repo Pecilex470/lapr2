@@ -19,6 +19,7 @@ public class UC44_Controller {
    private List<Event> events;
    
    
+   
    /**
     *   
    * Creates an instance of UC44_Controller receiving Events Center to be considered for the management and organization of

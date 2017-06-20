@@ -25,11 +25,12 @@ public class UC44_1_UI extends javax.swing.JFrame {
      
     static final long serialVersionUID = -3387516993124229948L;
     private UC44_Controller c;
-     private Event eventSelected;
+     private List<Event> eventSelected = new ArrayList<>();
      private EventCenter ec;
      private User u;
      private String[] pickedList = new String[0];
      private String[] topList;
+     private Double[] a;
 
       
 
@@ -75,12 +76,12 @@ public class UC44_1_UI extends javax.swing.JFrame {
         jFrame1 = new javax.swing.JFrame();
         jScrollPane1 = new javax.swing.JScrollPane();
         eventList = new javax.swing.JList<>();
-        jTextField1 = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         pickedEventList = new javax.swing.JList<>();
         pickButton = new javax.swing.JButton();
         unpickButton = new javax.swing.JButton();
         Continue = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -130,13 +131,6 @@ public class UC44_1_UI extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(eventList);
 
-        jTextField1.setText("Pick the Events to show a a keywords frequency table for each event");
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
-            }
-        });
-
         pickedEventList.setModel(new javax.swing.AbstractListModel<String>() {
             static final long serialVersionUID = -3387516993124229948L;
             String[] strings = {""};
@@ -167,38 +161,39 @@ public class UC44_1_UI extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setText("Pick the Events to show a a keywords frequency table for each event");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 342, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(84, 84, 84)
-                                .addComponent(pickButton)
-                                .addGap(62, 62, 62)
-                                .addComponent(unpickButton))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(54, 54, 54)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(Continue)
                 .addGap(32, 32, 32))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(84, 84, 84)
+                        .addComponent(pickButton)
+                        .addGap(62, 62, 62)
+                        .addComponent(unpickButton))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(54, 54, 54)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel1)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(8, 8, 8)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addGap(21, 21, 21)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -213,10 +208,6 @@ public class UC44_1_UI extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void pickButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pickButtonActionPerformed
         String event = eventList.getSelectedValue();
@@ -238,7 +229,7 @@ public class UC44_1_UI extends javax.swing.JFrame {
         
         addEventToPickedList(event);
         
-        double a = Double.parseDouble(JOptionPane.showInputDialog(UC44_1_UI.this, "Enter the significance level [1 or 5]"));
+        double a = Double.parseDouble(JOptionPane.showInputDialog(UC44_1_UI.this, "Enter the significance level [0.01 or 0.05]"));
         
         pickedList[pickedList.length-1] += " - " + a;
         
@@ -300,15 +291,19 @@ public class UC44_1_UI extends javax.swing.JFrame {
     }//GEN-LAST:event_unpickButtonActionPerformed
 
     private void ContinueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ContinueActionPerformed
-      List<Event> eventList = new ArrayList<>();
+
       for(int i =0; i<pickedList.length;i++){
-        eventList.add(titleStringToEvent(pickedList[i]));
+         String[] part=pickedList[i].split("-");
+         String part1 = part[0];
+          System.out.println(part1);
+         eventSelected.add(titleStringToEvent(part1));
       }
+       
       
-      if(eventList.isEmpty()){
+      if(eventList==null){
        JOptionPane.showMessageDialog(UC44_1_UI.this, "Please select events", "Error", JOptionPane.OK_OPTION);
       }else{
-        new UC44_2_UI(ec);
+        new UC44_2_UI(ec,eventSelected,pickedList);
       }
       
      
@@ -330,9 +325,12 @@ public class UC44_1_UI extends javax.swing.JFrame {
         int cont = 0;
         for (Event e : ec.getEventRegister().getEventList()) {
             String title = e.getTitle();
-            list[cont] += title;
+            list[cont] = title;
             cont++;
         }
+        
+        topList = list;
+        
         return list;
     }
     
@@ -417,28 +415,25 @@ public class UC44_1_UI extends javax.swing.JFrame {
     
     public Event titleStringToEvent(String title) {
         
-        String c;
-        int count = 0;
-        String title1;
-        
-        do {
-            c = title.substring(count, count + 1);
-            count++;
-        } while (!c.equals("("));
-        
-        
-        title1 = title.substring(count, title.length() - 1);
-       
-        Event eve = null;
-        
+        String c =title;
+        Event eve= null;
         for (Event e : ec.getEventRegister().getEventList()) {
-            if (title1.equals(e.getTitle())) {    
+            if (c.equals(e.getTitle())) {    
                 eve = e;
                 break;
             }
         }
         
         return eve;
+    }
+    
+    public void getA(){
+       for(int i=0;i<pickedList.length;i++){
+           String[] part=pickedList[i].split("-");
+           String part2 = part[1];
+           a[i]= Double.parseDouble(part2);
+       }
+       
     }
 
     
@@ -448,11 +443,11 @@ public class UC44_1_UI extends javax.swing.JFrame {
     private javax.swing.JButton Continue;
     private javax.swing.JList<String> eventList;
     private javax.swing.JFrame jFrame1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JButton pickButton;
     private javax.swing.JList<String> pickedEventList;
     private javax.swing.JButton unpickButton;

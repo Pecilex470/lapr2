@@ -233,7 +233,7 @@ public class Event {
         FAE f = null;
 
         for (FAE fae : faeList.getFAEList()) {
-            if (fae.getUtilizadorFAE().getUsername().equals(u.getUsername())) {
+            if (fae.getUserFAE().getUsername().equals(u.getUsername())) {
                 f = fae;
             }
         }
@@ -250,7 +250,7 @@ public class Event {
 
         boolean isFAE = false;
         for (FAE f : faeList.getFAEList()) {
-            if (f.getUtilizadorFAE().getUsername().equals(u.getUsername())) {
+            if (f.getUserFAE().getUsername().equals(u.getUsername())) {
                 isFAE = true;
             }
         }
@@ -367,11 +367,11 @@ public class Event {
         double z = Ho / (Math.sqrt((acceptanceRate1 * (1 - acceptanceRate1)) / total1) + Math.sqrt((acceptanceRate2 * (1 - acceptanceRate2)) / total2));
         return z;
     }
-    
-    public double criticalValueA1(){
+   
+    public double criticalValue(String a){
      NormalDistribution p = new NormalDistribution();
-        double a = 0.01;
-        double zc = p.inverseCumulativeProbability(1 - a);
+        double sv = Double.parseDouble(a);
+        double zc = p.inverseCumulativeProbability(1 - sv);
         return zc;
     }
     
@@ -379,30 +379,12 @@ public class Event {
 
     /**
      * Method that returns the decision of the test where we check if the
-     * acceptance rate is over 50% with a significance level equal to 1%.
+     * acceptance rate is over 50%.
      *
      * @return Decision(Yes or No)
      */
-    public String testAcceptanceRate50a1() {
-        double zc =criticalValueA1();
-        double z = getZUni();
-        if (z > zc) {
-            return "Yes";
-        } else {
-            return "No";
-        }
-    }
-
-    /**
-     * Method that returns the decision of the test where we check if the
-     * acceptance rate is over 50% with a significance level equal to 5%.
-     *
-     * @return Decision(Yes or No)
-     */
-    public String testAcceptanceRate50a5() {
-        NormalDistribution p = new NormalDistribution();
-        double a = 0.05;
-        double zc = p.inverseCumulativeProbability(1 - a);
+    public String testAcceptanceRate50(String a) {
+        double zc =criticalValue(a);
         double z = getZUni();
         if (z > zc) {
             return "Yes";
@@ -453,6 +435,14 @@ public class Event {
         }
     }
 
+
+public void setFAEList(FAEList faelist){
+    this.faeList = faelist;
+}
+
+
+
+
     public boolean checkIFUserIsFAE(User u) {
         if (Event.this.isFAE(u)) {
             return true;
@@ -466,5 +456,6 @@ public class Event {
         }
         return false;
     }
+
 
 }

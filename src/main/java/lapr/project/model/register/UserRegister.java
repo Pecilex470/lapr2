@@ -34,6 +34,9 @@ public class UserRegister {
         this.users = users;
     }
 
+    public UserRegister(){
+        
+    }
     /**
      * @return List that contains all the users from a specific event center.
      */
@@ -119,5 +122,9 @@ public class UserRegister {
             }
         }
         return false;
+    }
+    
+    public void setUserList(List<User> userL){
+        this.users=userL;
     }
 }

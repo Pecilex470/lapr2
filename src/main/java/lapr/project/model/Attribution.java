@@ -45,4 +45,12 @@ public class Attribution {
     public void setUser(String username){
         this.faeUsername=username;
     }
+    
+    public void setEvaluation(Evaluation eva){
+        this.e=eva;
+    }
+    
+    public void setApplication(Application app){
+        this.a=app;
+    }
 }
