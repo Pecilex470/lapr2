@@ -16,9 +16,9 @@ public class Main {
     /**
      * Private constructor to hide implicit public one.
      */
-    private Main() {
-
-    }
+//    private Main() {
+//
+//    }
 
     /**
      * @param args the command line arguments

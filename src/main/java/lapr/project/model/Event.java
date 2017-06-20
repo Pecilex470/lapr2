@@ -414,7 +414,9 @@ public class Event {
         }
     }
 
-
+public void setFAEList(FAEList faelist){
+    this.faeList = faelist;
+}
 
 
 

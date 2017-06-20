@@ -273,4 +273,6 @@ public class Application implements Importable<Application>, Exportable {
     public void setInvitesQuantity(int invitesQuantity){
         this.invitesQuantity=invitesQuantity;
     }
+    
+ 
 }
