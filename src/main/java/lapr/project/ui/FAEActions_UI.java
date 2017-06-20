@@ -8,6 +8,8 @@ package lapr.project.ui;
 import java.awt.Font;
 import javax.swing.JOptionPane;
 import static javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE;
+import lapr.project.controller.UC4_Controller;
+import lapr.project.model.Event;
 import lapr.project.model.EventCenter;
 import lapr.project.model.User;
 
@@ -20,13 +22,17 @@ public class FAEActions_UI extends javax.swing.JFrame {
     static final long serialVersionUID = 42L;
     EventCenter ec;
     User u;
+    UC4_Controller c;
     
     /**
      * Creates new form FAEActions
      */
     public FAEActions_UI(EventCenter ec, User u) {
+        
         this.ec = ec;
         this.u = u;
+        c = new UC4_Controller(ec, u);
+        
         initComponents();
         this.setVisible(true);
         setLocationRelativeTo(null);
@@ -57,19 +63,19 @@ public class FAEActions_UI extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        decision = new javax.swing.JComboBox<>();
+        decisionUI = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        quantity = new javax.swing.JComboBox<>();
+        quantityUI = new javax.swing.JComboBox<>();
         jLabel7 = new javax.swing.JLabel();
-        adequancy = new javax.swing.JComboBox<>();
-        knowledge = new javax.swing.JComboBox<>();
-        overall = new javax.swing.JComboBox<>();
+        adequancyUI = new javax.swing.JComboBox<>();
+        knowledgeUI = new javax.swing.JComboBox<>();
+        overallUI = new javax.swing.JComboBox<>();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        justificationUI = new javax.swing.JTextArea();
         decideButton = new javax.swing.JButton();
         backButton = new javax.swing.JButton();
 
@@ -80,7 +86,7 @@ public class FAEActions_UI extends javax.swing.JFrame {
 
         listApplications.setModel(new javax.swing.AbstractListModel<String>() {
             static final long serialVersionUID = 42L;
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            String[] strings = {""};//applicationsAssigned();
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
@@ -92,21 +98,21 @@ public class FAEActions_UI extends javax.swing.JFrame {
 
         jLabel4.setText("Decision:");
 
-        decision.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Approved", "Rejected"}));
+        decisionUI.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Approved", "Rejected"}));
 
         jLabel5.setText("Parameters [0 to 5] :");
 
         jLabel6.setText("Invitations quantity adequacy for the application");
 
-        quantity.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "1", "2", "3", "4", "5" }));
+        quantityUI.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "1", "2", "3", "4", "5" }));
 
         jLabel7.setText("Application adequacy for the event");
 
-        adequancy.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "1", "2", "3", "4", "5" }));
+        adequancyUI.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "1", "2", "3", "4", "5" }));
 
-        knowledge.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "1", "2", "3", "4", "5" }));
+        knowledgeUI.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "1", "2", "3", "4", "5" }));
 
-        overall.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "1", "2", "3", "4", "5" }));
+        overallUI.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "1", "2", "3", "4", "5" }));
 
         jLabel8.setText("FAE’s knowledge about the event topic");
 
@@ -114,11 +120,16 @@ public class FAEActions_UI extends javax.swing.JFrame {
 
         jLabel10.setText("Justification:");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane3.setViewportView(jTextArea1);
+        justificationUI.setColumns(20);
+        justificationUI.setRows(5);
+        jScrollPane3.setViewportView(justificationUI);
 
         decideButton.setText("Decide");
+        decideButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                decideButtonActionPerformed(evt);
+            }
+        });
 
         backButton.setText("Back");
 
@@ -142,25 +153,25 @@ public class FAEActions_UI extends javax.swing.JFrame {
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel4)
                                         .addGap(34, 34, 34)
-                                        .addComponent(decision, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(decisionUI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(jLabel5)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                         .addGroup(layout.createSequentialGroup()
                                             .addComponent(jLabel9)
                                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(overall, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addComponent(overallUI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                             .addComponent(jLabel8)
                                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(knowledge, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addComponent(knowledgeUI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGroup(layout.createSequentialGroup()
                                             .addComponent(jLabel7)
                                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(adequancy, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addComponent(adequancyUI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGroup(layout.createSequentialGroup()
                                             .addComponent(jLabel6)
                                             .addGap(18, 18, 18)
-                                            .addComponent(quantity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                            .addComponent(quantityUI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                                 .addGap(50, 50, 50)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel10)
@@ -185,7 +196,7 @@ public class FAEActions_UI extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(decision, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(decisionUI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel10))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -194,18 +205,18 @@ public class FAEActions_UI extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
-                            .addComponent(quantity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(quantityUI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel7)
-                            .addComponent(adequancy, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(adequancyUI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(knowledge, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(knowledgeUI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel8))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(overall, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(overallUI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel9)))
                     .addComponent(jScrollPane3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -218,12 +229,35 @@ public class FAEActions_UI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void decideButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_decideButtonActionPerformed
+
+
+    boolean decision = (((String) decisionUI.getSelectedItem()).equals("Approved") ? true : false);   
+    
+    int quatity = Integer.parseInt((String) quantityUI.getSelectedItem());
+    int adequacy = Integer.parseInt((String) adequancyUI.getSelectedItem());
+    int knowledge = Integer.parseInt((String) knowledgeUI.getSelectedItem());
+    int overall = Integer.parseInt((String) overallUI.getSelectedItem());
+    
+    String justification = justificationUI.getText();
+    
+    
+        
+        
+    }//GEN-LAST:event_decideButtonActionPerformed
+
+   // private String[] applicationsAssigned(){
+        
+        
+        
+        
+    //}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> adequancy;
+    private javax.swing.JComboBox<String> adequancyUI;
     private javax.swing.JButton backButton;
     private javax.swing.JButton decideButton;
-    private javax.swing.JComboBox<String> decision;
+    private javax.swing.JComboBox<String> decisionUI;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
@@ -237,10 +271,10 @@ public class FAEActions_UI extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JComboBox<String> knowledge;
+    private javax.swing.JTextArea justificationUI;
+    private javax.swing.JComboBox<String> knowledgeUI;
     private javax.swing.JList<String> listApplications;
-    private javax.swing.JComboBox<String> overall;
-    private javax.swing.JComboBox<String> quantity;
+    private javax.swing.JComboBox<String> overallUI;
+    private javax.swing.JComboBox<String> quantityUI;
     // End of variables declaration//GEN-END:variables
 }

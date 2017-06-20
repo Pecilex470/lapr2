@@ -7,7 +7,8 @@ package lapr.project.ui;
 
 import javax.swing.JOptionPane;
 import static javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE;
-import lapr.project.controller.UC1_Controller;
+import lapr.project.controller.UC43_Controller;
+import lapr.project.controller.UC46_Controller;
 import lapr.project.model.EventCenter;
 import lapr.project.model.User;
 
@@ -21,6 +22,8 @@ public class EventManagerActions_UI extends javax.swing.JFrame {
     
     private EventCenter ec;
     private User u;
+    private UC43_Controller uc43;
+    private UC46_Controller uc46;
 
     /**
      * Creates new form EventCenterActions_UI
@@ -30,6 +33,10 @@ public class EventManagerActions_UI extends javax.swing.JFrame {
     public EventManagerActions_UI(EventCenter ec, User u) {
         this.ec = ec;
         this.u = u;
+        uc43 = new UC43_Controller(ec);
+        uc46 = new UC46_Controller(ec);
+        
+        
         initComponents();
         this.setVisible(true);
         setLocationRelativeTo(null);
@@ -87,6 +94,11 @@ public class EventManagerActions_UI extends javax.swing.JFrame {
         });
 
         uc43Button.setText("UC43 - Show Global Acceptance Rate");
+        uc43Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                uc43ButtonActionPerformed(evt);
+            }
+        });
 
         uc44Button.setText("UC44 - Test if Event acceptance rate is over 50%");
         uc44Button.addActionListener(new java.awt.event.ActionListener() {
@@ -98,6 +110,11 @@ public class EventManagerActions_UI extends javax.swing.JFrame {
         uc45Button.setText("UC45 - Test the difference between two Events acceptance rate");
 
         uc46Button.setText("UC46 - Show a FAE mean rating");
+        uc46Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                uc46ButtonActionPerformed(evt);
+            }
+        });
 
         uc50Button.setText("UC50 - Test the difference between two FAEs mean deviations");
         uc50Button.addActionListener(new java.awt.event.ActionListener() {
@@ -208,6 +225,21 @@ public class EventManagerActions_UI extends javax.swing.JFrame {
         dispose();
         new MainWindow(u, ec);
     }//GEN-LAST:event_backButtonActionPerformed
+
+    private void uc43ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uc43ButtonActionPerformed
+        
+        JOptionPane.showMessageDialog(EventManagerActions_UI.this, uc43.getGlobalAcceptanceRate() + "% is the Global Acceptance Rate");
+    
+    }//GEN-LAST:event_uc43ButtonActionPerformed
+
+    private void uc46ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uc46ButtonActionPerformed
+        
+        String username = JOptionPane.showInputDialog(EventManagerActions_UI.this, "Enter the username of the FAE you\n want to know the mean rating of");
+        
+        uc46.getFAEMeanRating(uc46.getUserByUsername(username));
+        
+        
+    }//GEN-LAST:event_uc46ButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
