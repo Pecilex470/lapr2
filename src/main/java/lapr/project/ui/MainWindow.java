@@ -158,7 +158,7 @@ public class MainWindow extends javax.swing.JFrame {
 
         if (ec.checkIFUserIsFAE(u)) {
             dispose();
-            new FAEActions_UI(ec, u);
+//            new FAEActions_UI(ec, u);
         } else {
             JOptionPane.showMessageDialog(null, "You are not FAE in any event!");
         }

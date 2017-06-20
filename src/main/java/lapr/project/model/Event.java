@@ -233,7 +233,7 @@ public class Event {
         FAE f = null;
 
         for (FAE fae : faeList.getFAEList()) {
-            if (fae.getUtilizadorFAE().getUsername().equals(u.getUsername())) {
+            if (fae.getUserFAE().getUsername().equals(u.getUsername())) {
                 f = fae;
             }
         }
@@ -250,7 +250,7 @@ public class Event {
 
         boolean isFAE = false;
         for (FAE f : faeList.getFAEList()) {
-            if (f.getUtilizadorFAE().getUsername().equals(u.getUsername())) {
+            if (f.getUserFAE().getUsername().equals(u.getUsername())) {
                 isFAE = true;
             }
         }
