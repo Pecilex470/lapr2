@@ -309,7 +309,10 @@ public class Event {
         List<Stand> aL = null;
         for (Stand stand : this.standList) {
             if (stand.getAvailable() == true) {
-                aL.add(stand);
+                try{
+                    aL.add(stand);
+                } catch (NullPointerException e) {
+                }
             }
         }
         return aL;
