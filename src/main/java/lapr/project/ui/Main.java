@@ -61,7 +61,7 @@ public class Main {
         ///////// EVENT 2 //////////////////////////////////////////
         List<FAE> FAEListEvent2 = new ArrayList<>();
         List<Organizer> organizerListEvent2 = new ArrayList<>();
-        eventRegister.getEventList().add(new Event("EVENT2", "Porto", "a musical gathering", new Date(13, 11, 2017), new Date(14, 11, 2017), new Date(1, 11, 2017), new Date(12, 11, 2017), "exibition", new FAEList(FAEListEvent2), new OrganizerList(organizerListEvent2), 150));
+        eventRegister.getEventList().add(new Event(EVENT2, "Porto", "a musical gathering", new Date(13, 11, 2017), new Date(14, 11, 2017), new Date(1, 11, 2017), new Date(12, 11, 2017), "exibition", new FAEList(FAEListEvent2), new OrganizerList(organizerListEvent2), 150));
         /////////////////////////////////////////////////////////////
         
         ///////// EVENT 3 //////////////////////////////////////////
