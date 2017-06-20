@@ -16,6 +16,8 @@ import lapr.project.model.User;
  */
 public class OrganizerActions_UI extends javax.swing.JFrame {
     
+    static final long serialVersionUID = -3387516993124229948L;
+    
     private EventCenter ec;
     private User u;
 
@@ -135,7 +137,7 @@ public class OrganizerActions_UI extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(uc2Button)
                     .addComponent(uc20Button))
-                .addGap(56, 56, 56)
+                .addGap(50, 50, 50)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(uc22Button)
                     .addComponent(uc21Button))

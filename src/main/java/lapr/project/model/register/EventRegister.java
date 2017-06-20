@@ -58,23 +58,7 @@ public class EventRegister {
         return true;
     }
 
-    /**
-     * This method iterates all saved Events and returns a list of the events in
-     * which the user is organizer
-     *
-     * @param u teh user to check
-     * @return returns the list of the events
-     */
-    public List<Event> getEventsWhereUserIsOrganizer(User u) {
-
-        List<Event> eventsWhereUserIsOrganizer = new ArrayList<>();
-        for (Event e : events) {
-            if (e.isOrganizer(u)) {
-                eventsWhereUserIsOrganizer.add(e);
-            }
-        }
-        return eventsWhereUserIsOrganizer;
-    }
+  
 
     public Event getEventByTitle(String title) {
 
