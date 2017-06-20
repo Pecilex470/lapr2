@@ -435,6 +435,14 @@ public class Event {
         }
     }
 
+
+public void setFAEList(FAEList faelist){
+    this.faeList = faelist;
+}
+
+
+
+
     public boolean checkIFUserIsFAE(User u) {
         if (Event.this.isFAE(u)) {
             return true;
@@ -448,5 +456,6 @@ public class Event {
         }
         return false;
     }
+
 
 }

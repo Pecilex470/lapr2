@@ -6,6 +6,7 @@ import lapr.project.controller.UC6_Controller;
 import lapr.project.model.*;
 import lapr.project.model.register.*;
 import lapr.project.utils.Date;
+import lapr.project.utils.ImportEventData;
 
 /**
  * @author Nuno Bettencourt <nmb@isep.ipp.pt> on 24/05/16.
@@ -15,6 +16,7 @@ public class Main {
     /**
      * Private constructor to hide implicit public one.
      */
+
     private Main() {
 
     }
@@ -24,6 +26,7 @@ public class Main {
     private static final String ADMIN1 = "admin";
     private static final String ADMIN2 = "sicked";
     private static final String KEYWORD = "zebras";
+
 
     /**
      * @param args the command line arguments
@@ -61,13 +64,13 @@ public class Main {
         ///////// EVENT 2 //////////////////////////////////////////
         List<FAE> FAEListEvent2 = new ArrayList<>();
         List<Organizer> organizerListEvent2 = new ArrayList<>();
-        eventRegister.getEventList().add(new Event("EVENT2", "Porto", "a musical gathering", new Date(13, 11, 2017), new Date(14, 11, 2017), new Date(1, 11, 2017), new Date(12, 11, 2017), "exibition", new FAEList(FAEListEvent2), new OrganizerList(organizerListEvent2), 150));
+        eventRegister.getEventList().add(new Event(EVENT2, "Porto", "a musical gathering", new Date(13, 11, 2017), new Date(14, 11, 2017), new Date(1, 11, 2017), new Date(12, 11, 2017), "exibition", new FAEList(FAEListEvent2), new OrganizerList(organizerListEvent2), 150));
         /////////////////////////////////////////////////////////////
         
         ///////// EVENT 3 //////////////////////////////////////////
         
-       // ImportEventData impEvent = new ImportEventData(); 
-       // eventRegister.getEventList().add(impEvent.readEvent());
+        ImportEventData impEvent = new ImportEventData(); 
+        eventRegister.getEventList().add(impEvent.readEvent());
         
          /////////////////////////////////////////////////////////////
         
