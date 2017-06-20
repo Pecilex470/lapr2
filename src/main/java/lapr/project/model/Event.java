@@ -180,6 +180,7 @@ public class Event {
 
     /**
      * this method adds an application to the event
+     *
      * @param a the application to be added
      */
     public void addApplication(Application a) {
@@ -269,6 +270,7 @@ public class Event {
         for (Organizer o : organizerList.getOrganizers()) {
 
             if (o.getUserOrganizer().getUsername().equals(u.getUsername())) {
+
                 isOrganizer = true;
             }
         }
@@ -314,7 +316,7 @@ public class Event {
         List<Stand> aL = null;
         for (Stand stand : this.standList) {
             if (stand.getAvailable() == true) {
-                try{
+                try {
                     aL.add(stand);
                 } catch (NullPointerException e) {
                 }
@@ -431,6 +433,20 @@ public class Event {
         } else {
             return "No";
         }
+    }
+
+    public boolean checkIFUserIsFAE(User u) {
+        if (Event.this.isFAE(u)) {
+            return true;
+        }
+        return false;
+    }
+    
+    public boolean checkIFUserIsOrganizer(User u) {
+        if (Event.this.isOrganizer(u)) {
+            return true;
+        }
+        return false;
     }
 
 }

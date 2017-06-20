@@ -5,12 +5,16 @@
  */
 package lapr.project.ui;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 import static javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE;
 import lapr.project.controller.UC2_Controller;
 import lapr.project.model.Encryption;
 import lapr.project.model.Event;
 import lapr.project.model.EventCenter;
+import lapr.project.model.FAE;
+import lapr.project.model.Organizer;
 import lapr.project.model.User;
 
 /**
@@ -20,12 +24,12 @@ import lapr.project.model.User;
 public class UC2_UI extends javax.swing.JFrame {
 
     static final long serialVersionUID = -3387516993124229948L;
-    
+
     /**
      * The instance of the EventCenter
      */
     private EventCenter ec;
-    
+
     /**
      * The instance of the controller
      */
@@ -36,6 +40,9 @@ public class UC2_UI extends javax.swing.JFrame {
      */
     private User u;
 
+    private Event eventSelected;
+    private FAE userSelected;
+
     /**
      * Creates new form UC2_UI
      *
@@ -43,10 +50,12 @@ public class UC2_UI extends javax.swing.JFrame {
      * @param u the user using the window
      */
     public UC2_UI(EventCenter ec, User u) {
-        initComponents();
+
         this.ec = ec;
         this.c = new UC2_Controller(ec);
         this.u = u;
+
+        initComponents();
         this.setVisible(true);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
@@ -55,6 +64,7 @@ public class UC2_UI extends javax.swing.JFrame {
             public void windowClosing(java.awt.event.WindowEvent windowEvent) {
                 if (JOptionPane.showConfirmDialog(UC2_UI.this, "Do you wish to exit without saving?", "Close", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
                     dispose();
+                    new OrganizerActions_UI(ec, u);
                 }
             }
         });
@@ -62,9 +72,9 @@ public class UC2_UI extends javax.swing.JFrame {
 
     private String[] eventList() {
 
-        String[] list = new String[ec.getEventRegister().getEventsWhereUserIsOrganizer(u).size()];
+        String[] list = new String[ec.getEventsWhereUserIsOrganizer(u).size()];
         int cont = 0;
-        for (Event e : ec.getEventRegister().getEventsWhereUserIsOrganizer(u)) {
+        for (Event e : ec.getEventsWhereUserIsOrganizer(u)) {
             list[cont] = e.getTitle();
             cont++;
         }
@@ -98,9 +108,14 @@ public class UC2_UI extends javax.swing.JFrame {
 
         userList.setModel(new javax.swing.AbstractListModel<String>() {
             static final long serialVersionUID = -3387516993124229948L;
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            String[] strings = { "|| SELECT EVENT ||" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
+        });
+        userList.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                userListMouseClicked(evt);
+            }
         });
         jScrollPane2.setViewportView(userList);
 
@@ -110,9 +125,19 @@ public class UC2_UI extends javax.swing.JFrame {
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
+        eventList.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                eventListMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(eventList);
 
         defineButton.setText("Define FAE");
+        defineButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                defineButtonActionPerformed(evt);
+            }
+        });
 
         backButton.setText("Back");
         backButton.addActionListener(new java.awt.event.ActionListener() {
@@ -135,8 +160,8 @@ public class UC2_UI extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(41, 41, 41)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(30, 30, 30)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3))))
@@ -168,6 +193,107 @@ public class UC2_UI extends javax.swing.JFrame {
         new OrganizerActions_UI(ec, u);
     }//GEN-LAST:event_backButtonActionPerformed
 
+    private void eventListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_eventListMouseClicked
+
+        this.eventSelected = ec.getEventRegister().getEventList().get(eventList.getSelectedIndex());
+        String[] list = modelList();
+
+        userList.setModel(new javax.swing.AbstractListModel<String>() {
+            static final long serialVersionUID = -3387516993124229948L;
+            String[] strings = list;
+
+            public int getSize() {
+                return list.length;
+            }
+
+            public String getElementAt(int i) {
+                return list[i];
+            }
+        });
+    }//GEN-LAST:event_eventListMouseClicked
+
+    private void defineButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_defineButtonActionPerformed
+
+        if (JOptionPane.showConfirmDialog(UC2_UI.this, "Do you wish to define this user as FAE?", "Define", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
+            eventSelected.getFaeList().getFAEList().add(userSelected);
+            String[] list = modelList();
+            
+            userList.setModel(new javax.swing.AbstractListModel<String>() {
+            static final long serialVersionUID = -3387516993124229948L;
+            String[] strings = list;
+
+            public int getSize() {
+                return list.length;
+            }
+
+            public String getElementAt(int i) {
+                return list[i];
+            }
+        });
+        }
+    }//GEN-LAST:event_defineButtonActionPerformed
+    /**
+     * This method gets the list of users that aren't FAE's or Organizers of
+     * this Event
+     *
+     * @return returns the array of Strings
+     */
+    private String[] modelList() {
+        List<User> users = new ArrayList<>();
+
+        for (User user : ec.getUserRegister().getUsers()) {
+            if (!(eventSelected.checkIFUserIsFAE(user)) && (eventSelected.checkIFUserIsOrganizer(user))) {
+                users.add(user);
+            }
+        }
+
+        String[] list = new String[users.size()];
+
+        for (int i = 0; i < list.length; i++) {
+            String name = Encryption.deEncryptPassword(users.get(i).getName(), ec.getEncryptionRegister().getEncryptionByUser(users.get(i)).getShift(), Encryption.ABC);
+            name = Encryption.deEncryptData(name, ec.getEncryptionRegister().getEncryptionByUser(users.get(i)).getKeyword());
+            name = name + " (" + users.get(i).getUsername() + ")";
+            list[i] = name;
+        }
+        return list;
+    }
+
+    private void userListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_userListMouseClicked
+
+        this.userSelected = nameStringToFae(userList.getSelectedValue());
+    }//GEN-LAST:event_userListMouseClicked
+
+    /**
+     * This method returns the User that is selected in the user List in the
+     * form of FAE
+     *
+     * @param name the name displayed in the JList
+     * @return returns the new instance of FAE
+     */
+    public FAE nameStringToFae(String name) {
+
+        String c;
+        int count = 0;
+        String username;
+
+        do {
+            c = name.substring(count, count + 1);
+            count++;
+        } while (!c.equals("("));
+
+        username = name.substring(count, name.length() - 1);
+
+        User org = null;
+
+        for (User u : ec.getUserRegister().getUsers()) {
+            if (username.equals(u.getUsername())) {
+                org = u;
+                break;
+            }
+        }
+
+        return new FAE(org);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backButton;

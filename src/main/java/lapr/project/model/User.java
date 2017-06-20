@@ -37,11 +37,6 @@ public class User {
     private boolean isEventManager;
 
     /**
-     * Checks if the user is an Oranizer
-     */
-    private boolean isOrganizer;
-
-    /**
      * Checks if the user is a Representative
      */
     private boolean isRepresentative;
