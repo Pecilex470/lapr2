@@ -429,9 +429,9 @@ public class UC1_UI extends javax.swing.JDialog {
     private void confirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmButtonActionPerformed
         List<FAE> faelist = new ArrayList<>();
         List<Organizer> organizerList = new ArrayList<>();
-
-        organizerList.add(nameStringToOrganizer(pickedList[0]));
-        organizerList.add(nameStringToOrganizer(pickedList[1]));
+        for(int i=0;i<pickedList.length;i++){
+        organizerList.add(nameStringToOrganizer(pickedList[i]));
+        }
         
         if (!(titleTextField.getText().equals("") || locationTextField.getText().equals("") || descriptionTextArea.getText().equals("") || startDateDay.getText().equals("") || startDateMonth.getText().equals("") || startDateYear.getText().equals("") || endDateDay.getText().equals("") || endDateMonth.getText().equals("") || endDateYear.getText().equals("") || (submissionStartDateDay.getText().equals("") || submissionStartDateMonth.getText().equals("") || submissionStartDateYear.getText().equals("") || submissionEndDateDay.getText().equals("") || submissionEndDateMonth.getText().equals("") || submissionEndDateYear.getText().equals("") || availableArea.getText().equals("")))) {
             if (c.validateEventData(titleTextField.getText(), locationTextField.getText(), descriptionTextArea.getText(), assembleDate(startDateDay.getText(), startDateMonth.getText(), startDateYear.getText()), assembleDate(endDateDay.getText(), endDateMonth.getText(), endDateYear.getText()), assembleDate(submissionStartDateDay.getText(), submissionStartDateMonth.getText(), submissionStartDateYear.getText()), assembleDate(submissionEndDateDay.getText(), submissionEndDateMonth.getText(), submissionEndDateYear.getText()), (String) eventTypeComboBox.getSelectedItem(), new FAEList(faelist), new OrganizerList(organizerList), Integer.parseInt(availableArea.getText()))) {
@@ -462,11 +462,6 @@ public class UC1_UI extends javax.swing.JDialog {
     private void eventTypeComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eventTypeComboBoxActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_eventTypeComboBoxActionPerformed
-
-    private void userListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_userListMouseClicked
-        
-
-    }//GEN-LAST:event_userListMouseClicked
 
     private void pickButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pickButtonActionPerformed
         
@@ -550,6 +545,10 @@ public class UC1_UI extends javax.swing.JDialog {
             dispose();
         }
     }//GEN-LAST:event_cancelButtonActionPerformed
+
+    private void userListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_userListMouseClicked
+
+    }//GEN-LAST:event_userListMouseClicked
 
     /**
      * method that retrieves the full list of registered users to allow the
