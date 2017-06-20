@@ -27,7 +27,7 @@ public class OrganizerList {
     /**
      * @return  List that contains all the FAE from a specific event.
      */
-    public List<Organizer> getOrganizadores() {
+    public List<Organizer> getOrganizers() {
         return organizers;
     }
     

@@ -27,7 +27,7 @@ public class Main {
 
         EventCenter ec = createInitialComponents();
         createEventManager(ec);
-        
+        addOrganizers(ec);
         new InitialWindow_UI(ec);
 
     }
@@ -81,5 +81,14 @@ public class Main {
         c.registerUser(c.twoLayerEncription("Luís Azevedo", 6, "zebras", Encryption.ABC), c.twoLayerEncription("luis@gmail.com", 6, "zebras", Encryption.ABC), "sicked", c.encryptPassword("Pm-10", 6, Encryption.ABC), true, true);
         c.addEncryption(6, "sicked", "zebras");
     }
-
+    
+    public static void addOrganizers(EventCenter ec) {
+        ec.getEventRegister().getEventByTitle("Bolo do Caco Festival").getOrganizerList().getOrganizers().add(new Organizer(ec.getUserRegister().getUserByUsername("admin")));
+        ec.getEventRegister().getEventByTitle("Bolo do Caco Festival").getOrganizerList().getOrganizers().add(new Organizer(ec.getUserRegister().getUserByUsername("sicked")));
+    
+        ec.getEventRegister().getEventByTitle("Guns and Roses Festival").getOrganizerList().getOrganizers().add(new Organizer(ec.getUserRegister().getUserByUsername("admin")));
+        ec.getEventRegister().getEventByTitle("Guns and Roses Festival").getOrganizerList().getOrganizers().add(new Organizer(ec.getUserRegister().getUserByUsername("sicked")));
+    
+    }
+    
 }

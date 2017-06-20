@@ -261,7 +261,7 @@ public class Event {
     public boolean isOrganizer(User u) {
 
         boolean isOrganizer = false;
-        for (Organizer o : organizerList.getOrganizadores()) {
+        for (Organizer o : organizerList.getOrganizers()) {
 
             if (o.getUserOrganizer().getUsername().equals(u.getUsername())) {
                 isOrganizer = true;
