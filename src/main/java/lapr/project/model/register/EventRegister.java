@@ -45,7 +45,6 @@ public class EventRegister {
 //            if (event.getSubmissionStartDate())
 //        }
 //    }
-    
     /**
      * sets the event list from an existing list
      *
@@ -75,6 +74,16 @@ public class EventRegister {
             }
         }
         return eventsWhereUserIsOrganizer;
+    }
+
+    public Event getEventByTitle(String title) {
+
+        for (Event e : events) {
+            if (e.getTitle().equals(title)) {
+                return e;
+            }
+        }
+        return null;
     }
 
 }
