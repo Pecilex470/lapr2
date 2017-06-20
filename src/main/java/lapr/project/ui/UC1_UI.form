@@ -124,7 +124,7 @@
                   <Group type="102" alignment="1" attributes="0">
                       <Component id="pickButton" min="-2" pref="69" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
-                      <Component id="clear" min="-2" max="-2" attributes="0"/>
+                      <Component id="unpickButton" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="76" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -147,7 +147,7 @@
                               <Component id="jScrollPane4" min="-2" pref="168" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="clear" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="unpickButton" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="pickButton" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
@@ -417,7 +417,7 @@
         <Component class="javax.swing.JList" name="userList">
           <Properties>
             <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-              <Connection code="new javax.swing.AbstractListModel&lt;String&gt;() {&#xa;static final long serialVersionUID = -3387516993124229948L;    &#xa;String[] strings = userList();&#xa;    public int getSize() { return strings.length; }&#xa;    public String getElementAt(int i) { return strings[i]; }&#xa;}" type="code"/>
+              <Connection code="new javax.swing.AbstractListModel&lt;String&gt;() {&#xa;static final long serialVersionUID = -3387516993124229948L;    &#xa;String[] strings = initialUserList();&#xa;    public int getSize() { return strings.length; }&#xa;    public String getElementAt(int i) { return strings[i]; }&#xa;}" type="code"/>
             </Property>
           </Properties>
           <Events>
@@ -429,12 +429,12 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JButton" name="clear">
+    <Component class="javax.swing.JButton" name="unpickButton">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Clear"/>
+        <Property name="text" type="java.lang.String" value="Unpick"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="clearActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="unpickButtonActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="pickButton">
@@ -474,7 +474,7 @@
             <Component class="javax.swing.JList" name="pickedUserList">
               <Properties>
                 <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="new javax.swing.AbstractListModel&lt;String&gt;() {&#xa;    static final long serialVersionUID = -3387516993124229948L;&#xa;String[] strings = {&quot;..........&quot;};&#xa;    public int getSize() { return strings.length; }&#xa;    public String getElementAt(int i) { return strings[i]; }&#xa;}" type="code"/>
+                  <Connection code="new javax.swing.AbstractListModel&lt;String&gt;() {&#xa;static final long serialVersionUID = -3387516993124229948L;   &#xa;String[] strings = {&quot;&quot;};&#xa;    public int getSize() { return strings.length; }&#xa;    public String getElementAt(int i) { return strings[i]; }&#xa;}" type="code"/>
                 </Property>
               </Properties>
               <AuxValues>

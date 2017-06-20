@@ -8,6 +8,7 @@ package lapr.project.model.register;
 import java.util.ArrayList;
 import java.util.List;
 import lapr.project.model.Event;
+import lapr.project.model.User;
 import lapr.project.utils.Date;
 
 /**
@@ -44,17 +45,29 @@ public class EventRegister {
 //            if (event.getSubmissionStartDate())
 //        }
 //    }
-    
     /**
      * sets the event list from an existing list
+     *
      * @param el existing list that is received
      */
-    public void setEventList(List<Event> el){
+    public void setEventList(List<Event> el) {
         this.events = el;
     }
 
     public boolean validateEventData(String title, String location, String description, Date startDate, Date endDate, Date submissionStartDate, Date submissionEndDate, String eventType, FAEList fl, OrganizerList ol, int availableArea) {
         return true;
     }
+
   
+
+    public Event getEventByTitle(String title) {
+
+        for (Event e : events) {
+            if (e.getTitle().equals(title)) {
+                return e;
+            }
+        }
+        return null;
+    }
+
 }

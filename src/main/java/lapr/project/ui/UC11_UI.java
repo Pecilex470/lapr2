@@ -96,6 +96,8 @@ public class UC11_UI extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         maxAreaAvailableStand = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        nInvites = new javax.swing.JTextField();
 
         jMenuItem1.setText("jMenuItem1");
 
@@ -197,11 +199,13 @@ public class UC11_UI extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 12, Short.MAX_VALUE))
+                .addGap(0, 25, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 384, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 421, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         jLabel8.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
@@ -232,6 +236,8 @@ public class UC11_UI extends javax.swing.JFrame {
 
         maxAreaAvailableStand.setText("100");
 
+        jLabel7.setText("Number of Invites:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -247,15 +253,15 @@ public class UC11_UI extends javax.swing.JFrame {
                         .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(12, 12, 12))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel5))
-                                .addGap(18, 18, 18))))
+                                .addGap(34, 34, 34)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING)))
+                            .addComponent(jLabel7))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel8)
                         .addGap(0, 0, Short.MAX_VALUE)))
@@ -291,7 +297,8 @@ public class UC11_UI extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(removeButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(changeButton)))
+                        .addComponent(changeButton))
+                    .addComponent(nInvites, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(36, 36, 36))
         );
         layout.setVerticalGroup(
@@ -303,8 +310,7 @@ public class UC11_UI extends javax.swing.JFrame {
                     .addComponent(jLabel8))
                 .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 384, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addGroup(layout.createSequentialGroup()
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(jLabel2)
@@ -335,13 +341,18 @@ public class UC11_UI extends javax.swing.JFrame {
                                 .addGroup(layout.createSequentialGroup()
                                     .addGap(26, 26, 26)
                                     .addComponent(jLabel5)))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(nInvites, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel7))
+                            .addGap(29, 29, 29)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(changeButton)
                                 .addComponent(backButton)
-                                .addComponent(removeButton))))
-                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(38, Short.MAX_VALUE))
+                                .addComponent(removeButton)))
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 421, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         pack();
@@ -371,7 +382,7 @@ public class UC11_UI extends javax.swing.JFrame {
                     }
                 }
 
-                c.changeApplication(c.getApplicationsFromThisUserInThisEvent(u, c.getEventsWhereRepresentativeHasApplications(u).get(listEvent.getSelectedIndex())).get(listApplication.getSelectedIndex()), description.getText(), keywordList, companyNameTextField.getText(), new Stand(Integer.parseInt(standArea.getText()), ""), u);
+                c.changeApplication(c.getApplicationsFromThisUserInThisEvent(u, c.getEventsWhereRepresentativeHasApplications(u).get(listEvent.getSelectedIndex())).get(listApplication.getSelectedIndex()), description.getText(), keywordList, companyNameTextField.getText(), u, Integer.parseInt(standArea.getText()), Integer.parseInt(nInvites.getText()));
 
                 JOptionPane.showMessageDialog(UC11_UI.this, "Application Changed", "Information", JOptionPane.INFORMATION_MESSAGE);
 
@@ -418,24 +429,25 @@ public class UC11_UI extends javax.swing.JFrame {
     }//GEN-LAST:event_companyNameTextFieldActionPerformed
 
     private void listApplicationMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listApplicationMouseClicked
-  
+
         this.selectedApplication = c.getApplicationsFromThisUserInThisEvent(u, selectedEvent).get(listApplication.getSelectedIndex());
 
         companyNameTextField.setText(selectedApplication.getCompanyName());
-        standArea.setText("" + selectedApplication.getStand().getArea());
+        standArea.setText("" + selectedApplication.getBoothArea());
         keyword1.setText(selectedApplication.getKeywordList().get(0).getValue());
         keyword2.setText(selectedApplication.getKeywordList().get(1).getValue());
         keyword3.setText(selectedApplication.getKeywordList().get(2).getValue());
         keyword4.setText(selectedApplication.getKeywordList().get(3).getValue());
         keyword5.setText(selectedApplication.getKeywordList().get(4).getValue());
         description.setText(selectedApplication.getDescription());
+        nInvites.setText("" + selectedApplication.getInvitesQuantity());
     }//GEN-LAST:event_listApplicationMouseClicked
 
     private void removeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeButtonActionPerformed
 
         if (JOptionPane.showConfirmDialog(UC11_UI.this, "Do you really want to remove this application?", "Confirmation", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
             c.removeApplication(selectedEvent, selectedApplication);
-            
+
             listApplication.setModel(new javax.swing.AbstractListModel<String>() {
                 static final long serialVersionUID = -3387516993124229948L;
                 String[] strings = {"|| SELECT EVENT ||"};
@@ -448,10 +460,10 @@ public class UC11_UI extends javax.swing.JFrame {
                     return strings[i];
                 }
             });
-            
+
             cleanTextFields();
             JOptionPane.showMessageDialog(UC11_UI.this, "Application Removed", "Information", JOptionPane.INFORMATION_MESSAGE);
-            
+
         }
 
     }//GEN-LAST:event_removeButtonActionPerformed
@@ -515,9 +527,9 @@ public class UC11_UI extends javax.swing.JFrame {
         return applicationList;
 
     }
-    
-    public void cleanTextFields(){
-        
+
+    public void cleanTextFields() {
+
         companyNameTextField.setText("");
         standArea.setText("");
         keyword1.setText("");
@@ -526,7 +538,8 @@ public class UC11_UI extends javax.swing.JFrame {
         keyword4.setText("");
         keyword5.setText("");
         description.setText("");
-        
+        nInvites.setText("");
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -542,6 +555,7 @@ public class UC11_UI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JMenuItem jMenuItem1;
@@ -559,6 +573,7 @@ public class UC11_UI extends javax.swing.JFrame {
     private javax.swing.JList<String> listApplication;
     private javax.swing.JList<String> listEvent;
     private javax.swing.JLabel maxAreaAvailableStand;
+    private javax.swing.JTextField nInvites;
     private javax.swing.JButton removeButton;
     private javax.swing.JTextField standArea;
     // End of variables declaration//GEN-END:variables

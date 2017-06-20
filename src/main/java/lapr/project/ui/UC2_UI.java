@@ -5,17 +5,80 @@
  */
 package lapr.project.ui;
 
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JOptionPane;
+import static javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE;
+import lapr.project.controller.UC2_Controller;
+import lapr.project.model.Encryption;
+import lapr.project.model.Event;
+import lapr.project.model.EventCenter;
+import lapr.project.model.FAE;
+import lapr.project.model.Organizer;
+import lapr.project.model.User;
+
 /**
  *
  * @author Luis
  */
 public class UC2_UI extends javax.swing.JFrame {
 
+    static final long serialVersionUID = -3387516993124229948L;
+
+    /**
+     * The instance of the EventCenter
+     */
+    private EventCenter ec;
+
+    /**
+     * The instance of the controller
+     */
+    private UC2_Controller c;
+
+    /**
+     * The user that is using this UC right now
+     */
+    private User u;
+
+    private Event eventSelected;
+    private FAE userSelected;
+
     /**
      * Creates new form UC2_UI
+     *
+     * @param ec the instance of the eveentcenter
+     * @param u the user using the window
      */
-    public UC2_UI() {
+    public UC2_UI(EventCenter ec, User u) {
+
+        this.ec = ec;
+        this.c = new UC2_Controller(ec);
+        this.u = u;
+
         initComponents();
+        this.setVisible(true);
+        setLocationRelativeTo(null);
+        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+        this.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+                if (JOptionPane.showConfirmDialog(UC2_UI.this, "Do you wish to exit without saving?", "Close", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
+                    dispose();
+                    new OrganizerActions_UI(ec, u);
+                }
+            }
+        });
+    }
+
+    private String[] eventList() {
+
+        String[] list = new String[ec.getEventsWhereUserIsOrganizer(u).size()];
+        int cont = 0;
+        for (Event e : ec.getEventsWhereUserIsOrganizer(u)) {
+            list[cont] = e.getTitle();
+            cont++;
+        }
+        return list;
     }
 
     /**
@@ -28,55 +91,81 @@ public class UC2_UI extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        userList = new javax.swing.JList<>();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
-        jLabel2 = new javax.swing.JLabel();
+        eventList = new javax.swing.JList<>();
+        defineButton = new javax.swing.JButton();
+        backButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("UC2 - Define FAE");
 
         jLabel1.setText("Choose an Event:");
 
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+        jLabel3.setText("Choose a User to be FAE:");
+
+        userList.setModel(new javax.swing.AbstractListModel<String>() {
+            static final long serialVersionUID = -3387516993124229948L;
+            String[] strings = { "|| SELECT EVENT ||" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane1.setViewportView(jList1);
+        userList.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                userListMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(userList);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 225, Short.MAX_VALUE)
-                .addContainerGap())
-        );
+        eventList.setModel(new javax.swing.AbstractListModel<String>() {
+            static final long serialVersionUID = -3387516993124229948L;
+            String[] strings = eventList();
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        eventList.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                eventListMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(eventList);
 
-        jLabel2.setText("FAE data:");
+        defineButton.setText("Define FAE");
+        defineButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                defineButtonActionPerformed(evt);
+            }
+        });
+
+        backButton.setText("Back");
+        backButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(33, 33, 33)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(9, 9, 9)
-                        .addComponent(jLabel1)
-                        .addGap(125, 125, 125)
-                        .addComponent(jLabel2)))
-                .addContainerGap(311, Short.MAX_VALUE))
+                        .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(44, 44, 44)
+                        .addComponent(defineButton))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(30, 30, 30)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3))))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -84,21 +173,136 @@ public class UC2_UI extends javax.swing.JFrame {
                 .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(15, Short.MAX_VALUE))
+                    .addComponent(jLabel3))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane1)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(29, 29, 29)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(defineButton)
+                    .addComponent(backButton))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
+        dispose();
+        new OrganizerActions_UI(ec, u);
+    }//GEN-LAST:event_backButtonActionPerformed
+
+    private void eventListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_eventListMouseClicked
+
+        this.eventSelected = ec.getEventRegister().getEventList().get(eventList.getSelectedIndex());
+        String[] list = modelList();
+
+        userList.setModel(new javax.swing.AbstractListModel<String>() {
+            static final long serialVersionUID = -3387516993124229948L;
+            String[] strings = list;
+
+            public int getSize() {
+                return list.length;
+            }
+
+            public String getElementAt(int i) {
+                return list[i];
+            }
+        });
+    }//GEN-LAST:event_eventListMouseClicked
+
+    private void defineButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_defineButtonActionPerformed
+
+        if (JOptionPane.showConfirmDialog(UC2_UI.this, "Do you wish to define this user as FAE?", "Define", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
+            eventSelected.getFaeList().getFAEList().add(userSelected);
+            String[] list = modelList();
+            
+            userList.setModel(new javax.swing.AbstractListModel<String>() {
+            static final long serialVersionUID = -3387516993124229948L;
+            String[] strings = list;
+
+            public int getSize() {
+                return list.length;
+            }
+
+            public String getElementAt(int i) {
+                return list[i];
+            }
+        });
+        }
+    }//GEN-LAST:event_defineButtonActionPerformed
+    /**
+     * This method gets the list of users that aren't FAE's or Organizers of
+     * this Event
+     *
+     * @return returns the array of Strings
+     */
+    private String[] modelList() {
+        List<User> users = new ArrayList<>();
+
+        for (User user : ec.getUserRegister().getUsers()) {
+            if (!(eventSelected.checkIFUserIsFAE(user)) && (eventSelected.checkIFUserIsOrganizer(user))) {
+                users.add(user);
+            }
+        }
+
+        String[] list = new String[users.size()];
+
+        for (int i = 0; i < list.length; i++) {
+            String name = Encryption.deEncryptPassword(users.get(i).getName(), ec.getEncryptionRegister().getEncryptionByUser(users.get(i)).getShift(), Encryption.ABC);
+            name = Encryption.deEncryptData(name, ec.getEncryptionRegister().getEncryptionByUser(users.get(i)).getKeyword());
+            name = name + " (" + users.get(i).getUsername() + ")";
+            list[i] = name;
+        }
+        return list;
+    }
+
+    private void userListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_userListMouseClicked
+
+        this.userSelected = nameStringToFae(userList.getSelectedValue());
+    }//GEN-LAST:event_userListMouseClicked
+
+    /**
+     * This method returns the User that is selected in the user List in the
+     * form of FAE
+     *
+     * @param name the name displayed in the JList
+     * @return returns the new instance of FAE
+     */
+    public FAE nameStringToFae(String name) {
+
+        String c;
+        int count = 0;
+        String username;
+
+        do {
+            c = name.substring(count, count + 1);
+            count++;
+        } while (!c.equals("("));
+
+        username = name.substring(count, name.length() - 1);
+
+        User org = null;
+
+        for (User u : ec.getUserRegister().getUsers()) {
+            if (username.equals(u.getUsername())) {
+                org = u;
+                break;
+            }
+        }
+
+        return new FAE(org);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton backButton;
+    private javax.swing.JButton defineButton;
+    private javax.swing.JList<String> eventList;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JList<String> jList1;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JList<String> userList;
     // End of variables declaration//GEN-END:variables
 }

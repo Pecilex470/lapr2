@@ -75,12 +75,13 @@ public class UC11_Controller {
 
     }
 
-    public void changeApplication(Application a, String description, List<Keyword> keywordList, String companyName, Stand stand, User representative) {
+    public void changeApplication(Application a, String description, List<Keyword> keywordList, String companyName, User representative, int boothArea, int nInvites) {
         a.setCompanyName(companyName);
         a.setDescription(description);
         a.setKeywordList(keywordList);
         a.setRepresentative(representative);
-        a.setStand(stand);
+        a.setBoothArea(boothArea);
+        a.setInvitesQuantity(nInvites);
     }
 
 }

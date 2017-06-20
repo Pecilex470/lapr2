@@ -53,6 +53,7 @@ public class ImportEventData {
 
             this.event = docXML.getFirstChild();
 
+
         } catch (SAXException ex) {
             Logger.getLogger(ImportEventData.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
@@ -68,7 +69,9 @@ public class ImportEventData {
 
         NodeList eventAtributes = this.event.getChildNodes();
 
+
         UserRegister ur = new UserRegister();
+
 
         for (int i = 1; i < eventAtributes.getLength(); i++) {
 
@@ -100,7 +103,9 @@ public class ImportEventData {
         return newEvent;
     }
 
+
     public List<FAE> readFAESet(Element faeList, List<User> userList) {
+
 
         List<FAE> list = new ArrayList();
 
@@ -151,7 +156,9 @@ public class ImportEventData {
                             list.add(newFae);
                             break;
                         }
+
                     }
+
                 }
             }
         }
@@ -188,7 +195,10 @@ public class ImportEventData {
                     }
                 }
             }
-            list.add(stand);
+            try{ 
+                list.add(stand);
+            } catch (NullPointerException e) {
+            }
         }
         return list;
     }
@@ -304,7 +314,10 @@ public class ImportEventData {
                     }
                 }
             }
-            list.add(eva);
+            try{ 
+                list.add(eva);
+            } catch (NullPointerException e) {
+            }
         }
 
         return list;
@@ -379,7 +392,10 @@ public class ImportEventData {
 
             switch (key.getTagName()) {
                 case "keyword":
-                    list.add(new Keyword(key.getTextContent()));
+                    try{
+                        list.add(new Keyword(key.getTextContent()));
+                    } catch (NullPointerException e) {
+                    }
                     break;
             }
         }

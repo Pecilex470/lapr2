@@ -56,10 +56,10 @@ public class KeywordList {
         this.keywords = keywords;
     }
 
-    public String[][] vogueKeywords(KeywordList keywordsList) {
+    public String[][] vogueKeywords() {
         List<Keyword> allKey = new ArrayList<>();
-        for (int i = 0; i < keywordsList.getKeywords().size(); i++) {
-            List<Keyword> lele = keywordsList.getKeywords().get(i);
+        for (int i = 0; i < getKeywords().size(); i++) {
+            List<Keyword> lele = getKeywords().get(i);
             for (int j = 0; j < lele.size(); j++) {
                 allKey.add(lele.get(j));
 

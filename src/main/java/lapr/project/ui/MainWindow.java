@@ -179,7 +179,8 @@ public class MainWindow extends javax.swing.JFrame {
     private void buttonOrganizerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonOrganizerActionPerformed
 
         if (ec.checkIFUserIsOrganizer(u)) {
-
+            dispose();
+            new OrganizerActions_UI(ec, u);
         } else {
             JOptionPane.showMessageDialog(null, "You are not organizer in any event!");
         }

@@ -24,7 +24,7 @@ public class Organizer {
     /**
      * @return User that received the role of organizer of a certain event.
      */
-    public User getUtilizadorOrganizador() {
+    public User getUserOrganizer() {
         return userOrg;
     }
 

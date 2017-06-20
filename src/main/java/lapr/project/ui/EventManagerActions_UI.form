@@ -128,6 +128,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="UC43 - Show Global Acceptance Rate"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="uc43ButtonActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="uc44Button">
       <Properties>
@@ -146,6 +149,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="UC46 - Show a FAE mean rating"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="uc46ButtonActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="uc50Button">
       <Properties>
