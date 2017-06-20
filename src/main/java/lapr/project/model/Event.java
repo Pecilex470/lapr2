@@ -29,6 +29,7 @@ public class Event {
 
     /**
      * Constructor
+     *
      * @param title - String
      * @param location - String
      * @param description - String
@@ -175,8 +176,13 @@ public class Event {
     public List<Application> getApplicationList() {
         return applicationList.getApplication();
     }
-    
-    public void addApplication(Application a){
+
+    /**
+     * this method adds an application to the event
+     *
+     * @param a the application to be added
+     */
+    public void addApplication(Application a) {
         applicationList.addApplication(a);
     }
 
@@ -206,7 +212,7 @@ public class Event {
     }
 
     /**
-     * 
+     *
      * @return FAEList
      */
     public FAEList getFaeList() {
@@ -246,11 +252,12 @@ public class Event {
 
         return isFAE;
     }
-    
+
     /**
      *
      * @param u user that we want to check if it is an Organizer in this event
-     * @return true if the user u is an Organizer in this event, false if it's not
+     * @return true if the user u is an Organizer in this event, false if it's
+     * not
      */
     public boolean isOrganizer(User u) {
 
@@ -264,14 +271,12 @@ public class Event {
         return isOrganizer;
     }
 
-    
-    public OrganizerList getOrganizerList(){
+    public OrganizerList getOrganizerList() {
         return this.organizerList;
     }
 
-
     /**
-     * 
+     *
      * @return availableArea
      */
     public int getAvailableArea() {
@@ -279,7 +284,7 @@ public class Event {
     }
 
     /**
-     * 
+     *
      * @param area - available area
      */
     public void setAvailableArea(int area) {
@@ -288,6 +293,7 @@ public class Event {
 
     /**
      * Method that adds a stand to event
+     *
      * @param stand - Stand
      */
     public void addStand(Stand stand) {
@@ -296,30 +302,34 @@ public class Event {
 
     /**
      * Method that returns a list of available stands of event
+     *
      * @return List of stands available
      */
-    public List<Stand> getAvailableStands(){
-        List<Stand> aL=null;
-        for (Stand stand: this.standList){
-            if(stand.getAvailable()==true){
+    public List<Stand> getAvailableStands() {
+        List<Stand> aL = null;
+        for (Stand stand : this.standList) {
+            if (stand.getAvailable() == true) {
                 aL.add(stand);
             }
         }
         return aL;
     }
-    
-    public List<Stand> getStandList(){
+
+    public List<Stand> getStandList() {
         return this.standList;
     }
-    
-    public void setStandList(List<Stand> list){
-        this.standList=list;
+
+    public void setStandList(List<Stand> list) {
+        this.standList = list;
     }
-    
-     /**
-     * Method that returns the Z-test that is any statistical test for which the distribution of the test statistic under the null hypothesis can be approximated by a normal distribution.In this case, used a Z-test Unilateral for proportion.
-     * 
-     * @return Z-test 
+
+    /**
+     * Method that returns the Z-test that is any statistical test for which the
+     * distribution of the test statistic under the null hypothesis can be
+     * approximated by a normal distribution.In this case, used a Z-test
+     * Unilateral for proportion.
+     *
+     * @return Z-test
      */
     public double getZUni() {
         double Ho = 0.5;
@@ -328,11 +338,15 @@ public class Event {
         double z = (acceptanceRate - Ho) / Math.sqrt((Ho * (1 - Ho)) / total);
         return z;
     }
+
     /**
-     * Method that returns the Z-test that is any statistical test for which the distribution of the test statistic under the null hypothesis can be approximated by a normal distribution.In this case, used a Z-test Bilateral to compare two proportions.
-     * 
+     * Method that returns the Z-test that is any statistical test for which the
+     * distribution of the test statistic under the null hypothesis can be
+     * approximated by a normal distribution.In this case, used a Z-test
+     * Bilateral to compare two proportions.
+     *
      * @param e Second event to get the second proportion.
-     * @return Z-test 
+     * @return Z-test
      */
     public double getZBil(Event e) {
         double acceptanceRate1 = (getAcceptanceRate() / 100.);
@@ -343,10 +357,12 @@ public class Event {
         double z = Ho / (Math.sqrt((acceptanceRate1 * (1 - acceptanceRate1)) / total1) + Math.sqrt((acceptanceRate2 * (1 - acceptanceRate2)) / total2));
         return z;
     }
+
     /**
-     * Method that returns the decision of the test where we check if the acceptance rate is over 50% with a significance level equal to 1%.
-     * 
-     * @return Decision(Yes or No) 
+     * Method that returns the decision of the test where we check if the
+     * acceptance rate is over 50% with a significance level equal to 1%.
+     *
+     * @return Decision(Yes or No)
      */
     public String testAcceptanceRate50a1() {
         NormalDistribution p = new NormalDistribution();
@@ -359,10 +375,12 @@ public class Event {
             return "No";
         }
     }
+
     /**
-     * Method that returns the decision of the test where we check if the acceptance rate is over 50% with a significance level equal to 5%.
-     * 
-     * @return Decision(Yes or No)  
+     * Method that returns the decision of the test where we check if the
+     * acceptance rate is over 50% with a significance level equal to 5%.
+     *
+     * @return Decision(Yes or No)
      */
     public String testAcceptanceRate50a5() {
         NormalDistribution p = new NormalDistribution();
@@ -377,17 +395,19 @@ public class Event {
     }
 
     /**
-     * Method that returns the decision of the test where we check if the difference between two Events acceptance rate is equal or not with a significance level equal to 1%.
-     * 
+     * Method that returns the decision of the test where we check if the
+     * difference between two Events acceptance rate is equal or not with a
+     * significance level equal to 1%.
+     *
      * @param e Second event to get is Z-test.
-     * 
+     *
      * @return Decision(Yes or No)
      */
     public String testDifferenceTwoEventsAccepRateA1(Event e) {
         NormalDistribution p = new NormalDistribution();
         double a = 0.01;
         double zc = p.inverseCumulativeProbability(1 - (a / 2.));
-        double z =getZBil(e);
+        double z = getZBil(e);
         if (z < -zc && z > zc) {
             return "Yes";
         } else {
@@ -396,10 +416,12 @@ public class Event {
     }
 
     /**
-     * Method that returns the decision of the test where we check if the difference between two Events acceptance rate is equal or not with a significance level equal to 5%.
-     * 
+     * Method that returns the decision of the test where we check if the
+     * difference between two Events acceptance rate is equal or not with a
+     * significance level equal to 5%.
+     *
      * @param e Second event to get is Z-test
-     * 
+     *
      * @return Decision(Yes or No)
      */
     public String testDifferenceTwoEventsAccepRateA5(Event e) {
@@ -413,10 +435,5 @@ public class Event {
             return "No";
         }
     }
-
-
-
-
-
 
 }

@@ -27,6 +27,8 @@ import lapr.project.utils.Date;
  */
 public class UC1_UI extends javax.swing.JDialog {
 
+    static final long serialVersionUID = -3387516993124229948L;
+
     private EventCenter ec;
     private String[] pickedList = new String[0];
     SimpleDateFormat d = new SimpleDateFormat("dd/MM/yyyy");
@@ -198,6 +200,7 @@ public class UC1_UI extends javax.swing.JDialog {
         jLabel11.setText("Pick at least 2 organizers for the Event:");
 
         userList.setModel(new javax.swing.AbstractListModel<String>() {
+            static final long serialVersionUID = -3387516993124229948L;
             String[] strings = initialUserList();
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
@@ -224,6 +227,7 @@ public class UC1_UI extends javax.swing.JDialog {
         });
 
         pickedUserList.setModel(new javax.swing.AbstractListModel<String>() {
+            static final long serialVersionUID = -3387516993124229948L;
             String[] strings = {""};
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
@@ -464,6 +468,7 @@ public class UC1_UI extends javax.swing.JDialog {
         removeUserFromTopList(user);
 
         userList.setModel(new javax.swing.AbstractListModel<String>() {
+            static final long serialVersionUID = -3387516993124229948L;
             String[] strings = returnTopList();
 
             public int getSize() {
@@ -479,6 +484,7 @@ public class UC1_UI extends javax.swing.JDialog {
 
         pickedUserList.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = returnPickedList();
+            static final long serialVersionUID = -3387516993124229948L;
 
             public int getSize() {
                 return strings.length;
@@ -494,10 +500,11 @@ public class UC1_UI extends javax.swing.JDialog {
     private void unpickButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_unpickButtonActionPerformed
 
         String user = pickedUserList.getSelectedValue();
-        
+
         removeUserFromPickedList(user);
-        
+
         pickedUserList.setModel(new javax.swing.AbstractListModel<String>() {
+            static final long serialVersionUID = -3387516993124229948L;
             String[] strings = returnPickedList();
 
             public int getSize() {
@@ -508,10 +515,11 @@ public class UC1_UI extends javax.swing.JDialog {
                 return strings[i];
             }
         });
-        
+
         addUserToTopList(user);
-        
+
         userList.setModel(new javax.swing.AbstractListModel<String>() {
+           static final long serialVersionUID = -3387516993124229948L;
             String[] strings = returnTopList();
 
             public int getSize() {
@@ -522,7 +530,7 @@ public class UC1_UI extends javax.swing.JDialog {
                 return strings[i];
             }
         });
-        
+
 
     }//GEN-LAST:event_unpickButtonActionPerformed
 
@@ -572,9 +580,9 @@ public class UC1_UI extends javax.swing.JDialog {
         topList = list;
 
     }
-    
+
     public void removeUserFromPickedList(String uName) {
-        
+
         String[] list = new String[pickedList.length - 1];
 
         int flag = 0;
@@ -589,8 +597,7 @@ public class UC1_UI extends javax.swing.JDialog {
 
         pickedList = new String[pickedList.length - 1];
         pickedList = list;
-        
-        
+
     }
 
     public void addUserToPickedList(String pickedUser) {
@@ -607,7 +614,7 @@ public class UC1_UI extends javax.swing.JDialog {
         pickedList = list;
 
     }
-    
+
     public void addUserToTopList(String topUser) {
 
         String[] list = new String[topList.length + 1];
