@@ -41,15 +41,15 @@ public class Application implements Importable<Application>, Exportable {
      * @param description CandidaturaDescription
      * @param keywordList Keyword List
      */
-    public Application(String description, List<Keyword> keywordList, String companyName, Stand stand, User representative, int boothArea, int invitesQuantity) {
+    public Application(String description, List<Keyword> keywordList, String companyName, User representative, int boothArea, int invitesQuantity) {
         this.description = description;
         this.keywordList.addAll(keywordList);
         this.decision = DEFAULT_DECISION;
         this.companyName = companyName;
-        this.stand = stand;
         this.representative = representative;
         this.boothArea=boothArea;
         this.invitesQuantity=invitesQuantity;
+        
     }
 
     /**
@@ -204,19 +204,8 @@ public class Application implements Importable<Application>, Exportable {
         return this.companyName;
     }
 
-    public void addStand(Stand stand) {
-        if (stand.getAvailable() == true) {
-            this.setStand(stand);
-            stand.setAvailable(false);
-        }
-    }
-
     public int getNumberOfDecisions() {
         return this.numberOfDecisions;
-    }
-
-    public Stand getStand() {
-        return this.stand;
     }
 
     public void setSubmissionMeanRating(int value) {
@@ -253,13 +242,6 @@ public class Application implements Importable<Application>, Exportable {
     }
 
     /**
-     * @param stand the stand to set
-     */
-    public void setStand(Stand stand) {
-        this.stand = stand;
-    }
-
-    /**
      * @param representative the representative to set
      */
     public void setRepresentative(User representative) {
@@ -272,5 +254,19 @@ public class Application implements Importable<Application>, Exportable {
     
     public void setInvitesQuantity(int invitesQuantity){
         this.invitesQuantity=invitesQuantity;
+    }
+
+    /**
+     * @return the boothArea
+     */
+    public int getBoothArea() {
+        return boothArea;
+    }
+
+    /**
+     * @return the invitesQuantity
+     */
+    public int getInvitesQuantity() {
+        return invitesQuantity;
     }
 }

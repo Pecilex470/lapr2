@@ -60,7 +60,7 @@ public class UC21_Controller {
      * @param app - Application
      */
     public void addStand(Event e, Stand stand, Application app) {
-        app.addStand(stand);
+    //    app.addStand(stand);
     }
 
 }

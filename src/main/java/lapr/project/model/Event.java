@@ -313,7 +313,7 @@ public class Event {
     }
     
     public void setStandList(List<Stand> list){
-        this.standL=list;
+        this.standList=list;
     }
     
      /**

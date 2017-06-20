@@ -60,8 +60,8 @@ public class Main {
         
         ///////// EVENT 3 //////////////////////////////////////////
         
-        ImportEventData impEvent = new ImportEventData(); 
-        eventRegister.getEventList().add(impEvent.readEvent());
+       // ImportEventData impEvent = new ImportEventData(); 
+       // eventRegister.getEventList().add(impEvent.readEvent());
         
          /////////////////////////////////////////////////////////////
         
@@ -78,6 +78,8 @@ public class Main {
         UC6_Controller c = new UC6_Controller(ec);
         c.registerUser(c.twoLayerEncription("Pedro Miller Brandão Pinho", 6, "zebras", Encryption.ABC), c.twoLayerEncription("pedro.miller.pinho@gmail.com", 6, "zebras", Encryption.ABC), "admin", c.encryptPassword("Pm-10", 6, Encryption.ABC), true, true);
         c.addEncryption(6, "admin", "zebras");
+        c.registerUser(c.twoLayerEncription("Luís Azevedo", 6, "zebras", Encryption.ABC), c.twoLayerEncription("luis@gmail.com", 6, "zebras", Encryption.ABC), "sicked", c.encryptPassword("Pm-10", 6, Encryption.ABC), true, true);
+        c.addEncryption(6, "sicked", "zebras");
     }
 
 }

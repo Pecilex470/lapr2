@@ -28,9 +28,10 @@ import lapr.project.utils.Date;
 public class UC1_UI extends javax.swing.JDialog {
 
     private EventCenter ec;
-    private String[] pickedList;
+    private String[] pickedList = new String[0];
     SimpleDateFormat d = new SimpleDateFormat("dd/MM/yyyy");
     private UC1_Controller c;
+    private String[] topList;
 
     /**
      * Creates new form UC1_Dialog
@@ -39,8 +40,8 @@ public class UC1_UI extends javax.swing.JDialog {
      */
     public UC1_UI(EventCenter ec) {
         this.ec = ec;
-        this.pickedList = new String[ec.getUserRegister().getUsers().size()];
         this.c = new UC1_Controller(ec);
+        this.topList = initialUserList();
 
         initComponents();
         this.setVisible(true);
@@ -103,7 +104,7 @@ public class UC1_UI extends javax.swing.JDialog {
         jLabel11 = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
         userList = new javax.swing.JList<>();
-        clear = new javax.swing.JButton();
+        unpickButton = new javax.swing.JButton();
         pickButton = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -197,7 +198,7 @@ public class UC1_UI extends javax.swing.JDialog {
         jLabel11.setText("Pick at least 2 organizers for the Event:");
 
         userList.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = userList();
+            String[] strings = initialUserList();
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
@@ -208,10 +209,10 @@ public class UC1_UI extends javax.swing.JDialog {
         });
         jScrollPane4.setViewportView(userList);
 
-        clear.setText("Clear");
-        clear.addActionListener(new java.awt.event.ActionListener() {
+        unpickButton.setText("Unpick");
+        unpickButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                clearActionPerformed(evt);
+                unpickButtonActionPerformed(evt);
             }
         });
 
@@ -223,7 +224,7 @@ public class UC1_UI extends javax.swing.JDialog {
         });
 
         pickedUserList.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = {".........."};
+            String[] strings = {""};
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
@@ -331,7 +332,7 @@ public class UC1_UI extends javax.swing.JDialog {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(pickButton, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(40, 40, 40)
-                        .addComponent(clear)
+                        .addComponent(unpickButton)
                         .addGap(76, 76, 76))))
         );
         layout.setVerticalGroup(
@@ -349,7 +350,7 @@ public class UC1_UI extends javax.swing.JDialog {
                                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(clear)
+                                    .addComponent(unpickButton)
                                     .addComponent(pickButton))
                                 .addGap(10, 10, 10))
                             .addGroup(layout.createSequentialGroup()
@@ -458,10 +459,12 @@ public class UC1_UI extends javax.swing.JDialog {
 
     private void pickButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pickButtonActionPerformed
 
-        String temp = userList.getSelectedValue();
+        String user = userList.getSelectedValue();
+
+        removeUserFromTopList(user);
 
         userList.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = userListExcept(userList.getSelectedValue());
+            String[] strings = returnTopList();
 
             public int getSize() {
                 return strings.length;
@@ -472,7 +475,7 @@ public class UC1_UI extends javax.swing.JDialog {
             }
         });
 
-        addUserToPickedList(temp);
+        addUserToPickedList(user);
 
         pickedUserList.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = returnPickedList();
@@ -486,13 +489,16 @@ public class UC1_UI extends javax.swing.JDialog {
             }
         });
 
-
     }//GEN-LAST:event_pickButtonActionPerformed
 
-    private void clearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearActionPerformed
+    private void unpickButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_unpickButtonActionPerformed
 
+        String user = pickedUserList.getSelectedValue();
+        
+        removeUserFromPickedList(user);
+        
         pickedUserList.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = {""};
+            String[] strings = returnPickedList();
 
             public int getSize() {
                 return strings.length;
@@ -502,9 +508,11 @@ public class UC1_UI extends javax.swing.JDialog {
                 return strings[i];
             }
         });
-
+        
+        addUserToTopList(user);
+        
         userList.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = userList();
+            String[] strings = returnTopList();
 
             public int getSize() {
                 return strings.length;
@@ -514,13 +522,9 @@ public class UC1_UI extends javax.swing.JDialog {
                 return strings[i];
             }
         });
+        
 
-        for (int i = 0; i < pickedList.length; i++) {
-            pickedList[i] = null;
-        }
-
-
-    }//GEN-LAST:event_clearActionPerformed
+    }//GEN-LAST:event_unpickButtonActionPerformed
 
     private Date assembleDate(String day, String month, String year) {
         return new Date(Integer.parseInt(day), Integer.parseInt(month), Integer.parseInt(year));
@@ -538,8 +542,7 @@ public class UC1_UI extends javax.swing.JDialog {
      *
      * @return a String array to fill the JList
      */
-    public String[] userList() {
-
+    public String[] initialUserList() {
         String[] list = new String[ec.getUserRegister().getUsers().size()];
         int cont = 0;
         for (User u : ec.getUserRegister().getUsers()) {
@@ -551,63 +554,82 @@ public class UC1_UI extends javax.swing.JDialog {
         return list;
     }
 
-    public String[] userListExcept(String uName) {
+    public void removeUserFromTopList(String uName) {
 
-        String[] list = new String[ec.getUserRegister().getUsers().size()];
-        int cont = 0;
+        String[] list = new String[topList.length - 1];
 
-        for (User u : ec.getUserRegister().getUsers()) {
-            String name = Encryption.deEncryptPassword(u.getName(), ec.getEncryptionRegister().getEncryptionByUser(u).getShift(), Encryption.ABC);
-            name = Encryption.deEncryptData(name, ec.getEncryptionRegister().getEncryptionByUser(u).getKeyword());
-            if (uName.equals(list[cont])) {
-                list[cont] = name;
-                cont++;
+        int flag = 0;
+        for (int i = 0; i < topList.length; i++) {
+
+            if (!uName.equals(topList[i])) {
+                list[i - flag] = topList[i];
+            } else {
+                flag++;
             }
         }
-        return list;
+
+        topList = new String[topList.length - 1];
+        topList = list;
 
     }
+    
+    public void removeUserFromPickedList(String uName) {
+        
+        String[] list = new String[pickedList.length - 1];
 
-    public String[] pickedUserListExcept(String uName) {
-
-        String[] list = new String[pickedList.length];
-
-        int cont = 0;
-
+        int flag = 0;
         for (int i = 0; i < pickedList.length; i++) {
-            if (!pickedList[i].equals(uName)) {
-                list[i] = pickedList[i];
+
+            if (!uName.equals(pickedList[i])) {
+                list[i - flag] = pickedList[i];
+            } else {
+                flag++;
             }
         }
 
-        return list;
-
+        pickedList = new String[pickedList.length - 1];
+        pickedList = list;
+        
+        
     }
 
     public void addUserToPickedList(String pickedUser) {
 
-        String[] temp = new String[pickedList.length];
+        String[] list = new String[pickedList.length + 1];
 
         for (int i = 0; i < pickedList.length; i++) {
-            try {
-                if (pickedList[i].isEmpty()) {
-
-                } else {
-                    temp[i] = pickedUser;
-                }
-            } catch (NullPointerException e) {
-
-                temp[i] = pickedUser;
-            }
+            list[i] = pickedList[i];
         }
 
-        pickedList = temp;
+        list[list.length - 1] = pickedUser;
+
+        pickedList = new String[pickedList.length + 1];
+        pickedList = list;
+
+    }
+    
+    public void addUserToTopList(String topUser) {
+
+        String[] list = new String[topList.length + 1];
+
+        for (int i = 0; i < topList.length; i++) {
+            list[i] = topList[i];
+        }
+
+        list[list.length - 1] = topUser;
+
+        topList = new String[topList.length + 1];
+        topList = list;
 
     }
 
     public String[] returnPickedList() {
 
         return pickedList;
+    }
+
+    public String[] returnTopList() {
+        return topList;
     }
 
     /**
@@ -617,7 +639,6 @@ public class UC1_UI extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField availableArea;
     private javax.swing.JButton cancelButton;
-    private javax.swing.JButton clear;
     private javax.swing.JButton confirmButton;
     private javax.swing.JTextArea descriptionTextArea;
     private javax.swing.JTextField endDateDay;
@@ -659,6 +680,7 @@ public class UC1_UI extends javax.swing.JDialog {
     private javax.swing.JTextField submissionStartDateMonth;
     private javax.swing.JTextField submissionStartDateYear;
     private javax.swing.JTextField titleTextField;
+    private javax.swing.JButton unpickButton;
     private javax.swing.JList<String> userList;
     // End of variables declaration//GEN-END:variables
 }
