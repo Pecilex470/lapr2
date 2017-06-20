@@ -6,6 +6,7 @@
 package lapr.project.model.register;
 
 import java.util.List;
+import lapr.project.model.Application;
 import lapr.project.model.Attribution;
 
 /**
@@ -29,5 +30,12 @@ public class AttributionList {
         l_att.add(a);
     }
     
-    
+    public Attribution getAttributionByApplication(Application app){
+        for(Attribution att: this.l_att){
+            if(att.getApplication().equals(app)){
+                return att;
+            }
+        }
+        return null;
+    }
 }

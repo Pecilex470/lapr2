@@ -256,6 +256,7 @@ public class Application implements Importable<Application>, Exportable {
         this.invitesQuantity=invitesQuantity;
     }
 
+
     /**
      * @return the boothArea
      */
@@ -269,4 +270,5 @@ public class Application implements Importable<Application>, Exportable {
     public int getInvitesQuantity() {
         return invitesQuantity;
     }
+
 }
