@@ -8,6 +8,7 @@ package lapr.project.model.register;
 import java.util.ArrayList;
 import java.util.List;
 import lapr.project.model.Event;
+import lapr.project.model.User;
 import lapr.project.utils.Date;
 
 /**
@@ -47,14 +48,33 @@ public class EventRegister {
     
     /**
      * sets the event list from an existing list
+     *
      * @param el existing list that is received
      */
-    public void setEventList(List<Event> el){
+    public void setEventList(List<Event> el) {
         this.events = el;
     }
 
     public boolean validateEventData(String title, String location, String description, Date startDate, Date endDate, Date submissionStartDate, Date submissionEndDate, String eventType, FAEList fl, OrganizerList ol, int availableArea) {
         return true;
     }
-  
+
+    /**
+     * This method iterates all saved Events and returns a list of the events in
+     * which the user is organizer
+     *
+     * @param u teh user to check
+     * @return returns the list of the events
+     */
+    public List<Event> getEventsWhereUserIsOrganizer(User u) {
+
+        List<Event> eventsWhereUserIsOrganizer = new ArrayList<>();
+        for (Event e : events) {
+            if (e.isOrganizer(u)) {
+                eventsWhereUserIsOrganizer.add(e);
+            }
+        }
+        return eventsWhereUserIsOrganizer;
+    }
+
 }

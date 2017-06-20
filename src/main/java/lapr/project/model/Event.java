@@ -179,7 +179,6 @@ public class Event {
 
     /**
      * this method adds an application to the event
-     *
      * @param a the application to be added
      */
     public void addApplication(Application a) {
