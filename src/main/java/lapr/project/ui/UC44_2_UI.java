@@ -71,12 +71,11 @@ public class UC44_2_UI extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
-
             new Object [][] {
 
             },
             new String [] {
-                "Event", "Proportions of submissions accepted in n(i)  (n(i)>30", "Critical Value(zc)", "Significance level", "Observed value of test statistics ", "Decision over 50%(Yes or No)"
+                "t", "Title 2", "Title 3", "Title 4", "t5"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -117,7 +116,7 @@ public class UC44_2_UI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void InserirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InserirActionPerformed
-        DefaultTableModel val = (DefaultTableModel) Inserir.getModel();
+        DefaultTableModel val = (DefaultTableModel) jTable1.getModel();
         double e;
         String sl;
         double cv;
