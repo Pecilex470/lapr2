@@ -33,8 +33,11 @@ public class Evaluation implements Serializable{
      * Text supporting the decision taken.
      */
     private String justification;
-    
-   private String faeUsername;
+
+    /**
+     * The FAE's username
+     */
+    private String faeUsername;
 
     /**
      * Creates a Evaluation instance, by receiveing the decision and
@@ -99,37 +102,34 @@ public class Evaluation implements Serializable{
     }
 
     /**
-     * 
+     *
      * @return the mean rating of this evaluation
      */
-    
     public double getMeanRating() {
-
         return (adequancy + overall + knowledge + quantity) / NUMBER_OF_CRITERIA;
     }
 
-    
-    public void setKnowledge(int know){
-        this.knowledge= know;
+    public void setKnowledge(int know) {
+        this.knowledge = know;
     }
-    
-    public void setAdequancy(int ade){
-        this.adequancy=ade;
+
+    public void setAdequancy(int ade) {
+        this.adequancy = ade;
     }
-    
-    public void setOverall(int ove){
-        this.overall=ove;
+
+    public void setOverall(int ove) {
+        this.overall = ove;
     }
-    
-    public void setQuantity(int qua){
-        this.quantity=qua;
+
+    public void setQuantity(int qua) {
+        this.quantity = qua;
     }
-    
-    public String getFaeUsername(){
+
+    public String getFaeUsername() {
         return this.faeUsername;
     }
-    
-    public void setFaeUsername(String username){
-        this.faeUsername=username;
+
+    public void setFaeUsername(String username) {
+        this.faeUsername = username;
     }
 }

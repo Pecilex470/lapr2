@@ -24,7 +24,7 @@ public class OrganizerList implements Serializable{
     }
     
     public OrganizerList(){
-        
+        this.organizers = new ArrayList<>();
     }
     
     /**

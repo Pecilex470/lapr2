@@ -98,7 +98,7 @@ public class ImportEventData {
                         break;
                     case "applicationSet":
 
-                        newEvent.getApllicationRegister().setApplication(readApplication(element, ur));
+                        newEvent.getApplicationList().setApplication(readApplication(element, ur));
                         break;
                 }
             }

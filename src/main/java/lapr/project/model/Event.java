@@ -21,18 +21,14 @@ public class Event implements Serializable{
     private Date submissionEndDate;
     private String eventType;
     private ApplicationList applicationList = new ApplicationList();
-    private FAEList faeList;
+    private FAEList faeList = new FAEList();
     private OrganizerList organizerList = new OrganizerList();
     private int availableArea;
     private List<Stand> standList;
     private List<List<Keyword>> keywordList;
 
-    public Event() {
-
-    }
-
     /**
-     * Constructor
+     * Constructor with all the parameters
      *
      * @param title - String
      * @param location - String
@@ -58,6 +54,13 @@ public class Event implements Serializable{
         this.faeList = fl;
         this.organizerList = ol;
         this.availableArea = availableArea;
+    }
+
+    /**
+     * Empty constructor for an Event
+     */
+    public Event() {
+
     }
 
     /**
@@ -173,15 +176,6 @@ public class Event implements Serializable{
     }
 
     /**
-     * This method returns the list of applications for this event
-     *
-     * @return list of applications
-     */
-    public List<Application> getApplicationList() {
-        return applicationList.getApplication();
-    }
-
-    /**
      * this method adds an application to the event
      *
      * @param a the application to be added
@@ -195,7 +189,7 @@ public class Event implements Serializable{
      *
      * @return list of applications
      */
-    public ApplicationList getApllicationRegister() {
+    public ApplicationList getApplicationList() {
         return applicationList;
     }
 
@@ -207,7 +201,7 @@ public class Event implements Serializable{
     public double getAcceptanceRate() {
 
         int accepted = applicationList.getAcceptedApplicationRegister().size();
-        int total = applicationList.getApplication().size();
+        int total = applicationList.getApplications().size();
 
         double acceptanceRate = (double) (accepted * 100) / (double) total;
 
@@ -222,8 +216,8 @@ public class Event implements Serializable{
     public FAEList getFaeList() {
         return this.faeList;
     }
-    
-    public List<List<Keyword>> getKeywordList(){
+
+    public List<List<Keyword>> getKeywordList() {
         return this.keywordList;
     }
 
@@ -270,7 +264,7 @@ public class Event implements Serializable{
     public boolean isOrganizer(User u) {
 
         boolean isOrganizer = false;
-    
+
         for (Organizer o : organizerList.getOrganizers()) {
 
             if (o.getUserOrganizer().getUsername().equals(u.getUsername())) {
@@ -348,7 +342,7 @@ public class Event implements Serializable{
     public double getZUni() {
         double Ho = 0.5;
         double acceptanceRate = (getAcceptanceRate() / 100.);
-        int total = getApllicationRegister().getApplication().size();
+        int total = getApplicationList().getApplications().size();
         double z = (acceptanceRate - Ho) / Math.sqrt((Ho * (1 - Ho)) / total);
         return z;
     }
@@ -366,20 +360,18 @@ public class Event implements Serializable{
         double acceptanceRate1 = (getAcceptanceRate() / 100.);
         double acceptanceRate2 = (e.getAcceptanceRate() / 100.);
         double Ho = acceptanceRate1 - acceptanceRate2;
-        int total1 = getApllicationRegister().getApplication().size();
-        int total2 = e.getApllicationRegister().getApplication().size();
+        int total1 = getApplicationList().getApplications().size();
+        int total2 = e.getApplicationList().getApplications().size();
         double z = Ho / (Math.sqrt((acceptanceRate1 * (1 - acceptanceRate1)) / total1) + Math.sqrt((acceptanceRate2 * (1 - acceptanceRate2)) / total2));
         return z;
     }
-   
-    public double criticalValue(String a){
-     NormalDistribution p = new NormalDistribution();
+
+    public double criticalValue(String a) {
+        NormalDistribution p = new NormalDistribution();
         double sv = Double.parseDouble(a);
         double zc = p.inverseCumulativeProbability(1 - sv);
         return zc;
     }
-    
-
 
     /**
      * Method that returns the decision of the test where we check if the
@@ -388,7 +380,7 @@ public class Event implements Serializable{
      * @return Decision(Yes or No)
      */
     public String testAcceptanceRate50(String a) {
-        double zc =criticalValue(a);
+        double zc = criticalValue(a);
         double z = getZUni();
         if (z > zc) {
             return "Yes";
@@ -439,13 +431,9 @@ public class Event implements Serializable{
         }
     }
 
-
-public void setFAEList(FAEList faelist){
-    this.faeList = faelist;
-}
-
-
-
+    public void setFAEList(FAEList faelist) {
+        this.faeList = faelist;
+    }
 
     public boolean checkIFUserIsFAE(User u) {
         if (Event.this.isFAE(u)) {
@@ -453,7 +441,7 @@ public void setFAEList(FAEList faelist){
         }
         return false;
     }
-    
+
     public boolean checkIFUserIsOrganizer(User u) {
         if (Event.this.isOrganizer(u)) {
             return true;
@@ -461,8 +449,8 @@ public void setFAEList(FAEList faelist){
         return false;
     }
 
-    public void addArea(int area){
-        this.availableArea+=area;
+    public void addArea(int area) {
+        this.availableArea += area;
     }
 
 }

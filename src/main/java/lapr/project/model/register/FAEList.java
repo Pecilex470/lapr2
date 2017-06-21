@@ -36,7 +36,7 @@ public class FAEList implements Serializable{
     }
 
     public FAEList() {
-
+        this.faes = new ArrayList<>();
     }
 
     /**
@@ -70,7 +70,7 @@ public class FAEList implements Serializable{
     public double getMeanDeviation(Event e, FAE fae) {
         double total = 0;
         int cont = 0;
-        double global = e.getApllicationRegister().getGlobalMeanRating();
+        double global = e.getApplicationList().getGlobalMeanRating();
         for (Attribution att : fae.getAttributionList()) {
             total += Math.abs(att.getEvaluation().getMeanRating() - global);
             cont++;

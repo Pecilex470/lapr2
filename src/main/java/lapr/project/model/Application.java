@@ -43,6 +43,10 @@ public class Application implements Serializable {
      *
      * @param description CandidaturaDescription
      * @param keywordList Keyword List
+     * @param companyName
+     * @param representative
+     * @param boothArea
+     * @param invitesQuantity
      */
     public Application(String description, List<Keyword> keywordList, String companyName, User representative, int boothArea, int invitesQuantity) {
         this.description = description;
