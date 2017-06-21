@@ -5,7 +5,7 @@ import lapr.project.model.register.FAEList;
 import lapr.project.model.register.ApplicationList;
 import lapr.project.model.register.OrganizerList;
 import java.util.List;
-import lapr.project.utils.Date;
+import lapr.project.utils.CustomDate;
 import org.apache.commons.math3.distribution.NormalDistribution;
 
 public class Event implements Serializable {
@@ -14,10 +14,10 @@ public class Event implements Serializable {
     private String title;
     private String location;
     private String description;
-    private Date startDate;
-    private Date endDate;
-    private Date submissionStartDate;
-    private Date submissionEndDate;
+    private CustomDate startDate;
+    private CustomDate endDate;
+    private CustomDate submissionStartDate;
+    private CustomDate submissionEndDate;
     private String eventType;
     private ApplicationList applicationList = new ApplicationList();
     private FAEList faeList = new FAEList();
@@ -32,16 +32,16 @@ public class Event implements Serializable {
      * @param title - String
      * @param location - String
      * @param description - String
-     * @param startDate - Date
-     * @param endDate - Date
-     * @param submissionStartDate - Date
-     * @param submissionEndDate - Date
+     * @param startDate - CustomDate
+     * @param endDate - CustomDate
+     * @param submissionStartDate - CustomDate
+     * @param submissionEndDate - CustomDate
      * @param eventType - String
      * @param fl - List
      * @param ol - List
      * @param availableArea - int
      */
-    public Event(String title, String location, String description, Date startDate, Date endDate, Date submissionStartDate, Date submissionEndDate, String eventType, FAEList fl, OrganizerList ol, int availableArea) {
+    public Event(String title, String location, String description, CustomDate startDate, CustomDate endDate, CustomDate submissionStartDate, CustomDate submissionEndDate, String eventType, FAEList fl, OrganizerList ol, int availableArea) {
         this.title = title;
         this.location = location;
         this.description = description;
@@ -107,56 +107,56 @@ public class Event implements Serializable {
     /**
      * @return the startDate
      */
-    public Date getStartDate() {
+    public CustomDate getStartDate() {
         return startDate;
     }
 
     /**
      * @param startDate the startDate to set
      */
-    public void setStartDate(Date startDate) {
+    public void setStartDate(CustomDate startDate) {
         this.startDate = startDate;
     }
 
     /**
      * @return the endDate
      */
-    public Date getEndDate() {
+    public CustomDate getEndDate() {
         return endDate;
     }
 
     /**
      * @param endDate the endDate to set
      */
-    public void setEndDate(Date endDate) {
+    public void setEndDate(CustomDate endDate) {
         this.endDate = endDate;
     }
 
     /**
      * @return the submissionStartDate
      */
-    public Date getSubmissionStartDate() {
+    public CustomDate getSubmissionStartDate() {
         return submissionStartDate;
     }
 
     /**
      * @param submissionStartDate the submissionStartDate to set
      */
-    public void setSubmissionStartDate(Date submissionStartDate) {
+    public void setSubmissionStartDate(CustomDate submissionStartDate) {
         this.submissionStartDate = submissionStartDate;
     }
 
     /**
      * @return the submissionEndDate
      */
-    public Date getSubmissionEndDate() {
+    public CustomDate getSubmissionEndDate() {
         return submissionEndDate;
     }
 
     /**
      * @param submissionEndDate the submissionEndDate to set
      */
-    public void setSubmissionEndDate(Date submissionEndDate) {
+    public void setSubmissionEndDate(CustomDate submissionEndDate) {
         this.submissionEndDate = submissionEndDate;
     }
 

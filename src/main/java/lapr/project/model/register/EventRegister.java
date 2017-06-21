@@ -9,7 +9,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import lapr.project.model.Event;
-import lapr.project.utils.Date;
+import lapr.project.utils.CustomDate;
 
 /**
  *
@@ -42,7 +42,7 @@ public class EventRegister implements Serializable{
     }
 
     //    public List<Event> getAvailableEvents() {
-//        Date
+//        CustomDate
 //        for (Event event : eventRegister) {
 //            if (event.getSubmissionStartDate())
 //        }
@@ -56,7 +56,7 @@ public class EventRegister implements Serializable{
         this.events = el;
     }
 
-    public boolean validateEventData(String title, String location, String description, Date startDate, Date endDate, Date submissionStartDate, Date submissionEndDate, String eventType, FAEList fl, OrganizerList ol, int availableArea) {
+    public boolean validateEventData(String title, String location, String description, CustomDate startDate, CustomDate endDate, CustomDate submissionStartDate, CustomDate submissionEndDate, String eventType, FAEList fl, OrganizerList ol, int availableArea) {
         return true;
     }
 
