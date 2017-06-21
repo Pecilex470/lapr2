@@ -6,6 +6,7 @@ import lapr.project.model.register.EncryptionRegister;
 import lapr.project.model.register.EventRegister;
 import lapr.project.model.register.UserRegister;
 import lapr.project.model.register.RepresentativeRegister;
+import org.apache.commons.math3.distribution.NormalDistribution;
 
 /**
  *
@@ -211,5 +212,105 @@ public class EventCenter {
         }
         return false;
     }
+    /**
+     * Method that returns all the fae register in the Event Center
+     * 
+     * @return All the fae register in the Event Center 
+     */
+    public List<FAE> getAllFAE(){
+        List<FAE> allFAE = new ArrayList<>();
+        for(int i=0;i<er.getEventList().size();i++){
+            for(int j=0;j<er.getEventList().get(i).getFaeList().getFAEList().size();j++){
+                allFAE.add(er.getEventList().get(i).getFaeList().getFAEList().get(i));
+            }
+         
+        }
+        return allFAE;
+    }
+    
+ 
+    public double getMeanDeviation() {
+        double total = 0;
+        int cont = 0;
+        double global = getGlobalAcceptanceRate();
+        for (FAE fae : getAllFAE()) {
+            total += Math.abs(fae.getMeanRating() - global);
+            cont++;
+        }
+
+        if (cont != 0) {
+            return total / cont ;
+        }
+        return -1;
+    }
+    
+    /**
+     * Method that returns the Z-test that is any statistical test for which the distribution of the test statistic under the null hypothesis can be approximated by a normal distribution.In this case, used a Z-test for the mean deviation.
+     * 
+     * @return Z-test 
+     */
+    public double getZ(FAE fae) {
+        double mDev = getMeanDeviation();
+        int total = getAllFAE().size();
+        double standardDeviation = fae.getStandardDeviation();
+        double z = (mDev - 1) / (standardDeviation / Math.sqrt(total));
+
+        return z;
+    }
+    
+     /**
+     * Method that returns the Z-test that is any statistical test for which the distribution of the test statistic under the null hypothesis can be approximated by a normal distribution.In this case, used a Z-test to compare two mean deviations.
+     * 
+     *@param e Second FAE to get the info for the second mean deviation and standard deviation.
+     * 
+     * @return 
+     */
+    public double getZ2MeanDeviations(FAE e,FAE fae) {
+        double mDev1 = getMeanDeviation();
+        int total = getAllFAE().size();
+        double standardDeviation = e.getStandardDeviation();
+        double mDev2 = getMeanDeviation();
+        int total2 = fae.getAttributionList().size();
+        double standardDeviation2 = fae.getStandardDeviation();
+        double z = (mDev1 - mDev2) / Math.sqrt((standardDeviation / total) + (standardDeviation2 / total2));
+        return z;
+    }
+    
+    /**
+     * Method that returns the decision of the test where if the difference between FAE Mean Deviation and the number 1(Mean Deviation) is equal or not.
+     * 
+     * @return Decision(Yes or No)
+     */
+    public String testTheDifferenceBetweenTheMeanDeviationAndATheoreticalValue1ForAFAEAverageRating(String a) {
+        NormalDistribution p = new NormalDistribution();
+        double sv = Double.parseDouble(a);
+        double zc = p.inverseCumulativeProbability(1 - sv);
+        double z = getMeanDeviation();
+        if (z > zc) {
+            return "Yes";
+        } else {
+            return "No";
+        }
+    }
+    
+       /**
+     *  Method that returns the decision of the test where we check if the difference between two FAE Mean Deviations is equal or not with a significance level equal to 1%.
+     * 
+     * @param e Second event to get is Z-test
+     * 
+     * @return Decision(Yes or No) 
+     */
+    public String TestingTheDifferenceBetweenTwoFAEsMeanDeviationsA1(FAE e,FAE fae,String a) {
+        NormalDistribution p = new NormalDistribution();
+        double sv = Double.parseDouble(a);
+        double zc = p.inverseCumulativeProbability(1 - (sv / 2.));
+        double z = getZ2MeanDeviations(e,fae);
+        if (z < -zc && z > zc) {
+            return "Yes";
+        } else {
+            return "No";
+        }
+    }
+
 
 }

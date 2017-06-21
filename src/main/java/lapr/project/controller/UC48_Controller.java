@@ -36,15 +36,6 @@ public class UC48_Controller {
         return ec.getEventRegister().getEventList();
     }
     
-    /**
-     * Method to get the mean deviation
-     * 
-     * @param e - Event
-     * @param fae - FAE
-     * @return mean deviation
-     */
-    public double getMeanDeviation(Event e, FAE fae){
-        return e.getFaeList().getMeanDeviation(e, fae);
-    }
+   
     
 }

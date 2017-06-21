@@ -35,7 +35,6 @@ public class UC44_2_UI extends javax.swing.JFrame {
      *
      */
     public UC44_2_UI(EventCenter ec, List<Event> events, String[] a) {
-
         this.ec = ec;
         this.c = new UC44_Controller(ec);
         this.events = events;
@@ -75,12 +74,25 @@ public class UC44_2_UI extends javax.swing.JFrame {
 
             },
             new String [] {
-                "t", "Title 2", "Title 3", "Title 4", "t5"
+                "Event", "Proportion of submittions accepted in ni ", "Critical Value", "Significance level", "Observed Value of test statistic", "Decision(Yes or No)"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         Back.setText("Back");
+        Back.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BackActionPerformed(evt);
+            }
+        });
 
         Inserir.setText("Inserir");
         Inserir.addActionListener(new java.awt.event.ActionListener() {
@@ -93,19 +105,23 @@ public class UC44_2_UI extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1147, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(Inserir)
                 .addGap(66, 66, 66)
                 .addComponent(Back)
                 .addGap(70, 70, 70))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(7, 7, 7)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 104, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Back)
                     .addComponent(Inserir))
@@ -122,18 +138,26 @@ public class UC44_2_UI extends javax.swing.JFrame {
         double cv;
         double eve;
         String decision;
+        String title;
         for (int i = 0; i < events.size(); i++) {
+            System.out.print(events.get(i).getTitle());
+            title = events.get(i).getTitle();
             e = events.get(i).getAcceptanceRate();
             sl = getSignificanceLevel(events.get(i));
             cv  = events.get(i).criticalValue(sl);
             eve = events.get(i).getZUni();
             decision = events.get(i).testAcceptanceRate50(sl);
-            val.addRow(new Object[]{e,sl,cv,eve,decision});
+            val.addRow(new Object[]{title,e,sl,cv,eve,decision});
         }
     
     
         
     }//GEN-LAST:event_InserirActionPerformed
+
+    private void BackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackActionPerformed
+         new UC44_1_UI(ec);
+        dispose();
+    }//GEN-LAST:event_BackActionPerformed
 
     
     

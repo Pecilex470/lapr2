@@ -17,19 +17,16 @@ import lapr.project.model.register.FAEList;
  */
 public class UC49_Controller {
     EventCenter ec;
-    FAEList faeL;
+    List<FAE> allFAE;
     
     public UC49_Controller(EventCenter ec){
         this.ec=ec;
     }
     
-    public List<Event> getEvenList() {
-        return ec.getEventRegister().getEventList();
-    }
     
-    public List<FAE> getFAEList(Event e) {
-        faeL= e.getFaeList();
-        return faeL.getFAEList();
+    public List<FAE> getAllFae(EventCenter ec) {
+        allFAE= ec.getAllFAE();
+        return allFAE;
     }
     
 //    public boolean testDifference2Fae(FAE fae) {

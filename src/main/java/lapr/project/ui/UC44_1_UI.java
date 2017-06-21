@@ -27,7 +27,6 @@ public class UC44_1_UI extends javax.swing.JFrame {
     private UC44_Controller c;
      private List<Event> eventSelected = new ArrayList<>();
      private EventCenter ec;
-     private User u;
      private String[] pickedList = new String[0];
      private String[] topList;
      private Double[] a;
@@ -39,10 +38,9 @@ public class UC44_1_UI extends javax.swing.JFrame {
      * @param ec the instance of the event center
      * @param u the user that is using
      */
-    public UC44_1_UI(EventCenter ec, User u) {
+    public UC44_1_UI(EventCenter ec) {
         
         this.ec = ec;
-        this.u = u;
         this.c = new UC44_Controller(ec);
         initComponents();
         this.setVisible(true);
@@ -161,7 +159,7 @@ public class UC44_1_UI extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("Pick the Events to show a a keywords frequency table for each event");
+        jLabel1.setText("Test if the acceptance rate of each event is over 50%");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -180,21 +178,21 @@ public class UC44_1_UI extends javax.swing.JFrame {
                         .addComponent(unpickButton))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(54, 54, 54)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
+                        .addGap(40, 40, 40)
                         .addComponent(jLabel1)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(53, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(21, 21, 21)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(pickButton)
@@ -255,7 +253,7 @@ public class UC44_1_UI extends javax.swing.JFrame {
     }//GEN-LAST:event_pickButtonActionPerformed
     
     private void unpickButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_unpickButtonActionPerformed
-                                                 
+                                        
         
         String event = pickedEventList.getSelectedValue();
         
@@ -295,7 +293,6 @@ public class UC44_1_UI extends javax.swing.JFrame {
       for(int i =0; i<pickedList.length;i++){
          String[] part=pickedList[i].split("-");
          String part1 = part[0];
-          System.out.println(part1);
          eventSelected.add(titleStringToEvent(part1));
       }
        
@@ -358,10 +355,9 @@ public class UC44_1_UI extends javax.swing.JFrame {
         String[] list = new String[pickedList.length - 1];
         
         int flag = 0;
-        for (int i = 0; i < pickedList.length; i++) {
-            
-            if (!eTitle.equals(pickedList[i])) {
-                list[i - flag] = pickedList[i];
+        for (int i = 0; i < pickedList.length; i++){
+           if (!eTitle.equals(pickedList[i])) {
+                list[i - flag] = pickedList[i] ;
             } else {
                 flag++;
             }
@@ -395,8 +391,9 @@ public class UC44_1_UI extends javax.swing.JFrame {
         for (int i = 0; i < topList.length; i++) {
             list[i] = topList[i];
         }
-        
-        list[list.length - 1] = topEvent;
+        String[] part = topEvent.split("-");
+        String part1=part[0];
+        list[list.length - 1] = part1;
         
         topList = new String[topList.length + 1];
         topList = list;

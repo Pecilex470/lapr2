@@ -31,8 +31,6 @@ public class UC50_Controller {
         return faeL.getFAEList();
     }
 
-    public boolean testDifference2Fae(FAE fae1, FAE fae2) {
-        return faeL.testDifference2Fae(fae1, fae2);
-    }
+  
 
 }

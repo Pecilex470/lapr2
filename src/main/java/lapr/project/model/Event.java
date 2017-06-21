@@ -381,6 +381,7 @@ public class Event {
      * Method that returns the decision of the test where we check if the
      * acceptance rate is over 50%.
      *
+     * @param a Significance level
      * @return Decision(Yes or No)
      */
     public String testAcceptanceRate50(String a) {
