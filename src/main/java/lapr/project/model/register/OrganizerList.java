@@ -21,7 +21,7 @@ public class OrganizerList {
     }
     
     public OrganizerList(){
-        
+        this.organizers = new ArrayList<>();
     }
     
     /**

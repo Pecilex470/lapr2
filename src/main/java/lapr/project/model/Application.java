@@ -34,7 +34,7 @@ public class Application implements Importable<Application>, Exportable {
     private User representative;
     private int boothArea;
     private int invitesQuantity;
-    private List<Evaluation> evaluationList;
+    private EvaluationList evaluationList;
 
     /**
      * Constructor for Application

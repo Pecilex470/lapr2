@@ -14,7 +14,6 @@ import lapr.project.model.Encryption;
 import lapr.project.model.Event;
 import lapr.project.model.EventCenter;
 import lapr.project.model.FAE;
-import lapr.project.model.Organizer;
 import lapr.project.model.User;
 
 /**
@@ -111,12 +110,6 @@ public class UC2_UI extends javax.swing.JFrame {
 
         jLabel3.setText("Choose a User to be FAE:");
 
-        userList.setModel(new javax.swing.AbstractListModel<String>() {
-            static final long serialVersionUID = -3387516993124229948L;
-            String[] strings = { "|| SELECT EVENT ||" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         userList.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 userListMouseClicked(evt);
