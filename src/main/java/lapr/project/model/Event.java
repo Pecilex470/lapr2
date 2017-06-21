@@ -1,6 +1,7 @@
 package lapr.project.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import lapr.project.model.register.FAEList;
 import lapr.project.model.register.ApplicationList;
 import lapr.project.model.register.OrganizerList;
@@ -53,6 +54,7 @@ public class Event implements Serializable {
         this.faeList = fl;
         this.organizerList = ol;
         this.availableArea = availableArea;
+        this.standList= new ArrayList<>();
     }
 
     /**
