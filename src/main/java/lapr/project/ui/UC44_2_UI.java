@@ -72,6 +72,7 @@ public class UC44_2_UI extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
+
             new Object [][] {
 
             },
@@ -82,7 +83,7 @@ public class UC44_2_UI extends javax.swing.JFrame {
             boolean[] canEdit = new boolean [] {
                 false, false, false, false, false, false
             };
-
+            static final long serialVersionUID = -3387516993124229948L;
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }

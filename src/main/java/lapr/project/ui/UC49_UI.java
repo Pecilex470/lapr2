@@ -77,7 +77,7 @@ public class UC49_UI extends javax.swing.JFrame {
             boolean[] canEdit = new boolean [] {
                 false, false, false, false, false, false, true
             };
-
+            static final long serialVersionUID = -3387516993124229948L;
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }

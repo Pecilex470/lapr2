@@ -11,6 +11,8 @@ package lapr.project.ui;
  */
 public class UC50_1_UI extends javax.swing.JFrame {
 
+    
+        static final long serialVersionUID = -3387516993124229948L;
     /**
      * Creates new form UC50_UI
      */
@@ -37,6 +39,7 @@ public class UC50_1_UI extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jList1.setModel(new javax.swing.AbstractListModel<String>() {
+            static final long serialVersionUID = -3387516993124229948L;
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
@@ -44,6 +47,7 @@ public class UC50_1_UI extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jList1);
 
         jList2.setModel(new javax.swing.AbstractListModel<String>() {
+            static final long serialVersionUID = -3387516993124229948L;
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
@@ -70,9 +74,9 @@ public class UC50_1_UI extends javax.swing.JFrame {
                                 .addGap(10, 10, 10)
                                 .addComponent(jButton1))
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 222, Short.MAX_VALUE)
+                                .addComponent(jScrollPane1)
                                 .addComponent(jScrollPane2)))))
-                .addContainerGap(197, Short.MAX_VALUE))
+                .addContainerGap(161, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

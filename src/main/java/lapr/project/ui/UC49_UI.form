@@ -73,16 +73,8 @@
       <SubComponents>
         <Component class="javax.swing.JTable" name="Table1">
           <Properties>
-            <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="7" rowCount="0">
-                <Column editable="false" title="FAE" type="java.lang.Object"/>
-                <Column editable="false" title="Number of Submissions" type="java.lang.Object"/>
-                <Column editable="false" title="FAE Mean Rating" type="java.lang.Object"/>
-                <Column editable="false" title="Deviation Mean" type="java.lang.Object"/>
-                <Column editable="false" title="Standard Deviation" type="java.lang.Object"/>
-                <Column editable="false" title="Observed Value of test statistic" type="java.lang.Object"/>
-                <Column editable="true" title="Decision(Yes or No)" type="java.lang.Object"/>
-              </Table>
+            <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="new javax.swing.table.DefaultTableModel(&#xa;    new Object [][] {&#xa;&#xa;    },&#xa;    new String [] {&#xa;        &quot;FAE&quot;, &quot;Number of Submissions&quot;, &quot;FAE Mean Rating&quot;, &quot;Deviation Mean&quot;, &quot;Standard Deviation&quot;, &quot;Observed Value of test statistic&quot;, &quot;Decision(Yes or No)&quot;&#xa;    }&#xa;) {&#xa;    boolean[] canEdit = new boolean [] {&#xa;        false, false, false, false, false, false, true&#xa;    };&#xa;    static final long serialVersionUID = -3387516993124229948L;&#xa;    public boolean isCellEditable(int rowIndex, int columnIndex) {&#xa;        return canEdit [columnIndex];&#xa;    }&#xa;}" type="code"/>
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
               <TableColumnModel selectionModel="0">
