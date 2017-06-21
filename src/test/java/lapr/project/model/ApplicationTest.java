@@ -137,11 +137,11 @@ public class ApplicationTest {
      * Test of getDecision method, of class Application.
      */
     @Test
-    public void testGetDecision() {
+    public void testGetDecisionStatus() {
         System.out.println("getDecision");
         Application instance = new Application();
         int expResult = 0;
-        int result = instance.getDecision();
+        int result = instance.getDecisionStatus();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
@@ -192,11 +192,11 @@ public class ApplicationTest {
      * Test of setDecision method, of class Application.
      */
     @Test
-    public void testSetDecision() {
+    public void testSetDecisionStatus() {
         System.out.println("setDecision");
         int dec = 0;
         Application instance = new Application();
-        instance.setDecision(dec);
+        instance.setDecisionStatus(dec);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
