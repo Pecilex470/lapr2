@@ -44,9 +44,6 @@ public class Main {
             ec = createInitialComponents();
         }
 
-        System.out.println(ec);
-        
-        
         createEventManager(ec);
         addOrganizers(ec);
 
@@ -86,9 +83,7 @@ public class Main {
         List<Organizer> organizerListEvent2 = new ArrayList<>();
         eventRegister.getEventList().add(new Event(EVENT2, "Porto", "a musical gathering", new Date(13, 11, 2017), new Date(14, 11, 2017), new Date(1, 11, 2017), new Date(12, 11, 2017), "exibition", new FAEList(FAEListEvent2), new OrganizerList(organizerListEvent2), 150));
         /////////////////////////////////////////////////////////////
-
-        ///////// EVENT 3 //////////////////////////////////////////
-        /////////////////////////////////////////////////////////////
+        
         UserRegister userRegister = new UserRegister(ur);
         RepresentativeRegister representativeRegister = new RepresentativeRegister(rr);
         EncryptionRegister encryptionRegister = new EncryptionRegister(enr);

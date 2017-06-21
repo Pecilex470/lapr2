@@ -1,16 +1,6 @@
 package lapr.project.model;
 
 import java.io.Serializable;
-import lapr.project.utils.Exportable;
-import lapr.project.utils.Importable;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
 
 /**
  * Represents a keyword.

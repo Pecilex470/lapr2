@@ -44,10 +44,10 @@ public class ExportData {
             ObjectInputStream in = new ObjectInputStream(test);
             try {
                 ec = (EventCenter) in.readObject();
-
+            } catch (Exception e) {
+                System.out.println("ERROR");
             } finally {
                 in.close();
-                return ec;
             }
         } catch (IOException ex) {
             System.out.println("ERROR");
