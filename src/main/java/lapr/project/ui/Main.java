@@ -55,6 +55,13 @@ public class Main {
 
         }
 
+//        for (User u: ec.getUserRegister().getUsers()) {
+//            System.out.println(u.getName());
+//            System.out.println(u.getEmail());
+//            System.out.println(u.getPassword());
+//            System.out.println(u.getUsername());
+//        }
+        
         new InitialWindow_UI(ec);
 
     }
