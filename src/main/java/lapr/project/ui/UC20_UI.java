@@ -21,6 +21,8 @@ import lapr.project.utils.ExportData;
  * @author Cerqueira
  */
 public class UC20_UI extends javax.swing.JFrame {
+    
+    static final long serialVersionUID = -3387516993124229948L;
 
     EventCenter ec;
     User u;
@@ -88,6 +90,7 @@ public class UC20_UI extends javax.swing.JFrame {
         jLabel2.setText("Available Area");
 
         eventListUI.setModel(new javax.swing.AbstractListModel<String>() {
+            static final long serialVersionUID = -3387516993124229948L;
             String[] strings = listEvents();
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
