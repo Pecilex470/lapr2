@@ -52,9 +52,9 @@ public class Application implements Importable<Application>, Exportable {
         this.decision = DEFAULT_DECISION;
         this.companyName = companyName;
         this.representative = representative;
-        this.boothArea=boothArea;
-        this.invitesQuantity=invitesQuantity;
-        
+        this.boothArea = boothArea;
+        this.invitesQuantity = invitesQuantity;
+
     }
 
     /**
@@ -252,15 +252,19 @@ public class Application implements Importable<Application>, Exportable {
     public void setRepresentative(User representative) {
         this.representative = representative;
     }
-    
-    public void setBoothArea(int area){
-        this.boothArea=area;
-    }
-    
-    public void setInvitesQuantity(int invitesQuantity){
-        this.invitesQuantity=invitesQuantity;
+
+    public void setBoothArea(int area) {
+        this.boothArea = area;
     }
 
+    /**
+     * this method gets the invites quantity
+     *
+     * @param invitesQuantity the quantity of the invites
+     */
+    public void setInvitesQuantity(int invitesQuantity) {
+        this.invitesQuantity = invitesQuantity;
+    }
 
     /**
      * @return the boothArea
@@ -276,7 +280,18 @@ public class Application implements Importable<Application>, Exportable {
         return invitesQuantity;
     }
 
-    public void setEvaluationList(List<Evaluation> list){
-        this.evaluationList=list;
+    public void setEvaluationList(List<Evaluation> list) {
+        this.evaluationList = list;
+    }
+
+    /**
+     * This method gets the application information and converts it into a
+     * formatted string
+     *
+     * @return returns the formatted string
+     */
+    @Override
+    public String toString() {
+        return "hello";
     }
 }

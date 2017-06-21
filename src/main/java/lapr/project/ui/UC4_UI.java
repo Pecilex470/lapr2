@@ -142,6 +142,11 @@ public class UC4_UI extends javax.swing.JFrame {
         jLabel9.setText("Short justification:");
 
         decideButton.setText("Decide");
+        decideButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                decideButtonActionPerformed(evt);
+            }
+        });
 
         cancelButton.setText("Cancel");
         cancelButton.addActionListener(new java.awt.event.ActionListener() {
@@ -268,6 +273,8 @@ public class UC4_UI extends javax.swing.JFrame {
 
     private void applicationListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_applicationListMouseClicked
         this.selectedApplication = ec.getEventRegister().getEventList().get(eventList.getSelectedIndex()).getApplicationList().getApplications().get(applicationList.getSelectedIndex());
+
+        selectedApplication.toString();
     }//GEN-LAST:event_applicationListMouseClicked
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
@@ -276,6 +283,18 @@ public class UC4_UI extends javax.swing.JFrame {
             new MainWindow(u, ec);
         }
     }//GEN-LAST:event_cancelButtonActionPerformed
+
+    private void decideButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_decideButtonActionPerformed
+        if (!(applicationList.getSelectedIndex() == -1)) {
+            if (!(justificationField.getText().equals(""))) {
+
+            } else {
+                JOptionPane.showMessageDialog(UC4_UI.this, "Please provide a short justification", "Error", JOptionPane.OK_OPTION);
+            }
+        } else {
+            JOptionPane.showMessageDialog(UC4_UI.this, "Please select an Application", "Error", JOptionPane.OK_OPTION);
+        }
+    }//GEN-LAST:event_decideButtonActionPerformed
 
     /**
      * This method returns the whole event list to use in the JList
