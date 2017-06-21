@@ -71,7 +71,7 @@ public class ApplicationList implements Serializable{
     /**
      *
      * This method calculates and returns the accepted applications list using
-     * the getDecision method for each application.
+ the getDecisionStatus method for each application.
      *
      * @return accepted applications list
      */
@@ -80,7 +80,7 @@ public class ApplicationList implements Serializable{
         List<Application> acceptedApplicationRegister = new ArrayList<>();
 
         for (Application a : applications) {
-            if (a.getDecision() == 1) {
+            if (a.getDecisionStatus() == 1) {
                 acceptedApplicationRegister.add(a);
             }
         }
