@@ -1,6 +1,8 @@
 package lapr.project.ui;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 import lapr.project.controller.UC6_Controller;
@@ -30,15 +32,16 @@ public class Main {
 
     /**
      * @param args the command line arguments
+     * @throws java.io.FileNotFoundException
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
 
         EventCenter ec = new EventCenter();
         if (new File("test.bin").exists()) {
             try {
                 ec = ExportData.deserialization();
             } catch (Exception e) {
-                e.printStackTrace();
+                e.printStackTrace(new PrintStream(new File("log.txt")));
             }
         } else {
             ec = createInitialComponents();

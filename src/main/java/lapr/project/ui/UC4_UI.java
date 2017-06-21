@@ -285,8 +285,8 @@ public class UC4_UI extends javax.swing.JFrame {
     }//GEN-LAST:event_cancelButtonActionPerformed
 
     private void decideButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_decideButtonActionPerformed
-        if (!(applicationList.getSelectedIndex() == -1)) {
-            if (!(justificationField.getText().equals(""))) {
+        if (applicationList.getSelectedIndex() != -1) {
+            if (!(("").equals(justificationField.getText()))) {
 
             } else {
                 JOptionPane.showMessageDialog(UC4_UI.this, "Please provide a short justification", "Error", JOptionPane.OK_OPTION);
