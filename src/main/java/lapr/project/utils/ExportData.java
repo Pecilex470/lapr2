@@ -7,6 +7,7 @@ package lapr.project.utils;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -19,17 +20,16 @@ import lapr.project.model.EventCenter;
  * @author Luis
  */
 public class ExportData {
-    
+
     private static final String ERROR = "ERROR";
+    static String fileName = "test.bin";
 
     private ExportData() {
         throw new IllegalStateException("Utility class");
     }
 
-    static String fileName = "test.bin";
-
     //use to close the program
-    public static void serialization(EventCenter ec) {
+    public static void serialization(EventCenter ec) throws FileNotFoundException {
         try {
             FileOutputStream teste = new FileOutputStream(fileName);
             ObjectOutputStream out = new ObjectOutputStream(teste);
@@ -38,9 +38,10 @@ public class ExportData {
 
             } finally {
                 out.close();
+                teste.close();
             }
         } catch (IOException ex) {
-            System.out.println(ex);
+            ex.printStackTrace(new PrintWriter("log.txt"));
             System.out.println(ERROR);
         }
     }

@@ -52,11 +52,11 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
               <Component id="titleLabel" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="71" max="32767" attributes="0"/>
+              <EmptySpace pref="59" max="32767" attributes="0"/>
               <Component id="usernameTextField" min="-2" pref="33" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="passwordTextField" min="-2" pref="33" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
               <Component id="loginButton" min="-2" pref="49" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>

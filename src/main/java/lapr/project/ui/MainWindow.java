@@ -5,6 +5,9 @@
  */
 package lapr.project.ui;
 
+import java.io.FileNotFoundException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import static javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE;
 import lapr.project.controller.UC6_Controller;
@@ -23,7 +26,7 @@ public class MainWindow extends javax.swing.JFrame {
 
     User u;
     EventCenter ec;
-    UC6_Controller c = new UC6_Controller(ec);
+    UC6_Controller c;
 
     /**
      * Creates new form MainWindow
@@ -34,7 +37,7 @@ public class MainWindow extends javax.swing.JFrame {
     public MainWindow(User u, EventCenter ec) {
         this.u = u;
         this.ec = ec;
-        this.c = c;
+        this.c = new UC6_Controller(ec);
         initComponents();
         this.setVisible(true);
         setLocationRelativeTo(null);
@@ -43,7 +46,11 @@ public class MainWindow extends javax.swing.JFrame {
             @Override
             public void windowClosing(java.awt.event.WindowEvent windowEvent) {
                 if (JOptionPane.showConfirmDialog(MainWindow.this, "Do you wish to exit?", "Close", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
-                    ExportData.serialization(ec);
+                    try {
+                        ExportData.serialization(ec);
+                    } catch (FileNotFoundException ex) {
+                        Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                     dispose();
                 }
             }

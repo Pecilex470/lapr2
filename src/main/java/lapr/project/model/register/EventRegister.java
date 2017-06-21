@@ -9,7 +9,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import lapr.project.model.Event;
-import lapr.project.model.User;
 import lapr.project.utils.Date;
 
 /**

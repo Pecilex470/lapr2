@@ -8,10 +8,9 @@ import java.util.List;
 import lapr.project.utils.Date;
 import org.apache.commons.math3.distribution.NormalDistribution;
 
-public class Event implements Serializable{
+public class Event implements Serializable {
 
-    
-     static final long serialVersionUID = 6;
+    static final long serialVersionUID = 6;
     private String title;
     private String location;
     private String description;
@@ -203,9 +202,7 @@ public class Event implements Serializable{
         int accepted = applicationList.getAcceptedApplicationRegister().size();
         int total = applicationList.getApplications().size();
 
-        double acceptanceRate = (double) (accepted * 100) / (double) total;
-
-        return acceptanceRate;
+        return (double) (accepted * 100) / (double) total;
 
     }
 
@@ -313,10 +310,11 @@ public class Event implements Serializable{
     public List<Stand> getAvailableStands() {
         List<Stand> aL = null;
         for (Stand stand : this.standList) {
-            if (stand.getAvailable() == true) {
+            if (stand.getAvailable()) {
                 try {
                     aL.add(stand);
                 } catch (NullPointerException e) {
+                    throw (new NullPointerException("Stand is null"));
                 }
             }
         }
@@ -340,11 +338,10 @@ public class Event implements Serializable{
      * @return Z-test
      */
     public double getZUni() {
-        double Ho = 0.5;
+        double ho = 0.5;
         double acceptanceRate = (getAcceptanceRate() / 100.);
         int total = getApplicationList().getApplications().size();
-        double z = (acceptanceRate - Ho) / Math.sqrt((Ho * (1 - Ho)) / total);
-        return z;
+        return (acceptanceRate - ho) / Math.sqrt((ho * (1 - ho)) / total);
     }
 
     /**
@@ -359,18 +356,18 @@ public class Event implements Serializable{
     public double getZBil(Event e) {
         double acceptanceRate1 = (getAcceptanceRate() / 100.);
         double acceptanceRate2 = (e.getAcceptanceRate() / 100.);
-        double Ho = acceptanceRate1 - acceptanceRate2;
+        double ho = acceptanceRate1 - acceptanceRate2;
         int total1 = getApplicationList().getApplications().size();
         int total2 = e.getApplicationList().getApplications().size();
-        double z = Ho / (Math.sqrt((acceptanceRate1 * (1 - acceptanceRate1)) / total1) + Math.sqrt((acceptanceRate2 * (1 - acceptanceRate2)) / total2));
+        double z = ho / (Math.sqrt((acceptanceRate1 * (1 - acceptanceRate1)) / total1) + Math.sqrt((acceptanceRate2 * (1 - acceptanceRate2)) / total2));
         return z;
     }
 
     public double criticalValue(String a) {
         NormalDistribution p = new NormalDistribution();
         double sv = Double.parseDouble(a);
-        double zc = p.inverseCumulativeProbability(1 - sv);
-        return zc;
+        return p.inverseCumulativeProbability(1 - sv);
+
     }
 
     /**
@@ -437,17 +434,11 @@ public class Event implements Serializable{
     }
 
     public boolean checkIFUserIsFAE(User u) {
-        if (Event.this.isFAE(u)) {
-            return true;
-        }
-        return false;
+        return Event.this.isFAE(u);
     }
 
     public boolean checkIFUserIsOrganizer(User u) {
-        if (Event.this.isOrganizer(u)) {
-            return true;
-        }
-        return false;
+        return Event.this.isOrganizer(u);
     }
 
     public void addArea(int area) {

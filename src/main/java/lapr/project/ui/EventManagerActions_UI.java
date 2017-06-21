@@ -5,6 +5,9 @@
  */
 package lapr.project.ui;
 
+import java.io.FileNotFoundException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import static javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE;
 import lapr.project.controller.UC43_Controller;
@@ -47,9 +50,12 @@ public class EventManagerActions_UI extends javax.swing.JFrame {
             public void windowClosing(java.awt.event.WindowEvent windowEvent) {
 
                 if (JOptionPane.showConfirmDialog(EventManagerActions_UI.this, "Do you wish to exit without saving?", "Close", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
-                    ExportData.serialization(ec);
                     dispose();
-
+                    try {
+                        ExportData.serialization(ec);
+                    } catch (FileNotFoundException ex) {
+                        Logger.getLogger(EventManagerActions_UI.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
 
             }
@@ -212,7 +218,7 @@ public class EventManagerActions_UI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void uc1ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uc1ButtonActionPerformed
-        new UC1_UI(ec);
+        new UC1_UI(ec, u);
     }//GEN-LAST:event_uc1ButtonActionPerformed
 
     private void uc42ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uc42ButtonActionPerformed
