@@ -20,6 +20,7 @@ import lapr.project.model.User;
 import lapr.project.model.register.FAEList;
 import lapr.project.model.register.OrganizerList;
 import lapr.project.utils.Date;
+import lapr.project.utils.ExportData;
 
 /**
  *
@@ -54,6 +55,7 @@ public class UC1_UI extends javax.swing.JDialog {
             @Override
             public void windowClosing(java.awt.event.WindowEvent windowEvent) {
                 if (JOptionPane.showConfirmDialog(UC1_UI.this, "Do you wish to exit without saving?", "Close", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
+                    ExportData.serialization(ec);
                     dispose();
                 }
             }

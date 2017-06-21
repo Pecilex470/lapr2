@@ -45,16 +45,15 @@ public class Main {
             }
         } else {
             ec = createInitialComponents();
+            createEventManager(ec);
+            addOrganizers(ec);
+            ///////////// IMPORT FROM XML FILE
+            ImportEventData impEvent = new ImportEventData(ec);
+
+            ec.getEventRegister().getEventList().add(impEvent.readEvent());
+            /////////////
+
         }
-
-        createEventManager(ec);
-        addOrganizers(ec);
-
-        ///////////// IMPORT FROM FILE
-        ImportEventData impEvent = new ImportEventData(ec);
-
-        ec.getEventRegister().getEventList().add(impEvent.readEvent());
-        /////////////
 
         new InitialWindow_UI(ec);
 
@@ -86,7 +85,7 @@ public class Main {
         List<Organizer> organizerListEvent2 = new ArrayList<>();
         eventRegister.getEventList().add(new Event(EVENT2, "Porto", "a musical gathering", new Date(13, 11, 2017), new Date(14, 11, 2017), new Date(1, 11, 2017), new Date(12, 11, 2017), "exibition", new FAEList(FAEListEvent2), new OrganizerList(organizerListEvent2), 150));
         /////////////////////////////////////////////////////////////
-        
+
         UserRegister userRegister = new UserRegister(ur);
         RepresentativeRegister representativeRegister = new RepresentativeRegister(rr);
         EncryptionRegister encryptionRegister = new EncryptionRegister(enr);
