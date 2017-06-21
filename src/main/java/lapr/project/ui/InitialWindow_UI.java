@@ -171,11 +171,11 @@ public class InitialWindow_UI extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(32, 32, 32)
                 .addComponent(titleLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
                 .addComponent(usernameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(passwordTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20)
+                .addGap(32, 32, 32)
                 .addComponent(loginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1)
@@ -264,7 +264,7 @@ public class InitialWindow_UI extends javax.swing.JFrame {
 
     private void passwordTextFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_passwordTextFieldFocusGained
 
-        if(passwordTextField.getText().equals("Password")){
+        if(Encryption.assemblePassword(passwordTextField.getPassword()).equals("Password")){
         passwordTextField.setText("");
         passwordTextField.setForeground(new java.awt.Color(60, 60, 60));
         }
@@ -272,7 +272,7 @@ public class InitialWindow_UI extends javax.swing.JFrame {
     }//GEN-LAST:event_passwordTextFieldFocusGained
 
     private void passwordTextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_passwordTextFieldFocusLost
-        if (passwordTextField.getText().equals("")) {
+        if (Encryption.assemblePassword(passwordTextField.getPassword()).equals("")) {
             passwordTextField.setForeground(new java.awt.Color(153, 153, 153));
 
             passwordTextField.setText("Password");

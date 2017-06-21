@@ -38,17 +38,19 @@ public class UC1_UI extends javax.swing.JDialog {
     SimpleDateFormat d = new SimpleDateFormat("dd/MM/yyyy");
     private UC1_Controller c;
     private String[] topList;
+    private User u;
 
     /**
      * Creates new form UC1_Dialog
      *
      * @param ec the instance of the event center
      */
-    public UC1_UI(EventCenter ec) {
+    public UC1_UI(EventCenter ec, User u) {
 
         this.ec = ec;
         this.c = new UC1_Controller(ec);
         this.topList = initialUserList();
+        this.u = u;
 
         initComponents();
         this.setVisible(true);

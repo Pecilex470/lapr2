@@ -17,6 +17,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import lapr.project.model.Application;
 import lapr.project.model.Attribution;
 import lapr.project.model.Decision;
+import lapr.project.model.Encryption;
 import lapr.project.model.Event;
 import lapr.project.model.EventCenter;
 import lapr.project.model.FAE;
@@ -37,7 +38,9 @@ import org.xml.sax.SAXException;
  */
 public class ImportEventData {
 
-    private static final String fileName = "eventData.xml";
+    private static final String DEFAULT_KEYWORD = "zebras";
+    private static final int DEFAULT_SHIFT = 6;
+    private static final String FILE_NAME = "eventData.xml";
     EventCenter ec;
     Node event;
     Document docXML;
@@ -49,7 +52,7 @@ public class ImportEventData {
 
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
-            docXML = builder.parse(new File(fileName));
+            docXML = builder.parse(new File(FILE_NAME));
 
             this.event = docXML.getFirstChild();
 
@@ -396,11 +399,15 @@ public class ImportEventData {
 
                                                         case "name":
 
-                                                            newUser.setName(elAtributes.getTextContent());
+                                                            String temp = Encryption.encryptData(elAtributes.getTextContent(), DEFAULT_KEYWORD);
+                                                            temp = Encryption.encryptPassword(temp, DEFAULT_SHIFT, Encryption.ABC);
+                                                            newUser.setName(temp);
                                                             break;
                                                         case "email":
-
-                                                            newUser.setEmail(elAtributes.getTextContent());
+                                                            
+                                                            temp = Encryption.encryptData(elAtributes.getTextContent(), DEFAULT_KEYWORD);
+                                                            temp = Encryption.encryptPassword(temp, DEFAULT_SHIFT, Encryption.ABC);
+                                                            newUser.setEmail(temp);
                                                             break;
                                                         case "username":
 
@@ -409,13 +416,14 @@ public class ImportEventData {
                                                             break;
                                                         case "password":
 
-                                                            newUser.setPassword(elAtributes.getTextContent());
+                                                            temp = Encryption.encryptPassword(elAtributes.getTextContent(), DEFAULT_SHIFT, Encryption.ABC);
+                                                            newUser.setPassword(temp);
                                                             break;
                                                     }
                                                 }
                                             }
                                             ur.getUsers().add(newUser);
-
+                                            ec.getEncryptionRegister().addEncryption(new Encryption(DEFAULT_SHIFT, newUser, DEFAULT_KEYWORD));
                                         }
                                     }
                                 }

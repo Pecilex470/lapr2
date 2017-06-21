@@ -218,7 +218,7 @@ public class EventManagerActions_UI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void uc1ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uc1ButtonActionPerformed
-        new UC1_UI(ec);
+        new UC1_UI(ec, u);
     }//GEN-LAST:event_uc1ButtonActionPerformed
 
     private void uc42ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uc42ButtonActionPerformed

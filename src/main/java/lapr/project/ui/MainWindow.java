@@ -26,7 +26,7 @@ public class MainWindow extends javax.swing.JFrame {
 
     User u;
     EventCenter ec;
-    UC6_Controller c = new UC6_Controller(ec);
+    UC6_Controller c;
 
     /**
      * Creates new form MainWindow
@@ -37,7 +37,7 @@ public class MainWindow extends javax.swing.JFrame {
     public MainWindow(User u, EventCenter ec) {
         this.u = u;
         this.ec = ec;
-        this.c = c;
+        this.c = new UC6_Controller(ec);
         initComponents();
         this.setVisible(true);
         setLocationRelativeTo(null);
