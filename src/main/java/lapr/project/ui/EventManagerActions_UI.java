@@ -21,9 +21,9 @@ import lapr.project.utils.ExportData;
  * @author Pedro
  */
 public class EventManagerActions_UI extends javax.swing.JFrame {
-    
+
     static final long serialVersionUID = -3387516993124229948L;
-    
+
     private EventCenter ec;
     private User u;
     private UC43_Controller uc43;
@@ -31,16 +31,16 @@ public class EventManagerActions_UI extends javax.swing.JFrame {
 
     /**
      * Creates new form EventCenterActions_UI
+     *
      * @param ec the instance of the event center
-     * @param u the user 
+     * @param u the user
      */
     public EventManagerActions_UI(EventCenter ec, User u) {
         this.ec = ec;
         this.u = u;
         uc43 = new UC43_Controller(ec);
         uc46 = new UC46_Controller(ec);
-        
-        
+
         initComponents();
         this.setVisible(true);
         setLocationRelativeTo(null);
@@ -48,7 +48,7 @@ public class EventManagerActions_UI extends javax.swing.JFrame {
         this.addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
             public void windowClosing(java.awt.event.WindowEvent windowEvent) {
-                
+
                 if (JOptionPane.showConfirmDialog(EventManagerActions_UI.this, "Do you wish to exit without saving?", "Close", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
                     dispose();
                     try {
@@ -57,7 +57,7 @@ public class EventManagerActions_UI extends javax.swing.JFrame {
                         Logger.getLogger(EventManagerActions_UI.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
-                
+
             }
         });
     }
@@ -222,11 +222,11 @@ public class EventManagerActions_UI extends javax.swing.JFrame {
     }//GEN-LAST:event_uc1ButtonActionPerformed
 
     private void uc42ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uc42ButtonActionPerformed
-        
+
         dispose();
         new UC42_UI(ec, u);
-        
-        
+
+
     }//GEN-LAST:event_uc42ButtonActionPerformed
 
     private void uc44ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uc44ButtonActionPerformed
@@ -243,18 +243,18 @@ public class EventManagerActions_UI extends javax.swing.JFrame {
     }//GEN-LAST:event_backButtonActionPerformed
 
     private void uc43ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uc43ButtonActionPerformed
-        
+
         JOptionPane.showMessageDialog(EventManagerActions_UI.this, uc43.getGlobalAcceptanceRate() + "% is the Global Acceptance Rate");
-    
+
     }//GEN-LAST:event_uc43ButtonActionPerformed
 
     private void uc46ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uc46ButtonActionPerformed
-        
+
         String username = JOptionPane.showInputDialog(EventManagerActions_UI.this, "Enter the username of the FAE you\n want to know the mean rating of");
-        
+
         uc46.getFAEMeanRating(uc46.getUserByUsername(username));
-        
-        
+
+
     }//GEN-LAST:event_uc46ButtonActionPerformed
 
 

@@ -6,11 +6,15 @@
 package lapr.project.ui;
 
 import java.awt.Color;
+import java.io.FileNotFoundException;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import lapr.project.controller.UC6_Controller;
 import lapr.project.model.Encryption;
 import lapr.project.model.EventCenter;
+import lapr.project.utils.ExportData;
 
 /**
  *
@@ -39,6 +43,11 @@ public class UC6_UI extends javax.swing.JDialog {
             @Override
             public void windowClosing(java.awt.event.WindowEvent windowEvent) {
                 if (JOptionPane.showConfirmDialog(UC6_UI.this, "Do you wish to exit without saving?", "Close", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
+                    try {
+                        ExportData.serialization(ec);
+                    } catch (FileNotFoundException ex) {
+                        Logger.getLogger(UC6_UI.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                     dispose();
                 }
             }
