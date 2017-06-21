@@ -34,13 +34,17 @@ public class Application implements Importable<Application>, Exportable {
     private User representative;
     private int boothArea;
     private int invitesQuantity;
-    private EvaluationList evaluationList;
+    private List<Evaluation> evaluationList;
 
     /**
      * Constructor for Application
      *
      * @param description CandidaturaDescription
      * @param keywordList Keyword List
+     * @param companyName
+     * @param representative
+     * @param boothArea
+     * @param invitesQuantity
      */
     public Application(String description, List<Keyword> keywordList, String companyName, User representative, int boothArea, int invitesQuantity) {
         this.description = description;
