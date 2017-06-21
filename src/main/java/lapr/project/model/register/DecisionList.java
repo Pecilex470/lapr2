@@ -40,8 +40,20 @@ public class DecisionList {
         return decisionList;
     }
 
+    /**
+     * 
+     * @param decisionList 
+     */
     public void setDecisionList(List<Decision> decisionList) {
         this.decisionList = decisionList;
+    }
+    
+    /**
+     * This method adds a new decision to a certain application
+     * @param decision the decision to be added
+     */
+    public void addDecision(Decision decision) {
+        decisionList.add(decision);
     }
 
     /**

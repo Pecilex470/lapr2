@@ -28,7 +28,7 @@ public class UC20_Controller {
     
     /**
      * Method that creats new stand
-     * @param stand - Stand
+     * @param area the area of the stand
      * @return Stand
      */
     public Stand newStand(int area){
