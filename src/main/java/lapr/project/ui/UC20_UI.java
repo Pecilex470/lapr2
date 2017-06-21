@@ -30,7 +30,9 @@ public class UC20_UI extends javax.swing.JFrame {
     String[] eventListWithArea;
 
     /**
-     * Creates new form UC20_UI
+     *
+     * @param ec - EventCenter
+     * @param u - User
      */
     public UC20_UI(EventCenter ec, User u) {
 
@@ -55,7 +57,6 @@ public class UC20_UI extends javax.swing.JFrame {
             }
         });
 
-        avaiAreaLabel.setText(selectedEvent.getAvailableArea() + "");
     }
 
     /**
@@ -232,14 +233,22 @@ public class UC20_UI extends javax.swing.JFrame {
         try {
             int area = Integer.parseInt(areaLabel.getText());
             stand.setArea(area);
-            if (area < selectedEvent.getAvailableArea()) {
-                selectedEvent.setAvailableArea(selectedEvent.getAvailableArea() - area);
-                stand.setDescription(descriptionLabel.getText());
-                JOptionPane.showMessageDialog(UC20_UI.this, "New Stand created!");
-                new OrganizerActions_UI(ec, u);
-                dispose();
-            }else{
-                JOptionPane.showMessageDialog(UC20_UI.this, "Invalid Area. Please insert correct area.");
+            if (selectedEvent != null) {
+                if (area < selectedEvent.getAvailableArea()) {
+                    selectedEvent.setAvailableArea(selectedEvent.getAvailableArea() - area);
+                    stand.setDescription(descriptionLabel.getText());
+                    JOptionPane.showMessageDialog(UC20_UI.this, "New Stand created!");
+
+                    ec.getEventRegister().getEventByTitle(eventListWithArea[eventListUI.getSelectedIndex()]).addStand(stand);
+
+                    new OrganizerActions_UI(ec, u);
+                    dispose();
+
+                } else {
+                    JOptionPane.showMessageDialog(UC20_UI.this, "Invalid Area. Please insert correct area.");
+                }
+            } else {
+                JOptionPane.showMessageDialog(UC20_UI.this, "Select an Event.");
             }
         } catch (NumberFormatException e) {
 
@@ -252,6 +261,7 @@ public class UC20_UI extends javax.swing.JFrame {
     private void eventListUIMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_eventListUIMouseClicked
 
         this.selectedEvent = ec.getEventRegister().getEventByTitle(eventListWithArea[eventListUI.getSelectedIndex()]);
+        avaiAreaLabel.setText("" + selectedEvent.getAvailableArea());
 
 
     }//GEN-LAST:event_eventListUIMouseClicked
