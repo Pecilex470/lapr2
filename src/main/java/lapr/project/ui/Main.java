@@ -1,11 +1,13 @@
 package lapr.project.ui;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import lapr.project.controller.UC6_Controller;
 import lapr.project.model.*;
 import lapr.project.model.register.*;
 import lapr.project.utils.Date;
+import lapr.project.utils.ExportData;
 import lapr.project.utils.ImportEventData;
 
 /**
@@ -16,36 +18,44 @@ public class Main {
     /**
      * Private constructor to hide implicit public one.
      */
-
     private Main() {
 
     }
-    
+
     private static final String EVENT1 = "Bolo do Caco Festival";
     private static final String EVENT2 = "Guns and Roses Festival";
     private static final String ADMIN1 = "admin";
     private static final String ADMIN2 = "sicked";
     private static final String KEYWORD = "zebras";
 
-
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
 
-        EventCenter ec = createInitialComponents();
+        EventCenter ec = new EventCenter();
+        if (new File("test.bin").exists()) {
+            try {
+                ec = ExportData.deserialization();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else {
+            ec = createInitialComponents();
+        }
+
+        System.out.println(ec);
+        
+        
         createEventManager(ec);
         addOrganizers(ec);
-        
+
         ///////////// IMPORT FROM FILE
-       
-        ImportEventData impEvent = new ImportEventData(ec); 
-      
+        ImportEventData impEvent = new ImportEventData(ec);
+
         ec.getEventRegister().getEventList().add(impEvent.readEvent());
         /////////////
-      
-        
-        
+
         new InitialWindow_UI(ec);
 
     }
@@ -53,6 +63,7 @@ public class Main {
     /**
      * method that creates all the lists that the EventCenter holds, and the
      * instance of the EventCenter with those lists
+     *
      * @return returns the event center instance
      */
     public static EventCenter createInitialComponents() {
@@ -64,26 +75,20 @@ public class Main {
 
         EventRegister eventRegister = new EventRegister(er);
 
-        
         ////////// EVENT 1 //////////////////////////////////////////
         List<FAE> FAEListEvent1 = new ArrayList<>();
         List<Organizer> organizerListEvent1 = new ArrayList<>();
         eventRegister.getEventList().add(new Event(EVENT1, "Madeira", "A nice bolo do caco event", new Date(13, 11, 2017), new Date(14, 11, 2017), new Date(1, 11, 2017), new Date(12, 11, 2017), "congress", new FAEList(FAEListEvent1), new OrganizerList(organizerListEvent1), 300));
         /////////////////////////////////////////////////////////////
-        
+
         ///////// EVENT 2 //////////////////////////////////////////
         List<FAE> FAEListEvent2 = new ArrayList<>();
         List<Organizer> organizerListEvent2 = new ArrayList<>();
         eventRegister.getEventList().add(new Event(EVENT2, "Porto", "a musical gathering", new Date(13, 11, 2017), new Date(14, 11, 2017), new Date(1, 11, 2017), new Date(12, 11, 2017), "exibition", new FAEList(FAEListEvent2), new OrganizerList(organizerListEvent2), 150));
         /////////////////////////////////////////////////////////////
-        
+
         ///////// EVENT 3 //////////////////////////////////////////
-        
-      
-         /////////////////////////////////////////////////////////////
-        
-        
-        
+        /////////////////////////////////////////////////////////////
         UserRegister userRegister = new UserRegister(ur);
         RepresentativeRegister representativeRegister = new RepresentativeRegister(rr);
         EncryptionRegister encryptionRegister = new EncryptionRegister(enr);
@@ -98,14 +103,14 @@ public class Main {
         c.registerUser(c.twoLayerEncription("Luís Azevedo", 6, KEYWORD, Encryption.ABC), c.twoLayerEncription("luis@gmail.com", 6, KEYWORD, Encryption.ABC), ADMIN2, c.encryptPassword("Pm-10", 6, Encryption.ABC), true, true);
         c.addEncryption(6, ADMIN2, KEYWORD);
     }
-    
+
     public static void addOrganizers(EventCenter ec) {
         ec.getEventRegister().getEventByTitle(EVENT1).getOrganizerList().getOrganizers().add(new Organizer(ec.getUserRegister().getUserByUsername(ADMIN1)));
         ec.getEventRegister().getEventByTitle(EVENT1).getOrganizerList().getOrganizers().add(new Organizer(ec.getUserRegister().getUserByUsername(ADMIN2)));
-    
+
         ec.getEventRegister().getEventByTitle(EVENT2).getOrganizerList().getOrganizers().add(new Organizer(ec.getUserRegister().getUserByUsername(ADMIN1)));
         ec.getEventRegister().getEventByTitle(EVENT2).getOrganizerList().getOrganizers().add(new Organizer(ec.getUserRegister().getUserByUsername(ADMIN2)));
-    
+
     }
-    
+
 }

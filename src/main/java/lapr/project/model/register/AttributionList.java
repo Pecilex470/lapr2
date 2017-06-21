@@ -5,6 +5,7 @@
  */
 package lapr.project.model.register;
 
+import java.io.Serializable;
 import java.util.List;
 import lapr.project.model.Application;
 import lapr.project.model.Attribution;
@@ -13,7 +14,9 @@ import lapr.project.model.Attribution;
  *
  * @author Luis
  */
-public class AttributionList {
+public class AttributionList implements Serializable{
+    
+     static final long serialVersionUID = 15;
     
     private List<Attribution> l_att;
 

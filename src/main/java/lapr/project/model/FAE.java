@@ -1,9 +1,12 @@
 package lapr.project.model;
 
+import java.io.Serializable;
 import java.util.List;
 import org.apache.commons.math3.distribution.NormalDistribution;
 
-public class FAE {
+public class FAE implements Serializable{
+    
+     static final long serialVersionUID = 8;
 
     /**
      * User that received the role of FAE of a certain event.

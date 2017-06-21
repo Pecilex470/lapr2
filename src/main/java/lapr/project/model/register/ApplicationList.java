@@ -5,6 +5,7 @@
  */
 package lapr.project.model.register;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import lapr.project.model.Application;
@@ -13,7 +14,9 @@ import lapr.project.model.Application;
  *
  * @author Utilizador
  */
-public class ApplicationList {
+public class ApplicationList implements Serializable{
+    
+     static final long serialVersionUID = 14;
 
     /**
      * List that contains all the applications that were submitted to a specific event.

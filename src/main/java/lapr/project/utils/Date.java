@@ -1,7 +1,11 @@
 package lapr.project.utils;
 
-public class Date {
+import java.io.Serializable;
+
+public class Date implements Serializable{
     
+    
+    static final long serialVersionUID = 24;
     private int year;
     private int month;
     private int day;

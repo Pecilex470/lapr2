@@ -6,13 +6,16 @@ import lapr.project.model.register.EncryptionRegister;
 import lapr.project.model.register.EventRegister;
 import lapr.project.model.register.UserRegister;
 import lapr.project.model.register.RepresentativeRegister;
+import java.io.Serializable;
 
 /**
  *
  * @author Cerqueira
  */
-public class EventCenter {
+public class EventCenter implements Serializable {
 
+    
+     static final long serialVersionUID = 7;
     /**
      * Variable that saves the data of each event of the respective event
      * center.

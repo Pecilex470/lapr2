@@ -1,7 +1,10 @@
 package lapr.project.model;
 
-public class Attribution {
+import java.io.Serializable;
 
+public class Attribution implements Serializable{
+
+    static final long serialVersionUID = 2;
     private Application a;
     private Evaluation e;
     private String faeUsername;

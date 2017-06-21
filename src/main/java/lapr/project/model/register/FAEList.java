@@ -5,6 +5,7 @@
  */
 package lapr.project.model.register;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import lapr.project.model.Attribution;
@@ -15,7 +16,9 @@ import lapr.project.model.FAE;
  *
  * @author Utilizador
  */
-public class FAEList {
+public class FAEList implements Serializable{
+    
+     static final long serialVersionUID = 18;
 
     /**
      * List that contains all the faes from a specific event.

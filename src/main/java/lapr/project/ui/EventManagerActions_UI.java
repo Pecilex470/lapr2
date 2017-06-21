@@ -11,6 +11,7 @@ import lapr.project.controller.UC43_Controller;
 import lapr.project.controller.UC46_Controller;
 import lapr.project.model.EventCenter;
 import lapr.project.model.User;
+import lapr.project.utils.ExportData;
 
 /**
  *
@@ -44,8 +45,12 @@ public class EventManagerActions_UI extends javax.swing.JFrame {
         this.addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
             public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+                
+                if (JOptionPane.showConfirmDialog(EventManagerActions_UI.this, "Do you wish to exit without saving?", "Close", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
                     dispose();
-                    new MainWindow(u, ec);
+                    ExportData.serialization(ec);
+                }
+                
             }
         });
     }

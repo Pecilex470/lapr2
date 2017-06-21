@@ -5,6 +5,7 @@
  */
 package lapr.project.model.register;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -15,7 +16,9 @@ import lapr.project.model.Keyword;
  *
  * @author Utilizador
  */
-public class KeywordList {
+public class KeywordList implements Serializable{
+    
+     static final long serialVersionUID = 19;
 
     /**
      * List that contains all the keywords that were submitted to a specific
