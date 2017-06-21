@@ -16,14 +16,13 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import lapr.project.model.Application;
 import lapr.project.model.Attribution;
-import lapr.project.model.Evaluation;
+import lapr.project.model.Decision;
 import lapr.project.model.Event;
 import lapr.project.model.EventCenter;
 import lapr.project.model.FAE;
 import lapr.project.model.Keyword;
 import lapr.project.model.Stand;
 import lapr.project.model.User;
-import lapr.project.model.register.AttributionList;
 import lapr.project.model.register.FAEList;
 import lapr.project.model.register.UserRegister;
 import org.w3c.dom.Document;
@@ -98,7 +97,7 @@ public class ImportEventData {
                         break;
                     case "applicationSet":
 
-                        newEvent.getApplicationList().setApplication(readApplication(element, ur));
+                        newEvent.getApplicationList().setApplicationList(readApplication(element, ur));
                         break;
                 }
             }
@@ -268,7 +267,7 @@ public class ImportEventData {
                         switch (el.getTagName()) {
                             case "reviews":
 
-                                newApp.setEvaluationList(readReviews(el, ur));
+                                newApp.setDecisionList(readReviews(el, ur));
                                 break;
                         }
                     }
@@ -282,9 +281,9 @@ public class ImportEventData {
         return list;
     }
 
-    public List<Evaluation> readReviews(Element element, UserRegister ur) {
+    public List<Decision> readReviews(Element element, UserRegister ur) {
 
-        List<Evaluation> list = new ArrayList<>();
+        List<Decision> list = new ArrayList<>();
 
         NodeList evaList = element.getElementsByTagName("review");
 
@@ -296,7 +295,7 @@ public class ImportEventData {
 
                 NodeList evaAtributes = el.getChildNodes();
 
-                Evaluation eva = new Evaluation();
+                Decision eva = new Decision();
                 for (int j = 0; j < evaAtributes.getLength(); j++) {
 
                     if (evaAtributes.item(j).getNodeType() == Node.ELEMENT_NODE) {
@@ -346,7 +345,7 @@ public class ImportEventData {
         return list;
     }
 
-    public String readAssignment(Element element, UserRegister ur, Evaluation eva) {
+    public String readAssignment(Element element, UserRegister ur, Decision eva) {
 
         NodeList list = element.getElementsByTagName("fae");
 

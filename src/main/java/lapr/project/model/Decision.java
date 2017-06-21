@@ -12,16 +12,19 @@ import java.io.Serializable;
  *
  * @author Utilizador
  */
-public class Evaluation implements Serializable{
+public class Decision implements Serializable {
 
-    
-     static final long serialVersionUID = 5;
+    static final long serialVersionUID = 5;
+
+    private static final double NUMBER_OF_CRITERIA = 4;
+
     /**
      * Parameters that the FAE will use to evaluate the application
      */
-    private int knowledge, adequancy, quantity, overall;
-
-    private int NUMBER_OF_CRITERIA = 4;
+    private int knowledge;
+    private int adequancy;
+    private int quantity;
+    private int overall;
 
     /**
      * Boolean representative of the decision taken by an FAE in relation to a
@@ -46,8 +49,13 @@ public class Evaluation implements Serializable{
      * @param decision Boolean representative of the decision taken by an FAE in
      * relation to a given application.
      * @param justification Text supporting the decision taken.
+     * @param knowledge th knowledge of the FAE abou the event
+     * @param adequancy the adequancy of that application to the Event
+     * @param quantity the adequacy of the invite quantity
+     * @param overall the overall recommendation
+     * @param faeUsername the username of the FAE that made this Decision
      */
-    public Evaluation(boolean decision, String justification, int knowledge, int adequancy, int quantity, int overall, String faeUsername) {
+    public Decision(boolean decision, String justification, int knowledge, int adequancy, int quantity, int overall, String faeUsername) {
         this.decision = decision;
         this.justification = justification;
         this.knowledge = knowledge;
@@ -60,7 +68,7 @@ public class Evaluation implements Serializable{
     /**
      * Creates a Evalution instance with no parameters.
      */
-    public Evaluation() {
+    public Decision() {
 
     }
 
@@ -106,7 +114,7 @@ public class Evaluation implements Serializable{
      * @return the mean rating of this evaluation
      */
     public double getMeanRating() {
-        return (adequancy + overall + knowledge + quantity) / NUMBER_OF_CRITERIA;
+        return (double) (adequancy + overall + knowledge + quantity) / NUMBER_OF_CRITERIA;
     }
 
     public void setKnowledge(int know) {

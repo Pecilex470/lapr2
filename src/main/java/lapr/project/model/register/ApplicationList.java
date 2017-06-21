@@ -9,7 +9,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import lapr.project.model.Application;
-import lapr.project.model.User;
 
 /**
  *
@@ -53,16 +52,6 @@ public class ApplicationList implements Serializable{
     }
 
     /**
-     * Allows to define a list that contains all the applications.
-     *
-     * @param applications List that contains all the applications that were
-     * submitted to a specific event.
-     */
-    public void setApplication(List<Application> applications) {
-        this.applications = applications;
-    }
-
-    /**
      *
      * This method calculates and returns the global mean rating using
      *
@@ -97,6 +86,14 @@ public class ApplicationList implements Serializable{
         }
 
         return acceptedApplicationRegister;
+    }
+
+    /**
+     * sets the list of applications from a preexisting list
+     * @param readApplication the list that is received
+     */
+    public void setApplicationList(List<Application> readApplication) {
+        this.applications = readApplication;
     }
 
 }

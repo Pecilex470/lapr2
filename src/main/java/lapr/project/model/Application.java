@@ -3,6 +3,7 @@ package lapr.project.model;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import lapr.project.model.register.DecisionList;
 
 /**
  * Candidatura class.
@@ -12,9 +13,7 @@ import java.util.List;
 public class Application implements Serializable {
 
     static final long serialVersionUID = 1;
-    private static final String ROOT_ELEMENT_NAME = "application";
-    private static final String DESCRIPTION_ELEMENT_NAME = "description";
-    private static final String KEYWORDS_ELEMENT_NAME = "keywords";
+
     private static final int DEFAULT_DECISION = 0;
     private List<Keyword> keywordList = new ArrayList<>();
     private String description = "";
@@ -26,7 +25,7 @@ public class Application implements Serializable {
     private User representative;
     private int boothArea;
     private int invitesQuantity;
-    private List<Evaluation> evaluationList;
+    private DecisionList decisionList;
 
     /**
      * Constructor for Application
@@ -196,10 +195,6 @@ public class Application implements Serializable {
         return invitesQuantity;
     }
 
-    public void setEvaluationList(List<Evaluation> list) {
-        this.evaluationList = list;
-    }
-
     /**
      * This method gets the application information and converts it into a
      * formatted string
@@ -209,5 +204,9 @@ public class Application implements Serializable {
     @Override
     public String toString() {
         return "hello";
+    }
+
+    public void setDecisionList(List<Decision> readReviews) {
+        decisionList.setDecisionList(readReviews);
     }
 }
