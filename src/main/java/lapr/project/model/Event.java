@@ -1,5 +1,6 @@
 package lapr.project.model;
 
+import java.io.Serializable;
 import lapr.project.model.register.FAEList;
 import lapr.project.model.register.ApplicationList;
 import lapr.project.model.register.OrganizerList;
@@ -7,8 +8,10 @@ import java.util.List;
 import lapr.project.utils.Date;
 import org.apache.commons.math3.distribution.NormalDistribution;
 
-public class Event {
+public class Event implements Serializable{
 
+    
+     static final long serialVersionUID = 6;
     private String title;
     private String location;
     private String description;

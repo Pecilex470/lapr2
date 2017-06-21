@@ -6,6 +6,7 @@
 package lapr.project.model.register;
 
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import lapr.project.model.Representative;
@@ -14,7 +15,9 @@ import lapr.project.model.Representative;
  *
  * @author Utilizador
  */
-public class RepresentativeRegister {
+public class RepresentativeRegister implements Serializable{
+    
+     static final long serialVersionUID = 21;
    /**
      * List that contains all the representatives from a specific event center.
      */

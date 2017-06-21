@@ -6,12 +6,16 @@
  */
 package lapr.project.model;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Utilizador
  */
-public class Evaluation {
+public class Evaluation implements Serializable{
 
+    
+     static final long serialVersionUID = 5;
     /**
      * Parameters that the FAE will use to evaluate the application
      */

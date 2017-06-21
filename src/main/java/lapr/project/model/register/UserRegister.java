@@ -5,9 +5,9 @@
  */
 package lapr.project.model.register;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import lapr.project.controller.UC6_Controller;
 import lapr.project.model.Encryption;
 import lapr.project.model.EventCenter;
 import lapr.project.model.User;
@@ -17,7 +17,9 @@ import lapr.project.utils.LoginDataIncorrect;
  *
  * @author Utilizador
  */
-public class UserRegister {
+public class UserRegister implements Serializable{
+    
+     static final long serialVersionUID = 22;
 
     /**
      * List that contains all the users from a specific event center.

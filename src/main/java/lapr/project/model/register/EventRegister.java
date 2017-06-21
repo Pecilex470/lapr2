@@ -5,6 +5,7 @@
  */
 package lapr.project.model.register;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import lapr.project.model.Event;
@@ -15,7 +16,9 @@ import lapr.project.utils.Date;
  *
  * @author Utilizador
  */
-public class EventRegister {
+public class EventRegister implements Serializable{
+    
+     static final long serialVersionUID = 17;
 
     /**
      * List of events in charge of a given Event Center.
