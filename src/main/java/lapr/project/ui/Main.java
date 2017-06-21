@@ -36,6 +36,16 @@ public class Main {
         EventCenter ec = createInitialComponents();
         createEventManager(ec);
         addOrganizers(ec);
+        
+        ///////////// IMPORT FROM FILE
+       
+        ImportEventData impEvent = new ImportEventData(ec); 
+      
+        ec.getEventRegister().getEventList().add(impEvent.readEvent());
+        /////////////
+      
+        
+        
         new InitialWindow_UI(ec);
 
     }
@@ -69,9 +79,7 @@ public class Main {
         
         ///////// EVENT 3 //////////////////////////////////////////
         
-        ImportEventData impEvent = new ImportEventData(); 
-        eventRegister.getEventList().add(impEvent.readEvent());
-        
+      
          /////////////////////////////////////////////////////////////
         
         

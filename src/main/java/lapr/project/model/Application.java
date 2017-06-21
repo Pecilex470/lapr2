@@ -34,6 +34,7 @@ public class Application implements Importable<Application>, Exportable {
     private User representative;
     private int boothArea;
     private int invitesQuantity;
+    private List<Evaluation> evaluationList;
 
     /**
      * Constructor for Application
@@ -271,4 +272,7 @@ public class Application implements Importable<Application>, Exportable {
         return invitesQuantity;
     }
 
+    public void setEvaluationList(List<Evaluation> list){
+        this.evaluationList=list;
+    }
 }

@@ -74,9 +74,14 @@ public class UC2_UI extends javax.swing.JFrame {
 
         String[] list = new String[ec.getEventsWhereUserIsOrganizer(u).size()];
         int cont = 0;
+        
         for (Event e : ec.getEventsWhereUserIsOrganizer(u)) {
-            list[cont] = e.getTitle();
+           
+                list[cont] = e.getTitle();
             cont++;
+          
+            
+            
         }
         return list;
     }

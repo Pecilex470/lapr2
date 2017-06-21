@@ -19,7 +19,7 @@ public class Event {
     private String eventType;
     private ApplicationList applicationList = new ApplicationList();
     private FAEList faeList;
-    private OrganizerList organizerList;
+    private OrganizerList organizerList = new OrganizerList();
     private int availableArea;
     private List<Stand> standList;
     private List<List<Keyword>> keywordList;
@@ -267,6 +267,7 @@ public class Event {
     public boolean isOrganizer(User u) {
 
         boolean isOrganizer = false;
+    
         for (Organizer o : organizerList.getOrganizers()) {
 
             if (o.getUserOrganizer().getUsername().equals(u.getUsername())) {
@@ -457,5 +458,8 @@ public void setFAEList(FAEList faelist){
         return false;
     }
 
+    public void addArea(int area){
+        this.availableArea+=area;
+    }
 
 }

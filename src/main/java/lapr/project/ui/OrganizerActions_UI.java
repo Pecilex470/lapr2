@@ -159,6 +159,9 @@ public class OrganizerActions_UI extends javax.swing.JFrame {
 
     private void uc2ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uc2ButtonActionPerformed
         dispose();
+        
+        
+        
         new UC2_UI(ec, u);
     }//GEN-LAST:event_uc2ButtonActionPerformed
 
