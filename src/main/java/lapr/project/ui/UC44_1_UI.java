@@ -299,12 +299,13 @@ public class UC44_1_UI extends javax.swing.JFrame {
 
       for(int i =0; i<pickedList.length;i++){
          String[] part=pickedList[i].split("-");
-         String part1 = part[0];
+         String part1 = part[0].trim();
          eventSelected.add(titleStringToEvent(part1));
+      
       }
        
       
-      if(eventList==null){
+      if(eventSelected==null){
        JOptionPane.showMessageDialog(UC44_1_UI.this, "Please select events", "Error", JOptionPane.OK_OPTION);
       }else{
         new UC44_2_UI(ec,eventSelected,pickedList);
@@ -420,9 +421,11 @@ public class UC44_1_UI extends javax.swing.JFrame {
     public Event titleStringToEvent(String title) {
         
         String c =title;
-        Event eve= null;
+        Event eve= new Event();
         for (Event e : ec.getEventRegister().getEventList()) {
-            if (c.equals(e.getTitle())) {    
+         
+            if (c.equals(e.getTitle())) {  
+
                 eve = e;
                 break;
             }

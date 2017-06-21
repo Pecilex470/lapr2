@@ -137,22 +137,28 @@ public class ImportEventData {
                                     switch (el.getTagName()) {
 
                                         case "name":
-                                            newUser.setName(el.getTextContent());
+                                            String temp = Encryption.encryptData(el.getTextContent(), DEFAULT_KEYWORD);
+                                            temp = Encryption.encryptPassword(temp, DEFAULT_SHIFT, Encryption.ABC);
+                                            newUser.setName(temp);
                                             break;
                                         case "email":
-                                            newUser.setEmail(el.getTextContent());
+                                            temp = Encryption.encryptData(el.getTextContent(), DEFAULT_KEYWORD);
+                                            temp = Encryption.encryptPassword(temp, DEFAULT_SHIFT, Encryption.ABC);
+                                            newUser.setEmail(temp);
                                             break;
                                         case "username":
                                             newUser.setUsername(el.getTextContent());
                                             break;
                                         case "password":
-                                            newUser.setPassword(el.getTextContent());
+                                            temp = Encryption.encryptPassword(el.getTextContent(), DEFAULT_SHIFT, Encryption.ABC);
+                                            newUser.setPassword(temp);
                                             break;
                                     }
                                 }
 
                             }
                             ec.getUserRegister().getUsers().add(newUser);
+                            ec.getEncryptionRegister().addEncryption(new Encryption(DEFAULT_SHIFT, newUser, DEFAULT_KEYWORD));
                             newFae.setUtilizadorFAE(newUser);
                             list.add(newFae);
                             break;
@@ -383,7 +389,14 @@ public class ImportEventData {
 
                                         if (ur.verifyUsername(elementT.getTextContent())) {
 
+                                            
+                                            
+                                            
+                                            
                                             eva.setFaeUsername(userAtributes.item(w).getTextContent());
+                                            
+                                            
+                                            
                                         } else {
 
                                             for (int t = 0; t < userAtributes.getLength(); t++) {
@@ -395,16 +408,12 @@ public class ImportEventData {
                                                     switch (elAtributes.getTagName()) {
 
                                                         case "name":
-
-                                                            String temp = Encryption.encryptData(elAtributes.getTextContent(), DEFAULT_KEYWORD);
-                                                            temp = Encryption.encryptPassword(temp, DEFAULT_SHIFT, Encryption.ABC);
-                                                            newUser.setName(temp);
+                                                           
+                                                            newUser.setName(elAtributes.getTextContent());
                                                             break;
                                                         case "email":
-
-                                                            temp = Encryption.encryptData(elAtributes.getTextContent(), DEFAULT_KEYWORD);
-                                                            temp = Encryption.encryptPassword(temp, DEFAULT_SHIFT, Encryption.ABC);
-                                                            newUser.setEmail(temp);
+                                                            
+                                                            newUser.setEmail(elAtributes.getTextContent());
                                                             break;
                                                         case "username":
 
@@ -413,14 +422,14 @@ public class ImportEventData {
                                                             break;
                                                         case "password":
 
-                                                            temp = Encryption.encryptPassword(elAtributes.getTextContent(), DEFAULT_SHIFT, Encryption.ABC);
-                                                            newUser.setPassword(temp);
+                                                            newUser.setPassword(elAtributes.getTextContent());
+                                                      
                                                             break;
                                                     }
                                                 }
                                             }
                                             ur.getUsers().add(newUser);
-                                            ec.getEncryptionRegister().addEncryption(new Encryption(DEFAULT_SHIFT, newUser, DEFAULT_KEYWORD));
+                                            
                                         }
                                     }
                                 }
