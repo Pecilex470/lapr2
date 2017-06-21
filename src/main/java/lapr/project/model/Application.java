@@ -25,7 +25,7 @@ public class Application implements Serializable {
     private User representative;
     private int boothArea;
     private int invitesQuantity;
-    private DecisionList decisionList;
+    private DecisionList decisionList = new DecisionList();
 
     /**
      * Constructor for Application

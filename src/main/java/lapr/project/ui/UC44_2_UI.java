@@ -6,6 +6,7 @@
 package lapr.project.ui;
 
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -26,7 +27,7 @@ public class UC44_2_UI extends javax.swing.JFrame {
     static final long serialVersionUID = -3387516993124229948L;
     private UC44_Controller c;
     private EventCenter ec;
-    private List<Event> events;
+    private List<Event> events = new ArrayList<>();
     private String[] a;
 
     /**
@@ -142,46 +143,40 @@ public class UC44_2_UI extends javax.swing.JFrame {
 
     private void InserirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InserirActionPerformed
         DefaultTableModel val = (DefaultTableModel) jTable1.getModel();
-        double e;
-        String sl;
-        double cv;
-        double eve;
-        String decision;
-        String title;
-        for (int i = 0; i < events.size(); i++) {
-            System.out.print(events.get(i).getTitle());
-            title = events.get(i).getTitle();
-            e = events.get(i).getAcceptanceRate();
-            sl = getSignificanceLevel(events.get(i));
-            cv  = events.get(i).criticalValue(sl);
-            eve = events.get(i).getZUni();
-            decision = events.get(i).testAcceptanceRate50(sl);
-            val.addRow(new Object[]{title,e,sl,cv,eve,decision});
-        }
-    
-    
+
+        for (Event e: events) {
         
+            System.out.println(events.size());
+            String title = e.getTitle();
+            double aR = e.getAcceptanceRate();
+            String sl = getSignificanceLevel(e);
+            double cv = e.criticalValue(sl);
+            double eve = e.getZUni();
+            String decision = e.testAcceptanceRate50(sl);
+            val.addRow(new Object[]{title, aR, cv, sl, eve, decision});
+        }
+
+
     }//GEN-LAST:event_InserirActionPerformed
 
     private void BackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackActionPerformed
-         new UC44_1_UI(ec);
+        new UC44_1_UI(ec);
         dispose();
     }//GEN-LAST:event_BackActionPerformed
-
-    
-    
-    
-    
 
     public String getSignificanceLevel(Event e) {
         String cv = "-1";
         for (int i = 0; i < a.length; i++) {
             String[] parts = a[i].split("-");
-            String part1 = parts[0];
-            String part2 = parts[1];
+            String part1 = parts[0].trim();
+            String part2 = parts[1].trim();
+  
             if (part1.equals(e.getTitle())) {
-                cv = parts[1];
+                cv = part2;
+             return cv;
+            
             }
+           
         }
         return cv;
 
