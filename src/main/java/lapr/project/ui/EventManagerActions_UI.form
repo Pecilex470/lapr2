@@ -27,37 +27,35 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="uc47Button" min="-2" max="-2" attributes="0"/>
-                          <Component id="uc46Button" min="-2" max="-2" attributes="0"/>
-                          <Component id="uc45Button" min="-2" max="-2" attributes="0"/>
-                          <Component id="uc44Button" min="-2" max="-2" attributes="0"/>
-                          <Component id="uc43Button" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="uc1Button" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="uc32Button" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="uc42Button" alignment="0" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="uc45Button" max="32767" attributes="0"/>
+                          <Component id="uc43Button" alignment="0" max="32767" attributes="0"/>
+                          <Component id="uc32Button" alignment="0" max="32767" attributes="0"/>
+                          <Component id="uc42Button" alignment="0" max="32767" attributes="0"/>
                           <Group type="102" attributes="0">
-                              <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="uc50Button" min="-2" max="-2" attributes="0"/>
-                                  <Component id="uc49Button" min="-2" max="-2" attributes="0"/>
-                                  <Component id="uc48Button" min="-2" max="-2" attributes="0"/>
-                              </Group>
+                              <Component id="uc1Button" min="-2" pref="435" max="-2" attributes="0"/>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
-                          <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="backButton" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="uc44Button" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="uc48Button" alignment="0" max="32767" attributes="0"/>
+                          <Component id="uc50Button" alignment="0" max="32767" attributes="0"/>
+                          <Component id="uc49Button" alignment="0" max="32767" attributes="0"/>
+                          <Component id="uc47Button" alignment="0" max="32767" attributes="0"/>
+                          <Component id="uc46Button" alignment="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
+                  <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="20" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace max="32767" attributes="0"/>
+              <Component id="backButton" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="75" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -66,35 +64,41 @@
           <Group type="102" attributes="0">
               <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="uc1Button" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="uc48Button" alignment="3" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="63" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
+                      <Component id="uc1Button" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="uc32Button" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <Component id="uc46Button" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="uc47Button" min="-2" max="-2" attributes="0"/>
+                  </Group>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="uc32Button" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="uc49Button" alignment="3" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="uc42Button" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="uc43Button" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="uc44Button" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="uc48Button" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="uc49Button" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="uc50Button" min="-2" max="-2" attributes="0"/>
+                  </Group>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="uc42Button" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="uc50Button" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="uc43Button" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="uc44Button" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
               <Component id="uc45Button" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="uc46Button" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="uc47Button" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="backButton" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace pref="56" max="32767" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="backButton" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -175,6 +179,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="UC32 - Import Event Data from file"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="uc32ButtonActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="uc49Button">
       <Properties>

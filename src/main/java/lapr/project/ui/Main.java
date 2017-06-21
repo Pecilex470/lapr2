@@ -47,17 +47,8 @@ public class Main {
             ec = createInitialComponents();
             createEventManager(ec);
             addOrganizers(ec);
-            ///////////// IMPORT FROM XML FILE
-            ImportEventData impEvent = new ImportEventData(ec);
-
-            ec.getEventRegister().getEventList().add(impEvent.readEvent());
-            /////////////
 
         }
-
-        System.out.println("SIZE= " + ec.getEventRegister().getEventList().get(2).getApplicationList().getApplications().size());
-        System.out.println("ACCEPTED " + ec.getEventRegister().getEventList().get(2).getApplicationList().getAcceptedApplicationRegister().size());
-        
         new InitialWindow_UI(ec);
 
     }

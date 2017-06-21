@@ -570,12 +570,6 @@ public class UC1_UI extends javax.swing.JDialog {
         String[] list = new String[ec.getUserRegister().getUsers().size()];
         int cont = 0;
         for (User u : ec.getUserRegister().getUsers()) {
-            
-            
-            System.out.println(ec.getEncryptionRegister().getEncryptionByUser(u).getShift());
-            System.out.println(Encryption.ABC);
-            
-            
             String name = Encryption.deEncryptPassword(u.getName(), ec.getEncryptionRegister().getEncryptionByUser(u).getShift(), Encryption.ABC);
             name = Encryption.deEncryptData(name, ec.getEncryptionRegister().getEncryptionByUser(u).getKeyword());
             list[cont] = name + " (" + u.getUsername() + ")";
