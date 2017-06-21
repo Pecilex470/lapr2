@@ -6,12 +6,16 @@
  */
 package lapr.project.model;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Utilizador
  */
-public class Evaluation {
+public class Evaluation implements Serializable{
 
+    
+     static final long serialVersionUID = 5;
     /**
      * Parameters that the FAE will use to evaluate the application
      */
@@ -31,6 +35,11 @@ public class Evaluation {
     private String justification;
 
     /**
+     * The FAE's username
+     */
+    private String faeUsername;
+
+    /**
      * Creates a Evaluation instance, by receiveing the decision and
      * justification.
      *
@@ -38,13 +47,14 @@ public class Evaluation {
      * relation to a given application.
      * @param justification Text supporting the decision taken.
      */
-    public Evaluation(boolean decision, String justification, int knowledge, int adequancy, int quantity, int overall) {
+    public Evaluation(boolean decision, String justification, int knowledge, int adequancy, int quantity, int overall, String faeUsername) {
         this.decision = decision;
         this.justification = justification;
         this.knowledge = knowledge;
         this.adequancy = adequancy;
         this.quantity = quantity;
         this.overall = overall;
+        this.faeUsername = faeUsername;
     }
 
     /**
@@ -92,29 +102,34 @@ public class Evaluation {
     }
 
     /**
-     * 
+     *
      * @return the mean rating of this evaluation
      */
-    
     public double getMeanRating() {
-
         return (adequancy + overall + knowledge + quantity) / NUMBER_OF_CRITERIA;
     }
 
-    
-    public void setKnowledge(int know){
-        this.knowledge= know;
+    public void setKnowledge(int know) {
+        this.knowledge = know;
     }
-    
-    public void setAdequancy(int ade){
-        this.adequancy=ade;
+
+    public void setAdequancy(int ade) {
+        this.adequancy = ade;
     }
-    
-    public void setOverall(int ove){
-        this.overall=ove;
+
+    public void setOverall(int ove) {
+        this.overall = ove;
     }
-    
-    public void setQuantity(int qua){
-        this.quantity=qua;
+
+    public void setQuantity(int qua) {
+        this.quantity = qua;
+    }
+
+    public String getFaeUsername() {
+        return this.faeUsername;
+    }
+
+    public void setFaeUsername(String username) {
+        this.faeUsername = username;
     }
 }

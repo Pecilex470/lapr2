@@ -8,6 +8,7 @@ package lapr.project.ui;
 import javax.swing.JOptionPane;
 import lapr.project.model.EventCenter;
 import lapr.project.model.User;
+import lapr.project.utils.ExportData;
 
 /**
  *
@@ -36,8 +37,8 @@ public class RepresentativeActions extends javax.swing.JFrame {
         this.addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
             public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+                ExportData.serialization(ec);
                 dispose();
-                new MainWindow(u, ec);
         
             }
         });

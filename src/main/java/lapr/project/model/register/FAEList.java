@@ -5,6 +5,7 @@
  */
 package lapr.project.model.register;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import lapr.project.model.Attribution;
@@ -16,7 +17,9 @@ import lapr.project.model.FAE;
  *
  * @author Utilizador
  */
-public class FAEList {
+public class FAEList implements Serializable{
+    
+     static final long serialVersionUID = 18;
 
     /**
      * List that contains all the faes from a specific event.
@@ -34,7 +37,7 @@ public class FAEList {
     }
 
     public FAEList() {
-
+        this.faes = new ArrayList<>();
     }
 
     /**
@@ -55,6 +58,27 @@ public class FAEList {
     }
 
 
+    /**
+     * Method that compute the mean deviation between FAEs’ average ratings for
+     * each submission and global mean rating
+     *
+     * @param e - Event
+     * @return Mean deviation
+     */
+    public double getMeanDeviation(Event e, FAE fae) {
+        double total = 0;
+        int cont = 0;
+        double global = e.getApplicationList().getGlobalMeanRating();
+        for (Attribution att : fae.getAttributionList()) {
+            total += Math.abs(att.getEvaluation().getMeanRating() - global);
+            cont++;
+        }
+
+        if (cont != 0) {
+            return total / cont;
+        }
+        return -1;
+    }
 
     /**
      * This method adds a FAE to an Event

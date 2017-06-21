@@ -1,15 +1,6 @@
 package lapr.project.model;
 
-import lapr.project.utils.Exportable;
-import lapr.project.utils.Importable;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,8 +9,9 @@ import java.util.List;
  *
  * @author by Nuno Bettencourt [nmb@isep.ipp.pt] on 29/05/16.
  */
-public class Application implements Importable<Application>, Exportable {
+public class Application implements Serializable {
 
+    static final long serialVersionUID = 1;
     private static final String ROOT_ELEMENT_NAME = "application";
     private static final String DESCRIPTION_ELEMENT_NAME = "description";
     private static final String KEYWORDS_ELEMENT_NAME = "keywords";
@@ -34,12 +26,17 @@ public class Application implements Importable<Application>, Exportable {
     private User representative;
     private int boothArea;
     private int invitesQuantity;
+    private List<Evaluation> evaluationList;
 
     /**
      * Constructor for Application
      *
      * @param description CandidaturaDescription
      * @param keywordList Keyword List
+     * @param companyName
+     * @param representative
+     * @param boothArea
+     * @param invitesQuantity
      */
     public Application(String description, List<Keyword> keywordList, String companyName, User representative, int boothArea, int invitesQuantity) {
         this.description = description;
@@ -47,9 +44,9 @@ public class Application implements Importable<Application>, Exportable {
         this.decision = DEFAULT_DECISION;
         this.companyName = companyName;
         this.representative = representative;
-        this.boothArea=boothArea;
-        this.invitesQuantity=invitesQuantity;
-        
+        this.boothArea = boothArea;
+        this.invitesQuantity = invitesQuantity;
+
     }
 
     /**
@@ -89,82 +86,6 @@ public class Application implements Importable<Application>, Exportable {
     public List<Keyword> getKeywordList() {
         return keywordList;
 
-    }
-
-    @Override
-    public Node exportContentToXMLNode() throws ParserConfigurationException {
-        Node rootNode = null;
-
-        DocumentBuilderFactory factory
-                = DocumentBuilderFactory.newInstance();
-        //Create document builder
-        DocumentBuilder builder = factory.newDocumentBuilder();
-
-        //Obtain a new document
-        Document document = builder.newDocument();
-
-        //Create root element
-        Element elementCandidatura = document.createElement(ROOT_ELEMENT_NAME);
-
-        //Create a sub-element
-        Element elementDescription = document.createElement(DESCRIPTION_ELEMENT_NAME);
-
-        //Set the sub-element value
-        elementDescription.setTextContent(getDescription());
-
-        //Add sub-element to root element
-        elementCandidatura.appendChild(elementDescription);
-
-        //Create a sub-element
-        Element elementKeywords = document.createElement(KEYWORDS_ELEMENT_NAME);
-        elementCandidatura.appendChild(elementKeywords);
-
-        //iterate over keywords
-        for (Keyword keyword : getKeywordList()) {
-            Node keywordNode = keyword.exportContentToXMLNode();
-            elementKeywords.appendChild(document.importNode(keywordNode, true));
-        }
-
-        //Add root element to document
-        document.appendChild(elementCandidatura);
-
-        //It exports only the element representation to XMÇ, ommiting the XML header
-        rootNode = elementCandidatura;
-
-        return rootNode;
-    }
-
-    @Override
-    public Application importContentFromXMLNode(Node node) throws ParserConfigurationException {
-
-        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-
-        //Create document builder
-        DocumentBuilder builder = factory.newDocumentBuilder();
-
-        //Obtain a new document
-        Document document = builder.newDocument();
-        document.appendChild(document.importNode(node, true));
-
-        NodeList elementsCandidatura = document.getElementsByTagName(ROOT_ELEMENT_NAME);
-
-        Node elementCandidatura = elementsCandidatura.item(0);
-
-        //Get description
-        this.setDescription(elementCandidatura.getFirstChild().getFirstChild().getNodeValue());
-
-        NodeList elementsKeywords = document.getElementsByTagName(KEYWORDS_ELEMENT_NAME);
-
-        NodeList keywords = elementsKeywords.item(0).getChildNodes();
-        for (int position = 0; position < keywords.getLength(); position++) {
-            Node keyword = keywords.item(position);
-            Keyword keywordExample = new Keyword();
-
-            keywordExample = keywordExample.importContentFromXMLNode(keyword);
-            addKeyword(keywordExample);
-        }
-
-        return this;
     }
 
     @Override
@@ -247,15 +168,19 @@ public class Application implements Importable<Application>, Exportable {
     public void setRepresentative(User representative) {
         this.representative = representative;
     }
-    
-    public void setBoothArea(int area){
-        this.boothArea=area;
-    }
-    
-    public void setInvitesQuantity(int invitesQuantity){
-        this.invitesQuantity=invitesQuantity;
+
+    public void setBoothArea(int area) {
+        this.boothArea = area;
     }
 
+    /**
+     * this method gets the invites quantity
+     *
+     * @param invitesQuantity the quantity of the invites
+     */
+    public void setInvitesQuantity(int invitesQuantity) {
+        this.invitesQuantity = invitesQuantity;
+    }
 
     /**
      * @return the boothArea
@@ -271,4 +196,18 @@ public class Application implements Importable<Application>, Exportable {
         return invitesQuantity;
     }
 
+    public void setEvaluationList(List<Evaluation> list) {
+        this.evaluationList = list;
+    }
+
+    /**
+     * This method gets the application information and converts it into a
+     * formatted string
+     *
+     * @return returns the formatted string
+     */
+    @Override
+    public String toString() {
+        return "hello";
+    }
 }

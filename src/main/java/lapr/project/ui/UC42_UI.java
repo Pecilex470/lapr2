@@ -11,13 +11,16 @@ import lapr.project.controller.UC42_Controller;
 import lapr.project.model.Event;
 import lapr.project.model.EventCenter;
 import lapr.project.model.User;
+import lapr.project.utils.ExportData;
 
 /**
  *
  * @author Luis
  */
+
 public class UC42_UI extends javax.swing.JFrame {
 
+    static final long serialVersionUID = -3387516993124229948L;
     EventCenter ec;
     User u;
     UC42_Controller c;
@@ -39,6 +42,7 @@ public class UC42_UI extends javax.swing.JFrame {
             @Override
             public void windowClosing(java.awt.event.WindowEvent windowEvent) {
                 if (JOptionPane.showConfirmDialog(UC42_UI.this, "Do you wish to exit without saving?", "Close", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
+                    ExportData.serialization(ec);
                     dispose();
                 }
             }
@@ -65,6 +69,7 @@ public class UC42_UI extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         eventListUI.setModel(new javax.swing.AbstractListModel<String>() {
+            static final long serialVersionUID = -3387516993124229948L;
             String[] strings = initialEventList();
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }

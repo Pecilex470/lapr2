@@ -1,10 +1,13 @@
 package lapr.project.model.register;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import lapr.project.model.Organizer;
 
-public class OrganizerList {
+public class OrganizerList implements Serializable{
+    
+     static final long serialVersionUID = 20;
 
     /**
      * List that contains all the FAE from a specific event.
@@ -21,7 +24,7 @@ public class OrganizerList {
     }
     
     public OrganizerList(){
-        
+        this.organizers = new ArrayList<>();
     }
     
     /**

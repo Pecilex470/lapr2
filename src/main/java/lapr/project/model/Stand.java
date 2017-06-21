@@ -5,11 +5,15 @@
  */
 package lapr.project.model;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Cerqueira
  */
-public class Stand {
+public class Stand implements Serializable{
+    
+     static final long serialVersionUID = 12;
 
     private int area;
     private boolean available = true;

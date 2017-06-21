@@ -5,11 +5,15 @@
  */
 package lapr.project.model;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Utilizador
  */
-public class Representative {
+public class Representative implements Serializable{
+    
+     static final long serialVersionUID = 11;
   /**
      * User that is associated with the role of Representative
      */

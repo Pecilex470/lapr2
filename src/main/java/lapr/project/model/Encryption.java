@@ -1,5 +1,6 @@
 package lapr.project.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -8,8 +9,11 @@ import java.util.List;
  *
  * @author Pedro
  */
-public class Encryption {
+public class Encryption implements Serializable{
 
+    
+     static final long serialVersionUID = 4;
+    
     /**
      * Variable that stores the shift on the encryptation
      */

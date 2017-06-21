@@ -15,6 +15,7 @@ import lapr.project.model.Event;
 import lapr.project.model.EventCenter;
 import lapr.project.model.Keyword;
 import lapr.project.model.User;
+import lapr.project.utils.ExportData;
 
 /**
  *
@@ -47,6 +48,7 @@ public class UC5_UI extends javax.swing.JFrame {
             @Override
             public void windowClosing(java.awt.event.WindowEvent windowEvent) {
                 if (JOptionPane.showConfirmDialog(UC5_UI.this, "Do you wish to exit without saving?", "Close", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
+                    ExportData.serialization(ec);
                     dispose();
                 }
             }
@@ -71,11 +73,11 @@ public class UC5_UI extends javax.swing.JFrame {
         companyNameTextField = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        keyword1 = new javax.swing.JTextField();
-        keyword4 = new javax.swing.JTextField();
-        keyword2 = new javax.swing.JTextField();
-        keyword5 = new javax.swing.JTextField();
-        keyword3 = new javax.swing.JTextField();
+        keyw1 = new javax.swing.JTextField();
+        keyw4 = new javax.swing.JTextField();
+        keyw2 = new javax.swing.JTextField();
+        keyw5 = new javax.swing.JTextField();
+        keyw3 = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -120,15 +122,15 @@ public class UC5_UI extends javax.swing.JFrame {
 
         jLabel4.setText("Keywords:");
 
-        keyword4.addActionListener(new java.awt.event.ActionListener() {
+        keyw4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                keyword4ActionPerformed(evt);
+                keyw4ActionPerformed(evt);
             }
         });
 
-        keyword3.addActionListener(new java.awt.event.ActionListener() {
+        keyw3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                keyword3ActionPerformed(evt);
+                keyw3ActionPerformed(evt);
             }
         });
 
@@ -228,14 +230,14 @@ public class UC5_UI extends javax.swing.JFrame {
                             .addComponent(companyNameTextField)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(keyword4, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(keyword1, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(keyw4, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(keyw1, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(keyword2)
-                                    .addComponent(keyword5, javax.swing.GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE))
+                                    .addComponent(keyw2)
+                                    .addComponent(keyw5, javax.swing.GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(keyword3, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(keyw3, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                             .addComponent(backButton)
@@ -271,13 +273,13 @@ public class UC5_UI extends javax.swing.JFrame {
                         .addGap(27, 27, 27)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
-                            .addComponent(keyword1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(keyword2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(keyword3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(keyw1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(keyw2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(keyw3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(keyword4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(keyword5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(keyw4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(keyw5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(18, 18, 18)
@@ -299,13 +301,13 @@ public class UC5_UI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void keyword3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_keyword3ActionPerformed
+    private void keyw3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_keyw3ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_keyword3ActionPerformed
+    }//GEN-LAST:event_keyw3ActionPerformed
 
-    private void keyword4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_keyword4ActionPerformed
+    private void keyw4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_keyw4ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_keyword4ActionPerformed
+    }//GEN-LAST:event_keyw4ActionPerformed
 
     private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitButtonActionPerformed
         try {
@@ -314,7 +316,7 @@ public class UC5_UI extends javax.swing.JFrame {
                 if (JOptionPane.showConfirmDialog(UC5_UI.this, "Do you really want to submit this application?", "Confirmation", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
 
                     List<Keyword> keywordList = new ArrayList<>();
-                    String[] keywordArray = {keyword1.getText(), keyword2.getText(), keyword3.getText(), keyword4.getText(), keyword5.getText()};
+                    String[] keywordArray = {keyw1.getText(), keyw2.getText(), keyw3.getText(), keyw4.getText(), keyw5.getText()};
 
                     for (int i = 0; i < keywordArray.length; i++) {
                         if (!keywordArray[i].isEmpty()) {
@@ -367,23 +369,23 @@ public class UC5_UI extends javax.swing.JFrame {
 
         int numberOfKeywords = 0;
 
-        if (!keyword1.getText().isEmpty()) {
+        if (!keyw1.getText().isEmpty()) {
             numberOfKeywords++;
         }
 
-        if (!keyword2.getText().isEmpty()) {
+        if (!keyw2.getText().isEmpty()) {
             numberOfKeywords++;
         }
 
-        if (!keyword3.getText().isEmpty()) {
+        if (!keyw3.getText().isEmpty()) {
             numberOfKeywords++;
         }
 
-        if (!keyword4.getText().isEmpty()) {
+        if (!keyw4.getText().isEmpty()) {
             numberOfKeywords++;
         }
 
-        if (!keyword5.getText().isEmpty()) {
+        if (!keyw5.getText().isEmpty()) {
             numberOfKeywords++;
         }
 
@@ -422,11 +424,11 @@ public class UC5_UI extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextField keyword1;
-    private javax.swing.JTextField keyword2;
-    private javax.swing.JTextField keyword3;
-    private javax.swing.JTextField keyword4;
-    private javax.swing.JTextField keyword5;
+    private javax.swing.JTextField keyw1;
+    private javax.swing.JTextField keyw2;
+    private javax.swing.JTextField keyw3;
+    private javax.swing.JTextField keyw4;
+    private javax.swing.JTextField keyw5;
     private javax.swing.JList<String> listEvent;
     private javax.swing.JLabel maxAreaAvailableStand;
     private javax.swing.JTextField nInvites;

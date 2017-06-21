@@ -5,56 +5,63 @@
  */
 package lapr.project.model.register;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import lapr.project.model.Application;
+import lapr.project.model.User;
 
 /**
  *
  * @author Utilizador
  */
-public class ApplicationList {
+public class ApplicationList implements Serializable{
+    
+     static final long serialVersionUID = 14;
 
     /**
-     * List that contains all the applications that were submitted to a specific event.
+     * List that contains all the applications that were submitted to a specific
+     * event.
      */
     private List<Application> applications = new ArrayList<>();
 
     /**
-     * Creates a ApplicationList instance, by receiving a list with all applications submitted to an event
+     * Creates a ApplicationList instance, by receiving a list with all
+     * applications submitted to an event
      *
-     * @param applications List that contains all the applications that were submitted to a specific event.
+     * @param applications List that contains all the applications that were
+     * submitted to a specific event.
      */
     public ApplicationList(List<Application> applications) {
         this.applications = applications;
     }
-    
-    public ApplicationList(){
-        
+
+    public ApplicationList() {
+        this.applications = new ArrayList<>();
     }
 
     /**
-     * @return List that contains all the applications that were submitted to a specific event.
-     * evento
+     * @return List that contains all the applications that were submitted to a
+     * specific event. evento
      */
-    public List<Application> getApplication() {
+    public List<Application> getApplications() {
         return applications;
     }
 
-    
-    public void addApplication(Application a){
+    public void addApplication(Application a) {
         applications.add(a);
     }
-    
+
     /**
-     * Allows to define a list that contains all the applications. 
+     * Allows to define a list that contains all the applications.
      *
-     * @param applications List that contains all the applications that were submitted to a specific event.
+     * @param applications List that contains all the applications that were
+     * submitted to a specific event.
      */
     public void setApplication(List<Application> applications) {
         this.applications = applications;
     }
-    
+
     /**
      *
      * This method calculates and returns the global mean rating using

@@ -14,8 +14,8 @@ import lapr.project.model.Encryption;
 import lapr.project.model.Event;
 import lapr.project.model.EventCenter;
 import lapr.project.model.FAE;
-import lapr.project.model.Organizer;
 import lapr.project.model.User;
+import lapr.project.utils.ExportData;
 
 /**
  *
@@ -63,8 +63,8 @@ public class UC2_UI extends javax.swing.JFrame {
             @Override
             public void windowClosing(java.awt.event.WindowEvent windowEvent) {
                 if (JOptionPane.showConfirmDialog(UC2_UI.this, "Do you wish to exit without saving?", "Close", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
+                    ExportData.serialization(ec);
                     dispose();
-                    new OrganizerActions_UI(ec, u);
                 }
             }
         });
@@ -74,9 +74,14 @@ public class UC2_UI extends javax.swing.JFrame {
 
         String[] list = new String[ec.getEventsWhereUserIsOrganizer(u).size()];
         int cont = 0;
+        
         for (Event e : ec.getEventsWhereUserIsOrganizer(u)) {
-            list[cont] = e.getTitle();
+           
+                list[cont] = e.getTitle();
             cont++;
+          
+            
+            
         }
         return list;
     }
@@ -106,12 +111,6 @@ public class UC2_UI extends javax.swing.JFrame {
 
         jLabel3.setText("Choose a User to be FAE:");
 
-        userList.setModel(new javax.swing.AbstractListModel<String>() {
-            static final long serialVersionUID = -3387516993124229948L;
-            String[] strings = { "|| SELECT EVENT ||" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         userList.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 userListMouseClicked(evt);

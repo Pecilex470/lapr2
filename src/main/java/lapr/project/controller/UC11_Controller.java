@@ -38,7 +38,7 @@ public class UC11_Controller {
 
             try {
 
-                for (Application a : e.getApplicationList()) {
+                for (Application a : e.getApplicationList().getApplications()) {
 
                     if (a.getRepresentative().getUsername().equals(u.getUsername())) {
 
@@ -60,7 +60,7 @@ public class UC11_Controller {
 
         List<Application> applicationList = new ArrayList<>();
 
-        for (Application a : e.getApplicationList()) {
+        for (Application a : e.getApplicationList().getApplications()) {
             if (a.getRepresentative().getUsername().equals(u.getUsername())) {
                 applicationList.add(a);
             }
@@ -71,7 +71,7 @@ public class UC11_Controller {
 
     public void removeApplication(Event e, Application a) {
 
-        e.getApplicationList().remove(a);
+        e.getApplicationList().getApplications().remove(a);
 
     }
 

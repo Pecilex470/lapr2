@@ -49,7 +49,7 @@ public class UC21_Controller {
      * @return List of applications
      */
     public List<Application> getApplicationList(Event e) {
-        return e.getApllicationRegister().getApplication();
+        return e.getApplicationList().getApplications();
     }
 
     /**

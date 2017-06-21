@@ -17,6 +17,7 @@ import lapr.project.model.EventCenter;
 import lapr.project.model.Keyword;
 import lapr.project.model.Stand;
 import lapr.project.model.User;
+import lapr.project.utils.ExportData;
 
 /**
  *
@@ -50,6 +51,7 @@ public class UC11_UI extends javax.swing.JFrame {
             @Override
             public void windowClosing(java.awt.event.WindowEvent windowEvent) {
                 if (JOptionPane.showConfirmDialog(UC11_UI.this, "Do you wish to exit?", "Close", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
+                    ExportData.serialization(ec);
                     dispose();
                 }
             }

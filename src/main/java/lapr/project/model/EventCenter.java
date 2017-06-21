@@ -6,14 +6,17 @@ import lapr.project.model.register.EncryptionRegister;
 import lapr.project.model.register.EventRegister;
 import lapr.project.model.register.UserRegister;
 import lapr.project.model.register.RepresentativeRegister;
+import java.io.Serializable;
 import org.apache.commons.math3.distribution.NormalDistribution;
 
 /**
  *
  * @author Cerqueira
  */
-public class EventCenter {
+public class EventCenter implements Serializable {
 
+    
+     static final long serialVersionUID = 7;
     /**
      * Variable that saves the data of each event of the respective event
      * center.
@@ -151,7 +154,7 @@ public class EventCenter {
         return eventsWhereUserIsFAE;
     }
 
-      /**
+    /**
      * This method iterates all saved Events and returns a list of the events in
      * which the user is organizer
      *
@@ -162,13 +165,16 @@ public class EventCenter {
 
         List<Event> eventsWhereUserIsOrganizer = new ArrayList<>();
         for (Event e : getEventRegister().getEventList()) {
-            if (e.isOrganizer(u)) {
-                eventsWhereUserIsOrganizer.add(e);
+            if (e.getOrganizerList().getOrganizers() != null) {
+                if (e.isOrganizer(u)) {
+                    eventsWhereUserIsOrganizer.add(e);
+                }
             }
+
         }
         return eventsWhereUserIsOrganizer;
     }
-    
+
     /**
      *
      * @param u user that we want to check if it's a FAE in any event or not
@@ -190,7 +196,7 @@ public class EventCenter {
         }
         return false;
     }
-    
+
     /**
      *
      * @param u user that we want to check if it's a FAE in any event or not

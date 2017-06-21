@@ -9,6 +9,7 @@ import javax.swing.JOptionPane;
 import static javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE;
 import lapr.project.model.EventCenter;
 import lapr.project.model.User;
+import lapr.project.utils.ExportData;
 
 /**
  *
@@ -37,6 +38,7 @@ public class OrganizerActions_UI extends javax.swing.JFrame {
             @Override
             public void windowClosing(java.awt.event.WindowEvent windowEvent) {
                 if (JOptionPane.showConfirmDialog(OrganizerActions_UI.this, "Do you wish to exit without saving?", "Close", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
+                    ExportData.serialization(ec);
                     dispose();
                 }
             }
@@ -159,6 +161,9 @@ public class OrganizerActions_UI extends javax.swing.JFrame {
 
     private void uc2ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uc2ButtonActionPerformed
         dispose();
+        
+        
+        
         new UC2_UI(ec, u);
     }//GEN-LAST:event_uc2ButtonActionPerformed
 

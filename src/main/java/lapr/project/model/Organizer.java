@@ -5,7 +5,11 @@
  */
 package lapr.project.model;
 
-public class Organizer {
+import java.io.Serializable;
+
+public class Organizer implements Serializable{
+    
+     static final long serialVersionUID = 10;
 
     /**
      * User that received the role of Organizer of a certain event.
