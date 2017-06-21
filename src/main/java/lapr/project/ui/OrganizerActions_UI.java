@@ -84,6 +84,11 @@ public class OrganizerActions_UI extends javax.swing.JFrame {
         });
 
         uc20Button.setText("UC20 - Create stands");
+        uc20Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                uc20ButtonActionPerformed(evt);
+            }
+        });
 
         uc21Button.setText("UC21 - Assign Stands");
         uc21Button.addActionListener(new java.awt.event.ActionListener() {
@@ -182,6 +187,11 @@ public class OrganizerActions_UI extends javax.swing.JFrame {
     private void uc21ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uc21ButtonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_uc21ButtonActionPerformed
+
+    private void uc20ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uc20ButtonActionPerformed
+        new UC20_UI(ec, u);
+        dispose();
+    }//GEN-LAST:event_uc20ButtonActionPerformed
 
     /**
      * @param args the command line arguments
