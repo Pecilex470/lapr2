@@ -27,7 +27,6 @@ public class UC6_UI extends javax.swing.JDialog {
      * Creates new form UC6_UI
      *
      * @param ec Receives the instance of the EventCenter
-     * @param c Receives the instance of this UI's Controller
      */
     public UC6_UI(EventCenter ec) {
         this.c = new UC6_Controller(ec);
@@ -65,8 +64,8 @@ public class UC6_UI extends javax.swing.JDialog {
         nameTextField = new javax.swing.JTextField();
         emailTextField = new javax.swing.JTextField();
         usernameTextField = new javax.swing.JTextField();
-        confirmButton = new javax.swing.JButton();
-        cancelButton = new javax.swing.JButton();
+        confirmButt = new javax.swing.JButton();
+        cancelButt = new javax.swing.JButton();
         representativeCheckBox = new javax.swing.JCheckBox();
         passwordField = new javax.swing.JPasswordField();
         confirmPasswordField = new javax.swing.JPasswordField();
@@ -95,17 +94,17 @@ public class UC6_UI extends javax.swing.JDialog {
 
         jLabel8.setText("Preferred Timezone:");
 
-        confirmButton.setText("Confirm");
-        confirmButton.addActionListener(new java.awt.event.ActionListener() {
+        confirmButt.setText("Confirm");
+        confirmButt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                confirmButtonActionPerformed(evt);
+                confirmButtActionPerformed(evt);
             }
         });
 
-        cancelButton.setText("Cancel");
-        cancelButton.addActionListener(new java.awt.event.ActionListener() {
+        cancelButt.setText("Cancel");
+        cancelButt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cancelButtonActionPerformed(evt);
+                cancelButtActionPerformed(evt);
             }
         });
 
@@ -153,9 +152,9 @@ public class UC6_UI extends javax.swing.JDialog {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 284, Short.MAX_VALUE)
                     .addComponent(representativeCheckBox, javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cancelButt, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(31, 31, 31)
-                        .addComponent(confirmButton, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(confirmButt, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(nameTextField, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(emailTextField, javax.swing.GroupLayout.Alignment.LEADING)
@@ -207,8 +206,8 @@ public class UC6_UI extends javax.swing.JDialog {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(21, 21, 21)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(confirmButton)
-                            .addComponent(cancelButton)))
+                            .addComponent(confirmButt)
+                            .addComponent(cancelButt)))
                     .addComponent(jLabel9))
                 .addContainerGap(30, Short.MAX_VALUE))
         );
@@ -220,7 +219,7 @@ public class UC6_UI extends javax.swing.JDialog {
 
     }//GEN-LAST:event_representativeCheckBoxActionPerformed
 
-    private void confirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmButtonActionPerformed
+    private void confirmButtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmButtActionPerformed
 
         if (!(nameTextField.getText().equals("") || emailTextField.getText().equals("") || usernameTextField.getText().equals("") || c.assemblePassword(passwordField.getPassword()).equals("") || keywordTextField.getText().equals(""))) {
             if (ec.getUserRegister().verifyUsername(usernameTextField.getText()) == false) {
@@ -264,17 +263,17 @@ public class UC6_UI extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(UC6_UI.this, "Please fill in all the fields", "Missing data", JOptionPane.OK_OPTION);
         }
 
-    }//GEN-LAST:event_confirmButtonActionPerformed
+    }//GEN-LAST:event_confirmButtActionPerformed
 
-    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
+    private void cancelButtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtActionPerformed
         if (JOptionPane.showConfirmDialog(UC6_UI.this, "Do you wish to exit without saving?", "Close", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
             dispose();
         }
-    }//GEN-LAST:event_cancelButtonActionPerformed
+    }//GEN-LAST:event_cancelButtActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton cancelButton;
-    private javax.swing.JButton confirmButton;
+    private javax.swing.JButton cancelButt;
+    private javax.swing.JButton confirmButt;
     private javax.swing.JPasswordField confirmPasswordField;
     private javax.swing.JTextField emailTextField;
     private javax.swing.JTextArea errorTextArea;

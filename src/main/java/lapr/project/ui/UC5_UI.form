@@ -75,16 +75,16 @@
                           <Component id="companyNameTextField" alignment="0" max="32767" attributes="0"/>
                           <Group type="102" alignment="1" attributes="0">
                               <Group type="103" groupAlignment="1" attributes="0">
-                                  <Component id="keyword4" min="-2" pref="116" max="-2" attributes="0"/>
-                                  <Component id="keyword1" min="-2" pref="116" max="-2" attributes="0"/>
+                                  <Component id="keyw4" min="-2" pref="116" max="-2" attributes="0"/>
+                                  <Component id="keyw1" min="-2" pref="116" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="keyword2" max="32767" attributes="0"/>
-                                  <Component id="keyword5" pref="116" max="32767" attributes="0"/>
+                                  <Component id="keyw2" max="32767" attributes="0"/>
+                                  <Component id="keyw5" pref="116" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="keyword3" min="-2" pref="112" max="-2" attributes="0"/>
+                              <Component id="keyw3" min="-2" pref="112" max="-2" attributes="0"/>
                           </Group>
                           <Component id="jPanel1" max="32767" attributes="0"/>
                       </Group>
@@ -130,14 +130,14 @@
                       <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="keyword1" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="keyword2" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="keyword3" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="keyw1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="keyw2" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="keyw3" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="keyword4" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="keyword5" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="keyw4" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="keyw5" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
@@ -214,20 +214,20 @@
         <Property name="text" type="java.lang.String" value="Keywords:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="keyword1">
+    <Component class="javax.swing.JTextField" name="keyw1">
     </Component>
-    <Component class="javax.swing.JTextField" name="keyword4">
+    <Component class="javax.swing.JTextField" name="keyw4">
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="keyword4ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="keyw4ActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JTextField" name="keyword2">
+    <Component class="javax.swing.JTextField" name="keyw2">
     </Component>
-    <Component class="javax.swing.JTextField" name="keyword5">
+    <Component class="javax.swing.JTextField" name="keyw5">
     </Component>
-    <Component class="javax.swing.JTextField" name="keyword3">
+    <Component class="javax.swing.JTextField" name="keyw3">
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="keyword3ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="keyw3ActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel5">
