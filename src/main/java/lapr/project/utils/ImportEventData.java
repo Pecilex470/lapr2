@@ -40,19 +40,20 @@ public class ImportEventData {
 
     private static final String DEFAULT_KEYWORD = "zebras";
     private static final int DEFAULT_SHIFT = 6;
-    private static final String FILE_NAME = "eventData.xml";
     EventCenter ec;
     Node event;
     Document docXML;
+    private String fileName;
 
-    public ImportEventData(EventCenter ec) {
+    public ImportEventData(EventCenter ec, String fileName) {
         this.ec = ec;
+        this.fileName = fileName;
 
         try {
 
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
-            docXML = builder.parse(new File(FILE_NAME));
+            docXML = builder.parse(new File(this.fileName));
 
             this.event = docXML.getFirstChild();
 
