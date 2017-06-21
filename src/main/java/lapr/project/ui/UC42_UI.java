@@ -16,8 +16,10 @@ import lapr.project.model.User;
  *
  * @author Luis
  */
+
 public class UC42_UI extends javax.swing.JFrame {
 
+    static final long serialVersionUID = -3387516993124229948L;
     EventCenter ec;
     User u;
     UC42_Controller c;
@@ -65,6 +67,7 @@ public class UC42_UI extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         eventListUI.setModel(new javax.swing.AbstractListModel<String>() {
+            static final long serialVersionUID = -3387516993124229948L;
             String[] strings = initialEventList();
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }

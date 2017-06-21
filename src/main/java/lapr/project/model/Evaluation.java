@@ -29,6 +29,8 @@ public class Evaluation {
      * Text supporting the decision taken.
      */
     private String justification;
+    
+   private String faeUsername;
 
     /**
      * Creates a Evaluation instance, by receiveing the decision and
@@ -38,13 +40,14 @@ public class Evaluation {
      * relation to a given application.
      * @param justification Text supporting the decision taken.
      */
-    public Evaluation(boolean decision, String justification, int knowledge, int adequancy, int quantity, int overall) {
+    public Evaluation(boolean decision, String justification, int knowledge, int adequancy, int quantity, int overall, String faeUsername) {
         this.decision = decision;
         this.justification = justification;
         this.knowledge = knowledge;
         this.adequancy = adequancy;
         this.quantity = quantity;
         this.overall = overall;
+        this.faeUsername = faeUsername;
     }
 
     /**
@@ -116,5 +119,13 @@ public class Evaluation {
     
     public void setQuantity(int qua){
         this.quantity=qua;
+    }
+    
+    public String getFaeUsername(){
+        return this.faeUsername;
+    }
+    
+    public void setFaeUsername(String username){
+        this.faeUsername=username;
     }
 }
