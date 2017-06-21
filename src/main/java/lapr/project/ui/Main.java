@@ -55,12 +55,8 @@ public class Main {
 
         }
 
-//        for (User u: ec.getUserRegister().getUsers()) {
-//            System.out.println(u.getName());
-//            System.out.println(u.getEmail());
-//            System.out.println(u.getPassword());
-//            System.out.println(u.getUsername());
-//        }
+        System.out.println("SIZE= " + ec.getEventRegister().getEventList().get(2).getApplicationList().getApplications().size());
+        System.out.println("ACCEPTED " + ec.getEventRegister().getEventList().get(2).getApplicationList().getAcceptedApplicationRegister().size());
         
         new InitialWindow_UI(ec);
 
