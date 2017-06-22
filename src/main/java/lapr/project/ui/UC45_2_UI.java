@@ -95,6 +95,7 @@ public class UC45_2_UI extends javax.swing.JFrame {
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
+            static final long serialVersionUID = -3387516993124229948L;
         });
         jScrollPane1.setViewportView(jTable1);
 

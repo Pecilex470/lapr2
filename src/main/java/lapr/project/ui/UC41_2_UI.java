@@ -10,6 +10,8 @@ package lapr.project.ui;
  * @author Utilizador
  */
 public class UC41_2_UI extends javax.swing.JFrame {
+    
+    static final long serialVersionUID = -3387516993124229948L;
 
     /**
      * Creates new form UC41_2_UI
@@ -50,7 +52,9 @@ public class UC41_2_UI extends javax.swing.JFrame {
             new String [] {
                 "Stand Area", "Absolute Frequency", "Relative Frequency"
             }
+
         ) {
+            static final long serialVersionUID = -3387516993124229948L;
             boolean[] canEdit = new boolean [] {
                 false, false, false
             };

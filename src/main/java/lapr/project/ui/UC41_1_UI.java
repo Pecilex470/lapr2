@@ -21,6 +21,8 @@ import lapr.project.utils.ExportData;
  * @author Cerqueira
  */
 public class UC41_1_UI extends javax.swing.JFrame {
+    
+    static final long serialVersionUID = -3387516993124229948L;
 
     Stand selectedStand;
     Event selectedEvent;
@@ -81,6 +83,7 @@ public class UC41_1_UI extends javax.swing.JFrame {
         jLabel1.setText("Stands Information");
 
         eventsLabel.setModel(new javax.swing.AbstractListModel<String>() {
+            static final long serialVersionUID = -3387516993124229948L;
             String[] strings = getEventsString();
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
@@ -93,6 +96,7 @@ public class UC41_1_UI extends javax.swing.JFrame {
         jScrollPane1.setViewportView(eventsLabel);
 
         standsLabel.setModel(new javax.swing.AbstractListModel<String>() {
+            static final long serialVersionUID = -3387516993124229948L;
             String[] strings = getStandsList();
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
