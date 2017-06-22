@@ -258,10 +258,23 @@ public class EventManagerActions_UI extends javax.swing.JFrame {
 
     private void uc46ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uc46ButtonActionPerformed
 
-        String username = JOptionPane.showInputDialog(EventManagerActions_UI.this, "Enter the username of the FAE you\n want to know the mean rating of");
+        String username;
 
-        uc46.getFAEMeanRating(uc46.getUserByUsername(username));
+        username = JOptionPane.showInputDialog(EventManagerActions_UI.this, "Enter the username of the FAE you\nwant to know the mean rating of:\n[type 0 to leave]");
+        while (ec.getEventsWhereUserIsFAE(ec.getUserRegister().getUserByUsername(username)).isEmpty() && !username.equals("0")) {
+            JOptionPane.showMessageDialog(EventManagerActions_UI.this, "That user is not a FAE in any event");
+            username = JOptionPane.showInputDialog(EventManagerActions_UI.this, "Enter the username of the FAE you\n want to know the mean rating of");
+        }
 
+        
+
+        if (username.equals("0")) {
+            
+        } else {
+            double meanR = uc46.getFAEMeanRating(uc46.getUserByUsername(username));
+            JOptionPane.showMessageDialog(EventManagerActions_UI.this, "O mean rating é " + meanR);
+        }
+        
 
     }//GEN-LAST:event_uc46ButtonActionPerformed
 
