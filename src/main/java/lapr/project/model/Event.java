@@ -471,7 +471,7 @@ public class Event implements Serializable {
     }
     
     public int determineInterspaceOfTable(){
-        return (int) (getAreaOfBiggestStand() - getAreaOfSmallest()/getK(getNumberOfStands()));
+        return (getAreaOfBiggestStand() - getAreaOfSmallest()/getK(getNumberOfStands()));
     }
 
 
