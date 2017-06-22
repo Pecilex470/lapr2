@@ -105,9 +105,64 @@ public class CustomDate implements Serializable {
      * @return returns if the condition is true or false
      */
     public boolean checkSubmissionPeriod(CustomDate minPeriod, CustomDate maxPeriod) {
-        if (day >= minPeriod.getDay() && day <= maxPeriod.getDay() && month >= minPeriod.getMonth() && month <= maxPeriod.getMonth() && year >= minPeriod.getYear() && year <= maxPeriod.getYear()) {
-            return true;
+
+        return testIfDateIsAfter(minPeriod) && testIfDateIsBefore(maxPeriod);
+    }
+
+    public boolean testIfDateIsAfter(CustomDate minPeriod) {
+
+        if (year >= minPeriod.getYear()) {
+
+            if (year > minPeriod.getYear()) {
+                return true;
+            }
+
+            if (year == minPeriod.getYear()) {
+
+                if (month > minPeriod.getMonth()) {
+                    return true;
+                }
+
+                if (month == minPeriod.getMonth()) {
+
+                    if (day >= minPeriod.getDay()) {
+                        return true;
+                    }
+
+                }
+
+            }
+
         }
         return false;
     }
+
+    public boolean testIfDateIsBefore(CustomDate maxPeriod) {
+
+        if (year <= maxPeriod.getYear()) {
+
+            if (year < maxPeriod.getYear()) {
+                return true;
+            }
+
+            if (year == maxPeriod.getYear()) {
+
+                if (month < maxPeriod.getMonth()) {
+                    return true;
+                }
+
+                if (month == maxPeriod.getMonth()) {
+
+                    if (day <= maxPeriod.getDay()) {
+                        return true;
+                    }
+
+                }
+
+            }
+
+        }
+        return false;
+    }
+
 }
