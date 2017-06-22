@@ -31,6 +31,7 @@ public class UC4_UI extends javax.swing.JFrame {
     private Event selectedEvent;
     private Application selectedApplication;
 
+
     /**
      * Creates new form UC4_UI
      *
@@ -291,7 +292,10 @@ public class UC4_UI extends javax.swing.JFrame {
             if (!(("").equals(justificationField.getText()))) {
                 if (JOptionPane.showConfirmDialog(UC4_UI.this, "Are you sure you want to submit this decision?", "Confirm", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
                     createDecision();
-                    System.out.println(selectedApplication.getDecisionList());
+                    if (selectedApplication.getDecisionStatus() == 1) {
+                        selectedEvent.setAvailableArea(selectedEvent.getAvailableArea() - selectedApplication.getBoothArea());
+                    }
+
                     dispose();
                     new MainWindow(u, ec);
                 }
@@ -340,10 +344,17 @@ public class UC4_UI extends javax.swing.JFrame {
     private String[] applications() {
         String[] names = new String[selectedEvent.getApplicationList().getApplications().size()];
         int cont = 0;
+ 
         for (Application a : selectedEvent.getApplicationList().getApplications()) {
-            names[cont] = a.getCompanyName();
-            cont++;
+            if (a.getDecisionStatus() == 0) {
+                names[cont] = a.getCompanyName();
+                cont++;
+            }
+
         }
+        
+
+        
         return names;
     }
 

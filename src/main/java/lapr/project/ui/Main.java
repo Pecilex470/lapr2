@@ -48,7 +48,7 @@ public class Main {
             addOrganizers(ec);
         }
         new InitialWindow_UI(ec);
-
+       
     }
 
     /**
@@ -70,13 +70,30 @@ public class Main {
         List<FAE> FAEListEvent1 = new ArrayList<>();
         List<Organizer> organizerListEvent1 = new ArrayList<>();
         eventRegister.getEventList().add(new Event(EVENT1, "Madeira", "A nice bolo do caco event", new CustomDate(13, 11, 2017), new CustomDate(14, 11, 2017), new CustomDate(1, 11, 2017), new CustomDate(12, 11, 2017), "congress", new FAEList(FAEListEvent1), new OrganizerList(organizerListEvent1), 300));
+//        List<Keyword> lK1 = new ArrayList<>();
+//        lK1.add(new Keyword("abc"));
+//        lK1.add(new Keyword("abc"));
+//        lK1.add(new Keyword("abc"));
+//        lK1.add(new Keyword("ze"));
+//        lK1.add(new Keyword("ze"));
+//        eventRegister.getEventList().get(0).setKeywordList(lK1);
+        
+        
         /////////////////////////////////////////////////////////////
-
         ///////// EVENT 2 //////////////////////////////////////////
         List<FAE> FAEListEvent2 = new ArrayList<>();
         List<Organizer> organizerListEvent2 = new ArrayList<>();
         eventRegister.getEventList().add(new Event(EVENT2, "Porto", "a musical gathering", new CustomDate(13, 11, 2017), new CustomDate(14, 11, 2017), new CustomDate(1, 11, 2017), new CustomDate(12, 11, 2017), "exibition", new FAEList(FAEListEvent2), new OrganizerList(organizerListEvent2), 150));
-        /////////////////////////////////////////////////////////////
+//        List<Keyword> lK2 = new ArrayList<>();
+//        lK2.add(new Keyword("abc"));
+//        lK2.add(new Keyword("abc"));
+//        lK2.add(new Keyword("abc"));
+//        lK2.add(new Keyword("ze"));
+//        lK2.add(new Keyword("boas"));
+//        eventRegister.getEventList().get(1).setKeywordList(lK2);
+
+        
+/////////////////////////////////////////////////////////////
 
         UserRegister userRegister = new UserRegister(ur);
         RepresentativeRegister representativeRegister = new RepresentativeRegister(rr);

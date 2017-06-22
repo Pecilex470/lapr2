@@ -7,6 +7,7 @@ import lapr.project.model.register.EventRegister;
 import lapr.project.model.register.UserRegister;
 import lapr.project.model.register.RepresentativeRegister;
 import java.io.Serializable;
+import java.util.Collections;
 import org.apache.commons.math3.distribution.NormalDistribution;
 
 /**
@@ -15,8 +16,7 @@ import org.apache.commons.math3.distribution.NormalDistribution;
  */
 public class EventCenter implements Serializable {
 
-    
-     static final long serialVersionUID = 7;
+    static final long serialVersionUID = 7;
     /**
      * Variable that saves the data of each event of the respective event
      * center.
@@ -131,13 +131,13 @@ public class EventCenter implements Serializable {
         double globalAcceptanceRate = 0;
 
         int count = 0;
-        
+
         for (Event e : er.getEventList()) {
             if (!e.getApplicationList().getApplications().isEmpty()) {
-                  globalAcceptanceRate += e.getAcceptanceRate();
-                  count++;
+                globalAcceptanceRate += e.getAcceptanceRate();
+                count++;
             }
-          
+
         }
 
         return globalAcceptanceRate / count;
@@ -224,62 +224,97 @@ public class EventCenter implements Serializable {
         }
         return false;
     }
+
     /**
      * Method that returns all the fae register in the Event Center
-     * 
-     * @return All the fae register in the Event Center 
+     *
+     * @return All the fae register in the Event Center
      */
-    public List<FAE> getAllFAE(){
+    public List<FAE> getAllFAE() {
         List<FAE> allFAE = new ArrayList<>();
-        for(int i=0;i<er.getEventList().size();i++){
-            for(int j=0;j<er.getEventList().get(i).getFaeList().getFAEList().size();j++){
+        for (int i = 0; i < er.getEventList().size(); i++) {
+            for (int j = 0; j < er.getEventList().get(i).getFaeList().getFAEList().size(); j++) {
                 allFAE.add(er.getEventList().get(i).getFaeList().getFAEList().get(i));
             }
-         
+
         }
         return allFAE;
     }
-    
- 
+  /**
+   * Mthod that returns all the fae that evaluated a application in the Event Center 
+   * 
+   * @return Fae that evaluated a application in the Event Center 
+   */
+    public List<FAE> getFAEEvaluatedApplicantions() {
+        List<FAE> allFAE = new ArrayList<>();
+
+        for (int i = 0; i < er.getEventList().size(); i++) {
+            for (int j = 0; j < er.getEventList().get(i).getApplicationList().getApplications().size(); j++) {
+                for (int k = 0; k < er.getEventList().get(i).getApplicationList().getApplications().get(j).getDecisionList().getDecisions().size(); k++) {
+                    String fae = getEventRegister().getEventList().get(i).getApplicationList().getApplications().get(j).getDecisionList().getDecisions().get(k).getFaeUsername();
+                    FAE f = new FAE();
+                    for (FAE faes : getAllFAE()) {
+
+                        if (faes.equals(fae)) {
+
+                            f = faes;
+                            allFAE.add(f);
+                        }
+                    }
+
+                }
+            }
+
+        }
+        return allFAE;
+    }
+
     public double getMeanDeviation() {
         double total = 0;
         int cont = 0;
         double global = getGlobalAcceptanceRate();
-        for (FAE fae : getAllFAE()) {
+        for (FAE fae : getFAEEvaluatedApplicantions()) {
             total += Math.abs(fae.getMeanRating() - global);
             cont++;
         }
 
         if (cont != 0) {
-            return total / cont ;
+            return total / cont;
         }
         return -1;
     }
-    
+
     /**
-     * Method that returns the Z-test that is any statistical test for which the distribution of the test statistic under the null hypothesis can be approximated by a normal distribution.In this case, used a Z-test for the mean deviation.
-     * 
-     * @return Z-test 
+     * Method that returns the Z-test that is any statistical test for which the
+     * distribution of the test statistic under the null hypothesis can be
+     * approximated by a normal distribution.In this case, used a Z-test for the
+     * mean deviation.
+     *
+     * @return Z-test
      */
     public double getZ(FAE fae) {
         double mDev = getMeanDeviation();
-        int total = getAllFAE().size();
+        int total = getFAEEvaluatedApplicantions().size();
         double standardDeviation = fae.getStandardDeviation();
         double z = (mDev - 1) / (standardDeviation / Math.sqrt(total));
 
         return z;
     }
-    
-     /**
-     * Method that returns the Z-test that is any statistical test for which the distribution of the test statistic under the null hypothesis can be approximated by a normal distribution.In this case, used a Z-test to compare two mean deviations.
-     * 
-     *@param e Second FAE to get the info for the second mean deviation and standard deviation.
-     * 
-     * @return 
+
+    /**
+     * Method that returns the Z-test that is any statistical test for which the
+     * distribution of the test statistic under the null hypothesis can be
+     * approximated by a normal distribution.In this case, used a Z-test to
+     * compare two mean deviations.
+     *
+     * @param e Second FAE to get the info for the second mean deviation and
+     * standard deviation.
+     *
+     * @return
      */
-    public double getZ2MeanDeviations(FAE e,FAE fae) {
+    public double getZ2MeanDeviations(FAE e, FAE fae) {
         double mDev1 = getMeanDeviation();
-        int total = getAllFAE().size();
+        int total = getFAEEvaluatedApplicantions().size();
         double standardDeviation = e.getStandardDeviation();
         double mDev2 = getMeanDeviation();
         int total2 = fae.getAttributionList().size();
@@ -287,10 +322,12 @@ public class EventCenter implements Serializable {
         double z = (mDev1 - mDev2) / Math.sqrt((standardDeviation / total) + (standardDeviation2 / total2));
         return z;
     }
-    
+
     /**
-     * Method that returns the decision of the test where if the difference between FAE Mean Deviation and the number 1(Mean Deviation) is equal or not.
-     * 
+     * Method that returns the decision of the test where if the difference
+     * between FAE Mean Deviation and the number 1(Mean Deviation) is equal or
+     * not.
+     *
      * @return Decision(Yes or No)
      */
     public String testTheDifferenceBetweenTheMeanDeviationAndATheoreticalValue1ForAFAEAverageRating(String a) {
@@ -304,25 +341,26 @@ public class EventCenter implements Serializable {
             return "No";
         }
     }
-    
-       /**
-     *  Method that returns the decision of the test where we check if the difference between two FAE Mean Deviations is equal or not with a significance level equal to 1%.
-     * 
+
+    /**
+     * Method that returns the decision of the test where we check if the
+     * difference between two FAE Mean Deviations is equal or not with a
+     * significance level equal to 1%.
+     *
      * @param e Second event to get is Z-test
-     * 
-     * @return Decision(Yes or No) 
+     *
+     * @return Decision(Yes or No)
      */
-    public String TestingTheDifferenceBetweenTwoFAEsMeanDeviationsA1(FAE e,FAE fae,String a) {
+    public String TestingTheDifferenceBetweenTwoFAEsMeanDeviationsA1(FAE e, FAE fae, String a) {
         NormalDistribution p = new NormalDistribution();
         double sv = Double.parseDouble(a);
         double zc = p.inverseCumulativeProbability(1 - (sv / 2.));
-        double z = getZ2MeanDeviations(e,fae);
+        double z = getZ2MeanDeviations(e, fae);
         if (z < -zc && z > zc) {
             return "Yes";
         } else {
             return "No";
         }
     }
-
 
 }
