@@ -50,7 +50,7 @@ public class InitialWindow_UI extends javax.swing.JFrame {
                 if (JOptionPane.showConfirmDialog(InitialWindow_UI.this, "Do you wish to exit?", "Close", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
                     try {
                         ExportData.serialization(ec);
-                    } catch (FileNotFoundException ex) {
+                    } catch (Exception ex) {
                         Logger.getLogger(InitialWindow_UI.class.getName()).log(Level.SEVERE, null, ex);
                     }
                     dispose();

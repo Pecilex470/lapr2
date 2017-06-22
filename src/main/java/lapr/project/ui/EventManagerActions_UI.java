@@ -53,7 +53,7 @@ public class EventManagerActions_UI extends javax.swing.JFrame {
                     dispose();
                     try {
                         ExportData.serialization(ec);
-                    } catch (FileNotFoundException ex) {
+                    } catch (Exception ex) {
                         Logger.getLogger(EventManagerActions_UI.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }

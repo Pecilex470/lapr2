@@ -63,7 +63,7 @@ public class UC41_2_UI extends javax.swing.JFrame {
                 if (JOptionPane.showConfirmDialog(UC41_2_UI.this, "Do you wish to exit without saving?", "Close", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
                     try {
                         ExportData.serialization(ec);
-                    } catch (FileNotFoundException ex) {
+                    } catch (Exception ex) {
                         Logger.getLogger(UC2_UI.class.getName()).log(Level.SEVERE, null, ex);
                     }
                     dispose();
