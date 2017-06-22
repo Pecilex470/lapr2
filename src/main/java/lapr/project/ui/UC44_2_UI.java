@@ -71,31 +71,12 @@ public class UC44_2_UI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
         Back = new javax.swing.JButton();
         Inserir = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-
-            new Object [][] {
-
-            },
-            new String [] {
-                "Event", "Proportion of submittions accepted in ni ", "Critical Value", "Significance level", "Observed Value of test statistic", "Decision(Yes or No)"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
-            };
-            static final long serialVersionUID = -3387516993124229948L;
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane1.setViewportView(jTable1);
 
         Back.setText("Back");
         Back.addActionListener(new java.awt.event.ActionListener() {
@@ -111,26 +92,47 @@ public class UC44_2_UI extends javax.swing.JFrame {
             }
         });
 
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+
+            new Object [][] {
+
+            },
+            new String [] {
+                "Event", "Proportion of submittions accepted in ni", "Critical Value", "Significance level", "Observed value of test statistic", "Decision"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+
+            static final long serialVersionUID = -3387516993124229948L;
+        });
+        jScrollPane1.setViewportView(jTable1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(913, Short.MAX_VALUE)
                 .addComponent(Inserir)
                 .addGap(66, 66, 66)
                 .addComponent(Back)
                 .addGap(70, 70, 70))
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane1)
+                .addGap(39, 39, 39))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(7, 7, 7)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 104, Short.MAX_VALUE)
+                .addContainerGap(14, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Back)
@@ -151,9 +153,9 @@ public class UC44_2_UI extends javax.swing.JFrame {
             double aR = e.getAcceptanceRate();
             String sl = getSignificanceLevel(e);
             double cv = e.criticalValue(sl);
-            double eve = e.getZUni();
+            double ZUni = e.getZUni();
             String decision = e.testAcceptanceRate50(sl);
-            val.addRow(new Object[]{title, aR, cv, sl, eve, decision});
+            val.addRow(new Object[]{title, aR, cv, sl, ZUni, decision});
         }
 
 

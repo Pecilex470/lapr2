@@ -1,6 +1,7 @@
 package lapr.project.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import org.apache.commons.math3.distribution.NormalDistribution;
 
@@ -12,7 +13,7 @@ public class FAE implements Serializable{
      * User that received the role of FAE of a certain event.
      */
     private User userFAE;
-    private List<Attribution> attributionList;
+    private List<Attribution> attributionList = new ArrayList<>();
 
     /**
      * Creates an FAE instance, receiving a user that will perform the duty of

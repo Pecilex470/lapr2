@@ -169,12 +169,24 @@ public class UC42_UI extends javax.swing.JFrame {
     private void eventListUIMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_eventListUIMouseClicked
 
         
-        double accepRate = c.getEventAcceptanceRate(ec.getEventRegister().getEventList().get(eventListUI.getSelectedIndex()));
+       
+        if (!ec.getEventRegister().getEventList().get(eventListUI.getSelectedIndex()).getApplicationList().getApplications().isEmpty()) {
+            double accepRate = c.getEventAcceptanceRate(ec.getEventRegister().getEventList().get(eventListUI.getSelectedIndex()));
         
         int int1 = (int) (accepRate * 1000);
         double aR = (double) int1 / 1000;
+        
+        acceptanceRateUI.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 51, 255), 3, true));
+        acceptanceRateUI.setFont(new java.awt.Font("Dialog", 1, 24));
 
         acceptanceRateUI.setText(""+aR);
+        } else {
+            acceptanceRateUI.setText("Doesn't have applications");
+            acceptanceRateUI.setFont(new java.awt.Font("Dialog", 1, 10));
+            acceptanceRateUI.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 0, 0), 3, true));
+        }
+        
+        
 
 
     }//GEN-LAST:event_eventListUIMouseClicked

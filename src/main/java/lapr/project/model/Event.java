@@ -393,17 +393,14 @@ public class Event implements Serializable {
 
     /**
      * Method that returns the decision of the test where we check if the
-     * difference between two Events acceptance rate is equal or not with a
-     * significance level equal to 1%.
+     * difference between two Events acceptance rate is equal or not
      *
      * @param e Second event to get is Z-test.
      *
      * @return Decision(Yes or No)
      */
-    public String testDifferenceTwoEventsAccepRateA1(Event e) {
-        NormalDistribution p = new NormalDistribution();
-        double a = 0.01;
-        double zc = p.inverseCumulativeProbability(1 - (a / 2.));
+    public String testDifferenceTwoEventsAccepRate50(Event e,String a) {
+        double zc = criticalValue(a);
         double z = getZBil(e);
         if (z < -zc && z > zc) {
             return "Yes";
@@ -412,26 +409,6 @@ public class Event implements Serializable {
         }
     }
 
-    /**
-     * Method that returns the decision of the test where we check if the
-     * difference between two Events acceptance rate is equal or not with a
-     * significance level equal to 5%.
-     *
-     * @param e Second event to get is Z-test
-     *
-     * @return Decision(Yes or No)
-     */
-    public String testDifferenceTwoEventsAccepRateA5(Event e) {
-        NormalDistribution p = new NormalDistribution();
-        double a = 0.05;
-        double zc = p.inverseCumulativeProbability(1 - (a / 2.));
-        double z = getZBil(e);
-        if (z < -zc && z > zc) {
-            return "Yes";
-        } else {
-            return "No";
-        }
-    }
 
     public void setFAEList(FAEList faelist) {
         this.faeList = faelist;
