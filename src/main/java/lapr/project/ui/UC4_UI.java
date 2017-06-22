@@ -276,7 +276,7 @@ public class UC4_UI extends javax.swing.JFrame {
     private void applicationListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_applicationListMouseClicked
         this.selectedApplication = ec.getEventRegister().getEventList().get(eventList.getSelectedIndex()).getApplicationList().getApplications().get(applicationList.getSelectedIndex());
 
-        selectedApplication.toString();
+        JOptionPane.showMessageDialog(UC4_UI.this, selectedApplication.toString());
     }//GEN-LAST:event_applicationListMouseClicked
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed

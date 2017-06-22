@@ -64,8 +64,29 @@ public class Application implements Serializable {
         return description;
     }
 
+    /**
+     * Gets the representative that submitted this application
+     *
+     * @return returns the representative
+     */
     public User getRepresentative() {
         return representative;
+    }
+
+    /**
+     * This method gets the application information and converts it into a
+     * formatted string
+     *
+     * @return returns the formatted string
+     */
+    @Override
+    public String toString() {
+        String name = ("  Company name: " + Application.this.getCompanyName() + "\n"
+                + "  Representative: " + Application.this.getRepresentative().getUsername() + "\n"
+                + "          Booth Area: " + Application.this.getBoothArea() + "\n"
+                + "   Invites quantity: " + Application.this.getInvitesQuantity() + "\n\n"
+                + "     Description: " + Application.this.getDescription());
+        return name;
     }
 
     /**
@@ -94,9 +115,10 @@ public class Application implements Serializable {
     public List<Keyword> getKeywordList() {
         return keywordList;
     }
-    
+
     /**
      * This method gets all the decisions for the application
+     *
      * @return returns the decisions list
      */
     public DecisionList getDecisionList() {
@@ -130,6 +152,7 @@ public class Application implements Serializable {
 
     /**
      * This method calculates the submission mean rating
+     *
      * @return the submission mean rating
      */
     public int getSubmissionMeanRating() {
@@ -213,17 +236,6 @@ public class Application implements Serializable {
      */
     public int getInvitesQuantity() {
         return invitesQuantity;
-    }
-
-    /**
-     * This method gets the application information and converts it into a
-     * formatted string
-     *
-     * @return returns the formatted string
-     */
-    @Override
-    public String toString() {
-        return "hello";
     }
 
     public void setDecisionList(List<Decision> readReviews) {

@@ -148,6 +148,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="UC45 - Test the difference between two Events acceptance rate"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="uc45ButtonActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="uc46Button">
       <Properties>
@@ -187,6 +190,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="UC49 - Test the difference between the mean deviation and a theoretical value for a FAE average rating"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="uc49ButtonActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="backButton">
       <Properties>
