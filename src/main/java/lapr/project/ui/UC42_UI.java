@@ -5,8 +5,6 @@
  */
 package lapr.project.ui;
 
-import java.io.FileNotFoundException;
-import java.text.DecimalFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;

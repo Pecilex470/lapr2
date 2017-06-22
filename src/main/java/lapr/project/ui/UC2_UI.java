@@ -5,14 +5,11 @@
  */
 package lapr.project.ui;
 
-import java.awt.Color;
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import javax.swing.ListSelectionModel;
 import static javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE;
 import lapr.project.controller.UC2_Controller;
 import lapr.project.model.Encryption;

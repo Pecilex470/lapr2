@@ -5,7 +5,6 @@
  */
 package lapr.project.ui;
 
-import lapr.project.controller.UC49_Controller;
 import lapr.project.controller.UC50_Controller;
 import lapr.project.model.EventCenter;
 
