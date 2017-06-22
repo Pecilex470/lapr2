@@ -46,9 +46,7 @@ public class Main {
             ec = createInitialComponents();
             createEventManager(ec);
             addOrganizers(ec);
-
         }
-        CustomDate c = CustomDate.getCurrentTime();
         new InitialWindow_UI(ec);
        
     }
