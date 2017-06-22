@@ -24,6 +24,8 @@ import lapr.project.utils.MathUtils;
  * @author Utilizador
  */
 public class UC41_2_UI extends javax.swing.JFrame {
+    
+    static final long serialVersionUID = -3387516993124229948L;
 
     EventCenter ec;
     Event event;
@@ -102,7 +104,9 @@ public class UC41_2_UI extends javax.swing.JFrame {
             new String [] {
                 "Stand Area", "Absolute Frequency", "Relative Frequency"
             }
+
         ) {
+            static final long serialVersionUID = -3387516993124229948L;
             boolean[] canEdit = new boolean [] {
                 false, false, false
             };

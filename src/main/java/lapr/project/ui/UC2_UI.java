@@ -5,6 +5,7 @@
  */
 package lapr.project.ui;
 
+import java.awt.Color;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
@@ -45,6 +46,7 @@ public class UC2_UI extends javax.swing.JFrame {
 
     private Event eventSelected;
     private FAE userSelected;
+    private List<FAE> selected = new ArrayList<>();
 
     /**
      * Creates new form UC2_UI
@@ -71,6 +73,7 @@ public class UC2_UI extends javax.swing.JFrame {
                     } catch (FileNotFoundException ex) {
                         Logger.getLogger(UC2_UI.class.getName()).log(Level.SEVERE, null, ex);
                     }
+                    new OrganizerActions_UI(ec, u);
                     dispose();
                 }
             }
@@ -106,15 +109,15 @@ public class UC2_UI extends javax.swing.JFrame {
         userList = new javax.swing.JList<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         eventList = new javax.swing.JList<>();
-        defineButton = new javax.swing.JButton();
-        backButton = new javax.swing.JButton();
+        confirmButton = new javax.swing.JButton();
+        cancelButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("UC2 - Define FAE");
 
         jLabel1.setText("Choose an Event:");
 
-        jLabel3.setText("Choose a User to be FAE:");
+        jLabel3.setText("Pick exactly 2 users to be FAE:");
 
         userList.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -136,17 +139,17 @@ public class UC2_UI extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(eventList);
 
-        defineButton.setText("Define FAE");
-        defineButton.addActionListener(new java.awt.event.ActionListener() {
+        confirmButton.setText("Confirm");
+        confirmButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                defineButtonActionPerformed(evt);
+                confirmButtonActionPerformed(evt);
             }
         });
 
-        backButton.setText("Back");
-        backButton.addActionListener(new java.awt.event.ActionListener() {
+        cancelButton.setText("Cancel");
+        cancelButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                backButtonActionPerformed(evt);
+                cancelButtonActionPerformed(evt);
             }
         });
 
@@ -158,9 +161,9 @@ public class UC2_UI extends javax.swing.JFrame {
                 .addGap(33, 33, 33)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(44, 44, 44)
-                        .addComponent(defineButton))
+                        .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(49, 49, 49)
+                        .addComponent(confirmButton))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
@@ -184,18 +187,20 @@ public class UC2_UI extends javax.swing.JFrame {
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(defineButton)
-                    .addComponent(backButton))
+                    .addComponent(confirmButton)
+                    .addComponent(cancelButton))
                 .addContainerGap(31, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
-        dispose();
-        new OrganizerActions_UI(ec, u);
-    }//GEN-LAST:event_backButtonActionPerformed
+    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
+        if (JOptionPane.showConfirmDialog(UC2_UI.this, "Do you wish to exit cancel the operation?", "Cancel", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
+            new OrganizerActions_UI(ec, u);
+            dispose();
+        }
+    }//GEN-LAST:event_cancelButtonActionPerformed
 
     private void eventListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_eventListMouseClicked
 
@@ -215,26 +220,22 @@ public class UC2_UI extends javax.swing.JFrame {
         });
     }//GEN-LAST:event_eventListMouseClicked
 
-    private void defineButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_defineButtonActionPerformed
-
-        if (JOptionPane.showConfirmDialog(UC2_UI.this, "Do you wish to define this user as FAE?", "Define", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
-            eventSelected.getFaeList().getFAEList().add(userSelected);
-            String[] list = modelList();
-
-            userList.setModel(new javax.swing.AbstractListModel<String>() {
-                static final long serialVersionUID = -3387516993124229948L;
-                String[] strings = list;
-
-                public int getSize() {
-                    return list.length;
+    private void confirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmButtonActionPerformed
+        if (selected.size() == 2) {
+            if (JOptionPane.showConfirmDialog(UC2_UI.this, "Do you confirm your decision?", "Define FAE", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
+                for (FAE fae : selected) {
+                    eventSelected.getFaeList().getFAEList().add(fae);
+                    new OrganizerActions_UI(ec, u);
+                    dispose();
                 }
-
-                public String getElementAt(int i) {
-                    return list[i];
-                }
-            });
+            } else {
+                new OrganizerActions_UI(ec, u);
+                dispose();
+            }
+        } else {
+            JOptionPane.showMessageDialog(UC2_UI.this, "You should choose exactly 2 FAE", "Error", JOptionPane.OK_OPTION);
         }
-    }//GEN-LAST:event_defineButtonActionPerformed
+    }//GEN-LAST:event_confirmButtonActionPerformed
     /**
      * This method gets the list of users that aren't FAE's or Organizers of
      * this Event
@@ -264,6 +265,11 @@ public class UC2_UI extends javax.swing.JFrame {
     private void userListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_userListMouseClicked
 
         this.userSelected = nameStringToFae(userList.getSelectedValue());
+        selected.add(userSelected);
+
+        if (JOptionPane.showConfirmDialog(UC2_UI.this, "Do you wish to define this user as FAE?", "Define", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
+            userList.setSelectionBackground(Color.GREEN);
+        }
     }//GEN-LAST:event_userListMouseClicked
 
     /**
@@ -299,8 +305,8 @@ public class UC2_UI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton backButton;
-    private javax.swing.JButton defineButton;
+    private javax.swing.JButton cancelButton;
+    private javax.swing.JButton confirmButton;
     private javax.swing.JList<String> eventList;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;

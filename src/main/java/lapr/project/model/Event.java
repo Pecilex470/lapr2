@@ -3,6 +3,7 @@ package lapr.project.model;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.text.DecimalFormat;
+import java.util.Collections;
 import lapr.project.model.register.FAEList;
 import lapr.project.model.register.ApplicationList;
 import lapr.project.model.register.OrganizerList;
@@ -26,7 +27,7 @@ public class Event implements Serializable {
     private OrganizerList organizerList = new OrganizerList();
     private int availableArea;
     private List<Stand> standList;
-    private List<List<Keyword>> keywordList;
+    private List<Keyword> keywordList;
 
     /**
      * Constructor with all the parameters
@@ -218,7 +219,7 @@ public class Event implements Serializable {
         return this.faeList;
     }
 
-    public List<List<Keyword>> getKeywordList() {
+    public List<Keyword> getKeywordList() {
         return this.keywordList;
     }
 
@@ -425,6 +426,15 @@ public class Event implements Serializable {
     public void addArea(int area) {
         this.availableArea += area;
     }
+
+    /**
+     * @param keywordList the keywordList to set
+     */
+    public void setKeywordList(List<Keyword> keywordList) {
+        this.keywordList = keywordList;
+    }
+    
+    
     
       private int getNumberOfStands() {
         return this.getStandList().size();

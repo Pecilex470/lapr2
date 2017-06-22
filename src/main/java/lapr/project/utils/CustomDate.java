@@ -1,11 +1,10 @@
 package lapr.project.utils;
 
 import java.io.Serializable;
-import java.util.Calendar;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
+import javax.swing.JOptionPane;
 
 public class CustomDate implements Serializable {
 
@@ -31,6 +30,33 @@ public class CustomDate implements Serializable {
     }
 
     /**
+     * This method returns the date's day
+     *
+     * @return the day
+     */
+    public int getDay() {
+        return day;
+    }
+
+    /**
+     * This method returns the date's month
+     *
+     * @return the month
+     */
+    public int getMonth() {
+        return month;
+    }
+
+    /**
+     * This method returns the date's month
+     *
+     * @return
+     */
+    public int getYear() {
+        return year;
+    }
+
+    /**
      * Sets a specific date
      *
      * @param day the day to set
@@ -39,12 +65,26 @@ public class CustomDate implements Serializable {
      * @return returns the final object
      */
     public CustomDate setDate(int day, int month, int year) {
-        this.day = day;
-        this.month = month;
-        this.year = year;
+        if (0 < day && day <= daysMonth[month - 1]) {
+            if (0 < month && month <= 12) {
+                if (Integer.toString(year).length() == 4) {
+                    this.day = day;
+                    this.month = month;
+                    this.year = year;
+                    return CustomDate.this;
+                }
+            }
+        }
+        this.day = -1;
         return CustomDate.this;
     }
 
+    /**
+     * This method takes the local machine's time and creates a new Object with
+     * it
+     *
+     * @return returns the CustomDate object
+     */
     public static CustomDate getCurrentTime() {
         DateFormat df = new SimpleDateFormat("dd");
         DateFormat mf = new SimpleDateFormat("MM");
@@ -56,15 +96,73 @@ public class CustomDate implements Serializable {
         return new CustomDate(d, m, y);
     }
 
-//    public static void main(String[] args) {
-//       //getting current date and time using Date class
-//       DateFormat df = new SimpleDateFormat("dd/MM/yy HH:mm:ss");
-//       Date dateobj = new Date();
-//       System.out.println(df.format(dateobj));
-//
-//       /*getting current date time using calendar class 
-//        * An Alternative of above*/
-//       Calendar calobj = Calendar.getInstance();
-//       System.out.println(df.format(calobj.getTime()));
-//    }
+    /**
+     * This method checks if the current CustomDate object complies with the
+     * submission Period for a set Event
+     *
+     * @param minPeriod the beginning of the submission period
+     * @param maxPeriod the ending of the submission period
+     * @return returns if the condition is true or false
+     */
+    public boolean checkSubmissionPeriod(CustomDate minPeriod, CustomDate maxPeriod) {
+
+        return testIfDateIsAfter(minPeriod) && testIfDateIsBefore(maxPeriod);
+    }
+
+    public boolean testIfDateIsAfter(CustomDate minPeriod) {
+
+        if (year >= minPeriod.getYear()) {
+
+            if (year > minPeriod.getYear()) {
+                return true;
+            }
+
+            if (year == minPeriod.getYear()) {
+
+                if (month > minPeriod.getMonth()) {
+                    return true;
+                }
+
+                if (month == minPeriod.getMonth()) {
+
+                    if (day >= minPeriod.getDay()) {
+                        return true;
+                    }
+
+                }
+
+            }
+
+        }
+        return false;
+    }
+
+    public boolean testIfDateIsBefore(CustomDate maxPeriod) {
+
+        if (year <= maxPeriod.getYear()) {
+
+            if (year < maxPeriod.getYear()) {
+                return true;
+            }
+
+            if (year == maxPeriod.getYear()) {
+
+                if (month < maxPeriod.getMonth()) {
+                    return true;
+                }
+
+                if (month == maxPeriod.getMonth()) {
+
+                    if (day <= maxPeriod.getDay()) {
+                        return true;
+                    }
+
+                }
+
+            }
+
+        }
+        return false;
+    }
+
 }
