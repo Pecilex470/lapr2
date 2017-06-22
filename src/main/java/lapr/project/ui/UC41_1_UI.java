@@ -20,7 +20,7 @@ import lapr.project.utils.ExportData;
  *
  * @author Cerqueira
  */
-public class UC41_UI extends javax.swing.JFrame {
+public class UC41_1_UI extends javax.swing.JFrame {
 
     Stand selectedStand;
     Event selectedEvent;
@@ -30,7 +30,7 @@ public class UC41_UI extends javax.swing.JFrame {
     /**
      * Creates new form UC_41
      */
-    public UC41_UI(EventCenter ec, User u) {
+    public UC41_1_UI(EventCenter ec, User u) {
         this.u = u;
         this.ec = ec;
         initComponents();
@@ -40,7 +40,7 @@ public class UC41_UI extends javax.swing.JFrame {
         this.addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
             public void windowClosing(java.awt.event.WindowEvent windowEvent) {
-                if (JOptionPane.showConfirmDialog(UC41_UI.this, "Do you wish to exit without saving?", "Close", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
+                if (JOptionPane.showConfirmDialog(UC41_1_UI.this, "Do you wish to exit without saving?", "Close", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
                     try {
                         ExportData.serialization(ec);
                     } catch (FileNotFoundException ex) {
@@ -216,10 +216,6 @@ public class UC41_UI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void descLabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_descLabelActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_descLabelActionPerformed
-
     private void eventsLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_eventsLabelMouseClicked
 
         this.selectedEvent = ec.getEventRegister().getEventList().get(eventsLabel.getSelectedIndex());
@@ -254,6 +250,10 @@ public class UC41_UI extends javax.swing.JFrame {
         new OrganizerActions_UI(ec, u);
         dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void descLabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_descLabelActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_descLabelActionPerformed
 
     public String[] getEventsString() {
         String[] list = new String[ec.getEventRegister().getEventList().size()];
