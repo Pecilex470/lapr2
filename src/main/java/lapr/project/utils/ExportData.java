@@ -45,7 +45,7 @@ public class ExportData {
         } catch (IOException ex) {
             ex.printStackTrace(new PrintWriter("log.txt"));
             System.out.println(ERROR);
-        }
+        } 
     }
 
     public static EventCenter deserialization() {

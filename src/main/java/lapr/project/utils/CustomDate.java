@@ -53,9 +53,6 @@ public class CustomDate implements Serializable {
         int d = Integer.parseInt(df.format(calobj.getTime()));
         int m = Integer.parseInt(mf.format(calobj.getTime()));
         int y = Integer.parseInt(yf.format(calobj.getTime()));
-        System.out.println(d);
-        System.out.println(m);
-        System.out.println(y);
         return new CustomDate(d, m, y);
     }
 

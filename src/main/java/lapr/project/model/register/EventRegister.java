@@ -15,9 +15,9 @@ import lapr.project.utils.CustomDate;
  *
  * @author Utilizador
  */
-public class EventRegister implements Serializable{
-    
-     static final long serialVersionUID = 17;
+public class EventRegister implements Serializable {
+
+    static final long serialVersionUID = 17;
 
     /**
      * List of events in charge of a given Event Center.
@@ -41,12 +41,21 @@ public class EventRegister implements Serializable{
         return events;
     }
 
-    //    public List<Event> getAvailableEvents() {
-//        CustomDate
-//        for (Event event : eventRegister) {
-//            if (event.getSubmissionStartDate())
+    /**
+     * This method gets the events that are still available for receiving
+     * applications
+     *
+     * @return returns a list with the Events
+     */
+//    public List<Event> getAvailableEvents() {
+//        CustomDate today = CustomDate.getCurrentTime();
+//        for (Event event : events) {
+//            if (event.getSubmissionStartDate()) {
+//                
+//            }
 //        }
 //    }
+
     /**
      * sets the event list from an existing list
      *
@@ -59,8 +68,6 @@ public class EventRegister implements Serializable{
     public boolean validateEventData(String title, String location, String description, CustomDate startDate, CustomDate endDate, CustomDate submissionStartDate, CustomDate submissionEndDate, String eventType, FAEList fl, OrganizerList ol, int availableArea) {
         return true;
     }
-
-  
 
     public Event getEventByTitle(String title) {
 
