@@ -29,22 +29,11 @@ public class UC40_Controller {
    public UC40_Controller(EventCenter ec){
         this.ec=ec;
     }
-    /**
-     * Method that allows to keep the event chosen by the organizer.
-     * @return  Lista of all the events.
-     */
-    public List<Event> getEvents(){
-     return ec.getEventRegister().getEventList();
-    }
-    
-    /**
-     * Method that allows to save the event choosed by the organizer that is using the aplication in the moment.
-     * 
-     * @param eve Event choosed by the organizer.
-     */
-    public void setEvent(Event eve){
-      this.event=eve; 
-    }
-    
+
+   public Object[][] keywordFrequency(){
+       
+       
+       return ec.keywordFrequency();
+   }
     
 }

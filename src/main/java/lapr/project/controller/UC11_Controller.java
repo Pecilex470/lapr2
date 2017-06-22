@@ -62,6 +62,7 @@ public class UC11_Controller {
 
         for (Application a : e.getApplicationList().getApplications()) {
             if (a.getRepresentative().getUsername().equals(u.getUsername())) {
+               
                 applicationList.add(a);
             }
         }

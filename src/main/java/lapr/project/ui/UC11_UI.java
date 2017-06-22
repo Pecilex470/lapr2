@@ -426,6 +426,8 @@ public class UC11_UI extends javax.swing.JFrame {
                 return strings[i];
             }
         });
+        
+        maxAreaAvailableStand.setText(""+selectedEvent.getAvailableArea());
 
         cleanTextFields();
 
@@ -437,15 +439,21 @@ public class UC11_UI extends javax.swing.JFrame {
 
     private void listApplicationMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listApplicationMouseClicked
 
+        cleanTextFields();
+
         this.selectedApplication = c.getApplicationsFromThisUserInThisEvent(u, selectedEvent).get(listApplication.getSelectedIndex());
 
         companyNameTextField.setText(selectedApplication.getCompanyName());
         standArea.setText("" + selectedApplication.getBoothArea());
-        keyword1.setText(selectedApplication.getKeywordList().get(0).getValue());
-        keyword2.setText(selectedApplication.getKeywordList().get(1).getValue());
-        keyword3.setText(selectedApplication.getKeywordList().get(2).getValue());
-        keyword4.setText(selectedApplication.getKeywordList().get(3).getValue());
-        keyword5.setText(selectedApplication.getKeywordList().get(4).getValue());
+        try {
+            keyword1.setText(selectedApplication.getKeywordList().get(0).getValue());
+            keyword2.setText(selectedApplication.getKeywordList().get(1).getValue());
+            keyword3.setText(selectedApplication.getKeywordList().get(2).getValue());
+            keyword4.setText(selectedApplication.getKeywordList().get(3).getValue());
+            keyword5.setText(selectedApplication.getKeywordList().get(4).getValue());
+        } catch (Exception e) {
+
+        }
         description.setText(selectedApplication.getDescription());
         nInvites.setText("" + selectedApplication.getInvitesQuantity());
     }//GEN-LAST:event_listApplicationMouseClicked
@@ -528,6 +536,7 @@ public class UC11_UI extends javax.swing.JFrame {
         for (Application a : c.getApplicationsFromThisUserInThisEvent(u, e)) {
 
             applicationList[count] = c.getApplicationsFromThisUserInThisEvent(u, e).get(count).getCompanyName();
+            count++;
 
         }
 

@@ -7,6 +7,7 @@ import lapr.project.model.register.EventRegister;
 import lapr.project.model.register.UserRegister;
 import lapr.project.model.register.RepresentativeRegister;
 import java.io.Serializable;
+import java.util.Collections;
 import org.apache.commons.math3.distribution.NormalDistribution;
 
 /**
