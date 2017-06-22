@@ -226,31 +226,34 @@ public class UC41_2_UI extends javax.swing.JFrame {
         absoluteColumn = new int[areaColumn.length];
         List<Stand> list = e.getStandList();
         int mean = 0;
-        int cont = 0;
+        int contFor = 0;
+        int contTotal=0;
 
         for (int i = 0; i < areaColumn.length; i++) {
             String[] ends = areaColumn[i].split("-");
 
-            try {
+            //try {
                 int smallEnd = Integer.parseInt(ends[0].substring(1));
                 int bigEnd = Integer.parseInt(ends[1].substring(0, ends[1].length() - 1));
                 int[] listDes = new int[list.size()];
                 absoluteColumn[i] = 0;
                 for (Stand stand : list) {
-                    listDes[cont] = stand.getArea();
+                    listDes[contFor] = stand.getArea();
                     if (stand.getArea() > smallEnd && stand.getArea() <= bigEnd) {
                         absoluteColumn[i] += 1;
                         mean += stand.getArea();
-                        cont++;
+                        contFor++;
+                        contTotal++;
                     }
                 }
+                contFor=0;
                 deviationLabel.setText(MathUtils.calculeStandartDesviation(listDes)+"");
-            } catch (Exception ex) {
-                System.out.println("Erro in conversion to int, method getAbsoluteColumn!");
-            }
+            //} catch (Exception ex) {
+            //    System.out.println("Erro in conversion to int, method getAbsoluteColumn!");
+            //}
 
         }
-        meanLabel.setText((mean / cont) + "");
+        meanLabel.setText((mean / contTotal) + "");
     }
 
     public void getRelativeColumn() {
