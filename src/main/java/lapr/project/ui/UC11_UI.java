@@ -61,6 +61,36 @@ public class UC11_UI extends javax.swing.JFrame {
                 }
             }
         });
+
+        if (c.getEventsWhereRepresentativeHasApplications(u).isEmpty()) {
+            listEvent.setModel(new javax.swing.AbstractListModel<String>() {
+                static final long serialVersionUID = -3387516993124229948L;
+                String[] strings = {"|| YOU DONT HAVE ANY APPLICATIONS ||"};
+
+                public int getSize() {
+                    return strings.length;
+                }
+
+                public String getElementAt(int i) {
+                    return strings[i];
+                }
+            });
+
+            listApplication.setModel(new javax.swing.AbstractListModel<String>() {
+                static final long serialVersionUID = -3387516993124229948L;
+                String[] strings = {""};
+
+                public int getSize() {
+                    return strings.length;
+                }
+
+                public String getElementAt(int i) {
+                    return strings[i];
+                }
+            });
+
+        }
+
     }
 
     /**
@@ -437,22 +467,31 @@ public class UC11_UI extends javax.swing.JFrame {
 
     private void listEventMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listEventMouseClicked
 
-        this.selectedEvent = c.getEventsWhereRepresentativeHasApplications(u).get(listEvent.getSelectedIndex());
+        try {
+            this.selectedEvent = c.getEventsWhereRepresentativeHasApplications(u).get(listEvent.getSelectedIndex());
+        } catch (Exception e) {
 
-        listApplication.setModel(new javax.swing.AbstractListModel<String>() {
-            static final long serialVersionUID = -3387516993124229948L;
-            String[] strings = applicationList(c.getEventsWhereRepresentativeHasApplications(u).get(listEvent.getSelectedIndex()));
+        }
 
-            public int getSize() {
-                return strings.length;
-            }
+        try {
+            listApplication.setModel(new javax.swing.AbstractListModel<String>() {
+                static final long serialVersionUID = -3387516993124229948L;
 
-            public String getElementAt(int i) {
-                return strings[i];
-            }
-        });
-        
-        maxAreaAvailableStand.setText(""+selectedEvent.getAvailableArea());
+                String[] strings = applicationList(c.getEventsWhereRepresentativeHasApplications(u).get(listEvent.getSelectedIndex()));
+
+                public int getSize() {
+                    return strings.length;
+                }
+
+                public String getElementAt(int i) {
+                    return strings[i];
+                }
+            });
+
+            maxAreaAvailableStand.setText("" + selectedEvent.getAvailableArea());
+        } catch (Exception e) {
+
+        }
 
         cleanTextFields();
 
