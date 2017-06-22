@@ -13,36 +13,35 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import static javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE;
 import lapr.project.controller.UC44_Controller;
+import lapr.project.controller.UC45_Controller;
 import lapr.project.model.Event;
 import lapr.project.model.EventCenter;
+import lapr.project.model.User;
 import lapr.project.utils.ExportData;
 
 /**
  *
  * @author Utilizador
  */
-
-public class UC44_1_UI extends javax.swing.JFrame {
-     
-    static final long serialVersionUID = -3387516993124229948L;
-    private UC44_Controller c;
-     private List<Event> eventSelected = new ArrayList<>();
+public class UC45_1_UI extends javax.swing.JFrame {
+    
+     static final long serialVersionUID = -3387516993124229948L;
+    private UC45_Controller c;
+     private List<Event> eventSelected1 = new ArrayList<>();
+     private List<Event> eventSelected2 = new ArrayList<>();
      private EventCenter ec;
      private String[] pickedList = new String[0];
      private String[] topList;
      private Double[] a;
-
-      
+     private User user;
 
     /**
-     * Creates new form UC44_UI
-     * @param ec the instance of the event center
-     * @param u the user that is using
+     * Creates new form UC45_1_UI
      */
-    public UC44_1_UI(EventCenter ec) {
-        
-        this.ec = ec;
-        this.c = new UC44_Controller(ec);
+    public UC45_1_UI(EventCenter ec, User u) {
+        this.user=user;
+       this.ec = ec;
+        this.c = new UC45_Controller(ec);
         initComponents();
         this.setVisible(true);
         setLocationRelativeTo(null);
@@ -50,7 +49,7 @@ public class UC44_1_UI extends javax.swing.JFrame {
         this.addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
             public void windowClosing(java.awt.event.WindowEvent windowEvent) {
-                if (JOptionPane.showConfirmDialog(UC44_1_UI.this, "Do you wish to exit without saving?", "Close", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
+                if (JOptionPane.showConfirmDialog(UC45_1_UI.this, "Do you wish to exit without saving?", "Close", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
                     try {
                         ExportData.serialization(ec);
                     } catch (FileNotFoundException ex) {
@@ -61,10 +60,6 @@ public class UC44_1_UI extends javax.swing.JFrame {
             }
         });
     }
-   
-   
-    
-   
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -75,74 +70,53 @@ public class UC44_1_UI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
-        jFrame1 = new javax.swing.JFrame();
         jScrollPane1 = new javax.swing.JScrollPane();
-        eventList = new javax.swing.JList<>();
+        eve1List = new javax.swing.JList<>();
         jScrollPane2 = new javax.swing.JScrollPane();
+        eve2List = new javax.swing.JList<>();
+        jScrollPane3 = new javax.swing.JScrollPane();
         pickedEventList = new javax.swing.JList<>();
         pickButton = new javax.swing.JButton();
-        unpickButton = new javax.swing.JButton();
-        Continue = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-
-        javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
-        jFrame1.getContentPane().setLayout(jFrame1Layout);
-        jFrame1Layout.setHorizontalGroup(
-            jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        jFrame1Layout.setVerticalGroup(
-            jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        UnpickButtom = new javax.swing.JButton();
+        confirmButoon = new javax.swing.JButton();
+        backButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        eventList.setModel(new javax.swing.AbstractListModel<String>() {
+        eve1List.setModel(new javax.swing.AbstractListModel<String>() {
             static final long serialVersionUID = -3387516993124229948L;
-            String[] strings = initialEventList();
+            String[] strings = inicialEvent1List();
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
-        eventList.addMouseListener(new java.awt.event.MouseAdapter() {
+        eve1List.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                eventListMouseClicked(evt);
+            }
+
+        });
+        jScrollPane1.setViewportView(eve1List);
+
+        eve2List.setModel(new javax.swing.AbstractListModel<String>() {
+            static final long serialVersionUID = -3387516993124229948L;
+            String[] strings = inicialEvent2List();
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        eve2List.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 eventListMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(eventList);
+        jScrollPane2.setViewportView(eve2List);
 
         pickedEventList.setModel(new javax.swing.AbstractListModel<String>() {
             static final long serialVersionUID = -3387516993124229948L;
             String[] strings = {""};
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
-
         });
-        jScrollPane2.setViewportView(pickedEventList);
+        jScrollPane3.setViewportView(pickedEventList);
 
         pickButton.setText("Pick");
         pickButton.addActionListener(new java.awt.event.ActionListener() {
@@ -151,74 +125,84 @@ public class UC44_1_UI extends javax.swing.JFrame {
             }
         });
 
-        unpickButton.setText("Unpick");
-        unpickButton.addActionListener(new java.awt.event.ActionListener() {
+        UnpickButtom.setText("Unpick");
+        UnpickButtom.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                unpickButtonActionPerformed(evt);
+                UnpickButtomActionPerformed(evt);
             }
         });
 
-        Continue.setText("Continue");
-        Continue.addActionListener(new java.awt.event.ActionListener() {
+        confirmButoon.setText("Confirm");
+        confirmButoon.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ContinueActionPerformed(evt);
+                confirmButoonActionPerformed(evt);
             }
         });
 
-        jLabel1.setText("Test if the acceptance rate of each event is over 50%");
+        backButton.setText("Back");
+        backButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(Continue)
-                .addGap(32, 32, 32))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(backButton)
+                .addGap(28, 28, 28)
+                .addComponent(confirmButoon)
+                .addGap(78, 78, 78))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(119, 119, 119)
+                .addComponent(pickButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(UnpickButtom)
+                .addGap(119, 119, 119))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(84, 84, 84)
-                        .addComponent(pickButton)
-                        .addGap(62, 62, 62)
-                        .addComponent(unpickButton))
+                        .addContainerGap(88, Short.MAX_VALUE)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 444, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(54, 54, 54)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(40, 40, 40)
-                        .addComponent(jLabel1)))
-                .addContainerGap(53, Short.MAX_VALUE))
+                        .addGap(57, 57, 57)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(63, 63, 63))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 183, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1))
+                .addGap(12, 12, 12)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(pickButton)
-                    .addComponent(unpickButton))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
-                .addComponent(Continue)
-                .addGap(22, 22, 22))
+                    .addComponent(UnpickButtom))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(confirmButoon)
+                    .addComponent(backButton))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void pickButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pickButtonActionPerformed
-        String event = eventList.getSelectedValue();
+        String event = eve1List.getSelectedValue();
+        String event2 = eve2List.getSelectedValue();
         
-        removeEventFromTopList(event);
         
-        eventList.setModel(new javax.swing.AbstractListModel<String>() {
+        eve2List.setModel(new javax.swing.AbstractListModel<String>() {
             static final long serialVersionUID = -3387516993124229948L;
             String[] strings = returnTopList();
             
@@ -231,9 +215,9 @@ public class UC44_1_UI extends javax.swing.JFrame {
             }
         });
         
-        addEventToPickedList(event);
+        addEventsToPickedList(event,event2);
         
-        double a = Double.parseDouble(JOptionPane.showInputDialog(UC44_1_UI.this, "Enter the significance level [0.01 or 0.05]"));
+        double a = Double.parseDouble(JOptionPane.showInputDialog(UC45_1_UI.this, "Enter the significance level [0.01 or 0.05]"));
         
         pickedList[pickedList.length-1] += " - " + a;
         
@@ -251,16 +235,9 @@ public class UC44_1_UI extends javax.swing.JFrame {
                 return strings[i];
             }
         });
-        
-       
-        
-        
-                
     }//GEN-LAST:event_pickButtonActionPerformed
-    
-    private void unpickButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_unpickButtonActionPerformed
-                                        
-        
+
+    private void UnpickButtomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UnpickButtomActionPerformed
         String event = pickedEventList.getSelectedValue();
         
         removeEventFromPickedList(event);
@@ -278,9 +255,9 @@ public class UC44_1_UI extends javax.swing.JFrame {
             }
         }); 
         
-        addEventToTopList(event);
+     
         
-        eventList.setModel(new javax.swing.AbstractListModel<String>() {
+        eve2List.setModel(new javax.swing.AbstractListModel<String>() {
             static final long serialVersionUID = -3387516993124229948L;
             String[] strings = returnTopList();
             
@@ -291,40 +268,40 @@ public class UC44_1_UI extends javax.swing.JFrame {
             public String getElementAt(int i) {
                 return strings[i];
             }
-        });                                            
-    }//GEN-LAST:event_unpickButtonActionPerformed
+        });                                         
+    }//GEN-LAST:event_UnpickButtomActionPerformed
 
-    private void ContinueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ContinueActionPerformed
-
-      for(int i =0; i<pickedList.length;i++){
-         String[] part=pickedList[i].split("-");
+    private void confirmButoonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmButoonActionPerformed
+       for(int i =0; i<pickedList.length;i++){
+         String[] part=pickedList[i].trim().split("-");
          String part1 = part[0].trim();
-         eventSelected.add(titleStringToEvent(part1));
+         String part2 = part[1].trim();
+         eventSelected1.add(titleStringToEvent(part1));
+         eventSelected2.add(titleStringToEvent(part1));
       
       }
        
       
-      if(eventSelected==null){
-       JOptionPane.showMessageDialog(UC44_1_UI.this, "Please select events", "Error", JOptionPane.OK_OPTION);
+      if(eventSelected1==null || eventSelected2==null){
+       JOptionPane.showMessageDialog(UC45_1_UI.this, "Please select events", "Error", JOptionPane.OK_OPTION);
       }else{
-        new UC44_2_UI(ec,eventSelected,pickedList);
+        new UC45_2_UI(ec,eventSelected1,eventSelected2,pickedList, user);
+        dispose();
       }
-      
-     
-    }//GEN-LAST:event_ContinueActionPerformed
- 
-    private void eventListMouseClicked(java.awt.event.MouseEvent evt) {                                      
+    }//GEN-LAST:event_confirmButoonActionPerformed
 
-    }                      
-    
-    
+    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
+        new EventManagerActions_UI(ec, user);
+        dispose();
+    }//GEN-LAST:event_backButtonActionPerformed
+
     /**
      * Method that retrieves the full list of events to allow the
      * organizer to select the events.
      *
      * @return a String array to fill the JList
      */
-    public String[] initialEventList() {
+    public String[] inicialEvent1List() {
         String[] list = new String[ec.getEventRegister().getEventList().size()];
         int cont = 0;
         for (Event e : ec.getEventRegister().getEventList()) {
@@ -338,7 +315,14 @@ public class UC44_1_UI extends javax.swing.JFrame {
         return list;
     }
     
-    public void removeEventFromTopList(String uName) {
+    public String[] inicialEvent2List() {
+       
+     return inicialEvent1List(); 
+    }
+    
+    
+    
+    public void removeEventFromTop2List(String uName) {
         
         String[] list = new String[topList.length - 1];
         
@@ -357,13 +341,19 @@ public class UC44_1_UI extends javax.swing.JFrame {
         
     }
     
-    public void removeEventFromPickedList(String eTitle) {
+    public void removeEventFromPickedList(String eTwoTitle) {
+        String[] eTitle = eTwoTitle.trim().split("-");
+        String eTitle1 = eTitle[0];
+        String eTitle2 = eTitle[1]; 
         
         String[] list = new String[pickedList.length - 1];
         
         int flag = 0;
         for (int i = 0; i < pickedList.length; i++){
-           if (!eTitle.equals(pickedList[i])) {
+           String[] part= pickedList[i].trim().split("-");
+           String part1 = part[0];
+           String part2 = part[1];
+           if (!eTitle1.equals(part1) && !eTitle2.equals(part2)) {
                 list[i - flag] = pickedList[i] ;
             } else {
                 flag++;
@@ -375,7 +365,7 @@ public class UC44_1_UI extends javax.swing.JFrame {
         
     }
     
-    public void addEventToPickedList(String pickedEvent) {
+    public void addEventsToPickedList(String pickedEvent, String pickedEvent2) {
         
         String[] list = new String[pickedList.length + 1];
         
@@ -383,7 +373,7 @@ public class UC44_1_UI extends javax.swing.JFrame {
             list[i] = pickedList[i];
         }
         
-        list[list.length - 1] = pickedEvent;
+        list[list.length - 1] = pickedEvent + "-" + pickedEvent2;
         
         pickedList = new String[pickedList.length + 1];
         pickedList = list;
@@ -399,8 +389,8 @@ public class UC44_1_UI extends javax.swing.JFrame {
             list[i] = topList[i];
         }
         String[] part = topEvent.split("-");
-        String part1=part[0];
-        list[list.length - 1] = part1;
+        String Event2=part[1].trim();
+        list[list.length - 1] = Event2;
         
         topList = new String[topList.length + 1];
         topList = list;
@@ -436,26 +426,28 @@ public class UC44_1_UI extends javax.swing.JFrame {
     public void getA(){
        for(int i=0;i<pickedList.length;i++){
            String[] part=pickedList[i].split("-");
-           String part2 = part[1];
+           String part2 = part[2].trim();
            a[i]= Double.parseDouble(part2);
        }
        
     }
 
     
-    
+    private void eventListMouseClicked(java.awt.event.MouseEvent evt) {                                      
 
+    }  
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Continue;
-    private javax.swing.JList<String> eventList;
-    private javax.swing.JFrame jFrame1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
+    private javax.swing.JButton UnpickButtom;
+    private javax.swing.JButton backButton;
+    private javax.swing.JButton confirmButoon;
+    private javax.swing.JList<String> eve1List;
+    private javax.swing.JList<String> eve2List;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JButton pickButton;
     private javax.swing.JList<String> pickedEventList;
-    private javax.swing.JButton unpickButton;
     // End of variables declaration//GEN-END:variables
 }

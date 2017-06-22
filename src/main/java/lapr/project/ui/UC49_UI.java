@@ -156,13 +156,13 @@ public class UC49_UI extends javax.swing.JFrame {
     public void fillTable(String a){
       DefaultTableModel val = (DefaultTableModel) Table1.getModel();
          List<FAE> allFAE = c.getAllFae(ec);
-         for(int i=0;i<allFAE.size();i++){
-            String nome = allFAE.get(i).getName();
-            int nSub = allFAE.get(i).getAttributionList().size();
-            double mRa = allFAE.get(i).getMeanRating();
+         for(FAE fae : allFAE){
+            String nome = fae.getName();
+            int nSub = fae.getAttributionList().size();
+            double mRa = fae.getMeanRating();
             double dMean = ec.getMeanDeviation();
-            double sMean = allFAE.get(i).getStandardDeviation();
-            double z = ec.getZ(allFAE.get(i));
+            double sMean = fae.getStandardDeviation();
+            double z = ec.getZ(fae);
             String dec = ec.testTheDifferenceBetweenTheMeanDeviationAndATheoreticalValue1ForAFAEAverageRating(a);
             val.addRow(new Object[]{nome,nSub,mRa,dMean,sMean,z,dec}); 
       }   

@@ -120,6 +120,11 @@ public class EventManagerActions_UI extends javax.swing.JFrame {
         });
 
         uc45Button.setText("UC45 - Test the difference between two Events acceptance rate");
+        uc45Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                uc45ButtonActionPerformed(evt);
+            }
+        });
 
         uc46Button.setText("UC46 - Show a FAE mean rating");
         uc46Button.addActionListener(new java.awt.event.ActionListener() {
@@ -142,6 +147,11 @@ public class EventManagerActions_UI extends javax.swing.JFrame {
         uc32Button.setText("UC32 - Import Event Data from file");
 
         uc49Button.setText("UC49 - Test the difference between the mean deviation and a theoretical value for a FAE average rating");
+        uc49Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                uc49ButtonActionPerformed(evt);
+            }
+        });
 
         backButton.setText("Back");
         backButton.addActionListener(new java.awt.event.ActionListener() {
@@ -256,6 +266,14 @@ public class EventManagerActions_UI extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_uc46ButtonActionPerformed
+
+    private void uc49ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uc49ButtonActionPerformed
+        new UC49_UI(ec);
+    }//GEN-LAST:event_uc49ButtonActionPerformed
+
+    private void uc45ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uc45ButtonActionPerformed
+        new UC45_1_UI(ec, u);
+    }//GEN-LAST:event_uc45ButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
