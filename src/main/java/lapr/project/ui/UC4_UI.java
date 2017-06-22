@@ -11,6 +11,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import lapr.project.controller.UC4_Controller;
 import lapr.project.model.Application;
+import lapr.project.model.Decision;
 import lapr.project.model.Event;
 import lapr.project.model.EventCenter;
 import lapr.project.model.User;
@@ -84,7 +85,7 @@ public class UC4_UI extends javax.swing.JFrame {
         invitationsField = new javax.swing.JComboBox<>();
         recommendationField = new javax.swing.JComboBox<>();
         jLabel8 = new javax.swing.JLabel();
-        jComboBox5 = new javax.swing.JComboBox<>();
+        finalDecision = new javax.swing.JComboBox<>();
         jScrollPane3 = new javax.swing.JScrollPane();
         justificationField = new javax.swing.JTextArea();
         jLabel9 = new javax.swing.JLabel();
@@ -138,7 +139,7 @@ public class UC4_UI extends javax.swing.JFrame {
 
         jLabel8.setText("Final Decision:");
 
-        jComboBox5.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Accept" , "Reject" }));
+        finalDecision.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Accept" , "Reject" }));
 
         justificationField.setColumns(20);
         justificationField.setLineWrap(true);
@@ -178,15 +179,10 @@ public class UC4_UI extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(19, 19, 19)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel7)
-                                            .addComponent(jLabel6)
-                                            .addComponent(jLabel5))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel4)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                    .addComponent(jLabel7)
+                                    .addComponent(jLabel6)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel4))
                                 .addGap(43, 43, 43)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(adequacyField, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -196,7 +192,7 @@ public class UC4_UI extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel8)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jComboBox5, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(finalDecision, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(32, 32, 32))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel3)
@@ -251,7 +247,7 @@ public class UC4_UI extends javax.swing.JFrame {
                 .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(jComboBox5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(finalDecision, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(decideButton)
                     .addComponent(cancelButton))
                 .addContainerGap(24, Short.MAX_VALUE))
@@ -293,7 +289,12 @@ public class UC4_UI extends javax.swing.JFrame {
     private void decideButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_decideButtonActionPerformed
         if (applicationList.getSelectedIndex() != -1) {
             if (!(("").equals(justificationField.getText()))) {
-
+                if (JOptionPane.showConfirmDialog(UC4_UI.this, "Are you sure you want to submit this decision?", "Confirm", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
+                    createDecision();
+                    System.out.println(selectedApplication.getDecisionList());
+                    dispose();
+                    new MainWindow(u, ec);
+                }
             } else {
                 JOptionPane.showMessageDialog(UC4_UI.this, "Please provide a short justification", "Error", JOptionPane.OK_OPTION);
             }
@@ -318,6 +319,18 @@ public class UC4_UI extends javax.swing.JFrame {
         return names;
     }
 
+    private void createDecision() {
+
+        if (finalDecision.getSelectedItem().equals("Accept")) {
+            selectedApplication.addDecision(new Decision(true, justificationField.getText(), knowledgeField.getSelectedIndex(), adequacyField.getSelectedIndex(), invitationsField.getSelectedIndex(), recommendationField.getSelectedIndex(), u.getUsername()));
+            selectedApplication.setDecisionStatus(1);
+        } else {
+            selectedApplication.addDecision(new Decision(false, justificationField.getText(), knowledgeField.getSelectedIndex(), adequacyField.getSelectedIndex(), invitationsField.getSelectedIndex(), recommendationField.getSelectedIndex(), u.getUsername()));
+            selectedApplication.setDecisionStatus(-1);
+        }
+
+    }
+
     /**
      * This method returns the whole application list of an event to use in the
      * JList
@@ -340,8 +353,8 @@ public class UC4_UI extends javax.swing.JFrame {
     private javax.swing.JButton cancelButton;
     private javax.swing.JButton decideButton;
     private javax.swing.JList<String> eventList;
+    private javax.swing.JComboBox<String> finalDecision;
     private javax.swing.JComboBox<String> invitationsField;
-    private javax.swing.JComboBox<String> jComboBox5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

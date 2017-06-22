@@ -241,10 +241,10 @@ public class ImportEventData {
 
                             case "accepted":
                                 if (el.getTextContent().equalsIgnoreCase("true")) {
-                                    newApp.setDecision(1);
+                                    newApp.setDecisionStatus(1);
                                 }
                                 if (el.getTextContent().equalsIgnoreCase("false")) {
-                                    newApp.setDecision(-1);
+                                    newApp.setDecisionStatus(-1);
                                 }
                                 break;
                             case "description":

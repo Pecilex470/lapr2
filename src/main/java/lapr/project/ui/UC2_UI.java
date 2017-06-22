@@ -81,14 +81,12 @@ public class UC2_UI extends javax.swing.JFrame {
 
         String[] list = new String[ec.getEventsWhereUserIsOrganizer(u).size()];
         int cont = 0;
-        
+
         for (Event e : ec.getEventsWhereUserIsOrganizer(u)) {
-           
-                list[cont] = e.getTitle();
+
+            list[cont] = e.getTitle();
             cont++;
-          
-            
-            
+
         }
         return list;
     }
@@ -201,19 +199,18 @@ public class UC2_UI extends javax.swing.JFrame {
 
     private void eventListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_eventListMouseClicked
 
-        this.eventSelected = ec.getEventRegister().getEventList().get(eventList.getSelectedIndex());
-        String[] list = modelList();
+        this.eventSelected = ec.getEventRegister().getEventByTitle(eventList.getSelectedValue());
 
         userList.setModel(new javax.swing.AbstractListModel<String>() {
             static final long serialVersionUID = -3387516993124229948L;
-            String[] strings = list;
+            String[] strings = modelList();
 
             public int getSize() {
-                return list.length;
+                return strings.length;
             }
 
             public String getElementAt(int i) {
-                return list[i];
+                return strings[i];
             }
         });
     }//GEN-LAST:event_eventListMouseClicked
@@ -223,19 +220,19 @@ public class UC2_UI extends javax.swing.JFrame {
         if (JOptionPane.showConfirmDialog(UC2_UI.this, "Do you wish to define this user as FAE?", "Define", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
             eventSelected.getFaeList().getFAEList().add(userSelected);
             String[] list = modelList();
-            
+
             userList.setModel(new javax.swing.AbstractListModel<String>() {
-            static final long serialVersionUID = -3387516993124229948L;
-            String[] strings = list;
+                static final long serialVersionUID = -3387516993124229948L;
+                String[] strings = list;
 
-            public int getSize() {
-                return list.length;
-            }
+                public int getSize() {
+                    return list.length;
+                }
 
-            public String getElementAt(int i) {
-                return list[i];
-            }
-        });
+                public String getElementAt(int i) {
+                    return list[i];
+                }
+            });
         }
     }//GEN-LAST:event_defineButtonActionPerformed
     /**
@@ -248,7 +245,7 @@ public class UC2_UI extends javax.swing.JFrame {
         List<User> users = new ArrayList<>();
 
         for (User user : ec.getUserRegister().getUsers()) {
-            if (!(eventSelected.checkIFUserIsFAE(user)) && (eventSelected.checkIFUserIsOrganizer(user))) {
+            if (!(eventSelected.checkIFUserIsOrganizer(user)) && !(eventSelected.checkIFUserIsFAE(user))) {
                 users.add(user);
             }
         }

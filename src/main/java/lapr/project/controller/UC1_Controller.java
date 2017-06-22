@@ -5,7 +5,7 @@ import lapr.project.model.User;
 import lapr.project.model.register.EventRegister;
 import lapr.project.model.register.FAEList;
 import lapr.project.model.register.OrganizerList;
-import lapr.project.utils.Date;
+import lapr.project.utils.CustomDate;
 
 public class UC1_Controller {
     
@@ -37,7 +37,7 @@ public class UC1_Controller {
      * @param availableArea the area available for creating stands
      * @return returns if the data is correct or not
      */
-    public boolean validateEventData(String title, String location, String description, Date startDate, Date endDate, Date submissionStartDate, Date submissionEndDate, String eventType, FAEList fl, OrganizerList ol, int availableArea) {
+    public boolean validateEventData(String title, String location, String description, CustomDate startDate, CustomDate endDate, CustomDate submissionStartDate, CustomDate submissionEndDate, String eventType, FAEList fl, OrganizerList ol, int availableArea) {
         return ec.getEventRegister().validateEventData(title, location, description, startDate, endDate, submissionStartDate, submissionEndDate, eventType, fl, ol, availableArea);
     }
     

@@ -42,7 +42,7 @@ public class UC22_Controller {
         // APPLICATIONS WITHOUT DECISION
         for (Application a : e.getApplicationList().getApplications()) {
 
-            if (a.getDecision() == 0) {
+            if (a.getDecisionStatus() == 0) {
                 appList[0][count] = a.getCompanyName();
                 count++;
             }
@@ -53,7 +53,7 @@ public class UC22_Controller {
         // ACCEPTED APPLICATIONS
         for (Application a : e.getApplicationList().getApplications()) {
 
-            if (a.getDecision() == 1) {
+            if (a.getDecisionStatus() == 1) {
                 appList[1][count] = a.getCompanyName();
                 count++;
             }
@@ -64,7 +64,7 @@ public class UC22_Controller {
         // REJECTED APPLICATIONS
         for (Application a : e.getApplicationList().getApplications()) {
 
-            if (a.getDecision() == -1) {
+            if (a.getDecisionStatus() == -1) {
                 appList[2][count] = a.getCompanyName();
                 count++;
             }

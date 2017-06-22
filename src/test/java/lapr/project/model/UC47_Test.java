@@ -11,7 +11,7 @@ import lapr.project.model.register.ApplicationList;
 import lapr.project.model.register.EventRegister;
 import lapr.project.model.register.FAEList;
 import lapr.project.model.register.OrganizerList;
-import lapr.project.utils.Date;
+import lapr.project.utils.CustomDate;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
@@ -58,8 +58,8 @@ public class UC47_Test {
 //        appL.add(new Application("Test3", keyL));
 //        this.al.setApplication(appL);
 //
-//        eventList_Expected.add(new Event("Event1", "location1", "bla bla bla", new Date(2017, 8, 10), new Date(2017, 11, 10), new Date(2017, 9, 10), new Date(2017, 10, 10), "Exposição", faeL, orgL, 1000));
-//        eventList_Expected.add(new Event("Event2", "location1", "bla bla bla", new Date(2016, 8, 10), new Date(2016, 11, 10), new Date(2016, 9, 10), new Date(2016, 10, 10), "Exposição", faeL, orgL, 1000));
+//        eventList_Expected.add(new Event("Event1", "location1", "bla bla bla", new CustomDate(2017, 8, 10), new CustomDate(2017, 11, 10), new CustomDate(2017, 9, 10), new CustomDate(2017, 10, 10), "Exposição", faeL, orgL, 1000));
+//        eventList_Expected.add(new Event("Event2", "location1", "bla bla bla", new CustomDate(2016, 8, 10), new CustomDate(2016, 11, 10), new CustomDate(2016, 9, 10), new CustomDate(2016, 10, 10), "Exposição", faeL, orgL, 1000));
 //
 //        er.setEventList(eventList_Expected);
 //        ec.setEventRegister(er);
