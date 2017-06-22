@@ -82,6 +82,7 @@ public class UC50_1_UI extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jList1.setModel(new javax.swing.AbstractListModel<String>() {
+            static final long serialVersionUID = -3387516993124229948L;
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
@@ -89,6 +90,7 @@ public class UC50_1_UI extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jList1);
 
         jList2.setModel(new javax.swing.AbstractListModel<String>() {
+            static final long serialVersionUID = -3387516993124229948L;
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
@@ -96,6 +98,7 @@ public class UC50_1_UI extends javax.swing.JFrame {
         jScrollPane2.setViewportView(jList2);
 
         jList3.setModel(new javax.swing.AbstractListModel<String>() {
+            static final long serialVersionUID = -3387516993124229948L;
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
@@ -139,7 +142,7 @@ public class UC50_1_UI extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -162,26 +165,26 @@ public class UC50_1_UI extends javax.swing.JFrame {
      *
      * @return a String array to fill the JList
      */
-    public String[] inicialFAE1List() {
-        
-
-        String[] list = new String[];
-        int cont = 0;
-        for (Event e : ec.getEventRegister().getEventList()) {
-            String title = e.getTitle();
-            list[cont] = title;
-            cont++;
-        }
-        
-        topList = list;
-        
-        return list;
-    }
-    
-    public String[] inicialEvent2List() {
-       
-     return inicialEvent1List(); 
-    }
+//    public String[] inicialFAE1List() {
+//        
+//
+//        String[] list = new String[];
+//        int cont = 0;
+//        for (Event e : ec.getEventRegister().getEventList()) {
+//            String title = e.getTitle();
+//            list[cont] = title;
+//            cont++;
+//        }
+//        
+//        topList = list;
+//        
+//        return list;
+//    }
+//    
+//    public String[] inicialEvent2List() {
+//       
+//     return inicialEvent1List(); 
+//    }
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
