@@ -107,6 +107,11 @@ public class OrganizerActions_UI extends javax.swing.JFrame {
         });
 
         uc41Button.setText("UC41 - Show Event stands information");
+        uc41Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                uc41ButtonActionPerformed(evt);
+            }
+        });
 
         backButton.setText("Back");
         backButton.addActionListener(new java.awt.event.ActionListener() {
@@ -192,6 +197,11 @@ public class OrganizerActions_UI extends javax.swing.JFrame {
         new UC20_UI(ec, u);
         dispose();
     }//GEN-LAST:event_uc20ButtonActionPerformed
+
+    private void uc41ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uc41ButtonActionPerformed
+        new UC41_UI(ec, u);
+        dispose();
+    }//GEN-LAST:event_uc41ButtonActionPerformed
 
     /**
      * @param args the command line arguments
