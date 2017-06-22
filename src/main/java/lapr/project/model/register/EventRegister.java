@@ -51,6 +51,9 @@ public class EventRegister implements Serializable {
         List<Event> list = new ArrayList<>();
         CustomDate today = CustomDate.getCurrentTime();
         for (Event event : events) {
+            
+
+            
             if (today.checkSubmissionPeriod(event.getSubmissionStartDate(), event.getSubmissionEndDate())) {
                 list.add(event);
             }
