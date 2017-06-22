@@ -43,7 +43,7 @@ public class UC45_2_UI extends javax.swing.JFrame {
         this.ec = ec;
         this.c = new UC45_Controller(ec);
         this.eve1=eventSelected1;
-        this.eve2=eventSelected1;
+        this.eve2=eventSelected2;
         this.a = a;
         initComponents();
         this.setVisible(true);
@@ -173,7 +173,7 @@ public class UC45_2_UI extends javax.swing.JFrame {
             String part2 = parts[1].trim();
             String part3 = parts[2].trim();
   
-            if (part1.equals(e.getTitle()) || part2.equals(e.getTitle()) ) {
+            if (part1.equals(e.getTitle()) || part2.equals(e1.getTitle()) ) {
                 cv = part3;
              return cv;
             

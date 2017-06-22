@@ -217,7 +217,16 @@ public class UC45_1_UI extends javax.swing.JFrame {
         
         addEventsToPickedList(event,event2);
         
+        
+        
         double a = Double.parseDouble(JOptionPane.showInputDialog(UC45_1_UI.this, "Enter the significance level [0.01 or 0.05]"));
+        
+        while (a != 0.01 && a != 0.05) {
+            JOptionPane.showMessageDialog(UC45_1_UI.this, "Insert 0.01 or 0.05");
+            a = Double.parseDouble(JOptionPane.showInputDialog(UC45_1_UI.this, "Enter the significance level [0.01 or 0.05]"));
+        }
+        
+        
         
         pickedList[pickedList.length-1] += " - " + a;
         
@@ -277,7 +286,7 @@ public class UC45_1_UI extends javax.swing.JFrame {
          String part1 = part[0].trim();
          String part2 = part[1].trim();
          eventSelected1.add(titleStringToEvent(part1));
-         eventSelected2.add(titleStringToEvent(part1));
+         eventSelected2.add(titleStringToEvent(part2));
       
       }
        
