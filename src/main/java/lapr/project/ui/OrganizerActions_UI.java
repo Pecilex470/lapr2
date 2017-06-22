@@ -19,14 +19,15 @@ import lapr.project.utils.ExportData;
  * @author Pedro
  */
 public class OrganizerActions_UI extends javax.swing.JFrame {
-    
+
     static final long serialVersionUID = -3387516993124229948L;
-    
+
     private EventCenter ec;
     private User u;
 
     /**
      * Creates new form OrganizerActions_UI
+     *
      * @param ec the instance of the event center
      * @param u the user that is currently using the window
      */
@@ -173,14 +174,15 @@ public class OrganizerActions_UI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void uc40ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uc40ButtonActionPerformed
-        // TODO add your handling code here:
+
+        dispose();
+        new UC40_UI(ec, u);
+
     }//GEN-LAST:event_uc40ButtonActionPerformed
 
     private void uc2ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uc2ButtonActionPerformed
         dispose();
-        
-        
-        
+
         new UC2_UI(ec, u);
     }//GEN-LAST:event_uc2ButtonActionPerformed
 
@@ -206,7 +208,6 @@ public class OrganizerActions_UI extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backButton;
