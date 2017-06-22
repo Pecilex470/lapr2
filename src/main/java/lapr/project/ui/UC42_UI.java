@@ -6,7 +6,7 @@
 package lapr.project.ui;
 
 import java.io.FileNotFoundException;
-import java.util.Formatter;
+import java.text.DecimalFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -21,7 +21,6 @@ import lapr.project.utils.ExportData;
  *
  * @author Luis
  */
-
 public class UC42_UI extends javax.swing.JFrame {
 
     static final long serialVersionUID = -3387516993124229948L;
@@ -36,8 +35,7 @@ public class UC42_UI extends javax.swing.JFrame {
         this.u = u;
         this.ec = ec;
         c = new UC42_Controller(ec);
-        
-        
+
         initComponents();
         this.setVisible(true);
         setLocationRelativeTo(null);
@@ -170,12 +168,15 @@ public class UC42_UI extends javax.swing.JFrame {
 
     private void eventListUIMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_eventListUIMouseClicked
 
-        Formatter formatter = new Formatter();
         
+        double accepRate = c.getEventAcceptanceRate(ec.getEventRegister().getEventList().get(eventListUI.getSelectedIndex()));
         
-    acceptanceRateUI.setText(""+c.getEventAcceptanceRate(ec.getEventRegister().getEventList().get(eventListUI.getSelectedIndex())));
-        
-        
+        int int1 = (int) (accepRate * 1000);
+        double aR = (double) int1 / 1000;
+
+        acceptanceRateUI.setText(""+aR);
+
+
     }//GEN-LAST:event_eventListUIMouseClicked
 
     public String[] initialEventList() {

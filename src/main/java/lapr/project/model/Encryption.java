@@ -4,16 +4,16 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 
 /**
  *
  * @author Pedro
  */
-public class Encryption implements Serializable{
+public class Encryption implements Serializable {
 
-    
-     static final long serialVersionUID = 4;
-    
+    static final long serialVersionUID = 4;
+
     /**
      * Variable that stores the shift on the encryptation
      */
@@ -35,6 +35,7 @@ public class Encryption implements Serializable{
      * All the characters that can be used
      */
     public static final String ABC = " abcdefghijklmnopqrstuvwxyzãÃõÕêÊçÇíÍ*+ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890,;.:-@";
+    public static final int nCharABC = 81;
 
     /**
      * Constructor that creates the instance of an encryption
@@ -103,8 +104,8 @@ public class Encryption implements Serializable{
      * @param abc the abecedary of characters
      * @return returns the encrypted password
      */
-    public static String encryptPassword(String password, int num, String abc) {
-
+    public static String encryptPassword(String password, int num, String abc) {        
+        
         String encryptedString = "";
 
         List<String> abecedary = new ArrayList<>();
@@ -180,11 +181,11 @@ public class Encryption implements Serializable{
             abecedary.add(ABC.substring(i, i + 1));
             comparator.add(ABC.substring(i, i + 1));
         }
-        
+
         for (int i = 0; i < key.length(); i++) {
             substitution.add(key.substring(i, i + 1));
         }
-        
+
         for (int i = 0; i < key.length(); i++) {
             for (int j = 0; j < abecedary.size(); j++) {
                 if (key.substring(i, i + 1).equals(abecedary.get(j))) {
@@ -268,6 +269,31 @@ public class Encryption implements Serializable{
             string = string + chars[i];
         }
         return string;
+    }
+
+    public static String randomCipher() {
+
+        Random r = new Random();
+        int Low = 4;
+        int High = 8;
+        int nCaractersOfCipher = r.nextInt(High - Low) + Low;
+        
+        String cipher = "";
+
+        for (int i = 0; i < nCaractersOfCipher; i++) {
+
+            Random ra = new Random();
+            int Low2 = 0;
+            int High2 = 80;
+            int indexOfAbc = ra.nextInt(High2 - Low2) + Low2;
+            
+            cipher += ABC.substring(indexOfAbc, indexOfAbc +1);
+            
+
+        }
+      
+        return cipher;
+        
     }
 
 }

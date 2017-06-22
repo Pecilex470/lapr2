@@ -21,7 +21,7 @@ import lapr.project.utils.ExportData;
  * @author Pedro
  */
 public class UC6_UI extends javax.swing.JDialog {
-    
+
     static final long serialVersionUID = -3387516993124229948L;
 
     private EventCenter ec;
@@ -82,8 +82,6 @@ public class UC6_UI extends javax.swing.JDialog {
         errorTextArea = new javax.swing.JTextArea();
         jLabel9 = new javax.swing.JLabel();
         timezoneComboBox = new javax.swing.JComboBox<>();
-        jLabel7 = new javax.swing.JLabel();
-        keywordTextField = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("New User");
@@ -127,14 +125,12 @@ public class UC6_UI extends javax.swing.JDialog {
         errorTextArea.setEditable(false);
         errorTextArea.setColumns(20);
         errorTextArea.setRows(5);
-        errorTextArea.setText("The password must have at least one special\ncharacter (, . : ; -), and at least one uppercase\nletter and one lowercase letter, as well as at least\none number");
+        errorTextArea.setText("The password must have at least one special\ncharacter (, . : ; -), and at least one uppercase\nletter and one lowercase letter, as well as at least\none number\nData encryption keyword is randomly generated\n");
         jScrollPane1.setViewportView(errorTextArea);
 
         jLabel9.setText("*");
 
         timezoneComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "UTC", "GMT" }));
-
-        jLabel7.setText("Data encryption keyword:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -143,26 +139,24 @@ public class UC6_UI extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
+                        .addGap(58, 58, 58)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel3)
                             .addComponent(jLabel2)
                             .addComponent(jLabel4)
                             .addComponent(jLabel5)
                             .addComponent(jLabel6)
-                            .addComponent(jLabel8)
-                            .addComponent(jLabel7))
+                            .addComponent(jLabel8))
                         .addGap(31, 31, 31))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel9)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 284, Short.MAX_VALUE)
                     .addComponent(representativeCheckBox, javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(cancelButt, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(31, 31, 31)
+                        .addGap(30, 30, 30)
                         .addComponent(confirmButt, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(nameTextField, javax.swing.GroupLayout.Alignment.LEADING)
@@ -170,14 +164,14 @@ public class UC6_UI extends javax.swing.JDialog {
                     .addComponent(usernameTextField, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(passwordField, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(confirmPasswordField, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(timezoneComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(keywordTextField))
+                    .addComponent(timezoneComboBox, 0, 284, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1))
                 .addContainerGap(27, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(23, 23, 23)
+                .addContainerGap(22, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -203,22 +197,20 @@ public class UC6_UI extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(timezoneComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(keywordTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(representativeCheckBox)
-                .addGap(12, 12, 12)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(21, 21, 21)
+                        .addGap(42, 42, 42)
+                        .addComponent(jLabel9))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(confirmButt)
-                            .addComponent(cancelButt)))
-                    .addComponent(jLabel9))
-                .addContainerGap(30, Short.MAX_VALUE))
+                            .addComponent(cancelButt)
+                            .addComponent(confirmButt))))
+                .addGap(24, 24, 24))
         );
 
         pack();
@@ -230,31 +222,29 @@ public class UC6_UI extends javax.swing.JDialog {
 
     private void confirmButtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmButtActionPerformed
 
-        if (!(nameTextField.getText().equals("") || emailTextField.getText().equals("") || usernameTextField.getText().equals("") || c.assemblePassword(passwordField.getPassword()).equals("") || keywordTextField.getText().equals(""))) {
+        if (!(nameTextField.getText().equals("") || emailTextField.getText().equals("") || usernameTextField.getText().equals("") || c.assemblePassword(passwordField.getPassword()).equals(""))) {
             if (ec.getUserRegister().verifyUsername(usernameTextField.getText()) == false) {
                 if (c.verifyEmail(emailTextField.getText())) {
                     if (c.verifyExistingEmail(emailTextField.getText()) == false) {
                         if (c.assemblePassword(passwordField.getPassword()).equals(c.assemblePassword(confirmPasswordField.getPassword()))) {
-                            if (4 <= keywordTextField.getText().length() && 7 >= keywordTextField.getText().length()) {
-                                if (c.verifyPassword(c.assemblePassword(passwordField.getPassword())) == true) {
-                                    if (JOptionPane.showConfirmDialog(UC6_UI.this, "Are you sure you want to register with this Data?", "Confirm", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
-                                        int shift = ThreadLocalRandom.current().nextInt(1, 81);
-                                        String password = c.encryptPassword(c.assemblePassword(passwordField.getPassword()), shift, Encryption.ABC);
-                                        if (representativeCheckBox.isSelected()) {
-                                            c.registerUser(c.twoLayerEncription(nameTextField.getText(), shift, keywordTextField.getText(), Encryption.ABC), c.twoLayerEncription(emailTextField.getText(), shift, keywordTextField.getText(), Encryption.ABC), usernameTextField.getText(), password, false, true);
-                                        } else {
-                                            c.registerUser(c.twoLayerEncription(nameTextField.getText(), shift, keywordTextField.getText(), Encryption.ABC), c.twoLayerEncription(emailTextField.getText(), shift, keywordTextField.getText(), Encryption.ABC), usernameTextField.getText(), password, false, false);
-                                        }
-                                        c.addEncryption(shift, usernameTextField.getText(), keywordTextField.getText());
-                                        dispose();
+                            String keyword = Encryption.randomCipher();
+                            if (c.verifyPassword(c.assemblePassword(passwordField.getPassword())) == true) {
+                                if (JOptionPane.showConfirmDialog(UC6_UI.this, "Are you sure you want to register with this Data?", "Confirm", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
+                                    int shift = ThreadLocalRandom.current().nextInt(1, 81);
+                                    String password = c.encryptPassword(c.assemblePassword(passwordField.getPassword()), shift, Encryption.ABC);
+                                    if (representativeCheckBox.isSelected()) {
+                                        c.registerUser(c.twoLayerEncription(nameTextField.getText(), shift, keyword, Encryption.ABC), c.twoLayerEncription(emailTextField.getText(), shift, keyword, Encryption.ABC), usernameTextField.getText(), password, false, true);
+                                    } else {
+                                        c.registerUser(c.twoLayerEncription(nameTextField.getText(), shift, keyword, Encryption.ABC), c.twoLayerEncription(emailTextField.getText(), shift, keyword, Encryption.ABC), usernameTextField.getText(), password, false, false);
                                     }
-                                } else {
-                                    JOptionPane.showMessageDialog(UC6_UI.this, "Missing password requirements", "Error", JOptionPane.OK_OPTION);
-                                    errorTextArea.setForeground(Color.red);
+                                    c.addEncryption(shift, usernameTextField.getText(), keyword);
+                                    dispose();
                                 }
                             } else {
-                                JOptionPane.showMessageDialog(UC6_UI.this, "The Keyword must be between 4 and 7 characters", "Error", JOptionPane.OK_OPTION);
+                                JOptionPane.showMessageDialog(UC6_UI.this, "Missing password requirements", "Error", JOptionPane.OK_OPTION);
+                                errorTextArea.setForeground(Color.red);
                             }
+
                         } else {
                             JOptionPane.showMessageDialog(UC6_UI.this, "Passwords don´t match, please try again", "Error", JOptionPane.OK_OPTION);
                         }
@@ -292,11 +282,9 @@ public class UC6_UI extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField keywordTextField;
     private javax.swing.JTextField nameTextField;
     private javax.swing.JPasswordField passwordField;
     private javax.swing.JCheckBox representativeCheckBox;

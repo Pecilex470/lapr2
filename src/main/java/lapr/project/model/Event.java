@@ -1,6 +1,7 @@
 package lapr.project.model;
 
 import java.io.Serializable;
+import java.text.DecimalFormat;
 import lapr.project.model.register.FAEList;
 import lapr.project.model.register.ApplicationList;
 import lapr.project.model.register.OrganizerList;
@@ -202,7 +203,6 @@ public class Event implements Serializable {
         int accepted = applicationList.getAcceptedApplicationRegister().size();
         int total = applicationList.getApplications().size();
 
-        System.out.println("" + (double) (accepted * 100) / (double) total);
         
         return (double) (accepted * 100) / (double) total;
 
@@ -446,5 +446,6 @@ public class Event implements Serializable {
     public void addArea(int area) {
         this.availableArea += area;
     }
+    
 
 }

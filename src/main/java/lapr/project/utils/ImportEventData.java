@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.xml.parsers.DocumentBuilder;
@@ -38,8 +39,8 @@ import org.xml.sax.SAXException;
  */
 public class ImportEventData {
 
-    private static final String DEFAULT_KEYWORD = "zebras";
-    private static final int DEFAULT_SHIFT = 6;
+    private String randomKeyword;
+    private int randomShift;
     EventCenter ec;
     Node event;
     Document docXML;
@@ -48,6 +49,8 @@ public class ImportEventData {
     public ImportEventData(EventCenter ec, String fileName) {
         this.ec = ec;
         this.fileName = fileName;
+        this.randomKeyword = Encryption.randomCipher();
+        this.randomShift = ThreadLocalRandom.current().nextInt(1, 81);
 
         try {
 
@@ -138,20 +141,20 @@ public class ImportEventData {
                                     switch (el.getTagName()) {
 
                                         case "name":
-                                            String temp = Encryption.encryptData(el.getTextContent(), DEFAULT_KEYWORD);
-                                            temp = Encryption.encryptPassword(temp, DEFAULT_SHIFT, Encryption.ABC);
+                                            String temp = Encryption.encryptData(el.getTextContent(), randomKeyword);
+                                            temp = Encryption.encryptPassword(temp, randomShift, Encryption.ABC);
                                             newUser.setName(temp);
                                             break;
                                         case "email":
-                                            temp = Encryption.encryptData(el.getTextContent(), DEFAULT_KEYWORD);
-                                            temp = Encryption.encryptPassword(temp, DEFAULT_SHIFT, Encryption.ABC);
+                                            temp = Encryption.encryptData(el.getTextContent(), randomKeyword);
+                                            temp = Encryption.encryptPassword(temp, randomShift, Encryption.ABC);
                                             newUser.setEmail(temp);
                                             break;
                                         case "username":
                                             newUser.setUsername(el.getTextContent());
                                             break;
                                         case "password":
-                                            temp = Encryption.encryptPassword(el.getTextContent(), DEFAULT_SHIFT, Encryption.ABC);
+                                            temp = Encryption.encryptPassword(el.getTextContent(), randomShift, Encryption.ABC);
                                             newUser.setPassword(temp);
                                             break;
                                     }
@@ -159,7 +162,7 @@ public class ImportEventData {
 
                             }
                             ec.getUserRegister().getUsers().add(newUser);
-                            ec.getEncryptionRegister().addEncryption(new Encryption(DEFAULT_SHIFT, newUser, DEFAULT_KEYWORD));
+                            ec.getEncryptionRegister().addEncryption(new Encryption(randomShift, newUser, randomKeyword));
                             newFae.setUtilizadorFAE(newUser);
                             list.add(newFae);
                             break;
