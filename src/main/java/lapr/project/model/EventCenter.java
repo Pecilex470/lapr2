@@ -365,10 +365,7 @@ public class EventCenter implements Serializable {
             keywordMatrix[count][1] = "" + occurrences;
             count++;
         }
-
-       
-        
-        
+      
         Object[][] frequencyMatrix = new Object[listWithOneOfEachKeyword.size()][3];
         int nKeywords = listWithAllKeywords.size();
         double tempN;
