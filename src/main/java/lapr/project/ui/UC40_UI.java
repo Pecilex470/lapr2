@@ -32,6 +32,8 @@ import lapr.project.utils.ExportData;
  * @author Luis
  */
 public class UC40_UI extends javax.swing.JFrame {
+    
+    static final long serialVersionUID = -3387516993124229948L;
 
     EventCenter ec;
     User u;
