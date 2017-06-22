@@ -436,5 +436,43 @@ public class Event implements Serializable {
     
     
     
+      private int getNumberOfStands() {
+        return this.getStandList().size();
+    }
+
+    public int getK(int num) {
+        return (int) (1 + 3.22 * Math.log10(num));
+    }
+
+    private int getAreaOfBiggestStand() {
+
+        int biggestArea = 0;
+
+        for (Stand stand : this.getStandList()) {
+            if (stand.getArea() > biggestArea) {
+                biggestArea = stand.getArea();
+            }
+        }
+        return biggestArea;
+    }
+
+    private int getAreaOfSmallest() {
+        
+
+        int smallestArea = this.getStandList().get(0).getArea();
+
+        for (Stand stand : this.getStandList()) {
+            if (stand.getArea() < smallestArea) {
+                smallestArea = stand.getArea();
+            }
+        }
+        
+        return smallestArea;
+    }
+    
+    public int determineInterspaceOfTable(){
+        return (int) (getAreaOfBiggestStand() - getAreaOfSmallest()/getK(getNumberOfStands()));
+    }
+
 
 }
