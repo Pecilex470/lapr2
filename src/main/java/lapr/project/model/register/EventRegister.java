@@ -47,14 +47,16 @@ public class EventRegister implements Serializable {
      *
      * @return returns a list with the Events
      */
-//    public List<Event> getAvailableEvents() {
-//        CustomDate today = CustomDate.getCurrentTime();
-//        for (Event event : events) {
-//            if (event.getSubmissionStartDate()) {
-//                
-//            }
-//        }
-//    }
+    public List<Event> getAvailableEvents() {
+        List<Event> list = new ArrayList<>();
+        CustomDate today = CustomDate.getCurrentTime();
+        for (Event event : events) {
+            if (today.checkSubmissionPeriod(event.getSubmissionStartDate(), event.getSubmissionEndDate())) {
+                list.add(event);
+            }
+        }
+        return list;
+    }
 
     /**
      * sets the event list from an existing list
@@ -63,10 +65,6 @@ public class EventRegister implements Serializable {
      */
     public void setEventList(List<Event> el) {
         this.events = el;
-    }
-
-    public boolean validateEventData(String title, String location, String description, CustomDate startDate, CustomDate endDate, CustomDate submissionStartDate, CustomDate submissionEndDate, String eventType, FAEList fl, OrganizerList ol, int availableArea) {
-        return true;
     }
 
     public Event getEventByTitle(String title) {

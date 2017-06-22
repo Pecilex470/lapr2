@@ -18,6 +18,7 @@ import lapr.project.model.Event;
 import lapr.project.model.EventCenter;
 import lapr.project.model.Keyword;
 import lapr.project.model.User;
+import lapr.project.utils.CustomDate;
 import lapr.project.utils.ExportData;
 
 /**
@@ -339,32 +340,34 @@ public class UC5_UI extends javax.swing.JFrame {
 
     private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitButtonActionPerformed
         try {
-            if (numberOfKeywords() > 1) {
-
-                if (JOptionPane.showConfirmDialog(UC5_UI.this, "Do you really want to submit this application?", "Confirmation", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
-
-                    List<Keyword> keywordList = new ArrayList<>();
-                    String[] keywordArray = {keyw1.getText(), keyw2.getText(), keyw3.getText(), keyw4.getText(), keyw5.getText()};
-
-                    for (int i = 0; i < keywordArray.length; i++) {
-                        if (!keywordArray[i].isEmpty()) {
-                            keywordList.add(new Keyword(keywordArray[i]));
-                        }
-                    }
-
+            if (!(companyNameTextField.getText().equals("") || standArea.getText().equals("") || description.getText().equals("") || nInvites.getText().equals(""))) {
+                if (numberOfKeywords() > 1) {
                     
-                    Application a = new Application(description.getText(), keywordList, companyNameTextField.getText(), u, Integer.parseInt(standArea.getText()), Integer.parseInt(nInvites.getText()));
-                    a.setProducts(productsTextField.getText());
-                    eventSelected.addApplication(a);
-                    JOptionPane.showMessageDialog(UC5_UI.this, "Application submitted!", "Information", JOptionPane.INFORMATION_MESSAGE);
-                    dispose();
-                    new RepresentativeActions(ec, u);
 
+                    if (JOptionPane.showConfirmDialog(UC5_UI.this, "Do you really want to submit this application?", "Confirmation", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
+
+                        List<Keyword> keywordList = new ArrayList<>();
+                        String[] keywordArray = {keyw1.getText(), keyw2.getText(), keyw3.getText(), keyw4.getText(), keyw5.getText()};
+
+                        for (int i = 0; i < keywordArray.length; i++) {
+                            if (!keywordArray[i].isEmpty()) {
+                                keywordList.add(new Keyword(keywordArray[i]));
+                            }
+                        }
+
+                        Application a = new Application(description.getText(), keywordList, companyNameTextField.getText(), u, Integer.parseInt(standArea.getText()), Integer.parseInt(nInvites.getText()));
+                        eventSelected.addApplication(a);
+                        a.setProducts(productsTextField.getText());
+                        JOptionPane.showMessageDialog(UC5_UI.this, "Application submitted!", "Information", JOptionPane.INFORMATION_MESSAGE);
+                        dispose();
+                        new RepresentativeActions(ec, u);
+
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "At least 2 keywords needed");
                 }
             } else {
-
-                JOptionPane.showMessageDialog(null, "At least 2 keywords needed");
-
+                JOptionPane.showMessageDialog(UC5_UI.this, "Please fill in all the fields!", "Error", JOptionPane.OK_OPTION);
             }
         } catch (ArrayIndexOutOfBoundsException exc) {
             JOptionPane.showMessageDialog(null, "Select an event");
@@ -424,9 +427,9 @@ public class UC5_UI extends javax.swing.JFrame {
 
     public String[] nameList() {
 
-        String[] eventList = new String[ec.getEventRegister().getEventList().size()];
+        String[] eventList = new String[ec.getEventRegister().getAvailableEvents().size()];
         int cont = 0;
-        for (Event e : ec.getEventRegister().getEventList()) {
+        for (Event e : ec.getEventRegister().getAvailableEvents()) {
             eventList[cont] = e.getTitle();
             cont++;
         }

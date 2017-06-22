@@ -240,12 +240,40 @@ public class EventCenter implements Serializable {
         }
         return allFAE;
     }
+  /**
+   * Mthod that returns all the fae that evaluated a application in the Event Center 
+   * 
+   * @return Fae that evaluated a application in the Event Center 
+   */
+    public List<FAE> getFAEEvaluatedApplicantions() {
+        List<FAE> allFAE = new ArrayList<>();
+
+        for (int i = 0; i < er.getEventList().size(); i++) {
+            for (int j = 0; j < er.getEventList().get(i).getApplicationList().getApplications().size(); j++) {
+                for (int k = 0; k < er.getEventList().get(i).getApplicationList().getApplications().get(j).getDecisionList().getDecisions().size(); k++) {
+                    String fae = getEventRegister().getEventList().get(i).getApplicationList().getApplications().get(j).getDecisionList().getDecisions().get(k).getFaeUsername();
+                    FAE f = new FAE();
+                    for (FAE faes : getAllFAE()) {
+
+                        if (faes.equals(fae)) {
+
+                            f = faes;
+                            allFAE.add(f);
+                        }
+                    }
+
+                }
+            }
+
+        }
+        return allFAE;
+    }
 
     public double getMeanDeviation() {
         double total = 0;
         int cont = 0;
         double global = getGlobalAcceptanceRate();
-        for (FAE fae : getAllFAE()) {
+        for (FAE fae : getFAEEvaluatedApplicantions()) {
             total += Math.abs(fae.getMeanRating() - global);
             cont++;
         }
@@ -266,7 +294,7 @@ public class EventCenter implements Serializable {
      */
     public double getZ(FAE fae) {
         double mDev = getMeanDeviation();
-        int total = getAllFAE().size();
+        int total = getFAEEvaluatedApplicantions().size();
         double standardDeviation = fae.getStandardDeviation();
         double z = (mDev - 1) / (standardDeviation / Math.sqrt(total));
 
@@ -286,7 +314,7 @@ public class EventCenter implements Serializable {
      */
     public double getZ2MeanDeviations(FAE e, FAE fae) {
         double mDev1 = getMeanDeviation();
-        int total = getAllFAE().size();
+        int total = getFAEEvaluatedApplicantions().size();
         double standardDeviation = e.getStandardDeviation();
         double mDev2 = getMeanDeviation();
         int total2 = fae.getAttributionList().size();
