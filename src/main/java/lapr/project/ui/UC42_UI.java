@@ -6,6 +6,7 @@
 package lapr.project.ui;
 
 import java.io.FileNotFoundException;
+import java.text.DecimalFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -20,7 +21,6 @@ import lapr.project.utils.ExportData;
  *
  * @author Luis
  */
-
 public class UC42_UI extends javax.swing.JFrame {
 
     static final long serialVersionUID = -3387516993124229948L;
@@ -35,8 +35,7 @@ public class UC42_UI extends javax.swing.JFrame {
         this.u = u;
         this.ec = ec;
         c = new UC42_Controller(ec);
-        
-        
+
         initComponents();
         this.setVisible(true);
         setLocationRelativeTo(null);
@@ -108,7 +107,7 @@ public class UC42_UI extends javax.swing.JFrame {
         jLabel1.setText("Show Event Acceptance Rate");
 
         acceptanceRateUI.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
-        acceptanceRateUI.setText("230");
+        acceptanceRateUI.setText("Select Event");
         acceptanceRateUI.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 51, 255), 3, true));
 
         jLabel3.setText("Selected event acceptance rate:");
@@ -137,7 +136,7 @@ public class UC42_UI extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(acceptanceRateUI))
                             .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addContainerGap(23, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jButton1)
@@ -169,10 +168,15 @@ public class UC42_UI extends javax.swing.JFrame {
 
     private void eventListUIMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_eventListUIMouseClicked
 
+        
+        double accepRate = c.getEventAcceptanceRate(ec.getEventRegister().getEventList().get(eventListUI.getSelectedIndex()));
+        
+        int int1 = (int) (accepRate * 1000);
+        double aR = (double) int1 / 1000;
 
-    acceptanceRateUI.setText(""+c.getEventAcceptanceRate(ec.getEventRegister().getEventList().get(eventListUI.getSelectedIndex())));
-        
-        
+        acceptanceRateUI.setText(""+aR);
+
+
     }//GEN-LAST:event_eventListUIMouseClicked
 
     public String[] initialEventList() {

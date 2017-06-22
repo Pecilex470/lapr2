@@ -5,6 +5,7 @@
  */
 package lapr.project.model.register;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import lapr.project.model.Decision;
@@ -13,8 +14,10 @@ import lapr.project.model.Decision;
  *
  * @author Pedro
  */
-public class DecisionList {
+public class DecisionList implements Serializable{
 
+    static final long serialVersionUID = 26;
+    
     /**
      * List of events in charge of a given Event Center.
      */
@@ -40,8 +43,20 @@ public class DecisionList {
         return decisionList;
     }
 
+    /**
+     * 
+     * @param decisionList 
+     */
     public void setDecisionList(List<Decision> decisionList) {
         this.decisionList = decisionList;
+    }
+    
+    /**
+     * This method adds a new decision to a certain application
+     * @param decision the decision to be added
+     */
+    public void addDecision(Decision decision) {
+        decisionList.add(decision);
     }
 
     /**

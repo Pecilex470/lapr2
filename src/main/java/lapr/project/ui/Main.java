@@ -8,9 +8,8 @@ import java.util.List;
 import lapr.project.controller.UC6_Controller;
 import lapr.project.model.*;
 import lapr.project.model.register.*;
-import lapr.project.utils.Date;
+import lapr.project.utils.CustomDate;
 import lapr.project.utils.ExportData;
-import lapr.project.utils.ImportEventData;
 
 /**
  * @author Nuno Bettencourt <nmb@isep.ipp.pt> on 24/05/16.
@@ -47,21 +46,9 @@ public class Main {
             ec = createInitialComponents();
             createEventManager(ec);
             addOrganizers(ec);
-            ///////////// IMPORT FROM XML FILE
-            ImportEventData impEvent = new ImportEventData(ec);
-
-            ec.getEventRegister().getEventList().add(impEvent.readEvent());
-            /////////////
 
         }
-
-//        for (User u: ec.getUserRegister().getUsers()) {
-//            System.out.println(u.getName());
-//            System.out.println(u.getEmail());
-//            System.out.println(u.getPassword());
-//            System.out.println(u.getUsername());
-//        }
-        
+        CustomDate c = CustomDate.getCurrentTime();
         new InitialWindow_UI(ec);
 
     }
@@ -84,13 +71,13 @@ public class Main {
         ////////// EVENT 1 //////////////////////////////////////////
         List<FAE> FAEListEvent1 = new ArrayList<>();
         List<Organizer> organizerListEvent1 = new ArrayList<>();
-        eventRegister.getEventList().add(new Event(EVENT1, "Madeira", "A nice bolo do caco event", new Date(13, 11, 2017), new Date(14, 11, 2017), new Date(1, 11, 2017), new Date(12, 11, 2017), "congress", new FAEList(FAEListEvent1), new OrganizerList(organizerListEvent1), 300));
+        eventRegister.getEventList().add(new Event(EVENT1, "Madeira", "A nice bolo do caco event", new CustomDate(13, 11, 2017), new CustomDate(14, 11, 2017), new CustomDate(1, 11, 2017), new CustomDate(12, 11, 2017), "congress", new FAEList(FAEListEvent1), new OrganizerList(organizerListEvent1), 300));
         /////////////////////////////////////////////////////////////
 
         ///////// EVENT 2 //////////////////////////////////////////
         List<FAE> FAEListEvent2 = new ArrayList<>();
         List<Organizer> organizerListEvent2 = new ArrayList<>();
-        eventRegister.getEventList().add(new Event(EVENT2, "Porto", "a musical gathering", new Date(13, 11, 2017), new Date(14, 11, 2017), new Date(1, 11, 2017), new Date(12, 11, 2017), "exibition", new FAEList(FAEListEvent2), new OrganizerList(organizerListEvent2), 150));
+        eventRegister.getEventList().add(new Event(EVENT2, "Porto", "a musical gathering", new CustomDate(13, 11, 2017), new CustomDate(14, 11, 2017), new CustomDate(1, 11, 2017), new CustomDate(12, 11, 2017), "exibition", new FAEList(FAEListEvent2), new OrganizerList(organizerListEvent2), 150));
         /////////////////////////////////////////////////////////////
 
         UserRegister userRegister = new UserRegister(ur);

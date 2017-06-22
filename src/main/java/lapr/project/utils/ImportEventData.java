@@ -5,10 +5,12 @@
  */
 package lapr.project.utils;
 
+ 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.xml.parsers.DocumentBuilder;
@@ -38,21 +40,24 @@ import org.xml.sax.SAXException;
  */
 public class ImportEventData {
 
-    private static final String DEFAULT_KEYWORD = "zebras";
-    private static final int DEFAULT_SHIFT = 6;
-    private static final String FILE_NAME = "eventData.xml";
+    private String randomKeyword;
+    private int randomShift;
     EventCenter ec;
     Node event;
     Document docXML;
+    private String fileName;
 
-    public ImportEventData(EventCenter ec) {
+    public ImportEventData(EventCenter ec, String fileName) {
         this.ec = ec;
+        this.fileName = fileName;
+        this.randomKeyword = Encryption.randomCipher();
+        this.randomShift = ThreadLocalRandom.current().nextInt(1, 81);
 
         try {
 
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
-            docXML = builder.parse(new File(FILE_NAME));
+            docXML = builder.parse(new File(this.fileName));
 
             this.event = docXML.getFirstChild();
 
@@ -68,14 +73,11 @@ public class ImportEventData {
     public Event readEvent() {
 
         Event newEvent = new Event();
-//devolve uma lista de event
         NodeList eventAtributes = this.event.getChildNodes();
 
         UserRegister ur = ec.getUserRegister();
 
-//para cada event
         for (int i = 1; i < eventAtributes.getLength(); i++) {
-//vai buscar os atributos de event
             if (eventAtributes.item(i).getNodeType() == Node.ELEMENT_NODE) {
 
                 Element element = (Element) eventAtributes.item(i);
@@ -96,7 +98,7 @@ public class ImportEventData {
                         newEvent.setFAEList(faeList);
                         List<User> userList = new ArrayList<>();
                         newEvent.getFaeList().setFAE(readFAESet(element, userList, ur));//v
-                        
+
                         break;
                     case "applicationSet":
 
@@ -140,20 +142,20 @@ public class ImportEventData {
                                     switch (el.getTagName()) {
 
                                         case "name":
-                                            String temp = Encryption.encryptData(el.getTextContent(), DEFAULT_KEYWORD);
-                                            temp = Encryption.encryptPassword(temp, DEFAULT_SHIFT, Encryption.ABC);
+                                            String temp = Encryption.encryptData(el.getTextContent(), randomKeyword);
+                                            temp = Encryption.encryptPassword(temp, randomShift, Encryption.ABC);
                                             newUser.setName(temp);
                                             break;
                                         case "email":
-                                            temp = Encryption.encryptData(el.getTextContent(), DEFAULT_KEYWORD);
-                                            temp = Encryption.encryptPassword(temp, DEFAULT_SHIFT, Encryption.ABC);
+                                            temp = Encryption.encryptData(el.getTextContent(), randomKeyword);
+                                            temp = Encryption.encryptPassword(temp, randomShift, Encryption.ABC);
                                             newUser.setEmail(temp);
                                             break;
                                         case "username":
                                             newUser.setUsername(el.getTextContent());
                                             break;
                                         case "password":
-                                            temp = Encryption.encryptPassword(el.getTextContent(), DEFAULT_SHIFT, Encryption.ABC);
+                                            temp = Encryption.encryptPassword(el.getTextContent(), randomShift, Encryption.ABC);
                                             newUser.setPassword(temp);
                                             break;
                                     }
@@ -161,7 +163,7 @@ public class ImportEventData {
 
                             }
                             ec.getUserRegister().getUsers().add(newUser);
-                            ec.getEncryptionRegister().addEncryption(new Encryption(DEFAULT_SHIFT, newUser, DEFAULT_KEYWORD));
+                            ec.getEncryptionRegister().addEncryption(new Encryption(randomShift, newUser, randomKeyword));
                             newFae.setUtilizadorFAE(newUser);
                             list.add(newFae);
                             break;
@@ -240,10 +242,10 @@ public class ImportEventData {
 
                             case "accepted":
                                 if (el.getTextContent().equalsIgnoreCase("true")) {
-                                    newApp.setDecision(1);
+                                    newApp.setDecisionStatus(1);
                                 }
                                 if (el.getTextContent().equalsIgnoreCase("false")) {
-                                    newApp.setDecision(-1);
+                                    newApp.setDecisionStatus(-1);
                                 }
                                 break;
                             case "description":
@@ -283,6 +285,7 @@ public class ImportEventData {
                     att.setApplication(newApp);
                     attList.add(att);
                 }
+                list.add(newApp);
             }
 
         }
@@ -369,22 +372,21 @@ public class ImportEventData {
                 NodeList user = el.getElementsByTagName("user");
 
                 for (int j = 0; j < user.getLength(); j++) {
-          
+
                     if (user.item(j).getNodeType() == Node.ELEMENT_NODE) {
-                     
+
                         Element userEl = (Element) user.item(j);
                         NodeList userAtributes = userEl.getChildNodes();
 
                         for (int w = 0; w < userAtributes.getLength(); w++) {
-                       
+
                             if (userAtributes.item(w).getNodeType() == Node.ELEMENT_NODE) {
-                          
+
                                 Element userAtributesEl = (Element) userAtributes.item(w);
 
                                 NodeList usernameList = userAtributesEl.getElementsByTagName("username");
-                                
+
                                 for (int a = 0; a < usernameList.getLength(); a++) {
-                                  
 
                                     if (userAtributes.item(w).getNodeType() == Node.ELEMENT_NODE) {
 
@@ -438,14 +440,12 @@ public class ImportEventData {
                                 }
                             }
                         }
-                        }
                     }
                 }
             }
-            return newUser.getUsername();
         }
-
-    
+        return newUser.getUsername();
+    }
 
     public List<Keyword> readKeywords(Element element) {
         List<Keyword> list = new ArrayList<>();

@@ -36,5 +36,5 @@ public class UC4_Controller {
     public List<Event> getEventsWhereUserIsFAE() {
         return ec.getEventsWhereUserIsFAE(u);
     }
-
+    
 }

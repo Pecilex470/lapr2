@@ -22,7 +22,7 @@ import lapr.project.model.Organizer;
 import lapr.project.model.User;
 import lapr.project.model.register.FAEList;
 import lapr.project.model.register.OrganizerList;
-import lapr.project.utils.Date;
+import lapr.project.utils.CustomDate;
 import lapr.project.utils.ExportData;
 
 /**
@@ -546,8 +546,8 @@ public class UC1_UI extends javax.swing.JDialog {
 
     }//GEN-LAST:event_unpickButtonActionPerformed
 
-    private Date assembleDate(String day, String month, String year) {
-        return new Date(Integer.parseInt(day), Integer.parseInt(month), Integer.parseInt(year));
+    private CustomDate assembleDate(String day, String month, String year) {
+        return new CustomDate(Integer.parseInt(day), Integer.parseInt(month), Integer.parseInt(year));
     }
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
@@ -570,12 +570,6 @@ public class UC1_UI extends javax.swing.JDialog {
         String[] list = new String[ec.getUserRegister().getUsers().size()];
         int cont = 0;
         for (User u : ec.getUserRegister().getUsers()) {
-            
-            
-            System.out.println(ec.getEncryptionRegister().getEncryptionByUser(u).getShift());
-            System.out.println(Encryption.ABC);
-            
-            
             String name = Encryption.deEncryptPassword(u.getName(), ec.getEncryptionRegister().getEncryptionByUser(u).getShift(), Encryption.ABC);
             name = Encryption.deEncryptData(name, ec.getEncryptionRegister().getEncryptionByUser(u).getKeyword());
             list[cont] = name + " (" + u.getUsername() + ")";

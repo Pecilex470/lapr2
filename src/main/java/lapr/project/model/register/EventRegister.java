@@ -9,15 +9,15 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import lapr.project.model.Event;
-import lapr.project.utils.Date;
+import lapr.project.utils.CustomDate;
 
 /**
  *
  * @author Utilizador
  */
-public class EventRegister implements Serializable{
-    
-     static final long serialVersionUID = 17;
+public class EventRegister implements Serializable {
+
+    static final long serialVersionUID = 17;
 
     /**
      * List of events in charge of a given Event Center.
@@ -41,12 +41,21 @@ public class EventRegister implements Serializable{
         return events;
     }
 
-    //    public List<Event> getAvailableEvents() {
-//        Date
-//        for (Event event : eventRegister) {
-//            if (event.getSubmissionStartDate())
+    /**
+     * This method gets the events that are still available for receiving
+     * applications
+     *
+     * @return returns a list with the Events
+     */
+//    public List<Event> getAvailableEvents() {
+//        CustomDate today = CustomDate.getCurrentTime();
+//        for (Event event : events) {
+//            if (event.getSubmissionStartDate()) {
+//                
+//            }
 //        }
 //    }
+
     /**
      * sets the event list from an existing list
      *
@@ -56,11 +65,9 @@ public class EventRegister implements Serializable{
         this.events = el;
     }
 
-    public boolean validateEventData(String title, String location, String description, Date startDate, Date endDate, Date submissionStartDate, Date submissionEndDate, String eventType, FAEList fl, OrganizerList ol, int availableArea) {
+    public boolean validateEventData(String title, String location, String description, CustomDate startDate, CustomDate endDate, CustomDate submissionStartDate, CustomDate submissionEndDate, String eventType, FAEList fl, OrganizerList ol, int availableArea) {
         return true;
     }
-
-  
 
     public Event getEventByTitle(String title) {
 

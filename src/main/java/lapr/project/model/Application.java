@@ -18,7 +18,7 @@ public class Application implements Serializable {
     private List<Keyword> keywordList = new ArrayList<>();
     private String description = "";
     private int submissionMeanRating;
-    private int decision;
+    private int decisionStatus;
     private String companyName;
     private int numberOfDecisions;
     private Stand stand;
@@ -40,7 +40,7 @@ public class Application implements Serializable {
     public Application(String description, List<Keyword> keywordList, String companyName, User representative, int boothArea, int invitesQuantity) {
         this.description = description;
         this.keywordList.addAll(keywordList);
-        this.decision = DEFAULT_DECISION;
+        this.decisionStatus = DEFAULT_DECISION;
         this.companyName = companyName;
         this.representative = representative;
         this.boothArea = boothArea;
@@ -64,8 +64,29 @@ public class Application implements Serializable {
         return description;
     }
 
+    /**
+     * Gets the representative that submitted this application
+     *
+     * @return returns the representative
+     */
     public User getRepresentative() {
         return representative;
+    }
+
+    /**
+     * This method gets the application information and converts it into a
+     * formatted string
+     *
+     * @return returns the formatted string
+     */
+    @Override
+    public String toString() {
+        String name = ("  Company name: " + Application.this.getCompanyName() + "\n"
+                + "  Representative: " + Application.this.getRepresentative().getUsername() + "\n"
+                + "          Booth Area: " + Application.this.getBoothArea() + "\n"
+                + "   Invites quantity: " + Application.this.getInvitesQuantity() + "\n\n"
+                + "     Description: " + Application.this.getDescription());
+        return name;
     }
 
     /**
@@ -78,13 +99,30 @@ public class Application implements Serializable {
     }
 
     /**
+     * Adds a new Decision to the application
+     *
+     * @param decision the decision to be added
+     */
+    public void addDecision(Decision decision) {
+        decisionList.addDecision(decision);
+    }
+
+    /**
      * Obtain the list of existing keywords.
      *
      * @return A list of existing keywords.
      */
     public List<Keyword> getKeywordList() {
         return keywordList;
+    }
 
+    /**
+     * This method gets all the decisions for the application
+     *
+     * @return returns the decisions list
+     */
+    public DecisionList getDecisionList() {
+        return decisionList;
     }
 
     @Override
@@ -112,12 +150,17 @@ public class Application implements Serializable {
 
     }
 
+    /**
+     * This method calculates the submission mean rating
+     *
+     * @return the submission mean rating
+     */
     public int getSubmissionMeanRating() {
         return this.submissionMeanRating;
     }
 
-    public int getDecision() {
-        return this.decision;
+    public int getDecisionStatus() {
+        return this.decisionStatus;
     }
 
     public String getCompanyName() {
@@ -132,8 +175,8 @@ public class Application implements Serializable {
         this.submissionMeanRating = value;
     }
 
-    public void setDecision(int dec) {
-        this.decision = dec;
+    public void setDecisionStatus(int dec) {
+        this.decisionStatus = dec;
     }
 
     public void setNumberOfDecisions(int num) {
@@ -193,17 +236,6 @@ public class Application implements Serializable {
      */
     public int getInvitesQuantity() {
         return invitesQuantity;
-    }
-
-    /**
-     * This method gets the application information and converts it into a
-     * formatted string
-     *
-     * @return returns the formatted string
-     */
-    @Override
-    public String toString() {
-        return "hello";
     }
 
     public void setDecisionList(List<Decision> readReviews) {

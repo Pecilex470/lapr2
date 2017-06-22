@@ -1,198 +1,351 @@
-package lapr.project.model;
-
-import lapr.project.utils.StringUtil;
-import org.junit.Test;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.junit.Assert.*;
-
-/**
- * Class to demonstrate a Candidatura simple example.
- *
- * @author Nuno Bettencourt [nmb@isep.ipp.pt] on 29/05/16.
- */
-public class ApplicationTest {
-
-//	/**
-//	 * StringUtil variable to access utils for Strings.
-//	 */
-//	private StringUtil stringUtil = new StringUtil();
+//package lapr.project.model;
 //
-//	/**
-//	 * Get OS independent line break.
-//	 *
-//	 * @return OS independent line break "%n".
-//	 */
-//	private String getLineBreak() {
-//		if (stringUtil == null) {
-//			stringUtil = new StringUtil();
-//		}
-//		return stringUtil.getLineBreak();
-//	}
 //
-//	@Test
-//	public void ensureAddKeywordIsWorking() throws Exception {
-//		List<Keyword> expectedKeywordList = new ArrayList<>();
-//		expectedKeywordList.add(new Keyword("Doors"));
 //
-//		Application candidatura = new Application("MyCandidatura", new ArrayList<>());
-//		candidatura.addKeyword(new Keyword("Doors"));
+//import java.util.List;
+//import org.junit.After;
+//import org.junit.AfterClass;
 //
-//		List<Keyword> resultList = candidatura.getKeywordList();
+//import static org.junit.Assert.*;
+//import org.junit.Before;
+//import org.junit.BeforeClass;
+//import org.junit.Test;
 //
-//		assertArrayEquals(expectedKeywordList.toArray(), resultList.toArray());
+///**
+// * Class to demonstrate a Candidatura simple example.
+// *
+// * @author Nuno Bettencourt [nmb@isep.ipp.pt] on 29/05/16.
+// */
+//public class ApplicationTest {
 //
-//	}
+//    @BeforeClass
+//    public static void setUpClass() throws Exception {
+//    }
 //
-//	@Test
-//	public void ensureXMLElementExportToStringIsValid() throws Exception {
-//		String expected = "<application>" + getLineBreak() +
-//				"<description>MyApplication</description>" + getLineBreak() +
-//				"<keywords>" + getLineBreak() +
-//				"<keyword>" + getLineBreak() +
-//				"<value>Doors</value>" + getLineBreak() +
-//				"</keyword>" + getLineBreak() +
-//				"<keyword>" + getLineBreak() +
-//				"<value>Windows</value>" + getLineBreak() +
-//				"</keyword>" + getLineBreak() +
-//				"</keywords>" + getLineBreak() +
-//				"</application>" + getLineBreak();
+//    @AfterClass
+//    public static void tearDownClass() throws Exception {
+//    }
 //
-//		List<Keyword> keywordList = new ArrayList<>();
-//		keywordList.add(new Keyword("Doors"));
-//		keywordList.add(new Keyword("Windows"));
-//		Application application = new Application("MyApplication", keywordList);
-//		String result = application.exportContentToString();
-//		assertEquals(expected, result);
-//	}
+//    @Before
+//    public void setUp() throws Exception {
+//    }
 //
-//	@Test
-//	public void ensureImportFromXMLElementNodeIsValid() throws Exception {
-//		List<Keyword> keywordList = new ArrayList<>();
-//		keywordList.add(new Keyword("Doors"));
-//		keywordList.add(new Keyword("Windows"));
+//    @After
+//    public void tearDown() throws Exception {
+//    }
 //
-//		Application expected = new Application("MyApplication", keywordList);
+//    /**
+//     * Test of getDescription method, of class Application.
+//     */
+//    @Test
+//    public void testGetDescription() {
+//        System.out.println("getDescription");
+//        Application instance = new Application();
+//        String expResult = "teste";
+//        instance.setDescription("teste");
+//        String result = instance.getDescription();
+//        assertEquals(expResult, result);
+//        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
+//    }
 //
-//		DocumentBuilderFactory factory =
-//				DocumentBuilderFactory.newInstance();
+//    /**
+//     * Test of getRepresentative method, of class Application.
+//     */
+//    @Test
+//    public void testGetRepresentative() {
+//        System.out.println("getRepresentative");
+//        Application instance = new Application();
+//        User expResult = null;
+//        User result = instance.getRepresentative();
+//        assertEquals(expResult, result);
+//        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
+//    }
 //
-//		//Create document builder
-//		DocumentBuilder builder = factory.newDocumentBuilder();
+//    /**
+//     * Test of addKeyword method, of class Application.
+//     */
+//    @Test
+//    public void testAddKeyword() {
+//        System.out.println("addKeyword");
+//        Keyword keyword = null;
+//        Application instance = new Application();
+//        instance.addKeyword(keyword);
+//        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
+//    }
 //
-//		//Obtain a new document
-//		Document document = builder.newDocument();
+//    /**
+//     * Test of getKeywordList method, of class Application.
+//     */
+//    @Test
+//    public void testGetKeywordList() {
+//        System.out.println("getKeywordList");
+//        Application instance = new Application();
+//        List<Keyword> expResult = null;
+//        List<Keyword> result = instance.getKeywordList();
+//        assertEquals(expResult, result);
+//        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
+//    }
 //
-//		//Create root element
-//		Element elementCandidatura = document.createElement("application");
+//    /**
+//     * Test of hashCode method, of class Application.
+//     */
+//    @Test
+//    public void testHashCode() {
+//        System.out.println("hashCode");
+//        Application instance = new Application();
+//        int expResult = 0;
+//        int result = instance.hashCode();
+//        assertEquals(expResult, result);
+//        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
+//    }
 //
-//		//Create a sub-element
-//		Element elementDescription = document.createElement("description");
+//    /**
+//     * Test of equals method, of class Application.
+//     */
+//    @Test
+//    public void testEquals() {
+//        System.out.println("equals");
+//        Object o = null;
+//        Application instance = new Application();
+//        boolean expResult = false;
+//        boolean result = instance.equals(o);
+//        assertEquals(expResult, result);
+//        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
+//    }
 //
-//		//Set the sub-element value
-//		elementDescription.setTextContent("MyApplication");
+//    /**
+//     * Test of getSubmissionMeanRating method, of class Application.
+//     */
+//    @Test
+//    public void testGetSubmissionMeanRating() {
+//        System.out.println("getSubmissionMeanRating");
+//        Application instance = new Application();
+//        int expResult = 0;
+//        int result = instance.getSubmissionMeanRating();
+//        assertEquals(expResult, result);
+//        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
+//    }
 //
-//		//Add sub-element to root element
-//		elementCandidatura.appendChild(elementDescription);
+//    /**
+//     * Test of getDecision method, of class Application.
+//     */
+//    @Test
+//    public void testGetDecisionStatus() {
+//        System.out.println("getDecision");
+//        Application instance = new Application();
+//        int expResult = 0;
+//        int result = instance.getDecisionStatus();
+//        assertEquals(expResult, result);
+//        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
+//    }
 //
-//		//Create a sub-element
-//		Element elementKeywords = document.createElement("keywords");
+//    /**
+//     * Test of getCompanyName method, of class Application.
+//     */
+//    @Test
+//    public void testGetCompanyName() {
+//        System.out.println("getCompanyName");
+//        Application instance = new Application();
+//        String expResult = "";
+//        String result = instance.getCompanyName();
+//        assertEquals(expResult, result);
+//        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
+//    }
 //
-//		//iterate over keywords
-//		for (Keyword keyword : keywordList) {
-//			Node keywordNode = keyword.exportContentToXMLNode();
-//			elementKeywords.appendChild(document.importNode(keywordNode, true));
-//		}
+//    /**
+//     * Test of getNumberOfDecisions method, of class Application.
+//     */
+//    @Test
+//    public void testGetNumberOfDecisions() {
+//        System.out.println("getNumberOfDecisions");
+//        Application instance = new Application();
+//        int expResult = 0;
+//        int result = instance.getNumberOfDecisions();
+//        assertEquals(expResult, result);
+//        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
+//    }
 //
-//		elementCandidatura.appendChild(elementKeywords);
+//    /**
+//     * Test of setSubmissionMeanRating method, of class Application.
+//     */
+//    @Test
+//    public void testSetSubmissionMeanRating() {
+//        System.out.println("setSubmissionMeanRating");
+//        int value = 0;
+//        Application instance = new Application();
+//        instance.setSubmissionMeanRating(value);
+//        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
+//    }
 //
-//		//Add root element to document
-//		document.appendChild(elementCandidatura);
+//    /**
+//     * Test of setDecision method, of class Application.
+//     */
+//    @Test
+//    public void testSetDecisionStatus() {
+//        System.out.println("setDecision");
+//        int dec = 0;
+//        Application instance = new Application();
+//        instance.setDecisionStatus(dec);
+//        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
+//    }
 //
-//		Application result = new Application();
-//		result = result.importContentFromXMLNode(elementCandidatura);
+//    /**
+//     * Test of setNumberOfDecisions method, of class Application.
+//     */
+//    @Test
+//    public void testSetNumberOfDecisions() {
+//        System.out.println("setNumberOfDecisions");
+//        int num = 0;
+//        Application instance = new Application();
+//        instance.setNumberOfDecisions(num);
+//        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
+//    }
 //
-//		assertEquals(expected, result);
-//	}
+//    /**
+//     * Test of setKeywordList method, of class Application.
+//     */
+//    @Test
+//    public void testSetKeywordList() {
+//        System.out.println("setKeywordList");
+//        List<Keyword> keywordList = null;
+//        Application instance = new Application();
+//        instance.setKeywordList(keywordList);
+//        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
+//    }
 //
-//	@Test
-//	public void ensureSameContentObjectsAreEqual() {
-//		String description = "MyCandidatura";
+//    /**
+//     * Test of setDescription method, of class Application.
+//     */
+//    @Test
+//    public void testSetDescription() {
+//        System.out.println("setDescription");
+//        String description = "";
+//        Application instance = new Application();
+//        instance.setDescription(description);
+//        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
+//    }
 //
-//		List<Keyword> keywords = new ArrayList<>();
-//		keywords.add(new Keyword("Doors"));
-//		keywords.add(new Keyword("Windows"));
+//    /**
+//     * Test of setCompanyName method, of class Application.
+//     */
+//    @Test
+//    public void testSetCompanyName() {
+//        System.out.println("setCompanyName");
+//        String companyName = "";
+//        Application instance = new Application();
+//        instance.setCompanyName(companyName);
+//        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
+//    }
 //
-//		Application expected = new Application(description, keywords);
-//		Application result = new Application(description, keywords);
+//    /**
+//     * Test of setRepresentative method, of class Application.
+//     */
+//    @Test
+//    public void testSetRepresentative() {
+//        System.out.println("setRepresentative");
+//        User representative = null;
+//        Application instance = new Application();
+//        instance.setRepresentative(representative);
+//        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
+//    }
 //
-//		assertEquals(expected, result);
-//	}
+//    /**
+//     * Test of setBoothArea method, of class Application.
+//     */
+//    @Test
+//    public void testSetBoothArea() {
+//        System.out.println("setBoothArea");
+//        int area = 0;
+//        Application instance = new Application();
+//        instance.setBoothArea(area);
+//        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
+//    }
 //
-//	@Test
-//	public void ensureSameObjectIsEqual() {
-//		String description = "MyCandidatura";
+//    /**
+//     * Test of setInvitesQuantity method, of class Application.
+//     */
+//    @Test
+//    public void testSetInvitesQuantity() {
+//        System.out.println("setInvitesQuantity");
+//        int invitesQuantity = 0;
+//        Application instance = new Application();
+//        instance.setInvitesQuantity(invitesQuantity);
+//        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
+//    }
 //
-//		List<Keyword> keywords = new ArrayList<>();
-//		keywords.add(new Keyword("Doors"));
-//		keywords.add(new Keyword("Windows"));
+//    /**
+//     * Test of getBoothArea method, of class Application.
+//     */
+//    @Test
+//    public void testGetBoothArea() {
+//        System.out.println("getBoothArea");
+//        Application instance = new Application();
+//        int expResult = 0;
+//        int result = instance.getBoothArea();
+//        assertEquals(expResult, result);
+//        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
+//    }
 //
-//		Application expected = new Application(description, keywords);
+//    /**
+//     * Test of getInvitesQuantity method, of class Application.
+//     */
+//    @Test
+//    public void testGetInvitesQuantity() {
+//        System.out.println("getInvitesQuantity");
+//        Application instance = new Application();
+//        int expResult = 0;
+//        int result = instance.getInvitesQuantity();
+//        assertEquals(expResult, result);
+//        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
+//    }
 //
-//		assertEquals(expected, expected);
-//	}
+//    /**
+//     * Test of toString method, of class Application.
+//     */
+//    @Test
+//    public void testToString() {
+//        System.out.println("toString");
+//        Application instance = new Application();
+//        String expResult = "";
+//        String result = instance.toString();
+//        assertEquals(expResult, result);
+//        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
+//    }
 //
-//	@Test
-//	public void ensureDifferentObjectsAreNotEqual() {
-//		String description = "MyCandidatura";
+//    /**
+//     * Test of setDecisionList method, of class Application.
+//     */
+//    @Test
+//    public void testSetDecisionList() {
+//        System.out.println("setDecisionList");
+//        List<Decision> readReviews = null;
+//        Application instance = new Application();
+//        instance.setDecisionList(readReviews);
+//        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
+//    }
 //
-//		List<Keyword> keywords = new ArrayList<>();
-//		keywords.add(new Keyword("Doors"));
-//		keywords.add(new Keyword("Windows"));
 //
-//		Application expected = new Application(description, keywords);
-//
-//		Object result = new Object();
-//		assertNotEquals(expected, result);
-//	}
-//
-//	@Test
-//	public void ensureDifferentDescriptionMakeObjectsNotEqual() {
-//		String description1 = "MyCandidatura1";
-//		String description2 = "MyCandidatura2";
-//
-//		List<Keyword> keywords = new ArrayList<>();
-//		keywords.add(new Keyword("Doors"));
-//		keywords.add(new Keyword("Windows"));
-//
-//		Application expected = new Application(description1, keywords);
-//		Application result = new Application(description2, keywords);
-//
-//		assertNotEquals(expected, result);
-//	}
-//
-//	@Test
-//	public void ensureHashCodeIsCorrect() {
-//		String description = "MyCandidatura";
-//
-//		List<Keyword> keywords = new ArrayList<>();
-//		keywords.add(new Keyword("Doors"));
-//		keywords.add(new Keyword("Windows"));
-//
-//		Application application = new Application(description, keywords);
-//
-//		int expected = 461375881;
-//		int result = application.hashCode();
-//		assertEquals(expected, result);
-//
-//	}
-//
-
-}
+//}

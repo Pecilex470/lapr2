@@ -31,8 +31,10 @@ public class ExportData {
     //use to close the program
     public static void serialization(EventCenter ec) throws FileNotFoundException {
         try {
+
             FileOutputStream teste = new FileOutputStream(fileName);
             ObjectOutputStream out = new ObjectOutputStream(teste);
+
             try {
                 out.writeObject(ec);
 
@@ -43,14 +45,17 @@ public class ExportData {
         } catch (IOException ex) {
             ex.printStackTrace(new PrintWriter("log.txt"));
             System.out.println(ERROR);
-        }
+        } 
     }
 
     public static EventCenter deserialization() {
-        EventCenter ec = null;
+        EventCenter ec = new EventCenter();
         try {
+
             FileInputStream test = new FileInputStream(fileName);
+
             ObjectInputStream in = new ObjectInputStream(test);
+
             try {
                 ec = (EventCenter) in.readObject();
             } catch (Exception e) {
