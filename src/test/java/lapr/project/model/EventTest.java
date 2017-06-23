@@ -57,8 +57,14 @@ public class EventTest {
         this.u = new User(name, email, "admin", password, true, true);
         
         this.faeList = new FAEList(new ArrayList<>());
+        faeList.addFAE(new FAE());
+        
         this.organizerList = new OrganizerList(new ArrayList<>());
+        organizerList.addOrganizer(new Organizer(new User()));
+        
         this.applicationList = new ApplicationList(new ArrayList<>());
+        applicationList.addApplication(new Application());
+        
         e = new Event("Bolo do Caco Festival", "Madeira", "A nice bolo do caco event", new CustomDate(13, 11, 2017), new CustomDate(14, 11, 2017), new CustomDate(20, 6, 2017), new CustomDate(8, 10, 2017), "congress", faeList, organizerList, 300);
         
         this.keywords = new ArrayList<>();
@@ -297,8 +303,8 @@ public class EventTest {
 //    public void testGetApplicationList() {
 //        System.out.println("getApplicationList");
 //        Event instance = e;
-//        ApplicationList expResult = applicationList;
-//        ApplicationList result = instance.getApplicationList();
+//        int expResult = applicationList.getApplications().size();
+//        int result = instance.getApplicationList().getApplications().size();
 //        assertEquals(expResult, result);
 //    }
 
