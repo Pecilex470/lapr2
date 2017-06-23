@@ -141,7 +141,7 @@ public class EventCenter implements Serializable {
         double acceptanceRounded = 0;
 
         if (nApplicationsTotal != 0) {
-            int acceptance = (int) (((nApplicationsAccepted * 100) / nApplicationsTotal) * 100);
+            int acceptance = (((nApplicationsAccepted * 100) / nApplicationsTotal) * 100);
             acceptanceRounded = (double) acceptance / 100;
         }
 
@@ -340,7 +340,7 @@ public class EventCenter implements Serializable {
             sC += getMeanRatingF(f.getName());
 
         }
-        globalMeanRate = (double) sC / total;
+        globalMeanRate = sC/total;
         return globalMeanRate;
     }
 

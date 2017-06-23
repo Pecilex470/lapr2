@@ -19,6 +19,8 @@ import lapr.project.utils.ExportData;
  * @author Cerqueira
  */
 public class UC22_UI extends javax.swing.JFrame {
+    
+    static final long serialVersionUID = -3387516993124229948L;
 
     Event eventSelected;
     EventCenter ec;
@@ -64,7 +66,7 @@ public class UC22_UI extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         listEventLabel = new javax.swing.JList<>();
         jScrollPane2 = new javax.swing.JScrollPane();
-        listAppLabel = new javax.swing.JList<>();
+        listApp = new javax.swing.JList<>();
         backButton = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -74,6 +76,7 @@ public class UC22_UI extends javax.swing.JFrame {
         jLabel1.setText("Applications of Event");
 
         listEventLabel.setModel(new javax.swing.AbstractListModel<String>() {
+            static final long serialVersionUID = -3387516993124229948L;
             String[] strings = getListEventString();
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
@@ -85,17 +88,18 @@ public class UC22_UI extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(listEventLabel);
 
-        listAppLabel.setModel(new javax.swing.AbstractListModel<String>() {
+        listApp.setModel(new javax.swing.AbstractListModel<String>() {
+            static final long serialVersionUID = -3387516993124229948L;
             String[] strings = {"|| SELECT EVENT ||"};
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
-        listAppLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+        listApp.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                listAppLabelMouseClicked(evt);
+                listAppMouseClicked(evt);
             }
         });
-        jScrollPane2.setViewportView(listAppLabel);
+        jScrollPane2.setViewportView(listApp);
 
         backButton.setText("Back");
         backButton.addActionListener(new java.awt.event.ActionListener() {
@@ -162,7 +166,8 @@ public class UC22_UI extends javax.swing.JFrame {
         this.eventSelected = ec.getEventRegister().getEventList().get(listEventLabel.getSelectedIndex());
 
 
-        listAppLabel.setModel(new javax.swing.AbstractListModel<String>() {
+        listApp.setModel(new javax.swing.AbstractListModel<String>() {
+            static final long serialVersionUID = -3387516993124229948L;
             String[] strings = getApplicationSelected();
 
             public int getSize() {
@@ -173,16 +178,17 @@ public class UC22_UI extends javax.swing.JFrame {
                 return strings[i];
             }
         });
+        
     }//GEN-LAST:event_listEventLabelMouseClicked
 
-    private void listAppLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listAppLabelMouseClicked
+    private void listAppMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listAppMouseClicked
 
         try {
-            JOptionPane.showMessageDialog(UC22_UI.this, this.eventSelected.getApplicationList().getApplications().get(listAppLabel.getSelectedIndex()).toString());
+            JOptionPane.showMessageDialog(UC22_UI.this, this.eventSelected.getApplicationList().getApplications().get(listApp.getSelectedIndex()).toString());
         } catch (Exception e) {
 
         }
-    }//GEN-LAST:event_listAppLabelMouseClicked
+    }//GEN-LAST:event_listAppMouseClicked
 
     public String[] getListEventString() {
         String[] list = new String[ec.getEventRegister().getEventList().size()];
@@ -211,7 +217,7 @@ public class UC22_UI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JList<String> listAppLabel;
+    private javax.swing.JList<String> listApp;
     private javax.swing.JList<String> listEventLabel;
     // End of variables declaration//GEN-END:variables
 }

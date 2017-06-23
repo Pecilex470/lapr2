@@ -35,7 +35,7 @@ public class Encryption implements Serializable {
      * All the characters that can be used
      */
     public static final String ABC = " abcdefghijklmnopqrstuvwxyzãÃõÕêÊçÇíÍ*+ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890,;.:-@";
-    public static final int nCharABC = 81;
+    public static final int N_CHAR_ABC = 81;
 
     /**
      * Constructor that creates the instance of an encryption
@@ -205,7 +205,6 @@ public class Encryption implements Serializable {
                 }
             }
         }
-
         return encryptedParam;
     }
 
