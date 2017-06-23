@@ -155,8 +155,8 @@ public class UC50_2_UI extends javax.swing.JFrame {
          List<FAE> allFAEThatEvaluatedAnApplication = ec.getFAEEvaluatedApplications();
          for (int i=0; i<fae1.size(); i++) {
             String sL = getSignificanceLevel(fae1.get(i),fae2.get(i));
-            String nome1 = fae1.get(i).getName();
-            String nome2 = fae2.get(i).getName();
+            String nome1 = fae1.get(i).getEncryptedName();
+            String nome2 = fae2.get(i).getEncryptedName();
             int nSub1= ec.getEvaluatedApplicationsFAE(nome1).size();
             int nSub2 =ec.getEvaluatedApplicationsFAE(nome2).size();
             double mRa1 = ec.getMeanRatingF(nome1);
@@ -191,7 +191,7 @@ public class UC50_2_UI extends javax.swing.JFrame {
             String part2 = parts[1].trim();
             String part3 = parts[2].trim();
   
-            if (part1.equals(f.getName()) || part2.equals(f1.getName()) ) {
+            if (part1.equals(f.getEncryptedName()) || part2.equals(f1.getEncryptedName()))  {
                 cv = part3;
              return cv;
             

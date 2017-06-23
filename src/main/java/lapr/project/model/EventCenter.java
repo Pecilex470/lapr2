@@ -337,7 +337,7 @@ public class EventCenter implements Serializable {
         double sC = 0;
 
         for (FAE f : getFAEEvaluatedApplications()) {
-            sC += getMeanRatingF(f.getName());
+            sC += getMeanRatingF(f.getEncryptedName());
 
         }
         globalMeanRate = sC/total;
@@ -368,9 +368,9 @@ public class EventCenter implements Serializable {
      * @return Z-test
      */
     public double getZ(FAE fae) {
-        double mDev = getMeanDeviation(fae.getName());
+        double mDev = getMeanDeviation(fae.getEncryptedName());
         int total = getFAEEvaluatedApplications().size();
-        double standardDeviation = getStandardDeviation(fae.getName());
+        double standardDeviation = getStandardDeviation(fae.getEncryptedName());
         double z = (mDev - 1) / (standardDeviation / Math.sqrt(total));
 
         return z;
@@ -388,12 +388,12 @@ public class EventCenter implements Serializable {
      * @return
      */
     public double getZ2MeanDeviations(FAE e, FAE fae) {
-        double mDev1 = getMeanDeviation(e.getName());
+        double mDev1 = getMeanDeviation(e.getEncryptedName());
         int total = getFAEEvaluatedApplications().size();
-        double standardDeviation = getStandardDeviation(e.getName());
-        double mDev2 = getMeanDeviation(fae.getName());
+        double standardDeviation = getStandardDeviation(e.getEncryptedName());
+        double mDev2 = getMeanDeviation(fae.getEncryptedName());
         int total2 = fae.getAttributionList().size();
-        double standardDeviation2 = getStandardDeviation(fae.getName());
+        double standardDeviation2 = getStandardDeviation(fae.getEncryptedName());
         double z = (mDev1 - mDev2) / Math.sqrt((standardDeviation / total) + (standardDeviation2 / total2));
         return z;
     }
@@ -409,7 +409,7 @@ public class EventCenter implements Serializable {
         NormalDistribution p = new NormalDistribution();
         double sv = Double.parseDouble(a);
         double zc = p.inverseCumulativeProbability(1 - sv);
-        double z = getMeanDeviation(f.getName());
+        double z = getMeanDeviation(f.getEncryptedName());
         if (z > zc) {
             return "Yes";
         } else {

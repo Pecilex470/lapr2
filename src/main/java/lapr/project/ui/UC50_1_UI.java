@@ -316,7 +316,7 @@ public class UC50_1_UI extends javax.swing.JFrame {
        
         for (FAE fae : ec.getFAEEvaluatedApplications()) {
             
-            String title = fae.getName();
+            String title = fae.getEncryptedName();
             list[cont] = title;
             cont++;
         }
@@ -417,7 +417,7 @@ public class UC50_1_UI extends javax.swing.JFrame {
         FAE f= new FAE();
         for (FAE fae : ec.getFAEEvaluatedApplications()) {
          
-            if (c.equals(fae.getName())) {  
+            if (c.equals(fae.getEncryptedName())) {  
 
                 f = fae;
                 break;
