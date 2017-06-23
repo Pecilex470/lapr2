@@ -12,6 +12,7 @@ import javax.swing.JOptionPane;
 import static javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE;
 import javax.swing.table.DefaultTableModel;
 import lapr.project.controller.UC49_Controller;
+import lapr.project.model.Decision;
 import lapr.project.model.EventCenter;
 import lapr.project.model.FAE;
 import lapr.project.model.User;
@@ -46,7 +47,7 @@ public class UC49_UI extends javax.swing.JFrame {
         this.addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
             public void windowClosing(java.awt.event.WindowEvent windowEvent) {
-               
+
                 if (JOptionPane.showConfirmDialog(UC49_UI.this, "Do you wish to exit without saving?", "Close", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
                     try {
                         ExportData.serialization(ec);
@@ -96,6 +97,11 @@ public class UC49_UI extends javax.swing.JFrame {
         jScrollPane1.setViewportView(Table1);
 
         sig1.setText("0.01");
+        sig1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                sig1MouseClicked(evt);
+            }
+        });
         sig1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 sig1ActionPerformed(evt);
@@ -103,6 +109,11 @@ public class UC49_UI extends javax.swing.JFrame {
         });
 
         sig5.setText("0.05");
+        sig5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                sig5MouseClicked(evt);
+            }
+        });
         sig5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 sig5ActionPerformed(evt);
@@ -150,34 +161,74 @@ public class UC49_UI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void sig1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sig1ActionPerformed
-        String a = "0.01";
-        fillTable(a);
+
 
     }//GEN-LAST:event_sig1ActionPerformed
 
     private void sig5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sig5ActionPerformed
-        String a = "0.05";
-        fillTable(a);
 
 
     }//GEN-LAST:event_sig5ActionPerformed
+
+    private void sig1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sig1MouseClicked
+
+        cleanTable();
+        
+        String a = "0.01";
+        fillTable(a);
+
+        if (sig1.isSelected()) {
+            sig5.setSelected(false);
+        } else {
+          
+        }
+        
+        JOptionPane.showMessageDialog(UC49_UI.this, "The organizer was alerted if any of the FAE's mean deviation was above 1");
+        
+    }//GEN-LAST:event_sig1MouseClicked
+
+    private void sig5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sig5MouseClicked
+
+        cleanTable();
+        
+        String a = "0.05";
+        fillTable(a);
+
+        if (sig5.isSelected()) {
+            sig1.setSelected(false);
+        } else {
+            
+        }
+        
+        JOptionPane.showMessageDialog(UC49_UI.this, "The organizer was alerted if any of the FAE's mean deviation was above 1");
+        
+
+    }//GEN-LAST:event_sig5MouseClicked
 
     public void fillTable(String a) {
         DefaultTableModel val = (DefaultTableModel) Table1.getModel();
         List<FAE> allFAE = c.getFaeThatEvaluatedApplications(ec);
         for (FAE fae : allFAE) {
-            String nome = fae.getEncryptedName();
-            int nSub = ec.getEvaluatedApplicationsFAE(nome).size();
-            double mRa = ec.getMeanRatingF(nome);
-            double dMean = ec.getMeanDeviation(fae.getEncryptedName());
-            double sMean = ec.getStandardDeviation(nome);
-            double z = ec.getZ(fae);
-            String dec = ec.testTheDifferenceBetweenTheMeanDeviationAndATheoreticalValue1ForAFAEAverageRating(a, fae);
+            String username = fae.getUserFAE().getUsername();
+            List<Decision> user = ec.getEvaluatedApplicationsFAE(username);
+            int nSub = user.size();
+            double mRa = ec.getMeanRatingF(user);
+            double dMean = ec.getMeanDeviation(user);
+            double sMean = ec.getStandardDeviation(user);
+            double z = ec.getZ(dMean, nSub, user);
+            String dec = ec.testTheDifferenceBetweenTheMeanDeviationAndATheoreticalValue1ForAFAEAverageRating(a, user);
             if (nSub >= 30) {
-                val.addRow(new Object[]{nome, nSub, mRa, dMean, sMean, z, dec});
+                val.addRow(new Object[]{username, nSub, mRa, dMean, sMean, z, dec});
             }
 
         }
+
+    }
+
+    public void cleanTable() {
+
+        DefaultTableModel model = (DefaultTableModel) Table1.getModel();
+        model.setRowCount(0);
 
     }
 

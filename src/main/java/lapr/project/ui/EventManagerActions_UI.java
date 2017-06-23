@@ -5,6 +5,7 @@
  */
 package lapr.project.ui;
 
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -12,6 +13,7 @@ import static javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE;
 import lapr.project.controller.UC43_Controller;
 import lapr.project.controller.UC46_Controller;
 import lapr.project.controller.UC47_Controller;
+import lapr.project.model.Decision;
 import lapr.project.model.EventCenter;
 import lapr.project.model.User;
 import lapr.project.utils.ExportData;
@@ -287,13 +289,14 @@ public class EventManagerActions_UI extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(EventManagerActions_UI.this, "That user is not a FAE in any event");
             username = JOptionPane.showInputDialog(EventManagerActions_UI.this, "Enter the username of the FAE you\n want to know the mean rating of");
         }
-
+  
+        List<Decision> user = ec.getEvaluatedApplicationsFAE(username);
         
 
         if (username.equals("0")) {
             
         } else {
-            double meanR = ec.getMeanRatingF(username);
+            double meanR = ec.getMeanRatingF(user);
             JOptionPane.showMessageDialog(EventManagerActions_UI.this, "O mean rating é " + meanR);
         }
         

@@ -5,8 +5,10 @@
  */
 package lapr.project.ui;
 
+import java.util.List;
 import javax.swing.JOptionPane;
 import static javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE;
+import lapr.project.model.Decision;
 import lapr.project.model.Encryption;
 import lapr.project.model.Event;
 import lapr.project.model.EventCenter;
@@ -145,9 +147,9 @@ public class UC48_UI extends javax.swing.JFrame {
     }//GEN-LAST:event_listLabelMouseClicked
 
     private void confirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmButtonActionPerformed
-        String name = Encryption.deEncryptPassword(selectedFAE.getEncryptedName(), ec.getEncryptionRegister().getEncryptionByUser(selectedFAE.getUserFAE()).getShift(), Encryption.ABC);
-        name = Encryption.deEncryptData(name, ec.getEncryptionRegister().getEncryptionByUser(selectedFAE.getUserFAE()).getKeyword());
-        JOptionPane.showMessageDialog(UC48_UI.this, "The mean deviation for this FAE is " + ec.getMeanDeviation(name));
+        String username = selectedFAE.getUserFAE().getUsername();
+        List<Decision> user = ec.getEvaluatedApplicationsFAE(username);
+        JOptionPane.showMessageDialog(UC48_UI.this, "The mean deviation for this FAE is " + ec.getMeanDeviation(user));
     }//GEN-LAST:event_confirmButtonActionPerformed
 
     public String[] getFAEList() {
