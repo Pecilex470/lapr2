@@ -237,6 +237,7 @@ public class UC50_1_UI extends javax.swing.JFrame {
         double a = Double.parseDouble(JOptionPane.showInputDialog(UC50_1_UI.this, "Enter the significance level [0.01 or 0.05]"));
         
         while (a != 0.01 && a != 0.05) {
+            
             JOptionPane.showMessageDialog(UC50_1_UI.this, "Insert 0.01 or 0.05");
             a = Double.parseDouble(JOptionPane.showInputDialog(UC50_1_UI.this, "Enter the significance level [0.01 or 0.05]"));
         }
