@@ -22,23 +22,22 @@ import lapr.project.utils.ExportData;
  * @author Utilizador
  */
 public class UC45_1_UI extends javax.swing.JFrame {
-    
-     static final long serialVersionUID = -3387516993124229948L;
+
+    static final long serialVersionUID = -3387516993124229948L;
     private UC45_Controller c;
-     private List<Event> eventSelected1 = new ArrayList<>();
-     private List<Event> eventSelected2 = new ArrayList<>();
-     private EventCenter ec;
-     private String[] pickedList = new String[0];
-     private String[] topList;
-     private Double[] a;
-     private User user;
+    private List<Event> eventSelected1 = new ArrayList<>();
+    private List<Event> eventSelected2 = new ArrayList<>();
+    private EventCenter ec;
+    private String[] pickedList = new String[0];
+    private String[] topList;
+    private User user;
 
     /**
      * Creates new form UC45_1_UI
      */
     public UC45_1_UI(EventCenter ec, User u) {
-        this.user=user;
-       this.ec = ec;
+        this.user = user;
+        this.ec = ec;
         this.c = new UC45_Controller(ec);
         initComponents();
         this.setVisible(true);
@@ -208,46 +207,39 @@ public class UC45_1_UI extends javax.swing.JFrame {
     private void pickButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pickButtonActionPerformed
         String event = eve1List.getSelectedValue();
         String event2 = eve2List.getSelectedValue();
-        
-        
+
         eve2List.setModel(new javax.swing.AbstractListModel<String>() {
             static final long serialVersionUID = -3387516993124229948L;
             String[] strings = returnTopList();
-            
+
             public int getSize() {
                 return strings.length;
             }
-            
+
             public String getElementAt(int i) {
                 return strings[i];
             }
         });
-        
-        addEventsToPickedList(event,event2);
-        
-        
-        
+
+        addEventsToPickedList(event, event2);
+
         double a = Double.parseDouble(JOptionPane.showInputDialog(UC45_1_UI.this, "Enter the significance level [0.01 or 0.05]"));
-        
+
         while (a != 0.01 && a != 0.05) {
             JOptionPane.showMessageDialog(UC45_1_UI.this, "Insert 0.01 or 0.05");
             a = Double.parseDouble(JOptionPane.showInputDialog(UC45_1_UI.this, "Enter the significance level [0.01 or 0.05]"));
         }
-        
-        
-        
-        pickedList[pickedList.length-1] += " - " + a;
-        
-        
-        
+
+        pickedList[pickedList.length - 1] += " - " + a;
+
         pickedEventList.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = returnPickedList();
             static final long serialVersionUID = -3387516993124229948L;
-            
+
             public int getSize() {
                 return strings.length;
             }
-            
+
             public String getElementAt(int i) {
                 return strings[i];
             }
@@ -256,55 +248,52 @@ public class UC45_1_UI extends javax.swing.JFrame {
 
     private void UnpickButtomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UnpickButtomActionPerformed
         String event = pickedEventList.getSelectedValue();
-        
+
         removeEventFromPickedList(event);
-        
+
         pickedEventList.setModel(new javax.swing.AbstractListModel<String>() {
             static final long serialVersionUID = -3387516993124229948L;
             String[] strings = returnPickedList();
-            
+
             public int getSize() {
                 return strings.length;
             }
-            
+
             public String getElementAt(int i) {
                 return strings[i];
             }
-        }); 
-        
-     
-        
+        });
+
         eve2List.setModel(new javax.swing.AbstractListModel<String>() {
             static final long serialVersionUID = -3387516993124229948L;
             String[] strings = returnTopList();
-            
+
             public int getSize() {
                 return strings.length;
             }
-            
+
             public String getElementAt(int i) {
                 return strings[i];
             }
-        });                                         
+        });
     }//GEN-LAST:event_UnpickButtomActionPerformed
 
     private void confirmButoonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmButoonActionPerformed
-       for(int i =0; i<pickedList.length;i++){
-         String[] part=pickedList[i].trim().split("-");
-         String part1 = part[0].trim();
-         String part2 = part[1].trim();
-         eventSelected1.add(titleStringToEvent(part1));
-         eventSelected2.add(titleStringToEvent(part2));
-      
-      }
-       
-      
-      if(eventSelected1==null || eventSelected2==null){
-       JOptionPane.showMessageDialog(UC45_1_UI.this, "Please select events", "Error", JOptionPane.OK_OPTION);
-      }else{
-        new UC45_2_UI(ec,eventSelected1,eventSelected2,pickedList, user);
-        dispose();
-      }
+        for (int i = 0; i < pickedList.length; i++) {
+            String[] part = pickedList[i].trim().split("-");
+            String part1 = part[0].trim();
+            String part2 = part[1].trim();
+            eventSelected1.add(titleStringToEvent(part1));
+            eventSelected2.add(titleStringToEvent(part2));
+
+        }
+
+        if (eventSelected1 == null || eventSelected2 == null) {
+            JOptionPane.showMessageDialog(UC45_1_UI.this, "Please select events", "Error", JOptionPane.OK_OPTION);
+        } else {
+            new UC45_2_UI(ec, eventSelected1, eventSelected2, pickedList, user);
+            dispose();
+        }
     }//GEN-LAST:event_confirmButoonActionPerformed
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
@@ -313,8 +302,8 @@ public class UC45_1_UI extends javax.swing.JFrame {
     }//GEN-LAST:event_backButtonActionPerformed
 
     /**
-     * Method that retrieves the full list of events to allow the
-     * organizer to select the events.
+     * Method that retrieves the full list of events to allow the organizer to
+     * select the events.
      *
      * @return a String array to fill the JList
      */
@@ -326,135 +315,121 @@ public class UC45_1_UI extends javax.swing.JFrame {
             list[cont] = title;
             cont++;
         }
-        
+
         topList = list;
-        
+
         return list;
     }
-    
+
     public String[] inicialEvent2List() {
-       
-     return inicialEvent1List(); 
+
+        return inicialEvent1List();
     }
-    
-    
-    
+
     public void removeEventFromTop2List(String uName) {
-        
+
         String[] list = new String[topList.length - 1];
-        
+
         int flag = 0;
         for (int i = 0; i < topList.length; i++) {
-            
+
             if (!uName.equals(topList[i])) {
                 list[i - flag] = topList[i];
             } else {
                 flag++;
             }
         }
-        
+
         topList = new String[topList.length - 1];
         topList = list;
-        
+
     }
-    
+
     public void removeEventFromPickedList(String eTwoTitle) {
         String[] eTitle = eTwoTitle.trim().split("-");
         String eTitle1 = eTitle[0];
-        String eTitle2 = eTitle[1]; 
-        
+        String eTitle2 = eTitle[1];
+
         String[] list = new String[pickedList.length - 1];
-        
+
         int flag = 0;
-        for (int i = 0; i < pickedList.length; i++){
-           String[] part= pickedList[i].trim().split("-");
-           String part1 = part[0];
-           String part2 = part[1];
-           if (!eTitle1.equals(part1) && !eTitle2.equals(part2)) {
-                list[i - flag] = pickedList[i] ;
+        for (int i = 0; i < pickedList.length; i++) {
+            String[] part = pickedList[i].trim().split("-");
+            String part1 = part[0];
+            String part2 = part[1];
+            if (!eTitle1.equals(part1) && !eTitle2.equals(part2)) {
+                list[i - flag] = pickedList[i];
             } else {
                 flag++;
             }
         }
-        
+
         pickedList = new String[pickedList.length - 1];
         pickedList = list;
-        
+
     }
-    
+
     public void addEventsToPickedList(String pickedEvent, String pickedEvent2) {
-        
+
         String[] list = new String[pickedList.length + 1];
-        
+
         for (int i = 0; i < pickedList.length; i++) {
             list[i] = pickedList[i];
         }
-        
+
         list[list.length - 1] = pickedEvent + "-" + pickedEvent2;
-        
+
         pickedList = new String[pickedList.length + 1];
         pickedList = list;
-        
+
     }
-    
-    
+
     public void addEventToTopList(String topEvent) {
-        
+
         String[] list = new String[topList.length + 1];
-        
+
         for (int i = 0; i < topList.length; i++) {
             list[i] = topList[i];
         }
         String[] part = topEvent.split("-");
-        String Event2=part[1].trim();
+        String Event2 = part[1].trim();
         list[list.length - 1] = Event2;
-        
+
         topList = new String[topList.length + 1];
         topList = list;
-        
+
     }
-    
+
     public String[] returnPickedList() {
-        
+
         return pickedList;
     }
-    
+
     public String[] returnTopList() {
         return topList;
     }
-   
-    
+
     public Event titleStringToEvent(String title) {
-        
-        String c =title;
-        Event eve= new Event();
+
+        String c = title;
+        Event eve = new Event();
         for (Event e : ec.getEventRegister().getEventList()) {
-         
-            if (c.equals(e.getTitle())) {  
+
+            if (c.equals(e.getTitle())) {
 
                 eve = e;
                 break;
             }
         }
-        
+
         return eve;
     }
-    
-    public void getA(){
-       for(int i=0;i<pickedList.length;i++){
-           String[] part=pickedList[i].split("-");
-           String part2 = part[2].trim();
-           a[i]= Double.parseDouble(part2);
-       }
-       
+
+    private void eventListMouseClicked(java.awt.event.MouseEvent evt) {
+
     }
 
-    
-    private void eventListMouseClicked(java.awt.event.MouseEvent evt) {                                      
 
-    }  
-    
-    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton UnpickButtom;
     private javax.swing.JButton backButton;

@@ -139,9 +139,10 @@ public class EventCenter implements Serializable {
             }
 
         }
-
-        return globalAcceptanceRate / count;
-
+        if (count != 0) {
+            return globalAcceptanceRate / count;
+        }
+        return 0;
     }
 
     /**
@@ -240,11 +241,13 @@ public class EventCenter implements Serializable {
         }
         return allFAE;
     }
-  /**
-   * Mthod that returns all the fae that evaluated a application in the Event Center 
-   * 
-   * @return Fae that evaluated a application in the Event Center 
-   */
+
+    /**
+     * Mthod that returns all the fae that evaluated a application in the Event
+     * Center
+     *
+     * @return Fae that evaluated a application in the Event Center
+     */
     public List<FAE> getFAEEvaluatedApplicantions() {
         List<FAE> allFAE = new ArrayList<>();
 
@@ -382,7 +385,7 @@ public class EventCenter implements Serializable {
                 }
             }
         }
-        
+
         String[][] keywordMatrix = new String[listWithOneOfEachKeyword.size()][2];
 
         int count = 0;
@@ -393,30 +396,27 @@ public class EventCenter implements Serializable {
             keywordMatrix[count][1] = "" + occurrences;
             count++;
         }
-      
+
         Object[][] frequencyMatrix = new Object[listWithOneOfEachKeyword.size()][3];
         int nKeywords = listWithAllKeywords.size();
         double tempN;
         int roundDouble;
-        
-        
+
         for (int i = 0; i < frequencyMatrix.length; i++) {
-            
+
             frequencyMatrix[i][0] = keywordMatrix[i][0];
-            tempN = ( Double.parseDouble(keywordMatrix[i][1]) * 100 ) / nKeywords;
-            
+            tempN = (Double.parseDouble(keywordMatrix[i][1]) * 100) / nKeywords;
+
             roundDouble = (int) (tempN * 10);
             tempN = (double) roundDouble / 10;
-            
-            frequencyMatrix[i][1] = ""+tempN+"%";
+
+            frequencyMatrix[i][1] = "" + tempN + "%";
             frequencyMatrix[i][2] = Integer.parseInt(keywordMatrix[i][1]);
-              
+
         }
-        
-        
+
         return frequencyMatrix;
-                
-        
+
     }
 
 }
