@@ -5,14 +5,12 @@
  */
 package lapr.project.ui;
 
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import static javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE;
-import lapr.project.controller.UC44_Controller;
 import lapr.project.controller.UC45_Controller;
 import lapr.project.model.Event;
 import lapr.project.model.EventCenter;

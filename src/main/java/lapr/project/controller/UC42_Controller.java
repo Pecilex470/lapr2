@@ -8,7 +8,6 @@ package lapr.project.controller;
 import java.util.List;
 import lapr.project.model.Event;
 import lapr.project.model.EventCenter;
-import lapr.project.model.register.EventRegister;
 
 /**
  *

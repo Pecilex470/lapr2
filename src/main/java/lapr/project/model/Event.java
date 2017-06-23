@@ -2,8 +2,6 @@ package lapr.project.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.text.DecimalFormat;
-import java.util.Collections;
 import lapr.project.model.register.FAEList;
 import lapr.project.model.register.ApplicationList;
 import lapr.project.model.register.OrganizerList;
