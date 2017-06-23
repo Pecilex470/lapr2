@@ -3,7 +3,6 @@ package lapr.project.model;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import org.apache.commons.math3.distribution.NormalDistribution;
 
 public class FAE implements Serializable{
     

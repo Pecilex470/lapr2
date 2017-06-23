@@ -1,6 +1,5 @@
 package lapr.project.controller;
 
-import javax.swing.JTextField;
 import lapr.project.model.Encryption;
 import lapr.project.model.EventCenter;
 import lapr.project.model.User;

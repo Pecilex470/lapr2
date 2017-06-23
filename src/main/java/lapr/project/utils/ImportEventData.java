@@ -73,6 +73,17 @@ public class ImportEventData {
     public Event readEvent() {
 
         Event newEvent = new Event();
+        
+       
+        
+        newEvent.setStartDate(new CustomDate(13, 11, 2017));
+        newEvent.setEndDate(new CustomDate(14, 11, 2017));
+        newEvent.setSubmissionStartDate(new CustomDate(10, 6, 2017));
+        newEvent.setSubmissionEndDate(new CustomDate(13, 11, 2018));
+        
+        
+        
+        
         NodeList eventAtributes = this.event.getChildNodes();
 
         UserRegister ur = ec.getUserRegister();

@@ -5,7 +5,6 @@
  */
 package lapr.project.ui;
 
-import java.io.FileNotFoundException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -41,10 +40,10 @@ public class OrganizerActions_UI extends javax.swing.JFrame {
         this.addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
             public void windowClosing(java.awt.event.WindowEvent windowEvent) {
-                if (JOptionPane.showConfirmDialog(OrganizerActions_UI.this, "Do you wish to exit without saving?", "Close", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
+                if (JOptionPane.showConfirmDialog(OrganizerActions_UI.this, "Do you wish to exit?", "Close", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
                     try {
                         ExportData.serialization(ec);
-                    } catch (FileNotFoundException ex) {
+                    } catch (Exception ex) {
                         Logger.getLogger(OrganizerActions_UI.class.getName()).log(Level.SEVERE, null, ex);
                     }
                     dispose();
@@ -187,8 +186,8 @@ public class OrganizerActions_UI extends javax.swing.JFrame {
     }//GEN-LAST:event_uc2ButtonActionPerformed
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
-        dispose();
         new MainWindow(u, ec);
+        dispose();
     }//GEN-LAST:event_backButtonActionPerformed
 
     private void uc21ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uc21ButtonActionPerformed

@@ -17,7 +17,7 @@ public class UC50_Controller {
 
     EventCenter ec;
     FAEList faeL;
-    
+
     public UC50_Controller(EventCenter ec) {
         this.ec = ec;
     }
@@ -27,10 +27,9 @@ public class UC50_Controller {
     }
 
     public List<FAE> getFAEList(Event e) {
-        faeL= e.getFaeList();
+        faeL = e.getFaeList();
         return faeL.getFAEList();
     }
 
   
-
 }

@@ -5,7 +5,6 @@
  */
 package lapr.project.ui;
 
-import java.io.FileNotFoundException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -62,7 +61,7 @@ public class UC1_UI extends javax.swing.JDialog {
                 if (JOptionPane.showConfirmDialog(UC1_UI.this, "Do you wish to exit without saving?", "Close", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
                     try {
                         ExportData.serialization(ec);
-                    } catch (FileNotFoundException ex) {
+                    } catch (Exception ex) {
                         Logger.getLogger(UC1_UI.class.getName()).log(Level.SEVERE, null, ex);
                     }
                     dispose();
@@ -444,7 +443,7 @@ public class UC1_UI extends javax.swing.JDialog {
         }
 
         if (!(("").equals(titleTextField.getText()) || locationTextField.getText().equals("") || descriptionTextArea.getText().equals("") || startDateDay.getText().equals("") || startDateMonth.getText().equals("") || startDateYear.getText().equals("") || endDateDay.getText().equals("") || endDateMonth.getText().equals("") || endDateYear.getText().equals("") || (submissionStartDateDay.getText().equals("") || submissionStartDateMonth.getText().equals("") || submissionStartDateYear.getText().equals("") || submissionEndDateDay.getText().equals("") || submissionEndDateMonth.getText().equals("") || submissionEndDateYear.getText().equals("") || availableArea.getText().equals("")))) {
-            if (c.validateEventData(titleTextField.getText(), locationTextField.getText(), descriptionTextArea.getText(), assembleDate(startDateDay.getText(), startDateMonth.getText(), startDateYear.getText()), assembleDate(endDateDay.getText(), endDateMonth.getText(), endDateYear.getText()), assembleDate(submissionStartDateDay.getText(), submissionStartDateMonth.getText(), submissionStartDateYear.getText()), assembleDate(submissionEndDateDay.getText(), submissionEndDateMonth.getText(), submissionEndDateYear.getText()), (String) eventTypeComboBox.getSelectedItem(), new FAEList(faelist), new OrganizerList(organizerList), Integer.parseInt(availableArea.getText()))) {
+            if (!(assembleDate(startDateDay.getText(), startDateMonth.getText(), startDateYear.getText()).getDay() == -1 || assembleDate(endDateDay.getText(), endDateMonth.getText(), endDateYear.getText()).getDay() == -1 || assembleDate(submissionStartDateDay.getText(), submissionStartDateMonth.getText(), submissionStartDateYear.getText()).getDay() == -1 || assembleDate(submissionEndDateDay.getText(), submissionEndDateMonth.getText(), submissionEndDateYear.getText()).getDay() == -1)) {
                 if (pickedUserList.getModel().getSize() >= 2) {
                     if (JOptionPane.showConfirmDialog(UC1_UI.this, "Are you sure you want to create an Event with this Data?", "Confirm", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
                         ec.getEventRegister().getEventList().add(new Event(titleTextField.getText(), locationTextField.getText(), descriptionTextArea.getText(), assembleDate(startDateDay.getText(), startDateMonth.getText(), startDateYear.getText()), assembleDate(endDateDay.getText(), endDateMonth.getText(), endDateYear.getText()), assembleDate(submissionStartDateDay.getText(), submissionStartDateMonth.getText(), submissionStartDateYear.getText()), assembleDate(submissionEndDateDay.getText(), submissionEndDateMonth.getText(), submissionEndDateYear.getText()), (String) eventTypeComboBox.getSelectedItem(), new FAEList(faelist), new OrganizerList(organizerList), Integer.parseInt(availableArea.getText())));
@@ -454,6 +453,8 @@ public class UC1_UI extends javax.swing.JDialog {
                 } else {
                     JOptionPane.showMessageDialog(UC1_UI.this, "You must pick at least 2 organizers", "Error", JOptionPane.OK_OPTION);
                 }
+            } else {
+                JOptionPane.showMessageDialog(UC1_UI.this, "One of the dates inserted isn't in a correct format", "Error", JOptionPane.OK_OPTION);
             }
         } else {
             JOptionPane.showMessageDialog(UC1_UI.this, "Please fill in all the fields", "Error", JOptionPane.OK_OPTION);

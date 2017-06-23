@@ -5,7 +5,6 @@
  */
 package lapr.project.ui;
 
-import java.io.FileNotFoundException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import lapr.project.model.EventCenter;
@@ -41,7 +40,7 @@ public class RepresentativeActions extends javax.swing.JFrame {
             public void windowClosing(java.awt.event.WindowEvent windowEvent) {
                 try {
                     ExportData.serialization(ec);
-                } catch (FileNotFoundException ex) {
+                } catch (Exception ex) {
                     Logger.getLogger(RepresentativeActions.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 dispose();

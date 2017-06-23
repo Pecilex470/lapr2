@@ -26,6 +26,7 @@ public class Application implements Serializable {
     private int boothArea;
     private int invitesQuantity;
     private DecisionList decisionList = new DecisionList();
+    private String products;
 
     /**
      * Constructor for Application
@@ -240,5 +241,19 @@ public class Application implements Serializable {
 
     public void setDecisionList(List<Decision> readReviews) {
         decisionList.setDecisionList(readReviews);
+    }
+
+    /**
+     * @param products the products to set
+     */
+    public void setProducts(String products) {
+        this.products = products;
+    }
+
+    /**
+     * @return the products
+     */
+    public String getProducts() {
+        return products;
     }
 }

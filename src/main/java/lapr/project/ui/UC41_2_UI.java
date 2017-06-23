@@ -5,6 +5,19 @@
  */
 package lapr.project.ui;
 
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import static javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE;
+import javax.swing.table.DefaultTableModel;
+import lapr.project.model.Event;
+import lapr.project.model.EventCenter;
+import lapr.project.model.Stand;
+import lapr.project.model.User;
+import lapr.project.utils.ExportData;
+import lapr.project.utils.MathUtils;
+
 /**
  *
  * @author Utilizador
@@ -13,11 +26,49 @@ public class UC41_2_UI extends javax.swing.JFrame {
     
     static final long serialVersionUID = -3387516993124229948L;
 
+    EventCenter ec;
+    Event event;
+    User u;
+    String[] areaColumn;
+    double[] relativeColumn;
+    int[] absoluteColumn;
+
     /**
      * Creates new form UC41_2_UI
      */
-    public UC41_2_UI() {
+    public UC41_2_UI(Event e, EventCenter ec, User u) {
+        this.ec = ec;
+        this.u = u;
+        this.event = e;
         initComponents();
+        this.setVisible(true);
+        setLocationRelativeTo(null);
+        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+
+        getTableValues(event);
+        getAbsoluteColumn(event);
+        getRelativeColumn();
+
+        DefaultTableModel val = (DefaultTableModel) jTable1.getModel();
+
+        for (int i = 0; i < areaColumn.length; i++) {
+
+            val.addRow(new Object[]{areaColumn[i], absoluteColumn[i], relativeColumn[i]});
+        }
+
+        this.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+                if (JOptionPane.showConfirmDialog(UC41_2_UI.this, "Do you wish to exit without saving?", "Close", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
+                    try {
+                        ExportData.serialization(ec);
+                    } catch (Exception ex) {
+                        Logger.getLogger(UC2_UI.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    dispose();
+                }
+            }
+        });
     }
 
     /**
@@ -78,6 +129,11 @@ public class UC41_2_UI extends javax.swing.JFrame {
 
         meanLabel.setEditable(false);
         meanLabel.setText("0");
+        meanLabel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                meanLabelActionPerformed(evt);
+            }
+        });
 
         deviationLabel.setEditable(false);
         deviationLabel.setText("0");
@@ -138,46 +194,79 @@ public class UC41_2_UI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BackBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackBActionPerformed
-        // TODO add your handling code here:
+        new UC41_1_UI(ec, u);
+        dispose();
     }//GEN-LAST:event_BackBActionPerformed
 
     private void deviationLabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deviationLabelActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_deviationLabelActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(UC41_2_UI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(UC41_2_UI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(UC41_2_UI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(UC41_2_UI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    private void meanLabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_meanLabelActionPerformed
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new UC41_2_UI().setVisible(true);
-            }
-        });
+    }//GEN-LAST:event_meanLabelActionPerformed
+
+    public void getTableValues(Event e) {
+
+        int space = e.determineInterspaceOfTable();
+        int cont = 0;
+        areaColumn = new String[e.getK(e.getStandList().size())];
+
+        for (int i = 0; i < areaColumn.length; i++) {
+            areaColumn[i] = "]" + cont + "-";
+            areaColumn[i] += cont + space + "]";
+            cont += space;
+        }
+
+    }
+
+    public void getAbsoluteColumn(Event e) {
+
+        absoluteColumn = new int[areaColumn.length];
+        List<Stand> list = e.getStandList();
+        int mean = 0;
+        int contFor = 0;
+        int contTotal=0;
+
+        for (int i = 0; i < areaColumn.length; i++) {
+            String[] ends = areaColumn[i].split("-");
+
+            //try {
+                int smallEnd = Integer.parseInt(ends[0].substring(1));
+                int bigEnd = Integer.parseInt(ends[1].substring(0, ends[1].length() - 1));
+                int[] listDes = new int[list.size()];
+                absoluteColumn[i] = 0;
+                for (Stand stand : list) {
+                    listDes[contFor] = stand.getArea();
+                    if (stand.getArea() > smallEnd && stand.getArea() <= bigEnd) {
+                        absoluteColumn[i] += 1;
+                        mean += stand.getArea();
+                        contFor++;
+                        contTotal++;
+                    }
+                }
+                contFor=0;
+                deviationLabel.setText(MathUtils.calculeStandartDesviation(listDes)+"");
+            //} catch (Exception ex) {
+            //    System.out.println("Erro in conversion to int, method getAbsoluteColumn!");
+            //}
+
+        }
+        meanLabel.setText((mean / contTotal) + "");
+    }
+
+    public void getRelativeColumn() {
+
+        relativeColumn = new double[absoluteColumn.length];
+
+        double total = 0;
+        for (int i = 0; i < absoluteColumn.length; i++) {
+            total += absoluteColumn[i];
+        }
+
+        for (int i = 0; i < relativeColumn.length; i++) {
+            relativeColumn[i] = (absoluteColumn[i] / total);
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

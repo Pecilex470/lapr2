@@ -447,4 +447,60 @@ public class EventCenter implements Serializable {
      return zc; 
     }
 
+    public Object[][] keywordFrequency() {
+
+        List<Keyword> listWithAllKeywords = new ArrayList<>();
+        List<String> listWithOneOfEachKeyword = new ArrayList<>();
+
+        for (Event e : getEventRegister().getEventList()) {
+            for (Application a : e.getApplicationList().getApplications()) {
+                for (Keyword k : a.getKeywordList()) {
+
+                    listWithAllKeywords.add(k);
+
+                    if (!listWithOneOfEachKeyword.contains(k.getValue())) {
+                        listWithOneOfEachKeyword.add(k.getValue());
+
+                    }
+
+                }
+            }
+        }
+        
+        String[][] keywordMatrix = new String[listWithOneOfEachKeyword.size()][2];
+
+        int count = 0;
+
+        for (String k : listWithOneOfEachKeyword) {
+            int occurrences = Collections.frequency(listWithAllKeywords, new Keyword(k));
+            keywordMatrix[count][0] = k;
+            keywordMatrix[count][1] = "" + occurrences;
+            count++;
+        }
+      
+        Object[][] frequencyMatrix = new Object[listWithOneOfEachKeyword.size()][3];
+        int nKeywords = listWithAllKeywords.size();
+        double tempN;
+        int roundDouble;
+        
+        
+        for (int i = 0; i < frequencyMatrix.length; i++) {
+            
+            frequencyMatrix[i][0] = keywordMatrix[i][0];
+            tempN = ( Double.parseDouble(keywordMatrix[i][1]) * 100 ) / nKeywords;
+            
+            roundDouble = (int) (tempN * 10);
+            tempN = (double) roundDouble / 10;
+            
+            frequencyMatrix[i][1] = ""+tempN+"%";
+            frequencyMatrix[i][2] = Integer.parseInt(keywordMatrix[i][1]);
+              
+        }
+        
+        
+        return frequencyMatrix;
+                
+        
+    }
+
 }

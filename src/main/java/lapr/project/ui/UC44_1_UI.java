@@ -5,7 +5,6 @@
  */
 package lapr.project.ui;
 
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -55,7 +54,7 @@ public class UC44_1_UI extends javax.swing.JFrame {
                 if (JOptionPane.showConfirmDialog(UC44_1_UI.this, "Do you wish to exit without saving?", "Close", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
                     try {
                         ExportData.serialization(ec);
-                    } catch (FileNotFoundException ex) {
+                    } catch (Exception ex) {
                         Logger.getLogger(UC44_1_UI.class.getName()).log(Level.SEVERE, null, ex);
                     }
                     dispose();

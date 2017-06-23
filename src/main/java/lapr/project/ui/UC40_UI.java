@@ -32,6 +32,8 @@ import lapr.project.utils.ExportData;
  * @author Luis
  */
 public class UC40_UI extends javax.swing.JFrame {
+    
+    static final long serialVersionUID = -3387516993124229948L;
 
     EventCenter ec;
     User u;
@@ -56,7 +58,7 @@ public class UC40_UI extends javax.swing.JFrame {
                 if (JOptionPane.showConfirmDialog(UC40_UI.this, "Do you wish to exit without saving?", "Close", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
                     try {
                         ExportData.serialization(ec);
-                    } catch (FileNotFoundException ex) {
+                    } catch (Exception ex) {
                         Logger.getLogger(UC40_UI.class.getName()).log(Level.SEVERE, null, ex);
                     }
                     dispose();
