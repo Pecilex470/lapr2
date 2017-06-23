@@ -156,7 +156,8 @@ public class UC44_2_UI extends javax.swing.JFrame {
             double cv = e.criticalValue(sl);
             double ZUni = e.getZUni();
             String decision = e.testAcceptanceRate50(sl);
-            if(aR != -1){
+           
+            if(Math.abs(aR - (-1)) >= 0.00000001){
              val.addRow(new Object[]{title, aR, cv, sl, ZUni, decision});   
             }
            

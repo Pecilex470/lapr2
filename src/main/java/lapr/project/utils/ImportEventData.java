@@ -5,7 +5,6 @@
  */
 package lapr.project.utils;
 
- 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -40,6 +39,7 @@ import org.xml.sax.SAXException;
  */
 public class ImportEventData {
 
+    private Event newEvent;
     private String randomKeyword;
     private int randomShift;
     EventCenter ec;
@@ -48,6 +48,7 @@ public class ImportEventData {
     private String fileName;
 
     public ImportEventData(EventCenter ec, String fileName) {
+        this.newEvent= new Event();
         this.ec = ec;
         this.fileName = fileName;
         this.randomKeyword = Encryption.randomCipher();
@@ -72,18 +73,13 @@ public class ImportEventData {
 
     public Event readEvent() {
 
-        Event newEvent = new Event();
         
-       
-        
-        newEvent.setStartDate(new CustomDate(13, 11, 2017));
-        newEvent.setEndDate(new CustomDate(14, 11, 2017));
-        newEvent.setSubmissionStartDate(new CustomDate(10, 6, 2017));
-        newEvent.setSubmissionEndDate(new CustomDate(13, 11, 2018));
-        
-        
-        
-        
+
+        this.newEvent.setStartDate(new CustomDate(13, 11, 2017));
+        this.newEvent.setEndDate(new CustomDate(14, 11, 2017));
+        this.newEvent.setSubmissionStartDate(new CustomDate(10, 6, 2017));
+        this.newEvent.setSubmissionEndDate(new CustomDate(13, 11, 2018));
+
         NodeList eventAtributes = this.event.getChildNodes();
 
         UserRegister ur = ec.getUserRegister();
@@ -355,8 +351,6 @@ public class ImportEventData {
                             case "assignment":
 
                                 eva.setFaeUsername(readAssignment(element, ur, eva));
-
-                                //application
                                 break;
                         }
                     }
@@ -393,68 +387,44 @@ public class ImportEventData {
 
                             if (userAtributes.item(w).getNodeType() == Node.ELEMENT_NODE) {
 
-                                Element userAtributesEl = (Element) userAtributes.item(w);
+                                Element elAtributes = (Element) userAtributes.item(w);
 
-                                NodeList usernameList = userAtributesEl.getElementsByTagName("username");
+                                switch (elAtributes.getTagName()) {
 
-                                for (int a = 0; a < usernameList.getLength(); a++) {
+                                    case "name":
 
-                                    if (userAtributes.item(w).getNodeType() == Node.ELEMENT_NODE) {
+                                        newUser.setName(elAtributes.getTextContent());
+                                        break;
+                                    case "email":
 
-                                        Element elementT = (Element) userAtributes.item(w);
-
-                                        if (ur.verifyUsername(elementT.getTextContent())) {
-
-                                            
-                                            
-                                            
-                                            
-                                            eva.setFaeUsername(userAtributes.item(w).getTextContent());
-                                            
-                                            
-                                            
-                                        } else {
-
-                                            for (int t = 0; t < userAtributes.getLength(); t++) {
-
-                                                if (userAtributes.item(t).getNodeType() == Node.ELEMENT_NODE) {
-
-                                                    Element elAtributes = (Element) userAtributes.item(t);
-
-                                                    switch (elAtributes.getTagName()) {
-
-                                                        case "name":
-                                                           
-                                                            newUser.setName(elAtributes.getTextContent());
-                                                            break;
-                                                        case "email":
-                                                            
-                                                            newUser.setEmail(elAtributes.getTextContent());
-                                                            break;
-                                                        case "username":
-
-                                                            newUser.setUsername(elAtributes.getTextContent());
-                                                            eva.setFaeUsername(elAtributes.getTextContent());
-                                                            break;
-                                                        case "password":
-
-                                                            newUser.setPassword(elAtributes.getTextContent());
-                                                      
-                                                            break;
-                                                    }
-                                                }
-                                            }
-                                            ur.getUsers().add(newUser);
-                                            
+                                        newUser.setEmail(elAtributes.getTextContent());
+                                        break;
+                                    case "username":
+                                        if (ur.verifyUsername(elAtributes.getTextContent())) {
+                                            eva.setFaeUsername(elAtributes.getTextContent());
+                                            this.newEvent.getFaeList().addFAE(new FAE(ur.getUserByUsername(elAtributes.getTextContent())));
+                                            return elAtributes.getTextContent();
                                         }
-                                    }
+                                        newUser.setUsername(elAtributes.getTextContent());
+
+                                        eva.setFaeUsername(elAtributes.getTextContent());
+                                        break;
+                                    case "password":
+
+                                        newUser.setPassword(elAtributes.getTextContent());
+
+                                        break;
                                 }
                             }
                         }
+                        this.newEvent.getFaeList().addFAE(new FAE(newUser));
+                        ur.getUsers().add(newUser);
+
                     }
                 }
             }
         }
+
         return newUser.getUsername();
     }
 

@@ -99,7 +99,7 @@ public class UC50_1_UI extends javax.swing.JFrame {
 
         pickFae2.setModel(new javax.swing.AbstractListModel<String>() {
             static final long serialVersionUID = -3387516993124229948L;
-            String[] strings = inicialFAE2List();
+            String[] strings = inicialFAE1List();
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
@@ -161,15 +161,13 @@ public class UC50_1_UI extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(44, 44, 44)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 141, Short.MAX_VALUE)
+                .addGap(29, 29, 29)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(pickFB)
+                    .addComponent(unpickFB))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(45, 45, 45))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(133, 133, 133)
-                .addComponent(pickFB)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(unpickFB)
-                .addGap(126, 126, 126))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -189,17 +187,20 @@ public class UC50_1_UI extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(pickFB)
-                    .addComponent(unpickFB))
-                .addGap(27, 27, 27)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(98, 98, 98)
+                        .addComponent(pickFB)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(unpickFB)))
+                .addGap(77, 77, 77)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -236,6 +237,7 @@ public class UC50_1_UI extends javax.swing.JFrame {
         double a = Double.parseDouble(JOptionPane.showInputDialog(UC50_1_UI.this, "Enter the significance level [0.01 or 0.05]"));
         
         while (a != 0.01 && a != 0.05) {
+            
             JOptionPane.showMessageDialog(UC50_1_UI.this, "Insert 0.01 or 0.05");
             a = Double.parseDouble(JOptionPane.showInputDialog(UC50_1_UI.this, "Enter the significance level [0.01 or 0.05]"));
         }
@@ -311,7 +313,9 @@ public class UC50_1_UI extends javax.swing.JFrame {
 
         String[] list = new String[ec.getFAEEvaluatedApplications().size()];
         int cont = 0;
+       
         for (FAE fae : ec.getFAEEvaluatedApplications()) {
+            
             String title = fae.getName();
             list[cont] = title;
             cont++;
@@ -321,16 +325,7 @@ public class UC50_1_UI extends javax.swing.JFrame {
         
         return list;
     }
-    /**
-     * /
-     * Method that retrieves the full list of fae that evaluated a application
-     *
-     * @return a String array to fill the JList
-     */
-    public String[] inicialFAE2List() {
-       
-     return inicialFAE1List(); 
-    }
+
     
      public void removeFAEFromTop2List(String uName) {
         
