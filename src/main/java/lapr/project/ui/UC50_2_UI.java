@@ -14,6 +14,7 @@ import javax.swing.JOptionPane;
 import static javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE;
 import javax.swing.table.DefaultTableModel;
 import lapr.project.controller.UC50_Controller;
+import lapr.project.model.Decision;
 import lapr.project.model.Encryption;
 import lapr.project.model.EventCenter;
 import lapr.project.model.FAE;
@@ -158,13 +159,15 @@ public class UC50_2_UI extends javax.swing.JFrame {
             String sL = getSignificanceLevel(fae1.get(i), fae2.get(i));
             String username1 = fae1.get(i).getUserFAE().getUsername();
             String username2 = fae2.get(i).getUserFAE().getUsername();
-            int nSub1 = ec.getEvaluatedApplicationsFAE(username1).size();
-            int nSub2 = ec.getEvaluatedApplicationsFAE(username2).size();
-            double dMean1 = ec.getMeanDeviation(username1);
-            double dMean2 = ec.getMeanDeviation(username2);
-            double z = ec.getZ2MeanDeviations(fae1.get(i), fae2.get(i));
+            List<Decision> user1 = ec.getEvaluatedApplicationsFAE(username1);
+            List<Decision> user2 = ec.getEvaluatedApplicationsFAE(username2); 
+            int nSub1 = user1.size();
+            int nSub2 = user2.size();
+            double dMean1 = ec.getMeanDeviation(user1);
+            double dMean2 = ec.getMeanDeviation(user2);
+            double z = ec.getZ2MeanDeviations(dMean1,dMean2,nSub1,nSub2,user1,user2);
             double zc = ec.zC(sL);
-            String dec = ec.testingTheDifferenceBetweenTwoFAEsMeanDeviations(fae1.get(i), fae2.get(i), sL);
+            String dec = ec.testingTheDifferenceBetweenTwoFAEsMeanDeviations(z, zc);
             if (nSub1 >= 30 && nSub2 >= 30) {
                 val.addRow(new Object[]{username1, username2, nSub1, nSub2, dMean1, dMean2, zc, z, dec});
             }

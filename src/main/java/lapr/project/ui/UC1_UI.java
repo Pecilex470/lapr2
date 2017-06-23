@@ -65,6 +65,7 @@ public class UC1_UI extends javax.swing.JDialog {
                     } catch (Exception ex) {
                         Logger.getLogger(UC1_UI.class.getName()).log(Level.SEVERE, null, ex);
                     }
+                    new EventManagerActions_UI(ec, u);
                     dispose();
                 }
             }

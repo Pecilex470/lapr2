@@ -36,6 +36,6 @@ public class UC47_Controller {
      * @return submission global mean rating (double)
      */
     public double getGlobalMeanRating() {
-        return this.ec.getGlobalMeanRate();
+        return ec.getGlobalMeanRate();
     }
 }
