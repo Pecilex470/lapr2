@@ -175,6 +175,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="UC47 - Show submission global mean rating"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="uc47ButtonActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="uc32Button">
       <Properties>

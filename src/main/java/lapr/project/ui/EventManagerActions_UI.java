@@ -11,6 +11,7 @@ import javax.swing.JOptionPane;
 import static javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE;
 import lapr.project.controller.UC43_Controller;
 import lapr.project.controller.UC46_Controller;
+import lapr.project.controller.UC47_Controller;
 import lapr.project.model.EventCenter;
 import lapr.project.model.User;
 import lapr.project.utils.ExportData;
@@ -142,6 +143,11 @@ public class EventManagerActions_UI extends javax.swing.JFrame {
         uc48Button.setText("UC48 - Show the mean deviation between FAEs' average ratings and global mean rating");
 
         uc47Button.setText("UC47 - Show submission global mean rating");
+        uc47Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                uc47ButtonActionPerformed(evt);
+            }
+        });
 
         uc32Button.setText("UC32 - Import Event Data from file");
         uc32Button.addActionListener(new java.awt.event.ActionListener() {
@@ -235,22 +241,25 @@ public class EventManagerActions_UI extends javax.swing.JFrame {
 
     private void uc1ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uc1ButtonActionPerformed
         new UC1_UI(ec, u);
+        dispose();
     }//GEN-LAST:event_uc1ButtonActionPerformed
 
     private void uc42ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uc42ButtonActionPerformed
 
-        dispose();
+       
         new UC42_UI(ec, u);
-
+        dispose();
 
     }//GEN-LAST:event_uc42ButtonActionPerformed
 
     private void uc44ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uc44ButtonActionPerformed
         new UC44_1_UI(ec,u);
+        dispose();
     }//GEN-LAST:event_uc44ButtonActionPerformed
 
     private void uc50ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uc50ButtonActionPerformed
         new UC50_1_UI(ec,u);
+        dispose();
     }//GEN-LAST:event_uc50ButtonActionPerformed
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
@@ -292,11 +301,18 @@ public class EventManagerActions_UI extends javax.swing.JFrame {
     }//GEN-LAST:event_uc32ButtonActionPerformed
     private void uc49ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uc49ButtonActionPerformed
         new UC49_UI(ec);
+        dispose();
     }//GEN-LAST:event_uc49ButtonActionPerformed
 
     private void uc45ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uc45ButtonActionPerformed
         new UC45_1_UI(ec, u);
+        dispose();
     }//GEN-LAST:event_uc45ButtonActionPerformed
+
+    private void uc47ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uc47ButtonActionPerformed
+        UC47_Controller cont = new UC47_Controller(ec);
+        JOptionPane.showMessageDialog(EventManagerActions_UI.this, "The Global Mean Rating is: "+cont.getGlobalMeanRating());
+    }//GEN-LAST:event_uc47ButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
