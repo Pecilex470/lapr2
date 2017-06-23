@@ -43,14 +43,9 @@ public class UC2_UI extends javax.swing.JFrame {
     private User u;
 
     private Event eventSelected;
-<<<<<<< HEAD
     private User userSelected;
     private List<User> selected = new ArrayList<>();
     private List<User> users = new ArrayList<>();
-=======
-    private List<FAE> usersSelected = new ArrayList<>();
-
->>>>>>> 453f7e32b296b66c182dca5a97386a6ea4e423df
 
     /**
      * Creates new form UC2_UI
@@ -82,8 +77,7 @@ public class UC2_UI extends javax.swing.JFrame {
                 }
             }
         });
-        
-        userList.getSelectionModel().setSelectionInterval(0, 2);
+
     }
 
     private String[] eventList() {
@@ -232,12 +226,7 @@ public class UC2_UI extends javax.swing.JFrame {
 
     private void eventListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_eventListMouseClicked
 
-<<<<<<< HEAD
         this.selected = new ArrayList<>();
-=======
-        this.usersSelected = new ArrayList<>();
-        
->>>>>>> 453f7e32b296b66c182dca5a97386a6ea4e423df
         this.eventSelected = ec.getEventRegister().getEventByTitle(eventList.getSelectedValue());
 
         userListUI.setModel(new javax.swing.AbstractListModel<String>() {
@@ -255,25 +244,10 @@ public class UC2_UI extends javax.swing.JFrame {
     }//GEN-LAST:event_eventListMouseClicked
 
     private void confirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmButtonActionPerformed
-//        if (selected.size() == 2) {
-//            if (JOptionPane.showConfirmDialog(UC2_UI.this, "Do you confirm your decision?", "Define FAE", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
-//                for (FAE fae : selected) {
-//                    eventSelected.getFaeList().getFAEList().add(fae);
-//                    new OrganizerActions_UI(ec, u);
-//                    dispose();
-//                }
-//            } else {
-//                new OrganizerActions_UI(ec, u);
-//                dispose();
-//            }
-//        } else {
-//            JOptionPane.showMessageDialog(UC2_UI.this, "You should choose exactly 2 FAE", "Error", JOptionPane.OK_OPTION);
-//        }
 
-
-        if (usersSelected.size() == 2) {
+        if (selected.size() == 2) {
             if (JOptionPane.showConfirmDialog(UC2_UI.this, "Do you confirm your decision?", "Define FAE", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
-<<<<<<< HEAD
+
                 for (User user : selected) {
                     eventSelected.getFaeList().getFAEList().add(new FAE(user));
                 }
@@ -285,17 +259,7 @@ public class UC2_UI extends javax.swing.JFrame {
             }
         } else {
             JOptionPane.showMessageDialog(UC2_UI.this, "You should choose exactly 2 FAE", "Error", JOptionPane.OK_OPTION);
-=======
-                for (FAE fae : usersSelected) {
-                    eventSelected.getFaeList().getFAEList().add(fae);
-                    new OrganizerActions_UI(ec, u);
-                    dispose();
-                }
->>>>>>> 453f7e32b296b66c182dca5a97386a6ea4e423df
         }
-
-        }
-
 
     }//GEN-LAST:event_confirmButtonActionPerformed
     /**
@@ -330,7 +294,6 @@ public class UC2_UI extends javax.swing.JFrame {
 
         this.userSelected = users.get(userListUI.getSelectedIndex());
 
-<<<<<<< HEAD
         if (selected.contains(userSelected)) {
             JOptionPane.showMessageDialog(UC2_UI.this, "You already selected this user");
             return;
@@ -378,27 +341,6 @@ public class UC2_UI extends javax.swing.JFrame {
         }
         return list;
     }
-=======
-        
-        
-        
-        this.usersSelected.add(nameStringToFae(userList.getSelectedValue()));
-        
-        
-            
-        
-        
-        
-        
-        //if (JOptionPane.showConfirmDialog(UC2_UI.this, "Do you wish to define this user as FAE?", "Define", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
-
-//            this.userSelected = nameStringToFae(userList.getSelectedValue());
-//         
-//            .setSelectionBackground(Color.GREEN);
-//            selected.add(userSelected);
-      //  }
-    }//GEN-LAST:event_userListMouseClicked
->>>>>>> 453f7e32b296b66c182dca5a97386a6ea4e423df
 
     /**
      * This method returns the User that is selected in the user List in the
