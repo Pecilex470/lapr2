@@ -40,7 +40,7 @@ public class OrganizerActions_UI extends javax.swing.JFrame {
         this.addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
             public void windowClosing(java.awt.event.WindowEvent windowEvent) {
-                if (JOptionPane.showConfirmDialog(OrganizerActions_UI.this, "Do you wish to exit without saving?", "Close", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
+                if (JOptionPane.showConfirmDialog(OrganizerActions_UI.this, "Do you wish to exit?", "Close", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
                     try {
                         ExportData.serialization(ec);
                     } catch (Exception ex) {
@@ -98,6 +98,11 @@ public class OrganizerActions_UI extends javax.swing.JFrame {
         });
 
         uc22Button.setText("UC22 - List Applications");
+        uc22Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                uc22ButtonActionPerformed(evt);
+            }
+        });
 
         uc40Button.setText("UC40 - Show Event submission keywords");
         uc40Button.addActionListener(new java.awt.event.ActionListener() {
@@ -186,8 +191,8 @@ public class OrganizerActions_UI extends javax.swing.JFrame {
     }//GEN-LAST:event_uc2ButtonActionPerformed
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
-        dispose();
         new MainWindow(u, ec);
+        dispose();
     }//GEN-LAST:event_backButtonActionPerformed
 
     private void uc21ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uc21ButtonActionPerformed
@@ -203,6 +208,11 @@ public class OrganizerActions_UI extends javax.swing.JFrame {
         new UC41_1_UI(ec, u);
         dispose();
     }//GEN-LAST:event_uc41ButtonActionPerformed
+
+    private void uc22ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uc22ButtonActionPerformed
+        new UC22_UI(ec, u);
+        dispose();
+    }//GEN-LAST:event_uc22ButtonActionPerformed
 
     /**
      * @param args the command line arguments

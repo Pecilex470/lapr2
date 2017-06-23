@@ -43,8 +43,9 @@ public class UC2_UI extends javax.swing.JFrame {
     private User u;
 
     private Event eventSelected;
-    private List<FAE> usersSelected = new ArrayList<>();
-
+    private User userSelected;
+    private List<User> selected = new ArrayList<>();
+    private List<User> users = new ArrayList<>();
 
     /**
      * Creates new form UC2_UI
@@ -76,8 +77,7 @@ public class UC2_UI extends javax.swing.JFrame {
                 }
             }
         });
-        
-        userList.getSelectionModel().setSelectionInterval(0, 2);
+
     }
 
     private String[] eventList() {
@@ -106,11 +106,14 @@ public class UC2_UI extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        userList = new javax.swing.JList<>();
+        userListUI = new javax.swing.JList<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         eventList = new javax.swing.JList<>();
         confirmButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        pickedListUI = new javax.swing.JList<>();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("UC2 - Define FAE");
@@ -119,12 +122,12 @@ public class UC2_UI extends javax.swing.JFrame {
 
         jLabel3.setText("Pick exactly 2 users to be FAE:");
 
-        userList.addMouseListener(new java.awt.event.MouseAdapter() {
+        userListUI.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                userListMouseClicked(evt);
+                userListUIMouseClicked(evt);
             }
         });
-        jScrollPane2.setViewportView(userList);
+        jScrollPane2.setViewportView(userListUI);
 
         eventList.setModel(new javax.swing.AbstractListModel<String>() {
             static final long serialVersionUID = -3387516993124229948L;
@@ -153,6 +156,15 @@ public class UC2_UI extends javax.swing.JFrame {
             }
         });
 
+        pickedListUI.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                pickedListUIMouseClicked(evt);
+            }
+        });
+        jScrollPane3.setViewportView(pickedListUI);
+
+        jLabel2.setText("Already picked users:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -167,11 +179,16 @@ public class UC2_UI extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(30, 30, 30)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3))))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(33, 33, 33)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane2)
+                            .addComponent(jScrollPane3)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel2))
+                                .addGap(91, 91, 91)))))
                 .addContainerGap(32, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -182,14 +199,19 @@ public class UC2_UI extends javax.swing.JFrame {
                     .addComponent(jLabel1)
                     .addComponent(jLabel3))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(29, 29, 29)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(31, 31, 31)
+                        .addComponent(jLabel2)
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 398, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(confirmButton)
                     .addComponent(cancelButton))
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addGap(19, 19, 19))
         );
 
         pack();
@@ -204,11 +226,12 @@ public class UC2_UI extends javax.swing.JFrame {
 
     private void eventListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_eventListMouseClicked
 
-        this.usersSelected = new ArrayList<>();
         
+        
+        this.selected = new ArrayList<>();
         this.eventSelected = ec.getEventRegister().getEventByTitle(eventList.getSelectedValue());
 
-        userList.setModel(new javax.swing.AbstractListModel<String>() {
+        userListUI.setModel(new javax.swing.AbstractListModel<String>() {
             static final long serialVersionUID = -3387516993124229948L;
             String[] strings = modelList();
 
@@ -223,33 +246,22 @@ public class UC2_UI extends javax.swing.JFrame {
     }//GEN-LAST:event_eventListMouseClicked
 
     private void confirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmButtonActionPerformed
-//        if (selected.size() == 2) {
-//            if (JOptionPane.showConfirmDialog(UC2_UI.this, "Do you confirm your decision?", "Define FAE", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
-//                for (FAE fae : selected) {
-//                    eventSelected.getFaeList().getFAEList().add(fae);
-//                    new OrganizerActions_UI(ec, u);
-//                    dispose();
-//                }
-//            } else {
-//                new OrganizerActions_UI(ec, u);
-//                dispose();
-//            }
-//        } else {
-//            JOptionPane.showMessageDialog(UC2_UI.this, "You should choose exactly 2 FAE", "Error", JOptionPane.OK_OPTION);
-//        }
 
-
-        if (usersSelected.size() == 2) {
+        if (selected.size() == 2) {
             if (JOptionPane.showConfirmDialog(UC2_UI.this, "Do you confirm your decision?", "Define FAE", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
-                for (FAE fae : usersSelected) {
-                    eventSelected.getFaeList().getFAEList().add(fae);
-                    new OrganizerActions_UI(ec, u);
-                    dispose();
+
+                for (User user : selected) {
+                    eventSelected.getFaeList().getFAEList().add(new FAE(user));
                 }
+                new OrganizerActions_UI(ec, u);
+                dispose();
+            } else {
+                new OrganizerActions_UI(ec, u);
+                dispose();
+            }
+        } else {
+            JOptionPane.showMessageDialog(UC2_UI.this, "You should choose exactly 2 FAE", "Error", JOptionPane.OK_OPTION);
         }
-
-        }
-
 
     }//GEN-LAST:event_confirmButtonActionPerformed
     /**
@@ -259,8 +271,9 @@ public class UC2_UI extends javax.swing.JFrame {
      * @return returns the array of Strings
      */
     private String[] modelList() {
-        List<User> users = new ArrayList<>();
 
+        this.users = new ArrayList<>();
+        
         for (User user : ec.getUserRegister().getUsers()) {
             if (!(eventSelected.checkIFUserIsOrganizer(user)) && !(eventSelected.checkIFUserIsFAE(user))) {
                 users.add(user);
@@ -275,30 +288,63 @@ public class UC2_UI extends javax.swing.JFrame {
             name = name + " (" + users.get(i).getUsername() + ")";
             list[i] = name;
         }
+
+        this.users = users;
+
         return list;
     }
 
-    private void userListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_userListMouseClicked
+    private void userListUIMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_userListUIMouseClicked
 
-        
-        
-        
-        this.usersSelected.add(nameStringToFae(userList.getSelectedValue()));
-        
-        
-            
-        
-        
-        
-        
-        //if (JOptionPane.showConfirmDialog(UC2_UI.this, "Do you wish to define this user as FAE?", "Define", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
+        this.userSelected = users.get(userListUI.getSelectedIndex());
 
-//            this.userSelected = nameStringToFae(userList.getSelectedValue());
-//         
-//            .setSelectionBackground(Color.GREEN);
-//            selected.add(userSelected);
-      //  }
-    }//GEN-LAST:event_userListMouseClicked
+        if (selected.contains(userSelected)) {
+            JOptionPane.showMessageDialog(UC2_UI.this, "You already selected this user");
+            return;
+        }
+
+        if (selected.size() == 2) {
+            JOptionPane.showMessageDialog(UC2_UI.this, "Only 2 FAE's allowed per event");
+            return;
+        }
+
+        if (JOptionPane.showConfirmDialog(UC2_UI.this, "Do you wish to define this user as FAE?", "Define", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
+
+            selected.add(userSelected);
+
+            pickedListUI.setModel(new javax.swing.AbstractListModel<String>() {
+                static final long serialVersionUID = -3387516993124229948L;
+                String[] picked = pickedUserNames();
+
+                public int getSize() {
+                    return picked.length;
+                }
+
+                public String getElementAt(int index) {
+                    return picked[index];
+                }
+
+            });
+        }
+
+
+    }//GEN-LAST:event_userListUIMouseClicked
+
+    private void pickedListUIMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pickedListUIMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_pickedListUIMouseClicked
+
+    private String[] pickedUserNames() {
+        String[] list = new String[selected.size()];
+
+        for (int i = 0; i < list.length; i++) {
+            String name = Encryption.deEncryptPassword(selected.get(i).getName(), ec.getEncryptionRegister().getEncryptionByUser(selected.get(i)).getShift(), Encryption.ABC);
+            name = Encryption.deEncryptData(name, ec.getEncryptionRegister().getEncryptionByUser(selected.get(i)).getKeyword());
+            name = name + " (" + selected.get(i).getUsername() + ")";
+            list[i] = name;
+        }
+        return list;
+    }
 
     /**
      * This method returns the User that is selected in the user List in the
@@ -337,9 +383,12 @@ public class UC2_UI extends javax.swing.JFrame {
     private javax.swing.JButton confirmButton;
     private javax.swing.JList<String> eventList;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JList<String> userList;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JList<String> pickedListUI;
+    private javax.swing.JList<String> userListUI;
     // End of variables declaration//GEN-END:variables
 }
