@@ -40,12 +40,13 @@ public class UC32_UI extends javax.swing.JFrame {
             @Override
             public void windowClosing(java.awt.event.WindowEvent windowEvent) {
                 if (JOptionPane.showConfirmDialog(UC32_UI.this, "Do you wish to exit without saving?", "Close", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
-                    dispose();
                     try {
                         ExportData.serialization(ec);
                     } catch (Exception ex) {
                         Logger.getLogger(EventManagerActions_UI.class.getName()).log(Level.SEVERE, null, ex);
                     }
+                    new EventManagerActions_UI(ec, u);
+                    dispose();
                 }
             }
         });
