@@ -38,18 +38,16 @@ public class EventCenterTest {
 //    private List<Organizer> organizerL;
 //    private List<FAE> faeL;
 //    private List<Keyword> keywords;
-//    private EventRegister ever; 
-//    private UserRegister userr; 
-//    private RepresentativeRegister reprer;
-//    private EncryptionRegister encrypr;
-//    private EventRegister eventRegister;
+//  
 //    private List<Event> er;
 //    private List<User> ur;
 //    private List<Representative> rr;
 //    private List<Encryption> enr;
+//    private EventRegister eventRegister;
 //    private UserRegister userRegister; 
 //    private RepresentativeRegister representativeRegister;
 //    private EncryptionRegister encryptionRegister; 
+//    
 //    public EventCenterTest() {
 //    }
 //    
@@ -70,7 +68,9 @@ public class EventCenterTest {
 //        faeL= new ArrayList<>();
 //        organizerL = new ArrayList<>();
 //        
-//        eventRegister = new EventRegister(er);
+//        
+//        
+//        
 //        
 //         String name = Encryption.encryptData("Pedro Miller Brandão Pinho", "zebras");
 //        name = Encryption.encryptPassword(name, 6, Encryption.ABC);
@@ -115,16 +115,29 @@ public class EventCenterTest {
 //        
 //        e = new Event("Bolo do Caco Festival", "Madeira", "A nice bolo do caco event", new CustomDate(13, 11, 2017), new CustomDate(14, 11, 2017), new CustomDate(20, 6, 2017), new CustomDate(8, 10, 2017), "congress", faeList, organizerList, 300);
 //        
-//        
 //        this.keywords = new ArrayList<>();
 //        keywords.add(new Keyword("Cake"));
 //        keywords.add(new Keyword("Sweet"));
 //        ap = new Application("Test application", keywords, "FoodInc", u , 15, 30);
 //        
 //        e.addApplication(ap);
+//        er.add(e);
+//        ur.add(u1);
+//        ur.add(u2);
+//        rr.add(new Representative(u));
+//       
+//        
+//        eventRegister = new EventRegister(er);
+//        userRegister = new UserRegister(ur);
+//        representativeRegister = new RepresentativeRegister(rr);
+//        encryptionRegister = new EncryptionRegister(enr);
+//
 //        
 //        
-//        EventCenter ec = new EventCenter(eventRegister, userr, reprer, encrypr);
+//        
+//        
+//        
+//        EventCenter ec = new EventCenter(eventRegister, userRegister, representativeRegister, encryptionRegister);
 //       
 //    }
 //    
@@ -138,7 +151,7 @@ public class EventCenterTest {
 //    @Test
 //    public void testGetEventRegister() {
 //        System.out.println("getEventRegister");
-//        EventCenter instance = new EventCenter();
+//        EventCenter instance = ec;
 //        EventRegister expResult = null;
 //        EventRegister result = instance.getEventRegister();
 //        assertEquals(expResult, result);

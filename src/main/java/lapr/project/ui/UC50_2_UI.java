@@ -153,19 +153,14 @@ public class UC50_2_UI extends javax.swing.JFrame {
 
     private void insertBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertBActionPerformed
         DefaultTableModel val = (DefaultTableModel) jTable1.getModel();
-        List<FAE> allFAEThatEvaluatedAnApplication = ec.getFAEEvaluatedApplications();
         for (int i = 0; i < fae1.size(); i++) {
             String sL = getSignificanceLevel(fae1.get(i), fae2.get(i));
             String username1 = fae1.get(i).getUserFAE().getUsername();
             String username2 = fae2.get(i).getUserFAE().getUsername();
             int nSub1 = ec.getEvaluatedApplicationsFAE(username1).size();
             int nSub2 = ec.getEvaluatedApplicationsFAE(username2).size();
-            double mRa1 = ec.getMeanRatingF(username1);
-            double mRa2 = ec.getMeanRatingF(username2);
             double dMean1 = ec.getMeanDeviation(username1);
             double dMean2 = ec.getMeanDeviation(username2);
-            double sMean1 = ec.getStandardDeviation(username1);
-            double sMean2 = ec.getStandardDeviation(username2);
             double z = ec.getZ2MeanDeviations(fae1.get(i), fae2.get(i));
             double zc = ec.zC(sL);
             String dec = ec.testingTheDifferenceBetweenTwoFAEsMeanDeviations(fae1.get(i), fae2.get(i), sL);
