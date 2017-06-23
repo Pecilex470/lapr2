@@ -203,10 +203,10 @@ public class Event implements Serializable {
 
         int accepted = applicationList.getAcceptedApplicationRegister().size();
         int total = applicationList.getApplications().size();
-        if(total<30){
-         return -1;   
+        if (total < 30) {
+            return -1;
         }
-        
+
         return (double) (accepted * 100) / (double) total;
 
     }
@@ -432,15 +432,49 @@ public class Event implements Serializable {
     public void setKeywordList(List<Keyword> keywordList) {
         this.keywordList = keywordList;
     }
-    
-    public FAE getFAEAtri(int i){
-      if(faeList.getFAEList().get(i).getAttributionList().size()!=0){
-       return faeList.getFAEList().get(i);
-      }
-      return null;
+
+    public FAE getFAEAtri(int i) {
+        if (faeList.getFAEList().get(i).getAttributionList().size() != 0) {
+            return faeList.getFAEList().get(i);
+        }
+        return null;
     }
     
-    
-    
+    private int getNumberOfStands() {
+        return this.getStandList().size();
+    }
+
+    public int getK(int num) {
+        return (int) (1 + 3.22 * Math.log10(num));
+    }
+
+    private int getAreaOfBiggestStand() {
+
+        int biggestArea = 0;
+
+        for (Stand stand : this.getStandList()) {
+            if (stand.getArea() > biggestArea) {
+                biggestArea = stand.getArea();
+            }
+        }
+        return biggestArea;
+    }
+
+    private int getAreaOfSmallest() {
+
+        int smallestArea = this.getStandList().get(0).getArea();
+
+        for (Stand stand : this.getStandList()) {
+            if (stand.getArea() < smallestArea) {
+                smallestArea = stand.getArea();
+            }
+        }
+
+        return smallestArea;
+    }
+
+    public int determineInterspaceOfTable() {
+        return (getAreaOfBiggestStand() - getAreaOfSmallest() / getK(getNumberOfStands()));
+    }
 
 }
