@@ -226,6 +226,8 @@ public class UC2_UI extends javax.swing.JFrame {
 
     private void eventListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_eventListMouseClicked
 
+        
+        
         this.selected = new ArrayList<>();
         this.eventSelected = ec.getEventRegister().getEventByTitle(eventList.getSelectedValue());
 
@@ -270,6 +272,8 @@ public class UC2_UI extends javax.swing.JFrame {
      */
     private String[] modelList() {
 
+        this.users = new ArrayList<>();
+        
         for (User user : ec.getUserRegister().getUsers()) {
             if (!(eventSelected.checkIFUserIsOrganizer(user)) && !(eventSelected.checkIFUserIsFAE(user))) {
                 users.add(user);
