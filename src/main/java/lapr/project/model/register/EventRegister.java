@@ -69,6 +69,12 @@ public class EventRegister implements Serializable {
     public void setEventList(List<Event> el) {
         this.events = el;
     }
+    
+    public void addEventList(List<Event> eventL){
+        for(Event event: eventL){
+            this.events.add(event);
+        }
+    }
 
     public Event getEventByTitle(String title) {
 

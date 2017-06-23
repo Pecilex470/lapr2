@@ -30,13 +30,13 @@ public class UC45_1_UI extends javax.swing.JFrame {
     private EventCenter ec;
     private String[] pickedList = new String[0];
     private String[] topList1;
-    private User user;
+    private User u;
 
     /**
      * Creates new form UC45_1_UI
      */
     public UC45_1_UI(EventCenter ec, User u) {
-        this.user = user;
+        this.u = u;
         this.ec = ec;
         this.c = new UC45_Controller(ec);
         initComponents();
@@ -291,13 +291,13 @@ public class UC45_1_UI extends javax.swing.JFrame {
         if (eventSelected1 == null || eventSelected2 == null) {
             JOptionPane.showMessageDialog(UC45_1_UI.this, "Please select events", "Error", JOptionPane.OK_OPTION);
         } else {
-            new UC45_2_UI(ec, eventSelected1, eventSelected2, pickedList, user);
+            new UC45_2_UI(ec, eventSelected1, eventSelected2, pickedList, u);
             dispose();
         }
     }//GEN-LAST:event_confirmButoonActionPerformed
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
-        new EventManagerActions_UI(ec, user);
+        new EventManagerActions_UI(ec, u);
         dispose();
     }//GEN-LAST:event_backButtonActionPerformed
 
