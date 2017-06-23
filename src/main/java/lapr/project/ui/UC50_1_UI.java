@@ -199,12 +199,12 @@ public class UC50_1_UI extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(63, 63, 63)
                         .addComponent(pickFB)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(unpickFB)))
                 .addGap(58, 58, 58)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(confirmFae)
                     .addComponent(backFae))
                 .addGap(18, 18, 18))
@@ -230,18 +230,16 @@ public class UC50_1_UI extends javax.swing.JFrame {
             }
         });
 
-       
-
         double a = Double.parseDouble(JOptionPane.showInputDialog(UC50_1_UI.this, "Enter the significance level [0.01 or 0.05]"));
 
         while (a != 0.01 && a != 0.05) {
-            
+
             JOptionPane.showMessageDialog(UC50_1_UI.this, "Insert 0.01 or 0.05");
             a = Double.parseDouble(JOptionPane.showInputDialog(UC50_1_UI.this, "Enter the significance level [0.01 or 0.05]"));
         }
 
-         addFAEToPickedList(fae, fae2, ""+a);
-        
+        addFAEToPickedList(fae, fae2, "" + a);
+
         pickedFAE.setModel(new javax.swing.AbstractListModel<String>() {
             static final long serialVersionUID = -3387516993124229948L;
             String[] strings = pickedList;
@@ -302,6 +300,8 @@ public class UC50_1_UI extends javax.swing.JFrame {
             String signLevel = part[2].trim();
             faeSelected1.add(nameStringToFAE(part1));
             faeSelected2.add(nameStringToFAE(part2));
+            System.out.println(faeSelected1.get(i).getUserFAE().getUsername());
+            System.out.println(faeSelected2.get(i).getUserFAE().getUsername());
 
         }
 
@@ -424,8 +424,12 @@ public class UC50_1_UI extends javax.swing.JFrame {
         String c = name;
         FAE f = new FAE();
         for (FAE fae : ec.getFAEEvaluatedApplications()) {
+            String title = Encryption.deEncryptPassword(fae.getEncryptedName(), ec.getEncryptionRegister().getEncryptionByUser(fae.getUserFAE()).getShift(), Encryption.ABC);
+            title = Encryption.deEncryptData(title, ec.getEncryptionRegister().getEncryptionByUser(fae.getUserFAE()).getKeyword());
 
-            if (c.equals(fae.getEncryptedName())) {
+            System.out.println(fae.getUserFAE().getUsername());
+
+            if (c.equals(title)) {
 
                 f = fae;
                 break;

@@ -274,7 +274,7 @@ public class Encryption implements Serializable {
 
         Random r = new Random();
         int Low = 4;
-        int High = 8;
+        int High = 7;
         int nCaractersOfCipher = r.nextInt(High - Low) + Low;
         
         String cipher = "";

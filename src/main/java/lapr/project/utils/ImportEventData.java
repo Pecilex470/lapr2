@@ -144,12 +144,12 @@ public class ImportEventData {
                                 switch (el.getTagName()) {
 
                                     case "name":
-                                        String temp = Encryption.encryptData(el.getTextContent(), randomKeyword);
+                                        String temp = Encryption.encryptData(el.getTextContent(), "zebras");
                                         temp = Encryption.encryptPassword(temp, randomShift, Encryption.ABC);
                                         newUser.setName(temp);
                                         break;
                                     case "email":
-                                        temp = Encryption.encryptData(el.getTextContent(), randomKeyword);
+                                        temp = Encryption.encryptData(el.getTextContent(), "zebras");
                                         temp = Encryption.encryptPassword(temp, randomShift, Encryption.ABC);
                                         newUser.setEmail(temp);
                                         break;
@@ -165,7 +165,7 @@ public class ImportEventData {
 
                         }
                         ec.getUserRegister().getUsers().add(newUser);
-                        ec.getEncryptionRegister().addEncryption(new Encryption(randomShift, newUser, randomKeyword));
+                        ec.getEncryptionRegister().addEncryption(new Encryption(randomShift, newUser, "zebras"));
                         newFae.setUtilizadorFAE(newUser);
                         list.add(newFae);
                         break;

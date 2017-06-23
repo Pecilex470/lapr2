@@ -14,6 +14,7 @@ import javax.swing.JOptionPane;
 import static javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE;
 import javax.swing.table.DefaultTableModel;
 import lapr.project.controller.UC50_Controller;
+import lapr.project.model.Encryption;
 import lapr.project.model.EventCenter;
 import lapr.project.model.FAE;
 import lapr.project.model.User;
@@ -30,8 +31,8 @@ public class UC50_2_UI extends javax.swing.JFrame {
     private EventCenter ec;
     private UC50_Controller c;
     private User user;
-    private List<FAE> fae1= new ArrayList<>();
-    private List<FAE> fae2=new ArrayList<>();
+    private List<FAE> fae1 = new ArrayList<>();
+    private List<FAE> fae2 = new ArrayList<>();
     private String[] a;
 
     /**
@@ -40,9 +41,9 @@ public class UC50_2_UI extends javax.swing.JFrame {
     public UC50_2_UI(EventCenter ec, List<FAE> f1, List<FAE> f2, String[] pickedList, User u) {
         this.ec = ec;
         this.user = u;
-        this.a=pickedList;
-        this.fae1=f1;
-        this.fae2=f2;
+        this.a = pickedList;
+        this.fae1 = f1;
+        this.fae2 = f2;
         this.c = new UC50_Controller(ec);
         initComponents();
         this.setVisible(true);
@@ -151,30 +152,30 @@ public class UC50_2_UI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void insertBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertBActionPerformed
-      DefaultTableModel val = (DefaultTableModel) jTable1.getModel();
-         List<FAE> allFAEThatEvaluatedAnApplication = ec.getFAEEvaluatedApplications();
-         for (int i=0; i<fae1.size(); i++) {
-            String sL = getSignificanceLevel(fae1.get(i),fae2.get(i));
-            String nome1 = fae1.get(i).getUserFAE().getUsername();
-            String nome2 = fae2.get(i).getUserFAE().getUsername();
-            int nSub1= ec.getEvaluatedApplicationsFAE(nome1).size();
-            int nSub2 =ec.getEvaluatedApplicationsFAE(nome2).size();
-            double mRa1 = ec.getMeanRatingF(nome1);
-            double mRa2 = ec.getMeanRatingF(nome2);
-            double dMean1 = ec.getMeanDeviation(nome1);
-            double dMean2 = ec.getMeanDeviation(nome2);
-            double sMean1 = ec.getStandardDeviation(nome1);
-            double sMean2 = ec.getStandardDeviation(nome2);
-            double z = ec.getZ2MeanDeviations(fae1.get(i),fae2.get(i));
+        DefaultTableModel val = (DefaultTableModel) jTable1.getModel();
+        List<FAE> allFAEThatEvaluatedAnApplication = ec.getFAEEvaluatedApplications();
+        for (int i = 0; i < fae1.size(); i++) {
+            String sL = getSignificanceLevel(fae1.get(i), fae2.get(i));
+            String username1 = fae1.get(i).getUserFAE().getUsername();
+            String username2 = fae2.get(i).getUserFAE().getUsername();
+            int nSub1 = ec.getEvaluatedApplicationsFAE(username1).size();
+            int nSub2 = ec.getEvaluatedApplicationsFAE(username2).size();
+            double mRa1 = ec.getMeanRatingF(username1);
+            double mRa2 = ec.getMeanRatingF(username2);
+            double dMean1 = ec.getMeanDeviation(username1);
+            double dMean2 = ec.getMeanDeviation(username2);
+            double sMean1 = ec.getStandardDeviation(username1);
+            double sMean2 = ec.getStandardDeviation(username2);
+            double z = ec.getZ2MeanDeviations(fae1.get(i), fae2.get(i));
             double zc = ec.zC(sL);
-            String dec = ec.testingTheDifferenceBetweenTwoFAEsMeanDeviations(fae1.get(i),fae2.get(i),sL);
-            if(nSub1 >= 30 && nSub2>=30){
-             val.addRow(new Object[]{nome1,nome2,nSub1,nSub2,dMean1,dMean2,zc,z,dec});   
+            String dec = ec.testingTheDifferenceBetweenTwoFAEsMeanDeviations(fae1.get(i), fae2.get(i), sL);
+            if (nSub1 >= 30 && nSub2 >= 30) {
+                val.addRow(new Object[]{username1, username2, nSub1, nSub2, dMean1, dMean2, zc, z, dec});
             }
-           
-      }
-        
-        
+
+        }
+
+
     }//GEN-LAST:event_insertBActionPerformed
 
     private void backBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBActionPerformed
@@ -182,21 +183,26 @@ public class UC50_2_UI extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_backBActionPerformed
 
-    
-     public String getSignificanceLevel(FAE f,FAE f1) {
+    public String getSignificanceLevel(FAE f, FAE f1) {
         String cv = "-1";
         for (int i = 0; i < a.length; i++) {
             String[] parts = a[i].split("-");
             String part1 = parts[0].trim();
             String part2 = parts[1].trim();
             String part3 = parts[2].trim();
-  
-            if (part1.equals(f.getEncryptedName()) || part2.equals(f1.getEncryptedName()))  {
+
+            String fae1Name = Encryption.deEncryptPassword(f.getEncryptedName(), ec.getEncryptionRegister().getEncryptionByUser(f.getUserFAE()).getShift(), Encryption.ABC);
+            fae1Name = Encryption.deEncryptData(fae1Name, ec.getEncryptionRegister().getEncryptionByUser(f.getUserFAE()).getKeyword());
+
+            String fae2Name = Encryption.deEncryptPassword(f1.getEncryptedName(), ec.getEncryptionRegister().getEncryptionByUser(f1.getUserFAE()).getShift(), Encryption.ABC);
+            fae2Name = Encryption.deEncryptData(fae2Name, ec.getEncryptionRegister().getEncryptionByUser(f1.getUserFAE()).getKeyword());
+
+            if (part1.equals(fae1Name) || part2.equals(fae2Name)) {
                 cv = part3;
-             return cv;
-            
+                return cv;
+
             }
-           
+
         }
         return cv;
 

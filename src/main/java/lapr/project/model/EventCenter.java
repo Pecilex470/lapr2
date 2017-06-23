@@ -261,20 +261,20 @@ public class EventCenter implements Serializable {
         List<FAE> faesWithAtLeastOneApplication = new ArrayList<>();
 
         for (Event e : getEventRegister().getEventList()) {
-            
+
             for (FAE fae : e.getFaeList().getFAEList()) {
-                
+
                 for (Attribution att : fae.getAttributionList()) {
-                    
+
                     Application app = att.getApplication();
 
                     for (Decision dec : app.getDecisionList().getDecisions()) {
-                        
+
                         if (!faesWithAtLeastOneApplication.contains(e.getFaeList().getFAEbyUsername(dec.getFaeUsername()))) {
                             faesWithAtLeastOneApplication.add(e.getFaeList().getFAEbyUsername(dec.getFaeUsername()));
                         }
                     }
-                    
+
                 }
             }
 
@@ -284,32 +284,33 @@ public class EventCenter implements Serializable {
     }
 
     public List<Decision> getEvaluatedApplicationsFAE(String f) {
+
         List<Decision> decisionFAE = new ArrayList<>();
         for (Event e : getEventRegister().getEventList()) {
-            for (FAE fae : e.getFaeList().getFAEList()) {
-                for (Attribution att : fae.getAttributionList()) {
-                    Application app = att.getApplication();
-                    for (Decision dec : app.getDecisionList().getDecisions()) {
-                        if (dec.getFaeUsername().equals(f)) {
-                            decisionFAE.add(dec);
-                        }
-
+            for (Application app : e.getApplicationList().getApplications()) {
+                for (Decision dec : app.getDecisionList().getDecisions()) {
+                    if (dec.getFaeUsername().equals(f)) {
+                        decisionFAE.add(dec);
                     }
+
                 }
             }
         }
+
         return decisionFAE;
     }
 
     public List<Decision> getAllDecisions() {
         List<Decision> decisionAll = new ArrayList<>();
-        for (int i = 0; i < er.getEventList().size(); i++) {
-            for (int j = 0; j < er.getEventList().get(i).getApplicationList().getApplications().size(); j++) {
-                for (int l = 0; j < er.getEventList().get(i).getApplicationList().getApplications().get(j).getDecisionList().getDecisions().size(); l++) {
-                    decisionAll.add(er.getEventList().get(i).getApplicationList().getApplications().get(j).getDecisionList().getDecisions().get(l));
+        for (Event e : getEventRegister().getEventList()) {
+            for (Application app : e.getApplicationList().getApplications()) {
+                for (Decision dec : app.getDecisionList().getDecisions()) {
+                    decisionAll.add(dec);
                 }
+
             }
         }
+
         return decisionAll;
     }
 
