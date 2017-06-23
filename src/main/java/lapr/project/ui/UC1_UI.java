@@ -554,6 +554,7 @@ public class UC1_UI extends javax.swing.JDialog {
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         if (JOptionPane.showConfirmDialog(UC1_UI.this, "Do you wish to exit without saving?", "Close", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
+            new EventManagerActions_UI(ec, u);
             dispose();
         }
     }//GEN-LAST:event_cancelButtonActionPerformed
