@@ -401,32 +401,28 @@ public class EventTest {
 //        fail("The test case is a prototype.");
 //    }
 //
-//    /**
-//     * Test of getAvailableArea method, of class Event.
-//     */
-//    @Test
-//    public void testGetAvailableArea() {
-//        System.out.println("getAvailableArea");
-//        Event instance = new Event();
-//        int expResult = 0;
-//        int result = instance.getAvailableArea();
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-//
-//    /**
-//     * Test of setAvailableArea method, of class Event.
-//     */
-//    @Test
-//    public void testSetAvailableArea() {
-//        System.out.println("setAvailableArea");
-//        int area = 0;
-//        Event instance = new Event();
-//        instance.setAvailableArea(area);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
+    /**
+     * Test of getAvailableArea method, of class Event.
+     */
+    @Test
+    public void testGetAvailableArea() {
+        System.out.println("getAvailableArea");
+        Event instance = e;
+        int expResult = 300;
+        int result = instance.getAvailableArea();
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of setAvailableArea method, of class Event.
+     */
+    @Test
+    public void testSetAvailableArea() {
+        System.out.println("setAvailableArea");
+        int area = 300;
+        Event instance = e;
+        instance.setAvailableArea(area);
+    }
 //
 //    /**
 //     * Test of addStand method, of class Event.

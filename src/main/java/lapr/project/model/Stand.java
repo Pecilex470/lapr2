@@ -11,9 +11,9 @@ import java.io.Serializable;
  *
  * @author Cerqueira
  */
-public class Stand implements Serializable{
-    
-     static final long serialVersionUID = 12;
+public class Stand implements Serializable {
+
+    static final long serialVersionUID = 12;
 
     private int area;
     private boolean available = true;
@@ -25,11 +25,11 @@ public class Stand implements Serializable{
     /**
      * Constructor
      *
-     * @param type - type of stand
+     * @param area
      */
     public Stand(int area, String description) {
         this.area = area;
-        this.description=description;
+        this.description = description;
     }
 
     public Stand() {
@@ -65,12 +65,12 @@ public class Stand implements Serializable{
     public void setArea(int area) {
         this.area = area;
     }
-    
-    public void setDescription(String des){
-        this.description=des;
+
+    public void setDescription(String des) {
+        this.description = des;
     }
 
-    public String getDescription(){
+    public String getDescription() {
         return this.description;
     }
 }
