@@ -138,9 +138,8 @@ public class EventCenter implements Serializable {
 
         }
 
-        
         double acceptanceRounded = 0;
-        
+
         if (nApplicationsTotal != 0) {
             int acceptance = (int) (((nApplicationsAccepted * 100) / nApplicationsTotal) * 100);
             acceptanceRounded = (double) acceptance / 100;
@@ -240,7 +239,11 @@ public class EventCenter implements Serializable {
         List<FAE> allFAE = new ArrayList<>();
         for (int i = 0; i < er.getEventList().size(); i++) {
             for (int j = 0; j < er.getEventList().get(i).getFaeList().getFAEList().size(); j++) {
-                allFAE.add(er.getEventList().get(i).getFaeList().getFAEList().get(i));
+                if (!allFAE.contains(er.getEventList().get(i).getFaeList().getFAEList().get(i))) {
+                    System.out.println("FAE");
+                    allFAE.add(er.getEventList().get(i).getFaeList().getFAEList().get(i));
+                }
+
             }
 
         }
@@ -254,27 +257,20 @@ public class EventCenter implements Serializable {
      * @return Fae that evaluated a application in the Event Center
      */
     public List<FAE> getFAEEvaluatedApplications() {
-        List<FAE> allFAE = new ArrayList<>();
 
-        for (int i = 0; i < er.getEventList().size(); i++) {
-            for (int j = 0; j < er.getEventList().get(i).getApplicationList().getApplications().size(); j++) {
-                for (int k = 0; k < er.getEventList().get(i).getApplicationList().getApplications().get(j).getDecisionList().getDecisions().size(); k++) {
-                    String fae = getEventRegister().getEventList().get(i).getApplicationList().getApplications().get(j).getDecisionList().getDecisions().get(k).getFaeUsername();
-                    FAE f = new FAE();
-                    for (FAE faes : getAllFAE()) {
+        List<FAE> faesWithAtLeastOneApplication = new ArrayList<>();
 
-                        if (faes.equals(fae)) {
+        for (Event e : getEventRegister().getEventList()) {
 
-                            f = faes;
-                            allFAE.add(f);
-                        }
-                    }
-
-                }
+            for (FAE f : e.getFaeList().getFAEList()) {
+                
+                
+                
             }
 
         }
-        return allFAE;
+
+        return faesWithAtLeastOneApplication;
     }
 
     public List<Decision> getEvaluatedApplicationsFAE(String fae) {
@@ -338,17 +334,15 @@ public class EventCenter implements Serializable {
     public double getGlobalMeanRate() {
         double globalMeanRate;
         int total = getAllDecisions().size();
-        double sC=0;
+        double sC = 0;
 
+        for (FAE f : getFAEEvaluatedApplications()) {
+            sC += getMeanRatingF(f.getName());
 
-        for (FAE f : getFAEEvaluatedApplications()){
-           sC +=getMeanRatingF( f.getName());
-            
         }
-        globalMeanRate = (double) sC/total;
+        globalMeanRate = (double) sC / total;
         return globalMeanRate;
     }
-
 
     public double getMeanDeviation(String fae) {
         double total = 0;
@@ -411,7 +405,7 @@ public class EventCenter implements Serializable {
      *
      * @return Decision(Yes or No)
      */
-    public String testTheDifferenceBetweenTheMeanDeviationAndATheoreticalValue1ForAFAEAverageRating(String a,FAE f) {
+    public String testTheDifferenceBetweenTheMeanDeviationAndATheoreticalValue1ForAFAEAverageRating(String a, FAE f) {
         NormalDistribution p = new NormalDistribution();
         double sv = Double.parseDouble(a);
         double zc = p.inverseCumulativeProbability(1 - sv);
@@ -435,9 +429,8 @@ public class EventCenter implements Serializable {
      * @return Decision(Yes or No)
      */
     public String testingTheDifferenceBetweenTwoFAEsMeanDeviations(FAE e, FAE fae, String a) {
-        
-        
-        double zc = zC(a); 
+
+        double zc = zC(a);
         double z = getZ2MeanDeviations(e, fae);
         if (z < -zc && z > zc) {
             return "Yes";
@@ -445,12 +438,12 @@ public class EventCenter implements Serializable {
             return "No";
         }
     }
-    
-    public double zC(String a){
-     NormalDistribution p = new NormalDistribution(); 
-     double sv = Double.parseDouble(a);
-     double zc = p.inverseCumulativeProbability(1 - (sv / 2.));
-     return zc; 
+
+    public double zC(String a) {
+        NormalDistribution p = new NormalDistribution();
+        double sv = Double.parseDouble(a);
+        double zc = p.inverseCumulativeProbability(1 - (sv / 2.));
+        return zc;
     }
 
     public Object[][] keywordFrequency() {
