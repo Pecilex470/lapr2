@@ -279,7 +279,7 @@ public class EventManagerActions_UI extends javax.swing.JFrame {
         if (username.equals("0")) {
             
         } else {
-            double meanR = uc46.getFAEMeanRating(uc46.getUserByUsername(username));
+            double meanR = ec.getMeanRatingF(username);
             JOptionPane.showMessageDialog(EventManagerActions_UI.this, "O mean rating é " + meanR);
         }
         

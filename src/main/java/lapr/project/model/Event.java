@@ -313,13 +313,13 @@ public class Event implements Serializable {
      * @return List of stands available
      */
     public List<Stand> getAvailableStands() {
-        List<Stand> aL = null;
+        List<Stand> aL = new ArrayList<>();
         for (Stand stand : this.standList) {
             if (stand.getAvailable()) {
                 try {
                     aL.add(stand);
                 } catch (NullPointerException e) {
-                    throw (new NullPointerException("Stand is null"));
+
                 }
             }
         }

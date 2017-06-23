@@ -23,7 +23,7 @@ import lapr.project.utils.MathUtils;
  * @author Utilizador
  */
 public class UC41_2_UI extends javax.swing.JFrame {
-    
+
     static final long serialVersionUID = -3387516993124229948L;
 
     EventCenter ec;
@@ -226,33 +226,35 @@ public class UC41_2_UI extends javax.swing.JFrame {
         List<Stand> list = e.getStandList();
         int mean = 0;
         int contFor = 0;
-        int contTotal=0;
+        int contTotal = 0;
 
         for (int i = 0; i < areaColumn.length; i++) {
             String[] ends = areaColumn[i].split("-");
 
             //try {
-                int smallEnd = Integer.parseInt(ends[0].substring(1));
-                int bigEnd = Integer.parseInt(ends[1].substring(0, ends[1].length() - 1));
-                int[] listDes = new int[list.size()];
-                absoluteColumn[i] = 0;
-                for (Stand stand : list) {
-                    listDes[contFor] = stand.getArea();
-                    if (stand.getArea() > smallEnd && stand.getArea() <= bigEnd) {
-                        absoluteColumn[i] += 1;
-                        mean += stand.getArea();
-                        contFor++;
-                        contTotal++;
-                    }
+            int smallEnd = Integer.parseInt(ends[0].substring(1));
+            int bigEnd = Integer.parseInt(ends[1].substring(0, ends[1].length() - 1));
+            int[] listDes = new int[list.size()];
+            absoluteColumn[i] = 0;
+            for (Stand stand : list) {
+                listDes[contFor] = stand.getArea();
+                if (stand.getArea() > smallEnd && stand.getArea() <= bigEnd) {
+                    absoluteColumn[i] += 1;
+                    mean += stand.getArea();
+                    contFor++;
+                    contTotal++;
                 }
-                contFor=0;
-                deviationLabel.setText(MathUtils.calculeStandartDesviation(listDes)+"");
+            }
+            contFor = 0;
+            deviationLabel.setText(MathUtils.calculeStandartDesviation(listDes) + "");
             //} catch (Exception ex) {
             //    System.out.println("Erro in conversion to int, method getAbsoluteColumn!");
             //}
 
         }
-        meanLabel.setText((mean / contTotal) + "");
+        if (contTotal != 0) {
+            meanLabel.setText((mean / contTotal) + "");
+        }
     }
 
     public void getRelativeColumn() {
@@ -263,9 +265,10 @@ public class UC41_2_UI extends javax.swing.JFrame {
         for (int i = 0; i < absoluteColumn.length; i++) {
             total += absoluteColumn[i];
         }
-
-        for (int i = 0; i < relativeColumn.length; i++) {
-            relativeColumn[i] = (absoluteColumn[i] / total);
+        if (total != 0) {
+            for (int i = 0; i < relativeColumn.length; i++) {
+                relativeColumn[i] = (absoluteColumn[i] / total);
+            }
         }
     }
 

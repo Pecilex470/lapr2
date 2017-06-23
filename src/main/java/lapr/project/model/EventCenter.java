@@ -128,19 +128,25 @@ public class EventCenter implements Serializable {
      */
     public double getGlobalAcceptanceRate() {
 
-        double globalAcceptanceRate = 0;
+        int nApplicationsTotal = 0;
+        int nApplicationsAccepted = 0;
 
-        int count = 0;
+        for (Event e : getEventRegister().getEventList()) {
 
-        for (Event e : er.getEventList()) {
-            if (!e.getApplicationList().getApplications().isEmpty()) {
-                globalAcceptanceRate += e.getAcceptanceRate();
-                count++;
-            }
+            nApplicationsAccepted += e.getApplicationList().getAcceptedApplicationRegister().size();
+            nApplicationsTotal += e.getApplicationList().getApplications().size();
 
         }
 
-        return globalAcceptanceRate / count;
+        
+        double acceptanceRounded = 0;
+        
+        if (nApplicationsTotal != 0) {
+            int acceptance = (int) (((nApplicationsAccepted * 100) / nApplicationsTotal) * 100);
+            acceptanceRounded = (double) acceptance / 100;
+        }
+
+        return acceptanceRounded;
 
     }
 
@@ -466,7 +472,7 @@ public class EventCenter implements Serializable {
                 }
             }
         }
-        
+
         String[][] keywordMatrix = new String[listWithOneOfEachKeyword.size()][2];
 
         int count = 0;
@@ -477,30 +483,27 @@ public class EventCenter implements Serializable {
             keywordMatrix[count][1] = "" + occurrences;
             count++;
         }
-      
+
         Object[][] frequencyMatrix = new Object[listWithOneOfEachKeyword.size()][3];
         int nKeywords = listWithAllKeywords.size();
         double tempN;
         int roundDouble;
-        
-        
+
         for (int i = 0; i < frequencyMatrix.length; i++) {
-            
+
             frequencyMatrix[i][0] = keywordMatrix[i][0];
-            tempN = ( Double.parseDouble(keywordMatrix[i][1]) * 100 ) / nKeywords;
-            
+            tempN = (Double.parseDouble(keywordMatrix[i][1]) * 100) / nKeywords;
+
             roundDouble = (int) (tempN * 10);
             tempN = (double) roundDouble / 10;
-            
-            frequencyMatrix[i][1] = ""+tempN+"%";
+
+            frequencyMatrix[i][1] = "" + tempN + "%";
             frequencyMatrix[i][2] = Integer.parseInt(keywordMatrix[i][1]);
-              
+
         }
-        
-        
+
         return frequencyMatrix;
-                
-        
+
     }
 
 }
