@@ -48,7 +48,7 @@ public class Main {
             addOrganizers(ec);
         }
         new InitialWindow_UI(ec);
-       
+
     }
 
     /**
@@ -77,8 +77,7 @@ public class Main {
 //        lK1.add(new Keyword("ze"));
 //        lK1.add(new Keyword("ze"));
 //        eventRegister.getEventList().get(0).setKeywordList(lK1);
-        
-        
+
         /////////////////////////////////////////////////////////////
         ///////// EVENT 2 //////////////////////////////////////////
         List<FAE> FAEListEvent2 = new ArrayList<>();
@@ -92,9 +91,7 @@ public class Main {
 //        lK2.add(new Keyword("boas"));
 //        eventRegister.getEventList().get(1).setKeywordList(lK2);
 
-        
 /////////////////////////////////////////////////////////////
-
         UserRegister userRegister = new UserRegister(ur);
         RepresentativeRegister representativeRegister = new RepresentativeRegister(rr);
         EncryptionRegister encryptionRegister = new EncryptionRegister(enr);
