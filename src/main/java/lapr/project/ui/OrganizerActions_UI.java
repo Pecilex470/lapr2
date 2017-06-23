@@ -99,6 +99,11 @@ public class OrganizerActions_UI extends javax.swing.JFrame {
         });
 
         uc22Button.setText("UC22 - List Applications");
+        uc22Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                uc22ButtonActionPerformed(evt);
+            }
+        });
 
         uc40Button.setText("UC40 - Show Event submission keywords");
         uc40Button.addActionListener(new java.awt.event.ActionListener() {
@@ -204,6 +209,11 @@ public class OrganizerActions_UI extends javax.swing.JFrame {
         new UC41_1_UI(ec, u);
         dispose();
     }//GEN-LAST:event_uc41ButtonActionPerformed
+
+    private void uc22ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uc22ButtonActionPerformed
+        new UC22_UI(ec, u);
+        dispose();
+    }//GEN-LAST:event_uc22ButtonActionPerformed
 
     /**
      * @param args the command line arguments
