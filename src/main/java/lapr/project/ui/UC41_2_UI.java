@@ -253,7 +253,11 @@ public class UC41_2_UI extends javax.swing.JFrame {
 
         }
         if (Math.abs(contTotal - 0) >= 0.00000001) {
+            try{
             meanLabel.setText((mean / contTotal) + "");
+            }catch(Exception ex){
+                
+            }
         }
     }
 
