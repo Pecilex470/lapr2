@@ -54,6 +54,7 @@ public class UC4_UI extends javax.swing.JFrame {
                     } catch (Exception ex) {
                         Logger.getLogger(UC4_UI.class.getName()).log(Level.SEVERE, null, ex);
                     }
+                    new MainWindow(u, ec);
                     dispose();
                 }
             }
