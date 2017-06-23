@@ -40,10 +40,9 @@ import org.xml.sax.SAXException;
 public class ImportEventData {
 
     private Event newEvent;
-    private String randomKeyword;
     private int randomShift;
     EventCenter ec;
-    Node event;
+    NodeList events;
     Document docXML;
     private String fileName;
 
@@ -51,7 +50,6 @@ public class ImportEventData {
         this.newEvent = new Event();
         this.ec = ec;
         this.fileName = fileName;
-        this.randomKeyword = Encryption.randomCipher();
         this.randomShift = ThreadLocalRandom.current().nextInt(1, 81);
 
         try {
@@ -60,7 +58,7 @@ public class ImportEventData {
             DocumentBuilder builder = factory.newDocumentBuilder();
             docXML = builder.parse(new File(this.fileName));
 
-            this.event = docXML.getFirstChild();
+            this.events = docXML.getElementsByTagName("event");
 
         } catch (SAXException ex) {
             Logger.getLogger(ImportEventData.class.getName()).log(Level.SEVERE, null, ex);
@@ -71,49 +69,59 @@ public class ImportEventData {
         }
     }
 
-    public Event readEvent() {
+    public List<Event> readEvent() {
+        
+        List<Event> list= new ArrayList<>();
 
-        this.newEvent.setStartDate(new CustomDate(13, 11, 2017));
-        this.newEvent.setEndDate(new CustomDate(14, 11, 2017));
-        this.newEvent.setSubmissionStartDate(new CustomDate(10, 6, 2017));
-        this.newEvent.setSubmissionEndDate(new CustomDate(13, 11, 2018));
+        for (int i = 0; i < events.getLength(); i++) {
+            if (events.item(i).getNodeType() == Node.ELEMENT_NODE) {
 
-        NodeList eventAtributes = this.event.getChildNodes();
+                Element event = (Element) events.item(i);
 
-        UserRegister ur = ec.getUserRegister();
+                this.newEvent.setStartDate(new CustomDate(13, 11, 2017));
+                this.newEvent.setEndDate(new CustomDate(14, 11, 2017));
+                this.newEvent.setSubmissionStartDate(new CustomDate(10, 6, 2017));
+                this.newEvent.setSubmissionEndDate(new CustomDate(13, 11, 2018));
+                
+                NodeList eventAtributes = event.getChildNodes();
 
-        for (int i = 1; i < eventAtributes.getLength(); i++) {
-            if (eventAtributes.item(i).getNodeType() == Node.ELEMENT_NODE) {
+                UserRegister ur = ec.getUserRegister();
 
-                Element element = (Element) eventAtributes.item(i);
+                for (int j = 1; j < eventAtributes.getLength(); j++) {
+                    if (eventAtributes.item(j).getNodeType() == Node.ELEMENT_NODE) {
 
-                switch (element.getTagName()) {
+                        Element element = (Element) eventAtributes.item(j);
 
-                    case "stands":
+                        switch (element.getTagName()) {
 
-                        newEvent.setStandList(readStands(element, newEvent)); //v
-                        break;
-                    case "title":
+                            case "stands":
 
-                        newEvent.setTitle(element.getTextContent());//v
-                        break;
-                    case "FAESet":
+                                newEvent.setStandList(readStands(element, newEvent)); //v
+                                break;
+                            case "title":
 
-                        FAEList faeList = new FAEList();
-                        newEvent.setFAEList(faeList);
-                        List<User> userList = new ArrayList<>();
-                        newEvent.getFaeList().setFAE(readFAESet(element, userList, ur));//v
+                                newEvent.setTitle(element.getTextContent());//v
+                                break;
+                            case "FAESet":
 
-                        break;
-                    case "applicationSet":
+                                FAEList faeList = new FAEList();
+                                newEvent.setFAEList(faeList);
+                                List<User> userList = new ArrayList<>();
+                                newEvent.getFaeList().setFAE(readFAESet(element, userList, ur));//v
 
-                        newEvent.getApplicationList().setApplicationList(readApplication(element, ur));
-                        break;
+                                break;
+                            case "applicationSet":
+
+                                newEvent.getApplicationList().setApplicationList(readApplication(element, ur));
+                                break;
+                        }
+                    }
                 }
+
+                list.add(newEvent);
             }
         }
-
-        return newEvent;
+        return list;
     }
 
     public List<FAE> readFAESet(Element faeList, List<User> userList, UserRegister ur) {
@@ -297,7 +305,7 @@ public class ImportEventData {
             }
 
         }
-        
+
         return list;
     }
 

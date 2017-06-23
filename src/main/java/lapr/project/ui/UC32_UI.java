@@ -90,7 +90,7 @@ public class UC32_UI extends javax.swing.JFrame {
         String fileName = f.getName();
         new EventManagerActions_UI(ec, u);
         ImportEventData impEvent = new ImportEventData(ec, fileName);
-        ec.getEventRegister().getEventList().add(impEvent.readEvent());
+        ec.getEventRegister().setEventList(impEvent.readEvent());
         
         JOptionPane.showMessageDialog(UC32_UI.this, "XML File successfully imported!");
         dispose();
