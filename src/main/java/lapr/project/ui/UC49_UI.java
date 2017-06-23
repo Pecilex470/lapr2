@@ -12,29 +12,30 @@ import javax.swing.table.DefaultTableModel;
 import lapr.project.controller.UC49_Controller;
 import lapr.project.model.EventCenter;
 import lapr.project.model.FAE;
+import lapr.project.model.User;
 
 /**
  *
  * @author Utilizador
  */
 public class UC49_UI extends javax.swing.JFrame {
- static final long serialVersionUID = -3387516993124229948L;
- 
- 
- 
+
+    static final long serialVersionUID = -3387516993124229948L;
+
     private EventCenter ec;
-    
+
     private UC49_Controller c;
- 
- 
- 
-     /**
+    private User u;
+
+    /**
      * Creates new form UC49_1_UI
+     *
      * @param ec EventCenter
      */
-    public UC49_UI(EventCenter ec) {
-        this.ec=ec;
-        this.c=new UC49_Controller(ec);
+    public UC49_UI(EventCenter ec, User u) {
+        this.ec = ec;
+        this.u = u;
+        this.c = new UC49_Controller(ec);
         initComponents();
         this.setVisible(true);
         setLocationRelativeTo(null);
@@ -43,6 +44,7 @@ public class UC49_UI extends javax.swing.JFrame {
             @Override
             public void windowClosing(java.awt.event.WindowEvent windowEvent) {
                 if (JOptionPane.showConfirmDialog(UC49_UI.this, "Do you wish to exit without saving?", "Close", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
+                    new EventManagerActions_UI(ec, u);
                     dispose();
                 }
             }
@@ -139,39 +141,35 @@ public class UC49_UI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void sig1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sig1ActionPerformed
-        String a="0.01";
-         fillTable(a);
-         
+        String a = "0.01";
+        fillTable(a);
+
     }//GEN-LAST:event_sig1ActionPerformed
 
     private void sig5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sig5ActionPerformed
-        String a="0.05";
+        String a = "0.05";
         fillTable(a);
-        
-         
-          
+
+
     }//GEN-LAST:event_sig5ActionPerformed
 
-   
-    public void fillTable(String a){
-      DefaultTableModel val = (DefaultTableModel) Table1.getModel();
-         List<FAE> allFAE = c.getFaeThatEvaluatedApplications(ec);
-         for(FAE fae : allFAE){
+    public void fillTable(String a) {
+        DefaultTableModel val = (DefaultTableModel) Table1.getModel();
+        List<FAE> allFAE = c.getFaeThatEvaluatedApplications(ec);
+        for (FAE fae : allFAE) {
             String nome = fae.getName();
             int nSub = ec.getEvaluatedApplicationsFAE(nome).size();
             double mRa = ec.getMeanRatingF(nome);
             double dMean = ec.getMeanDeviation(fae.getName());
             double sMean = ec.getStandardDeviation(nome);
             double z = ec.getZ(fae);
-            String dec = ec.testTheDifferenceBetweenTheMeanDeviationAndATheoreticalValue1ForAFAEAverageRating(a,fae);
-            if(nSub >= 30){
-             val.addRow(new Object[]{nome,nSub,mRa,dMean,sMean,z,dec});   
+            String dec = ec.testTheDifferenceBetweenTheMeanDeviationAndATheoreticalValue1ForAFAEAverageRating(a, fae);
+            if (nSub >= 30) {
+                val.addRow(new Object[]{nome, nSub, mRa, dMean, sMean, z, dec});
             }
-           
-      }
-          
 
-        
+        }
+
     }
 
 
