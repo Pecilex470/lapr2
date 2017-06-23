@@ -33,10 +33,9 @@ public class UC47_Controller {
     /**
      * Method to get a submission global mean rating of the event
      *
-     * @param ar - ApplicationRegister
      * @return submission global mean rating (double)
      */
-    public double getGlobalMeanRating(ApplicationList ar) {
-        return ar.getGlobalMeanRating();
+    public double getGlobalMeanRating() {
+        return this.ec.getGlobalMeanRate();
     }
 }

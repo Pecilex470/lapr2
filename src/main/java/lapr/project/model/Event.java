@@ -20,9 +20,9 @@ public class Event implements Serializable {
     private CustomDate submissionStartDate;
     private CustomDate submissionEndDate;
     private String eventType;
-    private ApplicationList applicationList = new ApplicationList();
-    private FAEList faeList = new FAEList();
-    private OrganizerList organizerList = new OrganizerList();
+    private ApplicationList applicationList;
+    private FAEList faeList;
+    private OrganizerList organizerList;
     private int availableArea;
     private List<Stand> standList;
     private List<Keyword> keywordList;

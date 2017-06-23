@@ -43,6 +43,7 @@ public class UC1_UI extends javax.swing.JDialog {
      * Creates new form UC1_Dialog
      *
      * @param ec the instance of the event center
+     * @param u the user that is received
      */
     public UC1_UI(EventCenter ec, User u) {
 
