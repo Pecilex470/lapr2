@@ -170,9 +170,9 @@ public class ImportEventData {
                         list.add(newFae);
                         break;
                     }
-
                 }
             }
+
         }
         return list;
     }
@@ -182,43 +182,52 @@ public class ImportEventData {
         NodeList standsList = element.getElementsByTagName("stand");
 
         List<Stand> list = new ArrayList<>();
-        for (int i = 0; i < standsList.getLength(); i++) {
 
-            Stand stand = new Stand();
+        try {
 
-            NodeList standAtributes = standsList.item(i).getChildNodes();
+            for (int i = 0; i < standsList.getLength(); i++) {
 
-            for (int j = 0; j < standAtributes.getLength(); j++) {
+                Stand stand = new Stand();
 
-                if (standAtributes.item(j).getNodeType() == Node.ELEMENT_NODE) {
+                NodeList standAtributes = standsList.item(i).getChildNodes();
 
-                    Element at = (Element) standAtributes.item(j);
-                    switch (at.getTagName()) {
+                for (int j = 0; j < standAtributes.getLength(); j++) {
 
-                        case "description":
-                            stand.setDescription(at.getTextContent());
-                            break;
-                        case "area":
-                            try {
-                                newEvent.addArea(Integer.parseInt(at.getTextContent()));
-                                stand.setArea(Integer.parseInt(at.getTextContent()));
-                            } catch (Exception ex) {
-                            }
-                            break;
+                    if (standAtributes.item(j).getNodeType() == Node.ELEMENT_NODE) {
+
+                        Element at = (Element) standAtributes.item(j);
+                        switch (at.getTagName()) {
+
+                            case "description":
+                                stand.setDescription(at.getTextContent());
+                                break;
+                            case "area":
+                                try {
+                                    newEvent.addArea(Integer.parseInt(at.getTextContent()));
+                                    stand.setArea(Integer.parseInt(at.getTextContent()));
+                                } catch (Exception ex) {
+                                }
+                                break;
+                        }
                     }
                 }
+                try {
+                    list.add(stand);
+                } catch (NullPointerException e) {
+                }
             }
-            try {
-                list.add(stand);
-            } catch (NullPointerException e) {
-            }
+
+        } catch (Exception ex) {
+
         }
+
         return list;
     }
 
     public List<Application> readApplication(Element element, UserRegister ur) {
 
         List<Application> list = new ArrayList<>();
+        List<Attribution> attList = new ArrayList<>();
 
         NodeList applicationList = element.getElementsByTagName("application");
 
@@ -228,6 +237,7 @@ public class ImportEventData {
                 Element app = (Element) applicationList.item(i);
 
                 NodeList appAtributes = app.getChildNodes();
+                Attribution att = new Attribution();
                 Application newApp = new Application();
 
                 for (int j = 0; j < appAtributes.getLength(); j++) {
@@ -265,15 +275,24 @@ public class ImportEventData {
 
                                 newApp.setKeywordList(readKeywords(el));
                                 break;
+                        }
+                    }
+                }
+                for (int j = 0; j < appAtributes.getLength(); j++) {
+                    if (appAtributes.item(j).getNodeType() == Node.ELEMENT_NODE) {
+
+                        Element el = (Element) appAtributes.item(j);
+
+                        switch (el.getTagName()) {
                             case "reviews":
-                                
+
                                 newApp.setDecisionList(readReviews(el, ur, newApp));
                                 break;
                         }
-//                        }
                     }
+                    att.setApplication(newApp);
+                    attList.add(att);
                 }
-
                 list.add(newApp);
             }
 
@@ -287,7 +306,6 @@ public class ImportEventData {
         List<Decision> list = new ArrayList<>();
 
         NodeList evaList = element.getElementsByTagName("review");
-
         for (int i = 0; i < evaList.getLength(); i++) {
 
             if (evaList.item(i).getNodeType() == Node.ELEMENT_NODE) {
@@ -297,10 +315,8 @@ public class ImportEventData {
 
                 Decision eva = new Decision();
                 for (int j = 0; j < evaAtributes.getLength(); j++) {
-
                     if (evaAtributes.item(j).getNodeType() == Node.ELEMENT_NODE) {
                         Element at = (Element) evaAtributes.item(j);
-
                         switch (at.getTagName()) {
                             case "text":
                                 eva.setJustificacao(at.getTextContent());
@@ -340,7 +356,6 @@ public class ImportEventData {
                 list.add(eva);
             }
         }
-
         return list;
     }
 
@@ -348,62 +363,67 @@ public class ImportEventData {
 
         NodeList list = element.getElementsByTagName("fae");
 
-        User newUser=new User();
-        for (int i = 0; i < list.getLength(); i++) {
+        User newUser = new User();
+        try {
+            for (int i = 0; i < list.getLength(); i++) {
 
-            if (list.item(i).getNodeType() == Node.ELEMENT_NODE) {
+                if (list.item(i).getNodeType() == Node.ELEMENT_NODE) {
 
-                Element el = (Element) list.item(i);
+                    Element el = (Element) list.item(i);
 
-                NodeList user = el.getElementsByTagName("user");
+                    NodeList user = el.getElementsByTagName("user");
 
-                for (int j = 0; j < user.getLength(); j++) {
+                    for (int j = 0; j < user.getLength(); j++) {
 
-                    if (user.item(j).getNodeType() == Node.ELEMENT_NODE) {
+                        if (user.item(j).getNodeType() == Node.ELEMENT_NODE) {
 
-                        Element userEl = (Element) user.item(j);
-                        NodeList userAtributes = userEl.getChildNodes();
+                            Element userEl = (Element) user.item(j);
+                            NodeList userAtributes = userEl.getChildNodes();
 
-                        newUser = new User();
-                        for (int w = 0; w < userAtributes.getLength(); w++) {
+                            for (int w = 0; w < userAtributes.getLength(); w++) {
 
-                            if (userAtributes.item(w).getNodeType() == Node.ELEMENT_NODE) {
+                                if (userAtributes.item(w).getNodeType() == Node.ELEMENT_NODE) {
 
-                                Element elAtributes = (Element) userAtributes.item(w);
+                                    Element elAtributes = (Element) userAtributes.item(w);
 
-                                switch (elAtributes.getTagName()) {
+                                    switch (elAtributes.getTagName()) {
 
-                                    case "name":
-                                        newUser.setName(elAtributes.getTextContent());
-                                        break;
-                                    case "email":
-                                        newUser.setEmail(elAtributes.getTextContent());
-                                        break;
-                                    case "username":
-                                        if (ur.verifyUsername(elAtributes.getTextContent())) {
-                                            eva.setFaeUsername(elAtributes.getTextContent());
-                                            return elAtributes.getTextContent();
+                                        case "name":
 
-                                        } else {
+                                            newUser.setName(elAtributes.getTextContent());
+                                            break;
+                                        case "email":
+
+                                            newUser.setEmail(elAtributes.getTextContent());
+                                            break;
+                                        case "username":
+                                            if (ur.verifyUsername(elAtributes.getTextContent())) {
+                                                eva.setFaeUsername(elAtributes.getTextContent());
+                                                this.newEvent.getFaeList().addFAE(new FAE(ur.getUserByUsername(elAtributes.getTextContent())));
+                                                return elAtributes.getTextContent();
+                                            }
                                             newUser.setUsername(elAtributes.getTextContent());
 
                                             eva.setFaeUsername(elAtributes.getTextContent());
                                             break;
-                                        }
-                                    case "password":
+                                        case "password":
 
-                                        newUser.setPassword(elAtributes.getTextContent());
+                                            newUser.setPassword(elAtributes.getTextContent());
 
-                                        break;
+                                            break;
+                                    }
                                 }
                             }
-                        }
-                        this.newEvent.getFaeList().addFAE(new FAE(newUser));
-                        ur.getUsers().add(newUser);
+                            this.newEvent.getFaeList().addFAE(new FAE(newUser));
+                            ur.getUsers().add(newUser);
 
+                        }
                     }
                 }
             }
+
+        } catch (Exception ex) {
+
         }
 
         return newUser.getUsername();
@@ -412,21 +432,25 @@ public class ImportEventData {
     public List<Keyword> readKeywords(Element element) {
         List<Keyword> list = new ArrayList<>();
 
-        NodeList listKeyword = element.getElementsByTagName("keyword");
+        try {
 
-        for (int i = 0; i < listKeyword.getLength(); i++) {
-            Element key = (Element) listKeyword.item(i);
+            NodeList listKeyword = element.getElementsByTagName("keyword");
 
-            switch (key.getTagName()) {
-                case "keyword":
-                    try {
-                        list.add(new Keyword(key.getTextContent()));
-                    } catch (NullPointerException e) {
-                    }
-                    break;
+            for (int i = 0; i < listKeyword.getLength(); i++) {
+                Element key = (Element) listKeyword.item(i);
+
+                switch (key.getTagName()) {
+                    case "keyword":
+                        try {
+                            list.add(new Keyword(key.getTextContent()));
+                        } catch (NullPointerException e) {
+                        }
+                        break;
+                }
             }
-        }
+        } catch (Exception ex) {
 
+        }
         return list;
     }
 }

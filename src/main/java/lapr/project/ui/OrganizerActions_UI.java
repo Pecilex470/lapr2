@@ -64,7 +64,6 @@ public class OrganizerActions_UI extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         uc2Button = new javax.swing.JButton();
         uc20Button = new javax.swing.JButton();
-        uc21Button = new javax.swing.JButton();
         uc22Button = new javax.swing.JButton();
         uc40Button = new javax.swing.JButton();
         uc41Button = new javax.swing.JButton();
@@ -87,13 +86,6 @@ public class OrganizerActions_UI extends javax.swing.JFrame {
         uc20Button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 uc20ButtonActionPerformed(evt);
-            }
-        });
-
-        uc21Button.setText("UC21 - Assign Stands");
-        uc21Button.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                uc21ButtonActionPerformed(evt);
             }
         });
 
@@ -148,7 +140,6 @@ public class OrganizerActions_UI extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(uc20Button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(uc21Button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(uc41Button, javax.swing.GroupLayout.DEFAULT_SIZE, 264, Short.MAX_VALUE))))
                         .addGap(0, 33, Short.MAX_VALUE))))
         );
@@ -162,13 +153,11 @@ public class OrganizerActions_UI extends javax.swing.JFrame {
                     .addComponent(uc2Button)
                     .addComponent(uc20Button))
                 .addGap(50, 50, 50)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(uc22Button)
-                    .addComponent(uc21Button))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(uc41Button)
-                    .addComponent(uc40Button))
+                    .addComponent(uc22Button)
+                    .addComponent(uc41Button))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
+                .addComponent(uc40Button)
                 .addGap(26, 26, 26)
                 .addComponent(backButton)
                 .addGap(29, 29, 29))
@@ -196,10 +185,6 @@ public class OrganizerActions_UI extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_backButtonActionPerformed
 
-    private void uc21ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uc21ButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_uc21ButtonActionPerformed
-
     private void uc20ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uc20ButtonActionPerformed
         new UC20_UI(ec, u);
         dispose();
@@ -223,7 +208,6 @@ public class OrganizerActions_UI extends javax.swing.JFrame {
     private javax.swing.JButton backButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JButton uc20Button;
-    private javax.swing.JButton uc21Button;
     private javax.swing.JButton uc22Button;
     private javax.swing.JButton uc2Button;
     private javax.swing.JButton uc40Button;

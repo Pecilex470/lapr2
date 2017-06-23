@@ -165,10 +165,10 @@ public class UC49_UI extends javax.swing.JFrame {
         DefaultTableModel val = (DefaultTableModel) Table1.getModel();
         List<FAE> allFAE = c.getFaeThatEvaluatedApplications(ec);
         for (FAE fae : allFAE) {
-            String nome = fae.getName();
+            String nome = fae.getEncryptedName();
             int nSub = ec.getEvaluatedApplicationsFAE(nome).size();
             double mRa = ec.getMeanRatingF(nome);
-            double dMean = ec.getMeanDeviation(fae.getName());
+            double dMean = ec.getMeanDeviation(fae.getEncryptedName());
             double sMean = ec.getStandardDeviation(nome);
             double z = ec.getZ(fae);
             String dec = ec.testTheDifferenceBetweenTheMeanDeviationAndATheoreticalValue1ForAFAEAverageRating(a, fae);

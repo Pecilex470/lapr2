@@ -45,7 +45,7 @@ public class FAE implements Serializable{
         this.userFAE = utilizadorFAE;
     }
 
-    public String getName() {
+    public String getEncryptedName() {
         return userFAE.getName();
     }
 

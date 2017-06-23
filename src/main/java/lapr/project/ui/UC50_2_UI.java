@@ -191,7 +191,7 @@ public class UC50_2_UI extends javax.swing.JFrame {
             String part2 = parts[1].trim();
             String part3 = parts[2].trim();
   
-            if (part1.equals(f.getName()) || part2.equals(f1.getName()) ) {
+            if (part1.equals(f.getEncryptedName()) || part2.equals(f1.getEncryptedName()))  {
                 cv = part3;
              return cv;
             

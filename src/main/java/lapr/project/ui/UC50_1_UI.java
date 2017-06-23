@@ -175,7 +175,7 @@ public class UC50_1_UI extends javax.swing.JFrame {
                         .addGap(152, 152, 152)
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(231, 231, 231)
+                        .addGap(219, 219, 219)
                         .addComponent(jLabel1)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -188,22 +188,22 @@ public class UC50_1_UI extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(98, 98, 98)
+                        .addGap(63, 63, 63)
                         .addComponent(pickFB)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
                         .addComponent(unpickFB)))
-                .addGap(77, 77, 77)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(58, 58, 58)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(confirmFae)
                     .addComponent(backFae))
@@ -235,6 +235,7 @@ public class UC50_1_UI extends javax.swing.JFrame {
         double a = Double.parseDouble(JOptionPane.showInputDialog(UC50_1_UI.this, "Enter the significance level [0.01 or 0.05]"));
 
         while (a != 0.01 && a != 0.05) {
+            
             JOptionPane.showMessageDialog(UC50_1_UI.this, "Insert 0.01 or 0.05");
             a = Double.parseDouble(JOptionPane.showInputDialog(UC50_1_UI.this, "Enter the significance level [0.01 or 0.05]"));
         }
@@ -324,7 +325,7 @@ public class UC50_1_UI extends javax.swing.JFrame {
         int cont = 0;
 
         for (FAE fae : ec.getFAEEvaluatedApplications()) {
-            String title = Encryption.deEncryptPassword(fae.getName(), ec.getEncryptionRegister().getEncryptionByUser(fae.getUserFAE()).getShift(), Encryption.ABC);
+            String title = Encryption.deEncryptPassword(fae.getEncryptedName(), ec.getEncryptionRegister().getEncryptionByUser(fae.getUserFAE()).getShift(), Encryption.ABC);
             title = Encryption.deEncryptData(title, ec.getEncryptionRegister().getEncryptionByUser(fae.getUserFAE()).getKeyword());
             list[cont] = title;
             cont++;
@@ -424,7 +425,7 @@ public class UC50_1_UI extends javax.swing.JFrame {
         FAE f = new FAE();
         for (FAE fae : ec.getFAEEvaluatedApplications()) {
 
-            if (c.equals(fae.getName())) {
+            if (c.equals(fae.getEncryptedName())) {
 
                 f = fae;
                 break;

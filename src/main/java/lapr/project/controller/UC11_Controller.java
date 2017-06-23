@@ -33,18 +33,19 @@ public class UC11_Controller {
 
         for (Event e : ec.getEventRegister().getEventList()) {
 
-            try {
-
-                for (Application a : e.getApplicationList().getApplications()) {
-
+            for (Application a : e.getApplicationList().getApplications()) {
+                try {
+                
+                    
+                    
                     if (a.getRepresentative().getUsername().equals(u.getUsername())) {
 
                         eventsWhereRepresentativeHasApplications.add(e);
 
                         break;
                     }
+                } catch (NullPointerException ex) {
                 }
-            } catch (NullPointerException ex) {
 
             }
 
@@ -58,9 +59,13 @@ public class UC11_Controller {
         List<Application> applicationList = new ArrayList<>();
 
         for (Application a : e.getApplicationList().getApplications()) {
+            try{
             if (a.getRepresentative().getUsername().equals(u.getUsername())) {
-               
+
                 applicationList.add(a);
+            }
+            }catch (Exception ex){
+                
             }
         }
 

@@ -25,7 +25,7 @@ public class Event implements Serializable {
     private OrganizerList organizerList = new OrganizerList();
     private int availableArea;
     private List<Stand> standList;
-    private List<Keyword> keywordList;
+    private List<Keyword> keywordList = new ArrayList<>();
 
     /**
      * Constructor with all the parameters

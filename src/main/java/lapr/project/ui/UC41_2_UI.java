@@ -252,8 +252,12 @@ public class UC41_2_UI extends javax.swing.JFrame {
             //}
 
         }
-        if (contTotal != 0) {
+        if (Math.abs(contTotal - 0) >= 0.00000001) {
+            try{
             meanLabel.setText((mean / contTotal) + "");
+            }catch(Exception ex){
+                
+            }
         }
     }
 
@@ -265,7 +269,7 @@ public class UC41_2_UI extends javax.swing.JFrame {
         for (int i = 0; i < absoluteColumn.length; i++) {
             total += absoluteColumn[i];
         }
-        if (total != 0) {
+        if (Math.abs(total - 0) >= 0.00000001 ) {
             for (int i = 0; i < relativeColumn.length; i++) {
                 relativeColumn[i] = (absoluteColumn[i] / total);
             }

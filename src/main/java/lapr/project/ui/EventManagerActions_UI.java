@@ -141,6 +141,11 @@ public class EventManagerActions_UI extends javax.swing.JFrame {
         });
 
         uc48Button.setText("UC48 - Show the mean deviation between FAEs' average ratings and global mean rating");
+        uc48Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                uc48ButtonActionPerformed(evt);
+            }
+        });
 
         uc47Button.setText("UC47 - Show submission global mean rating");
         uc47Button.addActionListener(new java.awt.event.ActionListener() {
@@ -313,6 +318,11 @@ public class EventManagerActions_UI extends javax.swing.JFrame {
         UC47_Controller cont = new UC47_Controller(ec);
         JOptionPane.showMessageDialog(EventManagerActions_UI.this, "The Global Mean Rating is: "+cont.getGlobalMeanRating());
     }//GEN-LAST:event_uc47ButtonActionPerformed
+
+    private void uc48ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uc48ButtonActionPerformed
+        new UC48_UI(ec, u);
+        dispose();
+    }//GEN-LAST:event_uc48ButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

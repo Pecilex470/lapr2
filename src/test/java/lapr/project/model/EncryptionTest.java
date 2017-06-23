@@ -5,7 +5,6 @@
  */
 package lapr.project.model;
 
-import lapr.project.controller.UC6_Controller;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -91,7 +90,7 @@ public class EncryptionTest {
     @Test
     public void testSetUser() {
         System.out.println("setUser");
-        User user = null;
+        User user = u;
         Encryption instance = new Encryption();
         instance.setUser(user);
     }
@@ -114,7 +113,7 @@ public class EncryptionTest {
     @Test
     public void testSetKeyword() {
         System.out.println("setKeyword");
-        String keyword = "";
+        String keyword = "hello";
         Encryption instance = new Encryption(6, u, "zebras");
         instance.setKeyword(keyword);
     }
