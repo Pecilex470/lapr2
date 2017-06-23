@@ -15,6 +15,7 @@ import lapr.project.model.User;
  */
 public class UC48_UI extends javax.swing.JFrame {
 
+    static final long serialVersionUID = -3387516993124229948L;
     Event eventSelected;
     EventCenter ec;
     User u;
@@ -51,6 +52,7 @@ public class UC48_UI extends javax.swing.JFrame {
         jLabel1.setText("Choose a FAE");
 
         listLabel.setModel(new javax.swing.AbstractListModel<String>() {
+            static final long serialVersionUID = -3387516993124229948L;
             String[] strings = {""};
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
