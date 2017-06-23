@@ -250,26 +250,23 @@ public class EventManagerActions_UI extends javax.swing.JFrame {
     }//GEN-LAST:event_uc1ButtonActionPerformed
 
     private void uc42ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uc42ButtonActionPerformed
-
-       
         new UC42_UI(ec, u);
         dispose();
-
     }//GEN-LAST:event_uc42ButtonActionPerformed
 
     private void uc44ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uc44ButtonActionPerformed
-        new UC44_1_UI(ec,u);
+        new UC44_1_UI(ec, u);
         dispose();
     }//GEN-LAST:event_uc44ButtonActionPerformed
 
     private void uc50ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uc50ButtonActionPerformed
-        new UC50_1_UI(ec,u);
+        new UC50_1_UI(ec, u);
         dispose();
     }//GEN-LAST:event_uc50ButtonActionPerformed
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
-        dispose();
         new MainWindow(u, ec);
+        dispose();
     }//GEN-LAST:event_backButtonActionPerformed
 
     private void uc43ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uc43ButtonActionPerformed
@@ -288,15 +285,13 @@ public class EventManagerActions_UI extends javax.swing.JFrame {
             username = JOptionPane.showInputDialog(EventManagerActions_UI.this, "Enter the username of the FAE you\n want to know the mean rating of");
         }
 
-        
-
         if (username.equals("0")) {
-            
+
         } else {
             double meanR = ec.getMeanRatingF(username);
             JOptionPane.showMessageDialog(EventManagerActions_UI.this, "O mean rating é " + meanR);
         }
-        
+
 
     }//GEN-LAST:event_uc46ButtonActionPerformed
 
@@ -316,7 +311,7 @@ public class EventManagerActions_UI extends javax.swing.JFrame {
 
     private void uc47ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uc47ButtonActionPerformed
         UC47_Controller cont = new UC47_Controller(ec);
-        JOptionPane.showMessageDialog(EventManagerActions_UI.this, "The Global Mean Rating is: "+cont.getGlobalMeanRating());
+        JOptionPane.showMessageDialog(EventManagerActions_UI.this, "The Global Mean Rating is: " + cont.getGlobalMeanRating());
     }//GEN-LAST:event_uc47ButtonActionPerformed
 
     private void uc48ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uc48ButtonActionPerformed
