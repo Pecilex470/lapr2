@@ -283,20 +283,26 @@ public class EventCenter implements Serializable {
         return faesWithAtLeastOneApplication;
     }
 
+    /**
+     * This method gets all the decisions from the FAEs
+     *
+     * @param f the username of the fae
+     * @return returns the list of decisions
+     */
     public List<Decision> getEvaluatedApplicationsFAE(String f) {
 
         List<Decision> decisionFAE = new ArrayList<>();
         for (Event e : getEventRegister().getEventList()) {
-            for (Application app : e.getApplicationList().getApplications()) {
-                for (Decision dec : app.getDecisionList().getDecisions()) {
-                    if (dec.getFaeUsername().equals(f)) {
-                        decisionFAE.add(dec);
+            if (!(e.getApplicationList().getApplications().isEmpty())) {
+                for (Application app : e.getApplicationList().getApplications()) {
+                    for (Decision dec : app.getDecisionList().getDecisions()) {
+                        if (dec.getFaeUsername().equals(f)) {
+                            decisionFAE.add(dec);
+                        }
                     }
-
                 }
             }
         }
-
         return decisionFAE;
     }
 
@@ -354,9 +360,13 @@ public class EventCenter implements Serializable {
         double globalMeanRate;
         int total = getAllDecisions().size();
         double sC = 0;
-
+        
         for (FAE f : getFAEEvaluatedApplications()) {
-            sC += getMeanRatingF(f.getEncryptedName());
+            
+            String name = Encryption.deEncryptPassword(f.getEncryptedName(), enr.getEncryptionByUser(f.getUserFAE()).getShift(), Encryption.ABC);
+            name = Encryption.deEncryptData(name, enr.getEncryptionByUser(f.getUserFAE()).getKeyword());
+            
+            sC += getMeanRatingF(name);
 
         }
         globalMeanRate = sC / total;
@@ -377,7 +387,7 @@ public class EventCenter implements Serializable {
         }
         return -1;
     }
-
+    
     /**
      * Method that returns the Z-test that is any statistical test for which the
      * distribution of the test statistic under the null hypothesis can be

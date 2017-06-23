@@ -58,6 +58,7 @@ public class UC50_2_UI extends javax.swing.JFrame {
                     } catch (Exception ex) {
                         Logger.getLogger(UC50_2_UI.class.getName()).log(Level.SEVERE, null, ex);
                     }
+                    new EventManagerActions_UI(ec, user);
                     dispose();
                 }
             }
