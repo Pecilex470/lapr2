@@ -48,7 +48,7 @@ public class ImportEventData {
     private String fileName;
 
     public ImportEventData(EventCenter ec, String fileName) {
-        this.newEvent= new Event();
+        this.newEvent = new Event();
         this.ec = ec;
         this.fileName = fileName;
         this.randomKeyword = Encryption.randomCipher();
@@ -72,8 +72,6 @@ public class ImportEventData {
     }
 
     public Event readEvent() {
-
-        
 
         this.newEvent.setStartDate(new CustomDate(13, 11, 2017));
         this.newEvent.setEndDate(new CustomDate(14, 11, 2017));
@@ -140,42 +138,37 @@ public class ImportEventData {
 
                         FAE newFae = new FAE();
                         User newUser = new User();
-                        for (int a = 0; a < userAtributes.getLength(); a++) {
+                        for (int u = 0; u < userAtributes.getLength(); u++) {
+                            if (userAtributes.item(u).getNodeType() == Node.ELEMENT_NODE) {
+                                Element el = (Element) userAtributes.item(u);
+                                switch (el.getTagName()) {
 
-                            for (int u = 0; u < userAtributes.getLength(); u++) {
-                                if (userAtributes.item(u).getNodeType() == Node.ELEMENT_NODE) {
-
-                                    Element el = (Element) userAtributes.item(u);
-                                    switch (el.getTagName()) {
-
-                                        case "name":
-                                            String temp = Encryption.encryptData(el.getTextContent(), randomKeyword);
-                                            temp = Encryption.encryptPassword(temp, randomShift, Encryption.ABC);
-                                            newUser.setName(temp);
-                                            break;
-                                        case "email":
-                                            temp = Encryption.encryptData(el.getTextContent(), randomKeyword);
-                                            temp = Encryption.encryptPassword(temp, randomShift, Encryption.ABC);
-                                            newUser.setEmail(temp);
-                                            break;
-                                        case "username":
-                                            newUser.setUsername(el.getTextContent());
-                                            break;
-                                        case "password":
-                                            temp = Encryption.encryptPassword(el.getTextContent(), randomShift, Encryption.ABC);
-                                            newUser.setPassword(temp);
-                                            break;
-                                    }
+                                    case "name":
+                                        String temp = Encryption.encryptData(el.getTextContent(), randomKeyword);
+                                        temp = Encryption.encryptPassword(temp, randomShift, Encryption.ABC);
+                                        newUser.setName(temp);
+                                        break;
+                                    case "email":
+                                        temp = Encryption.encryptData(el.getTextContent(), randomKeyword);
+                                        temp = Encryption.encryptPassword(temp, randomShift, Encryption.ABC);
+                                        newUser.setEmail(temp);
+                                        break;
+                                    case "username":
+                                        newUser.setUsername(el.getTextContent());
+                                        break;
+                                    case "password":
+                                        temp = Encryption.encryptPassword(el.getTextContent(), randomShift, Encryption.ABC);
+                                        newUser.setPassword(temp);
+                                        break;
                                 }
-
                             }
-                            ec.getUserRegister().getUsers().add(newUser);
-                            ec.getEncryptionRegister().addEncryption(new Encryption(randomShift, newUser, randomKeyword));
-                            newFae.setUtilizadorFAE(newUser);
-                            list.add(newFae);
-                            break;
-                        }
 
+                        }
+                        ec.getUserRegister().getUsers().add(newUser);
+                        ec.getEncryptionRegister().addEncryption(new Encryption(randomShift, newUser, randomKeyword));
+                        newFae.setUtilizadorFAE(newUser);
+                        list.add(newFae);
+                        break;
                     }
 
                 }
@@ -226,7 +219,6 @@ public class ImportEventData {
     public List<Application> readApplication(Element element, UserRegister ur) {
 
         List<Application> list = new ArrayList<>();
-        List<Attribution> attList = new ArrayList<>();
 
         NodeList applicationList = element.getElementsByTagName("application");
 
@@ -236,7 +228,6 @@ public class ImportEventData {
                 Element app = (Element) applicationList.item(i);
 
                 NodeList appAtributes = app.getChildNodes();
-                Attribution att = new Attribution();
                 Application newApp = new Application();
 
                 for (int j = 0; j < appAtributes.getLength(); j++) {
@@ -274,24 +265,15 @@ public class ImportEventData {
 
                                 newApp.setKeywordList(readKeywords(el));
                                 break;
-                        }
-                    }
-                }
-                for (int j = 0; j < appAtributes.getLength(); j++) {
-                    if (appAtributes.item(j).getNodeType() == Node.ELEMENT_NODE) {
-
-                        Element el = (Element) appAtributes.item(j);
-
-                        switch (el.getTagName()) {
                             case "reviews":
-
-                                newApp.setDecisionList(readReviews(el, ur));
+                                
+                                newApp.setDecisionList(readReviews(el, ur, newApp));
                                 break;
                         }
+//                        }
                     }
-                    att.setApplication(newApp);
-                    attList.add(att);
                 }
+
                 list.add(newApp);
             }
 
@@ -300,13 +282,12 @@ public class ImportEventData {
         return list;
     }
 
-    public List<Decision> readReviews(Element element, UserRegister ur) {
+    public List<Decision> readReviews(Element element, UserRegister ur, Application app) {
 
         List<Decision> list = new ArrayList<>();
 
         NodeList evaList = element.getElementsByTagName("review");
 
-        //Attribution attr = new Attribution();
         for (int i = 0; i < evaList.getLength(); i++) {
 
             if (evaList.item(i).getNodeType() == Node.ELEMENT_NODE) {
@@ -349,8 +330,9 @@ public class ImportEventData {
                                 }
                                 break;
                             case "assignment":
-
-                                eva.setFaeUsername(readAssignment(element, ur, eva));
+                                String aux = readAssignment(at, ur, eva);
+                                eva.setFaeUsername(aux);
+                                this.newEvent.getFaeList().getFAEbyUsername(aux).getAttributionList().add(new Attribution(app, aux));
                                 break;
                         }
                     }
@@ -366,8 +348,7 @@ public class ImportEventData {
 
         NodeList list = element.getElementsByTagName("fae");
 
-        User newUser = new User();
-
+        User newUser=new User();
         for (int i = 0; i < list.getLength(); i++) {
 
             if (list.item(i).getNodeType() == Node.ELEMENT_NODE) {
@@ -383,6 +364,7 @@ public class ImportEventData {
                         Element userEl = (Element) user.item(j);
                         NodeList userAtributes = userEl.getChildNodes();
 
+                        newUser = new User();
                         for (int w = 0; w < userAtributes.getLength(); w++) {
 
                             if (userAtributes.item(w).getNodeType() == Node.ELEMENT_NODE) {
@@ -392,23 +374,22 @@ public class ImportEventData {
                                 switch (elAtributes.getTagName()) {
 
                                     case "name":
-
                                         newUser.setName(elAtributes.getTextContent());
                                         break;
                                     case "email":
-
                                         newUser.setEmail(elAtributes.getTextContent());
                                         break;
                                     case "username":
                                         if (ur.verifyUsername(elAtributes.getTextContent())) {
                                             eva.setFaeUsername(elAtributes.getTextContent());
-                                            this.newEvent.getFaeList().addFAE(new FAE(ur.getUserByUsername(elAtributes.getTextContent())));
                                             return elAtributes.getTextContent();
-                                        }
-                                        newUser.setUsername(elAtributes.getTextContent());
 
-                                        eva.setFaeUsername(elAtributes.getTextContent());
-                                        break;
+                                        } else {
+                                            newUser.setUsername(elAtributes.getTextContent());
+
+                                            eva.setFaeUsername(elAtributes.getTextContent());
+                                            break;
+                                        }
                                     case "password":
 
                                         newUser.setPassword(elAtributes.getTextContent());

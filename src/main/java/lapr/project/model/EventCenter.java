@@ -261,11 +261,21 @@ public class EventCenter implements Serializable {
         List<FAE> faesWithAtLeastOneApplication = new ArrayList<>();
 
         for (Event e : getEventRegister().getEventList()) {
+            
+            for (FAE fae : e.getFaeList().getFAEList()) {
+                
+                for (Attribution att : fae.getAttributionList()) {
+                    
+                    Application app = att.getApplication();
 
-            for (FAE f : e.getFaeList().getFAEList()) {
-                
-                
-                
+                    for (Decision dec : app.getDecisionList().getDecisions()) {
+                        
+                        if (!faesWithAtLeastOneApplication.contains(e.getFaeList().getFAEbyUsername(dec.getFaeUsername()))) {
+                            faesWithAtLeastOneApplication.add(e.getFaeList().getFAEbyUsername(dec.getFaeUsername()));
+                        }
+                    }
+                    
+                }
             }
 
         }
@@ -273,11 +283,19 @@ public class EventCenter implements Serializable {
         return faesWithAtLeastOneApplication;
     }
 
-    public List<Decision> getEvaluatedApplicationsFAE(String fae) {
+    public List<Decision> getEvaluatedApplicationsFAE(String f) {
         List<Decision> decisionFAE = new ArrayList<>();
-        for (int i = 0; i < er.getEventList().size(); i++) {
-            for (int j = 0; j < er.getEventList().get(i).getApplicationList().getApplications().size(); j++) {
-                decisionFAE.add(er.getEventList().get(i).getApplicationList().getApplications().get(j).getDecisionList().getDecisionByFAEUsername(fae));
+        for (Event e : getEventRegister().getEventList()) {
+            for (FAE fae : e.getFaeList().getFAEList()) {
+                for (Attribution att : fae.getAttributionList()) {
+                    Application app = att.getApplication();
+                    for (Decision dec : app.getDecisionList().getDecisions()) {
+                        if (dec.getFaeUsername().equals(f)) {
+                            decisionFAE.add(dec);
+                        }
+
+                    }
+                }
             }
         }
         return decisionFAE;
@@ -340,7 +358,7 @@ public class EventCenter implements Serializable {
             sC += getMeanRatingF(f.getName());
 
         }
-        globalMeanRate = sC/total;
+        globalMeanRate = sC / total;
         return globalMeanRate;
     }
 

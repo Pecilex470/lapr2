@@ -6,10 +6,13 @@
 package lapr.project.ui;
 
 import java.io.File;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import static javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE;
 import lapr.project.model.EventCenter;
 import lapr.project.model.User;
+import lapr.project.utils.ExportData;
 import lapr.project.utils.ImportEventData;
 
 /**
@@ -36,8 +39,13 @@ public class UC32_UI extends javax.swing.JFrame {
         this.addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
             public void windowClosing(java.awt.event.WindowEvent windowEvent) {
-                if (JOptionPane.showConfirmDialog(UC32_UI.this, "Do you wish to exit without selecting a file?", "Close", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
+                if (JOptionPane.showConfirmDialog(UC32_UI.this, "Do you wish to exit without saving?", "Close", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
                     dispose();
+                    try {
+                        ExportData.serialization(ec);
+                    } catch (Exception ex) {
+                        Logger.getLogger(EventManagerActions_UI.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
             }
         });

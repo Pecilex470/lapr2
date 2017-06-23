@@ -64,5 +64,14 @@ public class FAEList implements Serializable{
     public void addFAE(FAE fae) {
         faes.add(fae);
     }
+    
+    public FAE getFAEbyUsername(String username){
+        for(FAE fae: this.getFAEList()){
+            if(fae.getUserFAE().getUsername().equals(username)){
+                return fae;
+            }
+        }
+        return null;
+    }
 
 }
