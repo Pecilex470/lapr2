@@ -300,8 +300,6 @@ public class UC50_1_UI extends javax.swing.JFrame {
             String signLevel = part[2].trim();
             faeSelected1.add(nameStringToFAE(part1));
             faeSelected2.add(nameStringToFAE(part2));
-            System.out.println(faeSelected1.get(i).getUserFAE().getUsername());
-            System.out.println(faeSelected2.get(i).getUserFAE().getUsername());
 
         }
 
