@@ -2,8 +2,6 @@ package lapr.project.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.text.DecimalFormat;
-import java.util.Collections;
 import lapr.project.model.register.FAEList;
 import lapr.project.model.register.ApplicationList;
 import lapr.project.model.register.OrganizerList;
@@ -56,7 +54,7 @@ public class Event implements Serializable {
         this.faeList = fl;
         this.organizerList = ol;
         this.availableArea = availableArea;
-        this.standList= new ArrayList<>();
+        this.standList = new ArrayList<>();
     }
 
     /**
@@ -206,7 +204,6 @@ public class Event implements Serializable {
         int accepted = applicationList.getAcceptedApplicationRegister().size();
         int total = applicationList.getApplications().size();
 
-        
         return (double) (accepted * 100) / (double) total;
 
     }
@@ -400,7 +397,7 @@ public class Event implements Serializable {
      *
      * @return Decision(Yes or No)
      */
-    public String testDifferenceTwoEventsAccepRate50(Event e,String a) {
+    public String testDifferenceTwoEventsAccepRate50(Event e, String a) {
         double zc = criticalValue(a);
         double z = getZBil(e);
         if (z < -zc && z > zc) {
@@ -409,7 +406,6 @@ public class Event implements Serializable {
             return "No";
         }
     }
-
 
     public void setFAEList(FAEList faelist) {
         this.faeList = faelist;
@@ -433,10 +429,8 @@ public class Event implements Serializable {
     public void setKeywordList(List<Keyword> keywordList) {
         this.keywordList = keywordList;
     }
-    
-    
-    
-      private int getNumberOfStands() {
+
+    private int getNumberOfStands() {
         return this.getStandList().size();
     }
 
@@ -457,7 +451,6 @@ public class Event implements Serializable {
     }
 
     private int getAreaOfSmallest() {
-        
 
         int smallestArea = this.getStandList().get(0).getArea();
 
@@ -466,13 +459,12 @@ public class Event implements Serializable {
                 smallestArea = stand.getArea();
             }
         }
-        
+
         return smallestArea;
     }
-    
-    public int determineInterspaceOfTable(){
-        return (getAreaOfBiggestStand() - getAreaOfSmallest()/getK(getNumberOfStands()));
-    }
 
+    public int determineInterspaceOfTable() {
+        return (getAreaOfBiggestStand() - getAreaOfSmallest() / getK(getNumberOfStands()));
+    }
 
 }

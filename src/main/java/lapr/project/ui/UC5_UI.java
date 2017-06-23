@@ -5,7 +5,6 @@
  */
 package lapr.project.ui;
 
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -18,7 +17,6 @@ import lapr.project.model.Event;
 import lapr.project.model.EventCenter;
 import lapr.project.model.Keyword;
 import lapr.project.model.User;
-import lapr.project.utils.CustomDate;
 import lapr.project.utils.ExportData;
 
 /**
@@ -54,7 +52,7 @@ public class UC5_UI extends javax.swing.JFrame {
                 if (JOptionPane.showConfirmDialog(UC5_UI.this, "Do you wish to exit without saving?", "Close", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
                     try {
                         ExportData.serialization(ec);
-                    } catch (FileNotFoundException ex) {
+                    } catch (Exception ex) {
                         Logger.getLogger(UC5_UI.class.getName()).log(Level.SEVERE, null, ex);
                     }
                     dispose();
@@ -343,7 +341,11 @@ public class UC5_UI extends javax.swing.JFrame {
             if (!(companyNameTextField.getText().equals("") || standArea.getText().equals("") || description.getText().equals("") || nInvites.getText().equals(""))) {
                 if (numberOfKeywords() > 1) {
                     
-
+                    if (eventSelected.getFaeList().getFAEList().isEmpty()) {
+                        
+                        JOptionPane.showMessageDialog(UC5_UI.this, "You cant submit this application to this\nevent because it doesn't have any FAEs");
+                        return;
+                    }
                     if (JOptionPane.showConfirmDialog(UC5_UI.this, "Do you really want to submit this application?", "Confirmation", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
 
                         List<Keyword> keywordList = new ArrayList<>();
@@ -363,9 +365,11 @@ public class UC5_UI extends javax.swing.JFrame {
                         new RepresentativeActions(ec, u);
 
                     }
+                    
                 } else {
                     JOptionPane.showMessageDialog(null, "At least 2 keywords needed");
                 }
+                
             } else {
                 JOptionPane.showMessageDialog(UC5_UI.this, "Please fill in all the fields!", "Error", JOptionPane.OK_OPTION);
             }
@@ -390,6 +394,11 @@ public class UC5_UI extends javax.swing.JFrame {
 
         this.eventSelected = ec.getEventRegister().getEventList().get(listEvent.getSelectedIndex());
 
+        if (eventSelected.getFaeList().getFAEList().isEmpty()) {
+            JOptionPane.showMessageDialog(UC5_UI.this, "WARNING: This event has no FAEs\nto decide your application");
+        }
+        
+        
         maxAreaAvailableStand.setText("" + eventSelected.getAvailableArea());
 
     }//GEN-LAST:event_listEventMouseClicked

@@ -5,7 +5,6 @@
  */
 package lapr.project.ui;
 
-import java.io.FileNotFoundException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -21,9 +20,8 @@ import lapr.project.utils.ExportData;
  * @author Cerqueira
  */
 public class UC41_1_UI extends javax.swing.JFrame {
-    
-    static final long serialVersionUID = -3387516993124229948L;
 
+    static final long serialVersionUID = -3387516993124229948L;
 
     Event selectedEvent;
     EventCenter ec;
@@ -45,7 +43,7 @@ public class UC41_1_UI extends javax.swing.JFrame {
                 if (JOptionPane.showConfirmDialog(UC41_1_UI.this, "Do you wish to exit without saving?", "Close", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
                     try {
                         ExportData.serialization(ec);
-                    } catch (FileNotFoundException ex) {
+                    } catch (Exception ex) {
                         Logger.getLogger(UC2_UI.class.getName()).log(Level.SEVERE, null, ex);
                     }
                     dispose();
@@ -156,10 +154,15 @@ public class UC41_1_UI extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        if(selectedEvent!=null){
-        new UC41_2_UI(selectedEvent, this.ec, this.u);
-        dispose();
-        }else{
+        if (selectedEvent != null) {
+            if (selectedEvent.getStandList().size() != 0) {
+                new UC41_2_UI(selectedEvent, this.ec, this.u);
+                dispose();
+            }else{
+                JOptionPane.showMessageDialog(UC41_1_UI.this, "This Event has no Stands");
+            }
+
+        } else {
             JOptionPane.showMessageDialog(UC41_1_UI.this, "Select an Event");
         }
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -175,7 +178,7 @@ public class UC41_1_UI extends javax.swing.JFrame {
     }
 
     public String[] getStandsList() {
-        
+
         try {
             String[] list = new String[selectedEvent.getStandList().size()];
             int count = 0;

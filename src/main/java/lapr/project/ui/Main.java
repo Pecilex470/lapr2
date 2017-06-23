@@ -36,7 +36,7 @@ public class Main {
     public static void main(String[] args) throws FileNotFoundException {
 
         EventCenter ec = new EventCenter();
-        if (new File("test.bin").exists()) {
+        if (new File("LoadData.bin").exists()) {
             try {
                 ec = ExportData.deserialization();
             } catch (Exception e) {
