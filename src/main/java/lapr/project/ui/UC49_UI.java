@@ -155,17 +155,22 @@ public class UC49_UI extends javax.swing.JFrame {
    
     public void fillTable(String a){
       DefaultTableModel val = (DefaultTableModel) Table1.getModel();
-         List<FAE> allFAE = c.getAllFae(ec);
+         List<FAE> allFAE = c.getFaeThatEvaluatedApplications(ec);
          for(FAE fae : allFAE){
             String nome = fae.getName();
-            int nSub = fae.getAttributionList().size();
-            double mRa = fae.getMeanRating();
-            double dMean = ec.getMeanDeviation();
-            double sMean = fae.getStandardDeviation();
+            int nSub = ec.getEvaluatedApplicationsFAE(nome).size();
+            double mRa = ec.getMeanRatingF(nome);
+            double dMean = ec.getMeanDeviation(fae.getName());
+            double sMean = ec.getStandardDeviation(nome);
             double z = ec.getZ(fae);
-            String dec = ec.testTheDifferenceBetweenTheMeanDeviationAndATheoreticalValue1ForAFAEAverageRating(a);
-            val.addRow(new Object[]{nome,nSub,mRa,dMean,sMean,z,dec}); 
-      }   
+            String dec = ec.testTheDifferenceBetweenTheMeanDeviationAndATheoreticalValue1ForAFAEAverageRating(a,fae);
+            if(nSub >= 30){
+             val.addRow(new Object[]{nome,nSub,mRa,dMean,sMean,z,dec});   
+            }
+           
+      }
+          
+
         
     }
 

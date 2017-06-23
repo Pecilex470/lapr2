@@ -15,6 +15,7 @@ import static javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE;
 import lapr.project.controller.UC44_Controller;
 import lapr.project.model.Event;
 import lapr.project.model.EventCenter;
+import lapr.project.model.User;
 import lapr.project.utils.ExportData;
 
 /**
@@ -31,6 +32,7 @@ public class UC44_1_UI extends javax.swing.JFrame {
      private String[] pickedList = new String[0];
      private String[] topList;
      private Double[] a;
+    private User user;
 
       
 
@@ -39,8 +41,8 @@ public class UC44_1_UI extends javax.swing.JFrame {
      * @param ec the instance of the event center
      * @param u the user that is using
      */
-    public UC44_1_UI(EventCenter ec) {
-        
+    public UC44_1_UI(EventCenter ec, User u) {
+        this.user=u;
         this.ec = ec;
         this.c = new UC44_Controller(ec);
         initComponents();
@@ -86,6 +88,7 @@ public class UC44_1_UI extends javax.swing.JFrame {
         unpickButton = new javax.swing.JButton();
         Continue = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        back = new javax.swing.JButton();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -124,7 +127,7 @@ public class UC44_1_UI extends javax.swing.JFrame {
 
         eventList.setModel(new javax.swing.AbstractListModel<String>() {
             static final long serialVersionUID = -3387516993124229948L;
-            String[] strings = initialEventList();
+            String[] strings = inicialEventList();
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
@@ -167,14 +170,17 @@ public class UC44_1_UI extends javax.swing.JFrame {
 
         jLabel1.setText("Test if the acceptance rate of each event is over 50%");
 
+        back.setText("Back");
+        back.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(Continue)
-                .addGap(32, 32, 32))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -183,14 +189,19 @@ public class UC44_1_UI extends javax.swing.JFrame {
                         .addGap(62, 62, 62)
                         .addComponent(unpickButton))
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
                         .addGap(54, 54, 54)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(40, 40, 40)
-                        .addComponent(jLabel1)))
-                .addContainerGap(53, Short.MAX_VALUE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(Continue)
+                                .addGap(20, 20, 20)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(back)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -205,9 +216,11 @@ public class UC44_1_UI extends javax.swing.JFrame {
                     .addComponent(unpickButton))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
-                .addComponent(Continue)
-                .addGap(22, 22, 22))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Continue)
+                    .addComponent(back))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
         pack();
@@ -307,11 +320,16 @@ public class UC44_1_UI extends javax.swing.JFrame {
       if(eventSelected==null){
        JOptionPane.showMessageDialog(UC44_1_UI.this, "Please select events", "Error", JOptionPane.OK_OPTION);
       }else{
-        new UC44_2_UI(ec,eventSelected,pickedList);
+        new UC44_2_UI(ec,eventSelected,pickedList,user);
       }
       
      
     }//GEN-LAST:event_ContinueActionPerformed
+
+    private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
+        new EventManagerActions_UI(ec,user);
+        dispose();
+    }//GEN-LAST:event_backActionPerformed
  
     private void eventListMouseClicked(java.awt.event.MouseEvent evt) {                                      
 
@@ -324,7 +342,7 @@ public class UC44_1_UI extends javax.swing.JFrame {
      *
      * @return a String array to fill the JList
      */
-    public String[] initialEventList() {
+    public String[] inicialEventList() {
         String[] list = new String[ec.getEventRegister().getEventList().size()];
         int cont = 0;
         for (Event e : ec.getEventRegister().getEventList()) {
@@ -447,6 +465,7 @@ public class UC44_1_UI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Continue;
+    private javax.swing.JButton back;
     private javax.swing.JList<String> eventList;
     private javax.swing.JFrame jFrame1;
     private javax.swing.JLabel jLabel1;

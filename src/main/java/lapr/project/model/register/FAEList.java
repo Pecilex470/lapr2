@@ -57,29 +57,6 @@ public class FAEList implements Serializable{
         this.faes = FAE;
     }
 
-
-    /**
-     * Method that compute the mean deviation between FAEs’ average ratings for
-     * each submission and global mean rating
-     *
-     * @param e - Event
-     * @return Mean deviation
-     */
-    public double getMeanDeviation(Event e, FAE fae) {
-        double total = 0;
-        int cont = 0;
-        double global = e.getApplicationList().getGlobalMeanRating();
-        for (Attribution att : fae.getAttributionList()) {
-            total += Math.abs(att.getEvaluation().getMeanRating() - global);
-            cont++;
-        }
-
-        if (cont != 0) {
-            return total / cont;
-        }
-        return -1;
-    }
-
     /**
      * This method adds a FAE to an Event
      * @param fae the FAE to be added

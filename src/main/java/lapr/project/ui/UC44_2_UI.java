@@ -16,6 +16,7 @@ import javax.swing.table.DefaultTableModel;
 import lapr.project.controller.UC44_Controller;
 import lapr.project.model.Event;
 import lapr.project.model.EventCenter;
+import lapr.project.model.User;
 import lapr.project.utils.ExportData;
 
 /**
@@ -29,6 +30,7 @@ public class UC44_2_UI extends javax.swing.JFrame {
     private EventCenter ec;
     private List<Event> events = new ArrayList<>();
     private String[] a;
+    private User user;
 
     /**
      * Creates new form UC44_UI
@@ -38,7 +40,8 @@ public class UC44_2_UI extends javax.swing.JFrame {
      * @param a
      *
      */
-    public UC44_2_UI(EventCenter ec, List<Event> events, String[] a) {
+    public UC44_2_UI(EventCenter ec, List<Event> events, String[] a,User u) {
+        this.user = u;
         this.ec = ec;
         this.c = new UC44_Controller(ec);
         this.events = events;
@@ -147,22 +150,24 @@ public class UC44_2_UI extends javax.swing.JFrame {
         DefaultTableModel val = (DefaultTableModel) jTable1.getModel();
 
         for (Event e: events) {
-        
-            System.out.println(events.size());
+            
             String title = e.getTitle();
             double aR = e.getAcceptanceRate();
             String sl = getSignificanceLevel(e);
             double cv = e.criticalValue(sl);
             double ZUni = e.getZUni();
             String decision = e.testAcceptanceRate50(sl);
-            val.addRow(new Object[]{title, aR, cv, sl, ZUni, decision});
+            if(aR != -1){
+             val.addRow(new Object[]{title, aR, cv, sl, ZUni, decision});   
+            }
+           
         }
 
 
     }//GEN-LAST:event_InserirActionPerformed
 
     private void BackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackActionPerformed
-        new UC44_1_UI(ec);
+        new UC44_1_UI(ec,user);
         dispose();
     }//GEN-LAST:event_BackActionPerformed
 

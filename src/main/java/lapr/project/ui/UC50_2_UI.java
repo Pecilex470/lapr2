@@ -5,27 +5,62 @@
  */
 package lapr.project.ui;
 
-import lapr.project.controller.UC49_Controller;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import static javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE;
+import javax.swing.table.DefaultTableModel;
 import lapr.project.controller.UC50_Controller;
 import lapr.project.model.EventCenter;
+import lapr.project.model.FAE;
+import lapr.project.model.User;
+import lapr.project.utils.ExportData;
 
 /**
  *
  * @author Utilizador
  */
 public class UC50_2_UI extends javax.swing.JFrame {
-static final long serialVersionUID = -3387516993124229948L;
 
-private EventCenter ec;
-    
+    static final long serialVersionUID = -3387516993124229948L;
+
+    private EventCenter ec;
     private UC50_Controller c;
+    private User user;
+    private List<FAE> fae1= new ArrayList<>();
+    private List<FAE> fae2=new ArrayList<>();
+    private String[] a;
+
     /**
      * Creates new form UC50
      */
-    public UC50_2_UI(EventCenter ec) {
-        this.ec=ec;
-        this.c=new UC50_Controller(ec);
+    public UC50_2_UI(EventCenter ec, List<FAE> f1, List<FAE> f2, String[] pickedList, User u) {
+        this.ec = ec;
+        this.user = u;
+        this.a=pickedList;
+        this.fae1=f1;
+        this.fae2=f2;
+        this.c = new UC50_Controller(ec);
         initComponents();
+        this.setVisible(true);
+        setLocationRelativeTo(null);
+        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+        this.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+                if (JOptionPane.showConfirmDialog(UC50_2_UI.this, "Do you wish to exit without saving?", "Close", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
+                    try {
+                        ExportData.serialization(ec);
+                    } catch (FileNotFoundException ex) {
+                        Logger.getLogger(UC44_1_UI.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    dispose();
+                }
+            }
+        });
     }
 
     /**
@@ -116,21 +151,56 @@ private EventCenter ec;
     }// </editor-fold>//GEN-END:initComponents
 
     private void insertBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertBActionPerformed
-        // TODO add your handling code here:
+      DefaultTableModel val = (DefaultTableModel) jTable1.getModel();
+         List<FAE> allFAEThatEvaluatedAnApplication = ec.getFAEEvaluatedApplications();
+         for (int i=0; i<fae1.size(); i++) {
+            String sL = getSignificanceLevel(fae1.get(i),fae2.get(i));
+            String nome1 = fae1.get(i).getName();
+            String nome2 = fae2.get(i).getName();
+            int nSub1= ec.getEvaluatedApplicationsFAE(nome1).size();
+            int nSub2 =ec.getEvaluatedApplicationsFAE(nome2).size();
+            double mRa1 = ec.getMeanRatingF(nome1);
+            double mRa2 = ec.getMeanRatingF(nome2);
+            double dMean1 = ec.getMeanDeviation(nome1);
+            double dMean2 = ec.getMeanDeviation(nome2);
+            double sMean1 = ec.getStandardDeviation(nome1);
+            double sMean2 = ec.getStandardDeviation(nome2);
+            double z = ec.getZ2MeanDeviations(fae1.get(i),fae2.get(i));
+            double zc = ec.zC(sL);
+            String dec = ec.testingTheDifferenceBetweenTwoFAEsMeanDeviations(fae1.get(i),fae2.get(i),sL);
+            if(nSub1 >= 30 && nSub2>=30){
+             val.addRow(new Object[]{nome1,nome2,nSub1,nSub2,dMean1,dMean2,zc,z,dec});   
+            }
+           
+      }
+        
+        
     }//GEN-LAST:event_insertBActionPerformed
 
     private void backBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBActionPerformed
-        // TODO add your handling code here:
+        new UC50_1_UI(ec, user);
+        dispose();
     }//GEN-LAST:event_backBActionPerformed
 
-   
     
-    public void fillTable(String a){
-        
-    }
-    
-    
+     public String getSignificanceLevel(FAE f,FAE f1) {
+        String cv = "-1";
+        for (int i = 0; i < a.length; i++) {
+            String[] parts = a[i].split("-");
+            String part1 = parts[0].trim();
+            String part2 = parts[1].trim();
+            String part3 = parts[2].trim();
+  
+            if (part1.equals(f.getName()) || part2.equals(f1.getName()) ) {
+                cv = part3;
+             return cv;
+            
+            }
+           
+        }
+        return cv;
 
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backB;
     private javax.swing.JButton insertB;

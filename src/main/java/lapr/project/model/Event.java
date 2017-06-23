@@ -205,7 +205,9 @@ public class Event implements Serializable {
 
         int accepted = applicationList.getAcceptedApplicationRegister().size();
         int total = applicationList.getApplications().size();
-
+        if(total<30){
+         return -1;   
+        }
         
         return (double) (accepted * 100) / (double) total;
 
@@ -432,6 +434,13 @@ public class Event implements Serializable {
      */
     public void setKeywordList(List<Keyword> keywordList) {
         this.keywordList = keywordList;
+    }
+    
+    public FAE getFAEAtri(int i){
+      if(faeList.getFAEList().get(i).getAttributionList().size()!=0){
+       return faeList.getFAEList().get(i);
+      }
+      return null;
     }
     
     

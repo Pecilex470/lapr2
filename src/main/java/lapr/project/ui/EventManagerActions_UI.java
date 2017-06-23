@@ -247,11 +247,11 @@ public class EventManagerActions_UI extends javax.swing.JFrame {
     }//GEN-LAST:event_uc42ButtonActionPerformed
 
     private void uc44ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uc44ButtonActionPerformed
-        new UC44_1_UI(ec);
+        new UC44_1_UI(ec,u);
     }//GEN-LAST:event_uc44ButtonActionPerformed
 
     private void uc50ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uc50ButtonActionPerformed
-        // TODO add your handling code here:
+        new UC50_1_UI(ec,u);
     }//GEN-LAST:event_uc50ButtonActionPerformed
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed

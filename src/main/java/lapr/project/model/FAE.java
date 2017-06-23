@@ -53,40 +53,10 @@ public class FAE implements Serializable{
     public List<Attribution> getAttributionList() {
         return this.attributionList;
     }
-
-    /**
-     * Method to get the fae mean rating
-     *
-     * @return fae mean deviation
-     */
-    public double getMeanRating() {
-        double total = 0;
-        if (!this.attributionList.isEmpty()) {
-            for (Attribution att : this.attributionList) {
-                total += att.getEvaluation().getMeanRating();
-            }
-            return total / this.attributionList.size();
-        }
-        return -1;
-    }
     
-    /**
-     * Method to get the StandardDeviation ´
-     *
-     * @return StandarDeviation
-     */
-    public double getStandardDeviation() {
-        double meanRating = getMeanRating();
-        double x = 0;
-        if (!this.attributionList.isEmpty()) {
-            for (Attribution att : this.attributionList) {
-                x += Math.abs(att.getEvaluation().getMeanRating() - Math.pow(meanRating, 2));
-            }
-            return x / this.attributionList.size();
-        }
-        return -1;
-
-    }
+  
+    
+   
     
 
    

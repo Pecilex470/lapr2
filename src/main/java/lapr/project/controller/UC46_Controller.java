@@ -29,17 +29,4 @@ public class UC46_Controller {
         return ec.getUserRegister().getUserByUsername(username);
     }
     
-    public double getFAEMeanRating(User u){
-        
-        List<Event> eventsWhereUserIsFAE = ec.getEventsWhereUserIsFAE(u);
-        double FAEMeanRating=0;
-        
-        for(Event e: eventsWhereUserIsFAE){
-            
-            FAE f = e.getFAE(u);
-            FAEMeanRating += f.getMeanRating();
-        }
-        
-        return FAEMeanRating/eventsWhereUserIsFAE.size();
-    }
 }

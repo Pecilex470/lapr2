@@ -166,7 +166,10 @@ public class UC45_2_UI extends javax.swing.JFrame {
             double cv = eve1.get(i).criticalValue(sl);
             double ZBil = eve1.get(i).getZBil(eve2.get(i));
             String decision = eve1.get(i).testDifferenceTwoEventsAccepRate50(eve2.get(i),sl);
-            val.addRow(new Object[]{title1,title2,aR1,aR2,sl,cv,ZBil,decision});
+              if(aR1 != -1 && aR2!= -2){
+             val.addRow(new Object[]{title1,title2,aR1,aR2,sl,cv,ZBil,decision}); 
+            }
+           
         }
 
 

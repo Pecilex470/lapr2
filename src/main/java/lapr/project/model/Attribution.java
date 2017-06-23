@@ -6,17 +6,17 @@ public class Attribution implements Serializable{
 
     static final long serialVersionUID = 2;
     private Application a;
-    private Decision e;
     private String faeUsername;
+
+ 
+
+    public Attribution(Application a, String faeUsername) {
+        this.a = a;
+        this.faeUsername=faeUsername;
+    }
 
     public Attribution() {
 
-    }
-
-    public Attribution(Application a, Decision e, String faeUsername) {
-        this.a = a;
-        this.e = e;
-        this.faeUsername=faeUsername;
     }
 
     /**
@@ -38,19 +38,9 @@ public class Attribution implements Serializable{
         return a.equals(a);
     }
     
-    /**
-     * @return the e
-     */
-    public Decision getEvaluation() {
-        return e;
-    }
 
     public void setUser(String username){
         this.faeUsername=username;
-    }
-    
-    public void setEvaluation(Decision eva){
-        this.e=eva;
     }
     
     public void setApplication(Application app){

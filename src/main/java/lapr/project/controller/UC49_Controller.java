@@ -6,10 +6,8 @@
 package lapr.project.controller;
 
 import java.util.List;
-import lapr.project.model.Event;
 import lapr.project.model.EventCenter;
 import lapr.project.model.FAE;
-import lapr.project.model.register.FAEList;
 
 /**
  *
@@ -24,8 +22,8 @@ public class UC49_Controller {
     }
     
     
-    public List<FAE> getAllFae(EventCenter ec) {
-        allFAE= ec.getAllFAE();
+    public List<FAE> getFaeThatEvaluatedApplications(EventCenter ec) {
+        allFAE= ec.getFAEEvaluatedApplications();
         return allFAE;
     }
     

@@ -240,12 +240,14 @@ public class EventCenter implements Serializable {
         }
         return allFAE;
     }
-  /**
-   * Mthod that returns all the fae that evaluated a application in the Event Center 
-   * 
-   * @return Fae that evaluated a application in the Event Center 
-   */
-    public List<FAE> getFAEEvaluatedApplicantions() {
+
+    /**
+     * Method that returns all the fae that evaluated a application in the Event
+     * Center
+     *
+     * @return Fae that evaluated a application in the Event Center
+     */
+    public List<FAE> getFAEEvaluatedApplications() {
         List<FAE> allFAE = new ArrayList<>();
 
         for (int i = 0; i < er.getEventList().size(); i++) {
@@ -269,12 +271,85 @@ public class EventCenter implements Serializable {
         return allFAE;
     }
 
-    public double getMeanDeviation() {
+    public List<Decision> getEvaluatedApplicationsFAE(String fae) {
+        List<Decision> decisionFAE = new ArrayList<>();
+        for (int i = 0; i < er.getEventList().size(); i++) {
+            for (int j = 0; j < er.getEventList().get(i).getApplicationList().getApplications().size(); j++) {
+                decisionFAE.add(er.getEventList().get(i).getApplicationList().getApplications().get(j).getDecisionList().getDecisionByFAEUsername(fae));
+            }
+        }
+        return decisionFAE;
+    }
+
+    public List<Decision> getAllDecisions() {
+        List<Decision> decisionAll = new ArrayList<>();
+        for (int i = 0; i < er.getEventList().size(); i++) {
+            for (int j = 0; j < er.getEventList().get(i).getApplicationList().getApplications().size(); j++) {
+                for (int l = 0; j < er.getEventList().get(i).getApplicationList().getApplications().get(j).getDecisionList().getDecisions().size(); l++) {
+                    decisionAll.add(er.getEventList().get(i).getApplicationList().getApplications().get(j).getDecisionList().getDecisions().get(l));
+                }
+            }
+        }
+        return decisionAll;
+    }
+
+    /**
+     * /**
+     * Method to get the fae mean rating
+     *
+     * @param fae fae to get the mean rating
+     *
+     * @return fae mean deviation
+     */
+    public double getMeanRatingF(String fae) {
+        List<Decision> decisionFAE = getEvaluatedApplicationsFAE(fae);
+        double total = 0;
+        for (Decision dec : decisionFAE) {
+            total += dec.getMeanRating();
+        }
+        return total / decisionFAE.size();
+    }
+
+    /**
+     * Method to get the StandardDeviation ´
+     *
+     * @return StandarDeviation
+     */
+    public double getStandardDeviation(String fae) {
+        double meanRating = getMeanRatingF(fae);
+        List<Decision> decisionFAE = getEvaluatedApplicationsFAE(fae);
+        double x = 0;
+        if (!decisionFAE.isEmpty()) {
+            for (Decision dec : decisionFAE) {
+                x += Math.abs(dec.getMeanRating() - Math.pow(meanRating, 2));
+            }
+            return x / decisionFAE.size();
+        }
+        return -1;
+
+    }
+
+    public double getGlobalMeanRate() {
+        double globalMeanRate;
+        int total = getAllDecisions().size();
+        double sC=0;
+
+
+        for (FAE f : getFAEEvaluatedApplications()){
+           sC +=getMeanRatingF( f.getName());
+            
+        }
+        globalMeanRate = (double) sC/total;
+        return globalMeanRate;
+    }
+
+
+    public double getMeanDeviation(String fae) {
         double total = 0;
         int cont = 0;
-        double global = getGlobalAcceptanceRate();
-        for (FAE fae : getFAEEvaluatedApplicantions()) {
-            total += Math.abs(fae.getMeanRating() - global);
+        double global = getGlobalMeanRate();
+        for (Decision d : getEvaluatedApplicationsFAE(fae)) {
+            total += Math.abs(getMeanRatingF(fae) - global);
             cont++;
         }
 
@@ -293,9 +368,9 @@ public class EventCenter implements Serializable {
      * @return Z-test
      */
     public double getZ(FAE fae) {
-        double mDev = getMeanDeviation();
-        int total = getFAEEvaluatedApplicantions().size();
-        double standardDeviation = fae.getStandardDeviation();
+        double mDev = getMeanDeviation(fae.getName());
+        int total = getFAEEvaluatedApplications().size();
+        double standardDeviation = getStandardDeviation(fae.getName());
         double z = (mDev - 1) / (standardDeviation / Math.sqrt(total));
 
         return z;
@@ -313,12 +388,12 @@ public class EventCenter implements Serializable {
      * @return
      */
     public double getZ2MeanDeviations(FAE e, FAE fae) {
-        double mDev1 = getMeanDeviation();
-        int total = getFAEEvaluatedApplicantions().size();
-        double standardDeviation = e.getStandardDeviation();
-        double mDev2 = getMeanDeviation();
+        double mDev1 = getMeanDeviation(e.getName());
+        int total = getFAEEvaluatedApplications().size();
+        double standardDeviation = getStandardDeviation(e.getName());
+        double mDev2 = getMeanDeviation(fae.getName());
         int total2 = fae.getAttributionList().size();
-        double standardDeviation2 = fae.getStandardDeviation();
+        double standardDeviation2 = getStandardDeviation(fae.getName());
         double z = (mDev1 - mDev2) / Math.sqrt((standardDeviation / total) + (standardDeviation2 / total2));
         return z;
     }
@@ -330,11 +405,11 @@ public class EventCenter implements Serializable {
      *
      * @return Decision(Yes or No)
      */
-    public String testTheDifferenceBetweenTheMeanDeviationAndATheoreticalValue1ForAFAEAverageRating(String a) {
+    public String testTheDifferenceBetweenTheMeanDeviationAndATheoreticalValue1ForAFAEAverageRating(String a,FAE f) {
         NormalDistribution p = new NormalDistribution();
         double sv = Double.parseDouble(a);
         double zc = p.inverseCumulativeProbability(1 - sv);
-        double z = getMeanDeviation();
+        double z = getMeanDeviation(f.getName());
         if (z > zc) {
             return "Yes";
         } else {
@@ -347,20 +422,29 @@ public class EventCenter implements Serializable {
      * difference between two FAE Mean Deviations is equal or not with a
      * significance level equal to 1%.
      *
-     * @param e Second event to get is Z-test
+     * @param e First fae to get is Z-test
+     * @param fae Second fae to get is Z-test
+     * @param a Significance level
      *
      * @return Decision(Yes or No)
      */
-    public String TestingTheDifferenceBetweenTwoFAEsMeanDeviationsA1(FAE e, FAE fae, String a) {
-        NormalDistribution p = new NormalDistribution();
-        double sv = Double.parseDouble(a);
-        double zc = p.inverseCumulativeProbability(1 - (sv / 2.));
+    public String testingTheDifferenceBetweenTwoFAEsMeanDeviations(FAE e, FAE fae, String a) {
+        
+        
+        double zc = zC(a); 
         double z = getZ2MeanDeviations(e, fae);
         if (z < -zc && z > zc) {
             return "Yes";
         } else {
             return "No";
         }
+    }
+    
+    public double zC(String a){
+     NormalDistribution p = new NormalDistribution(); 
+     double sv = Double.parseDouble(a);
+     double zc = p.inverseCumulativeProbability(1 - (sv / 2.));
+     return zc; 
     }
 
 }
