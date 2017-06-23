@@ -300,7 +300,7 @@ public class EventManagerActions_UI extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_uc32ButtonActionPerformed
     private void uc49ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uc49ButtonActionPerformed
-        new UC49_UI(ec);
+        new UC49_UI(ec, u);
         dispose();
     }//GEN-LAST:event_uc49ButtonActionPerformed
 

@@ -29,7 +29,7 @@ public class UC45_1_UI extends javax.swing.JFrame {
     private List<Event> eventSelected2 = new ArrayList<>();
     private EventCenter ec;
     private String[] pickedList = new String[0];
-    private String[] topList;
+    private String[] topList1;
     private User user;
 
     /**
@@ -253,14 +253,14 @@ public class UC45_1_UI extends javax.swing.JFrame {
 
         pickedEventList.setModel(new javax.swing.AbstractListModel<String>() {
             static final long serialVersionUID = -3387516993124229948L;
-            String[] strings = returnPickedList();
+            String[] list = returnPickedList();
 
             public int getSize() {
-                return strings.length;
+                return list.length;
             }
 
             public String getElementAt(int i) {
-                return strings[i];
+                return list[i];
             }
         });
 
@@ -316,7 +316,7 @@ public class UC45_1_UI extends javax.swing.JFrame {
             cont++;
         }
 
-        topList = list;
+        topList1 = list;
 
         return list;
     }
@@ -328,20 +328,20 @@ public class UC45_1_UI extends javax.swing.JFrame {
 
     public void removeEventFromTop2List(String uName) {
 
-        String[] list = new String[topList.length - 1];
+        String[] list = new String[topList1.length - 1];
 
         int flag = 0;
-        for (int i = 0; i < topList.length; i++) {
+        for (int i = 0; i < topList1.length; i++) {
 
-            if (!uName.equals(topList[i])) {
-                list[i - flag] = topList[i];
+            if (!uName.equals(topList1[i])) {
+                list[i - flag] = topList1[i];
             } else {
                 flag++;
             }
         }
 
-        topList = new String[topList.length - 1];
-        topList = list;
+        topList1 = new String[topList1.length - 1];
+        topList1 = list;
 
     }
 
@@ -350,7 +350,7 @@ public class UC45_1_UI extends javax.swing.JFrame {
         String eTitle1 = eTitle[0];
         String eTitle2 = eTitle[1];
 
-        String[] list = new String[pickedList.length - 1];
+        String[] list1 = new String[pickedList.length - 1];
 
         int flag = 0;
         for (int i = 0; i < pickedList.length; i++) {
@@ -358,14 +358,14 @@ public class UC45_1_UI extends javax.swing.JFrame {
             String part1 = part[0];
             String part2 = part[1];
             if (!eTitle1.equals(part1) && !eTitle2.equals(part2)) {
-                list[i - flag] = pickedList[i];
+                list1[i - flag] = pickedList[i];
             } else {
                 flag++;
             }
         }
 
         pickedList = new String[pickedList.length - 1];
-        pickedList = list;
+        pickedList = list1;
 
     }
 
@@ -386,17 +386,17 @@ public class UC45_1_UI extends javax.swing.JFrame {
 
     public void addEventToTopList(String topEvent) {
 
-        String[] list = new String[topList.length + 1];
+        String[] list = new String[topList1.length + 1];
 
-        for (int i = 0; i < topList.length; i++) {
-            list[i] = topList[i];
+        for (int i = 0; i < topList1.length; i++) {
+            list[i] = topList1[i];
         }
         String[] part = topEvent.split("-");
         String Event2 = part[1].trim();
         list[list.length - 1] = Event2;
 
-        topList = new String[topList.length + 1];
-        topList = list;
+        topList1 = new String[topList1.length + 1];
+        topList1 = list;
 
     }
 
@@ -406,7 +406,7 @@ public class UC45_1_UI extends javax.swing.JFrame {
     }
 
     public String[] returnTopList() {
-        return topList;
+        return topList1;
     }
 
     public Event titleStringToEvent(String title) {
