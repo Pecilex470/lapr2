@@ -356,7 +356,7 @@ public class UC5_UI extends javax.swing.JFrame {
                                 keywordList.add(new Keyword(keywordArray[i]));
                             }
                         }
-
+                       
                         Application a = new Application(description.getText(), keywordList, companyNameTextField.getText(), u, Integer.parseInt(standArea.getText()), Integer.parseInt(nInvites.getText()));
                         eventSelected.addApplication(a);
                         a.setProducts(productsTextField.getText());

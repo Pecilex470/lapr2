@@ -12,7 +12,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import static javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE;
 import lapr.project.controller.UC45_Controller;
-import lapr.project.model.Event;
+import lapr.project.model.Encryption;
 import lapr.project.model.EventCenter;
 import lapr.project.model.FAE;
 import lapr.project.model.User;
@@ -52,8 +52,9 @@ public class UC50_1_UI extends javax.swing.JFrame {
                     try {
                         ExportData.serialization(ec);
                     } catch (Exception ex) {
-                        Logger.getLogger(UC44_1_UI.class.getName()).log(Level.SEVERE, null, ex);
+                        Logger.getLogger(UC50_1_UI.class.getName()).log(Level.SEVERE, null, ex);
                     }
+
                     dispose();
                 }
             }
@@ -161,11 +162,11 @@ public class UC50_1_UI extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(44, 44, 44)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(pickFB)
-                    .addComponent(unpickFB))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(unpickFB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pickFB, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(35, 35, 35)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(45, 45, 45))
             .addGroup(layout.createSequentialGroup()
@@ -174,35 +175,35 @@ public class UC50_1_UI extends javax.swing.JFrame {
                         .addGap(152, 152, 152)
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(231, 231, 231)
+                        .addGap(219, 219, 219)
                         .addComponent(jLabel1)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(confirmFae)
-                .addGap(29, 29, 29)
                 .addComponent(backFae)
-                .addContainerGap())
+                .addGap(18, 18, 18)
+                .addComponent(confirmFae)
+                .addGap(20, 20, 20))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(98, 98, 98)
+                        .addGap(63, 63, 63)
                         .addComponent(pickFB)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
                         .addComponent(unpickFB)))
-                .addGap(77, 77, 77)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(58, 58, 58)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(confirmFae)
                     .addComponent(backFae))
@@ -213,225 +214,231 @@ public class UC50_1_UI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void pickFBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pickFBActionPerformed
-       String fae = pickFae1.getSelectedValue();
+        String fae = pickFae1.getSelectedValue();
         String fae2 = pickFae2.getSelectedValue();
-        
-        
+
         pickFae2.setModel(new javax.swing.AbstractListModel<String>() {
             static final long serialVersionUID = -3387516993124229948L;
             String[] strings = returnTopList();
-            
+
             public int getSize() {
                 return strings.length;
             }
-            
+
             public String getElementAt(int i) {
                 return strings[i];
             }
         });
-        
-        addFAEToPickedList(fae,fae2);
-        
-        
-        
+
+       
+
         double a = Double.parseDouble(JOptionPane.showInputDialog(UC50_1_UI.this, "Enter the significance level [0.01 or 0.05]"));
-        
+
         while (a != 0.01 && a != 0.05) {
             
             JOptionPane.showMessageDialog(UC50_1_UI.this, "Insert 0.01 or 0.05");
             a = Double.parseDouble(JOptionPane.showInputDialog(UC50_1_UI.this, "Enter the significance level [0.01 or 0.05]"));
         }
-    }//GEN-LAST:event_pickFBActionPerformed
 
-    private void unpickFBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_unpickFBActionPerformed
-       String faePicked = pickedFAE.getSelectedValue();
-        
-        removeFAEFromPickedList(faePicked);
+         addFAEToPickedList(fae, fae2, ""+a);
         
         pickedFAE.setModel(new javax.swing.AbstractListModel<String>() {
             static final long serialVersionUID = -3387516993124229948L;
-            String[] strings = returnPickedList();
-            
+            String[] strings = pickedList;
+
             public int getSize() {
                 return strings.length;
             }
-            
+
             public String getElementAt(int i) {
                 return strings[i];
             }
-        }); 
-        
-     
-        
+        });
+    }//GEN-LAST:event_pickFBActionPerformed
+
+    private void unpickFBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_unpickFBActionPerformed
+        String faePicked = pickedFAE.getSelectedValue();
+
+        removeFAEFromPickedList(faePicked);
+
+        pickedFAE.setModel(new javax.swing.AbstractListModel<String>() {
+            static final long serialVersionUID = -3387516993124229948L;
+            String[] strings = returnPickedList();
+
+            public int getSize() {
+                return strings.length;
+            }
+
+            public String getElementAt(int i) {
+                return strings[i];
+            }
+        });
+
         pickFae2.setModel(new javax.swing.AbstractListModel<String>() {
             static final long serialVersionUID = -3387516993124229948L;
             String[] strings = returnTopList();
-            
+
             public int getSize() {
                 return strings.length;
             }
-            
+
             public String getElementAt(int i) {
                 return strings[i];
             }
-        });                                         
-                                              
+        });
+
     }//GEN-LAST:event_unpickFBActionPerformed
 
     private void backFaeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backFaeActionPerformed
-        // TODO add your handling code here:
+        dispose();
+        new EventManagerActions_UI(ec, user);
     }//GEN-LAST:event_backFaeActionPerformed
 
     private void confirmFaeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmFaeActionPerformed
-       for(int i =0; i<pickedList.length;i++){
-         String[] part=pickedList[i].trim().split("-");
-         String part1 = part[0].trim();
-         String part2 = part[1].trim();
-         faeSelected1.add(nameStringToFAE(part1));
-         faeSelected2.add(nameStringToFAE(part2));
-      
-      }
-       
-      
-      if(faeSelected1==null || faeSelected2==null){
-       JOptionPane.showMessageDialog(UC50_1_UI.this, "Please select events", "Error", JOptionPane.OK_OPTION);
-      }else{
-        new UC50_2_UI(ec,faeSelected1,faeSelected2,pickedList, user);
-        dispose();
-      }
-                                                 
+        for (int i = 0; i < pickedList.length; i++) {
+            String[] part = pickedList[i].trim().split("-");
+            String part1 = part[0].trim();
+            String part2 = part[1].trim();
+            String signLevel = part[2].trim();
+            faeSelected1.add(nameStringToFAE(part1));
+            faeSelected2.add(nameStringToFAE(part2));
+
+        }
+
+        if (faeSelected1 == null || faeSelected2 == null) {
+            JOptionPane.showMessageDialog(UC50_1_UI.this, "Please select events", "Error", JOptionPane.OK_OPTION);
+        } else {
+            new UC50_2_UI(ec, faeSelected1, faeSelected2, pickedList, user);
+            dispose();
+        }
+
     }//GEN-LAST:event_confirmFaeActionPerformed
 
-    
     /**
      * Method that retrieves the full list of fae that evaluated a application
      *
      * @return a String array to fill the JList
      */
     public String[] inicialFAE1List() {
-        
 
         String[] list = new String[ec.getFAEEvaluatedApplications().size()];
         int cont = 0;
-       
+
         for (FAE fae : ec.getFAEEvaluatedApplications()) {
-            
-            String title = fae.getName();
+            String title = Encryption.deEncryptPassword(fae.getEncryptedName(), ec.getEncryptionRegister().getEncryptionByUser(fae.getUserFAE()).getShift(), Encryption.ABC);
+            title = Encryption.deEncryptData(title, ec.getEncryptionRegister().getEncryptionByUser(fae.getUserFAE()).getKeyword());
             list[cont] = title;
             cont++;
         }
-        
+
         topList = list;
-        
+
         return list;
     }
 
-    
-     public void removeFAEFromTop2List(String uName) {
-        
+    public void removeFAEFromTop2List(String uName) {
+
         String[] list = new String[topList.length - 1];
-        
+
         int flag = 0;
         for (int i = 0; i < topList.length; i++) {
-            
+
             if (!uName.equals(topList[i])) {
                 list[i - flag] = topList[i];
             } else {
                 flag++;
             }
         }
-        
+
         topList = new String[topList.length - 1];
         topList = list;
-        
+
     }
-    
+
     public void removeFAEFromPickedList(String eTwoTitle) {
         String[] eTitle = eTwoTitle.trim().split("-");
         String eTitle1 = eTitle[0];
-        String eTitle2 = eTitle[1]; 
-        
+        String eTitle2 = eTitle[1];
+
         String[] list = new String[pickedList.length - 1];
-        
+
         int flag = 0;
-        for (int i = 0; i < pickedList.length; i++){
-           String[] part= pickedList[i].trim().split("-");
-           String part1 = part[0];
-           String part2 = part[1];
-           if (!eTitle1.equals(part1) && !eTitle2.equals(part2)) {
-                list[i - flag] = pickedList[i] ;
+        for (int i = 0; i < pickedList.length; i++) {
+            String[] part = pickedList[i].trim().split("-");
+            String part1 = part[0];
+            String part2 = part[1];
+            if (!eTitle1.equals(part1) && !eTitle2.equals(part2)) {
+                list[i - flag] = pickedList[i];
             } else {
                 flag++;
             }
         }
-        
+
         pickedList = new String[pickedList.length - 1];
         pickedList = list;
-        
+
     }
-    
-    public void addFAEToPickedList(String pickedFAE, String pickedFAE2) {
-        
+
+    public void addFAEToPickedList(String pickedFAE, String pickedFAE2, String signLevel) {
+
         String[] list = new String[pickedList.length + 1];
-        
+
         for (int i = 0; i < pickedList.length; i++) {
             list[i] = pickedList[i];
         }
-        
-        list[list.length - 1] = pickedFAE + "-" + pickedFAE2;
-        
+
+        list[list.length - 1] = pickedFAE + "-" + pickedFAE2 + "-" + signLevel;
+
         pickedList = new String[pickedList.length + 1];
         pickedList = list;
-        
+
     }
-    
-    
+
     public void addEventToTopList(String topFAE) {
-        
+
         String[] list = new String[topList.length + 1];
-        
+
         for (int i = 0; i < topList.length; i++) {
             list[i] = topList[i];
         }
         String[] part = topFAE.split("-");
-        String FAE2=part[1].trim();
+        String FAE2 = part[1].trim();
         list[list.length - 1] = FAE2;
-        
+
         topList = new String[topList.length + 1];
         topList = list;
-        
+
     }
-    
+
     public String[] returnPickedList() {
-        
+
         return pickedList;
     }
-    
+
     public String[] returnTopList() {
         return topList;
     }
-    
+
     public FAE nameStringToFAE(String name) {
-        
-        String c =name;
-        FAE f= new FAE();
+
+        String c = name;
+        FAE f = new FAE();
         for (FAE fae : ec.getFAEEvaluatedApplications()) {
-         
-            if (c.equals(fae.getName())) {  
+
+            if (c.equals(fae.getEncryptedName())) {
 
                 f = fae;
                 break;
             }
         }
-        
+
         return f;
     }
-    
-     private void faeListMouseClicked(java.awt.event.MouseEvent evt) {                                      
 
-    }  
-   
-    
+    private void faeListMouseClicked(java.awt.event.MouseEvent evt) {
+
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backFae;

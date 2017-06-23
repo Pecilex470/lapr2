@@ -5,8 +5,12 @@
  */
 package lapr.project.ui;
 
+import javax.swing.JOptionPane;
+import static javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE;
+import lapr.project.model.Encryption;
 import lapr.project.model.Event;
 import lapr.project.model.EventCenter;
+import lapr.project.model.FAE;
 import lapr.project.model.User;
 
 /**
@@ -19,17 +23,30 @@ public class UC48_UI extends javax.swing.JFrame {
     Event eventSelected;
     EventCenter ec;
     User u;
-    
+    private FAE selectedFAE;
+
     /**
-     * 
+     *
      * @param ec - EventCenter
      * @param u - User
      */
     public UC48_UI(EventCenter ec, User u) {
-        this.ec=ec;
-        this.u=u;
-        
+        this.ec = ec;
+        this.u = u;
+
         initComponents();
+        this.setVisible(true);
+        setLocationRelativeTo(null);
+        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+        this.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+                if (JOptionPane.showConfirmDialog(UC48_UI.this, "Do you wish to exit?", "Close", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
+                    new EventManagerActions_UI(ec, u);
+                    dispose();
+                }
+            }
+        });
     }
 
     /**
@@ -44,16 +61,17 @@ public class UC48_UI extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         listLabel = new javax.swing.JList<>();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        backButton = new javax.swing.JButton();
+        confirmButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("UC48");
 
         jLabel1.setText("Choose a FAE");
 
         listLabel.setModel(new javax.swing.AbstractListModel<String>() {
             static final long serialVersionUID = -3387516993124229948L;
-            String[] strings = {""};
+            String[] strings = getFAEList();
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
@@ -64,14 +82,19 @@ public class UC48_UI extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(listLabel);
 
-        jButton1.setText("Back");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        backButton.setText("Back");
+        backButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                backButtonActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Confirm");
+        confirmButton.setText("Confirm");
+        confirmButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                confirmButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -80,52 +103,67 @@ public class UC48_UI extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(78, 78, 78)
+                        .addGap(81, 81, 81)
+                        .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(confirmButton))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(119, 119, 119)
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(42, 42, 42)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton1)
-                                .addGap(25, 25, 25)
-                                .addComponent(jButton2)))))
-                .addContainerGap(50, Short.MAX_VALUE))
+                        .addGap(56, 56, 56)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(60, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(28, 28, 28)
                 .addComponent(jLabel1)
-                .addGap(35, 35, 35)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
-                .addContainerGap())
+                    .addComponent(backButton)
+                    .addComponent(confirmButton))
+                .addGap(45, 45, 45))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
+        if (JOptionPane.showConfirmDialog(UC48_UI.this, "Do you wish to exit?", "Close", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
+            new EventManagerActions_UI(ec, u);
+            dispose();
+        }
+
+    }//GEN-LAST:event_backButtonActionPerformed
 
     private void listLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listLabelMouseClicked
-      //  this.eventSelected = ec.getEventRegister().getEventList().getlistLabel.getSelectedIndex();
+        selectedFAE = ec.getFAEEvaluatedApplications().get(listLabel.getSelectedIndex());
     }//GEN-LAST:event_listLabelMouseClicked
 
-//    public String[] getFAEList(){
-//        String[] list = new String[];
-//        
-//        
-//        return list;        
-//    }
+    private void confirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmButtonActionPerformed
+        String name = Encryption.deEncryptPassword(selectedFAE.getEncryptedName(), ec.getEncryptionRegister().getEncryptionByUser(selectedFAE.getUserFAE()).getShift(), Encryption.ABC);
+        name = Encryption.deEncryptData(name, ec.getEncryptionRegister().getEncryptionByUser(selectedFAE.getUserFAE()).getKeyword());
+        JOptionPane.showMessageDialog(UC48_UI.this, "The mean deviation for this FAE is " + ec.getMeanDeviation(name));
+    }//GEN-LAST:event_confirmButtonActionPerformed
+
+    public String[] getFAEList() {
+        String[] list = new String[ec.getFAEEvaluatedApplications().size()];
+
+        for (int i = 0; i < list.length; i++) {
+            String name = Encryption.deEncryptPassword(ec.getFAEEvaluatedApplications().get(i).getEncryptedName(), ec.getEncryptionRegister().getEncryptionByUser(ec.getFAEEvaluatedApplications().get(i).getUserFAE()).getShift(), Encryption.ABC);
+            name = Encryption.deEncryptData(name, ec.getEncryptionRegister().getEncryptionByUser(ec.getFAEEvaluatedApplications().get(i).getUserFAE()).getKeyword());
+            list[i] = name;
+        }
+
+        return list;
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton backButton;
+    private javax.swing.JButton confirmButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JList<String> listLabel;

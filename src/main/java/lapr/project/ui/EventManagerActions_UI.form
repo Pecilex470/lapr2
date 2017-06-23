@@ -170,6 +170,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="UC48 - Show the mean deviation between FAEs&apos; average ratings and global mean rating"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="uc48ButtonActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="uc47Button">
       <Properties>

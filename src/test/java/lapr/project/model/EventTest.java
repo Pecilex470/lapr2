@@ -291,22 +291,23 @@ public class EventTest {
 //    @Test
 //    public void testAddApplication() {
 //        System.out.println("addApplication");
-//        Application a = ap;
+//        Application a = new Application("descri", keywords, "companyName", u, 0, 0);
+//        
 //        Event instance = e;
 //        instance.addApplication(a);
 //    }
 
-//    /**
-//     * Test of getApplicationList method, of class Event.
-//     */
-//    @Test
-//    public void testGetApplicationList() {
-//        System.out.println("getApplicationList");
-//        Event instance = e;
-//        int expResult = applicationList.getApplications().size();
-//        int result = instance.getApplicationList().getApplications().size();
-//        assertEquals(expResult, result);
-//    }
+    /**
+     * Test of getApplicationList method, of class Event.
+     */
+    @Test
+    public void testGetApplicationList() {
+        System.out.println("getApplicationList");
+        Event instance = e;
+        ApplicationList expResult = e.getApplicationList();
+        ApplicationList result = instance.getApplicationList();
+        assertEquals(expResult, result);
+    }
 
 //    /**
 //     * Test of getAcceptanceRate method, of class Event.
@@ -315,36 +316,34 @@ public class EventTest {
 //    public void testGetAcceptanceRate() {
 //        System.out.println("getAcceptanceRate");
 //        Event instance = e;
-//        double expResult = 0.0;
+//        double expResult = e.getAcceptanceRate();
 //        double result = instance.getAcceptanceRate();
 //        assertEquals(expResult, result, 0.0);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
 //    }
 
-//    /**
-//     * Test of getFaeList method, of class Event.
-//     */
-//    @Test
-//    public void testGetFaeList() {
-//        System.out.println("getFaeList");
-//        Event instance = e;
-//        FAEList expResult = faeList;
-//        FAEList result = instance.getFaeList();
-//        assertEquals(expResult, result);
-//    }
-//
-//    /**
-//     * Test of getKeywordList method, of class Event.
-//     */
-//    @Test
-//    public void testGetKeywordList() {
-//        System.out.println("getKeywordList");
-//        Event instance = e;
-//        List<Keyword> expResult = keywords;
-//        List<Keyword> result = instance.getKeywordList();
-//        assertEquals(expResult, result);
-//    }
+    /**
+     * Test of getFaeList method, of class Event.
+     */
+    @Test
+    public void testGetFaeList() {
+        System.out.println("getFaeList");
+        Event instance = e;
+        FAEList expResult = e.getFaeList();
+        FAEList result = instance.getFaeList();
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of getKeywordList method, of class Event.
+     */
+    @Test
+    public void testGetKeywordList() {
+        System.out.println("getKeywordList");
+        Event instance = e;
+        List<Keyword> expResult = e.getKeywordList();
+        List<Keyword> result = instance.getKeywordList();
+        assertEquals(expResult, result);
+    }
 
 //    /**
 //     * Test of getFAE method, of class Event.
@@ -354,11 +353,11 @@ public class EventTest {
 //        System.out.println("getFAE");
 //        User user = u;
 //        Event instance = e;
-//        FAE expResult = new FAE(u);
+//        FAE expResult = e.getFAE(user);
 //        FAE result = instance.getFAE(user);
 //        assertEquals(expResult, result);
 //    }
-
+//
 //    /**
 //     * Test of isFAE method, of class Event.
 //     */
@@ -367,120 +366,110 @@ public class EventTest {
 //        System.out.println("isFAE");
 //        User user = u;
 //        Event instance = e;
-//        boolean expResult = true;
-//        boolean result = instance.isFAE(user);
+//        boolean expResult = e.isFAE(u);
+//        boolean result = instance.isFAE(u);
 //        assertEquals(expResult, result);
 //    }
 
-//    /**
-//     * Test of isOrganizer method, of class Event.
-//     */
-//    @Test
-//    public void testIsOrganizer() {
-//        System.out.println("isOrganizer");
-//        User u = null;
-//        Event instance = new Event();
-//        boolean expResult = false;
-//        boolean result = instance.isOrganizer(u);
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-//
-//    /**
-//     * Test of getOrganizerList method, of class Event.
-//     */
-//    @Test
-//    public void testGetOrganizerList() {
-//        System.out.println("getOrganizerList");
-//        Event instance = new Event();
-//        OrganizerList expResult = null;
-//        OrganizerList result = instance.getOrganizerList();
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-//
-//    /**
-//     * Test of getAvailableArea method, of class Event.
-//     */
-//    @Test
-//    public void testGetAvailableArea() {
-//        System.out.println("getAvailableArea");
-//        Event instance = new Event();
-//        int expResult = 0;
-//        int result = instance.getAvailableArea();
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-//
-//    /**
-//     * Test of setAvailableArea method, of class Event.
-//     */
-//    @Test
-//    public void testSetAvailableArea() {
-//        System.out.println("setAvailableArea");
-//        int area = 0;
-//        Event instance = new Event();
-//        instance.setAvailableArea(area);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-//
-//    /**
-//     * Test of addStand method, of class Event.
-//     */
-//    @Test
-//    public void testAddStand() {
-//        System.out.println("addStand");
-//        Stand stand = null;
-//        Event instance = new Event();
-//        instance.addStand(stand);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-//
-//    /**
-//     * Test of getAvailableStands method, of class Event.
-//     */
-//    @Test
-//    public void testGetAvailableStands() {
-//        System.out.println("getAvailableStands");
-//        Event instance = new Event();
-//        List<Stand> expResult = null;
-//        List<Stand> result = instance.getAvailableStands();
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-//
-//    /**
-//     * Test of getStandList method, of class Event.
-//     */
-//    @Test
-//    public void testGetStandList() {
-//        System.out.println("getStandList");
-//        Event instance = new Event();
-//        List<Stand> expResult = null;
-//        List<Stand> result = instance.getStandList();
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-//
-//    /**
-//     * Test of setStandList method, of class Event.
-//     */
-//    @Test
-//    public void testSetStandList() {
-//        System.out.println("setStandList");
-//        List<Stand> list = null;
-//        Event instance = new Event();
-//        instance.setStandList(list);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
+    /**
+     * Test of isOrganizer method, of class Event.
+     */
+    @Test
+    public void testIsOrganizer() {
+        System.out.println("isOrganizer");
+        User u = new User();
+        Event instance = e;
+        boolean expResult = e.isOrganizer(u);
+        boolean result = instance.isOrganizer(u);
+        assertEquals(expResult, result);
+
+    }
+
+    /**
+     * Test of getOrganizerList method, of class Event.
+     */
+    @Test
+    public void testGetOrganizerList() {
+        System.out.println("getOrganizerList");
+        Event instance = e;
+        OrganizerList expResult = e.getOrganizerList();
+        OrganizerList result = instance.getOrganizerList();
+        assertEquals(expResult, result);
+  
+    }
+
+    /**
+     * Test of getAvailableArea method, of class Event.
+     */
+    @Test
+    public void testGetAvailableArea() {
+        System.out.println("getAvailableArea");
+        Event instance = e;
+        int expResult = 300;
+        int result = instance.getAvailableArea();
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of setAvailableArea method, of class Event.
+     */
+    @Test
+    public void testSetAvailableArea() {
+        System.out.println("setAvailableArea");
+        int area = 300;
+        Event instance = e;
+        instance.setAvailableArea(area);
+    }
+
+    /**
+     * Test of addStand method, of class Event.
+     */
+    @Test
+    public void testAddStand() {
+        System.out.println("addStand");
+        Stand stand = new Stand();
+        Event instance = e;
+        instance.addStand(stand);
+  
+    }
+
+    /**
+     * Test of getAvailableStands method, of class Event.
+     */
+    @Test
+    public void testGetAvailableStands() {
+        System.out.println("getAvailableStands");
+        Event instance = e;
+        List<Stand> expResult = e.getAvailableStands();
+        List<Stand> result = instance.getAvailableStands();
+        assertEquals(expResult, result);
+
+    }
+
+    /**
+     * Test of getStandList method, of class Event.
+     */
+    @Test
+    public void testGetStandList() {
+        System.out.println("getStandList");
+        Event instance = e;
+        List<Stand> expResult = e.getStandList();
+        List<Stand> result = instance.getStandList();
+        assertEquals(expResult, result);
+  
+    }
+
+    /**
+     * Test of setStandList method, of class Event.
+     */
+    @Test
+    public void testSetStandList() {
+        System.out.println("setStandList");
+        List<Stand> list = new ArrayList<>();
+        Event instance = e;
+        instance.setStandList(list);
+
+    }
 //
 //    /**
 //     * Test of getZUni method, of class Event.
@@ -488,29 +477,27 @@ public class EventTest {
 //    @Test
 //    public void testGetZUni() {
 //        System.out.println("getZUni");
-//        Event instance = new Event();
-//        double expResult = 0.0;
+//        Event instance = e;
+//        double expResult = e.getZUni();
 //        double result = instance.getZUni();
 //        assertEquals(expResult, result, 0.0);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
 //
+//    }
+
 //    /**
 //     * Test of getZBil method, of class Event.
 //     */
 //    @Test
 //    public void testGetZBil() {
 //        System.out.println("getZBil");
-//        Event e = null;
-//        Event instance = new Event();
-//        double expResult = 0.0;
+//        Event instance = e;
+//        double expResult = e.getZBil(instance);
 //        double result = instance.getZBil(e);
 //        assertEquals(expResult, result, 0.0);
 //        // TODO review the generated test code and remove the default call to fail.
 //        fail("The test case is a prototype.");
 //    }
-//
+
 //    /**
 //     * Test of criticalValue method, of class Event.
 //     */
@@ -518,12 +505,11 @@ public class EventTest {
 //    public void testCriticalValue() {
 //        System.out.println("criticalValue");
 //        String a = "";
-//        Event instance = new Event();
-//        double expResult = 0.0;
+//        Event instance = e;
+//        double expResult = e.criticalValue(a);
 //        double result = instance.criticalValue(a);
 //        assertEquals(expResult, result, 0.0);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
+// 
 //    }
 //
 //    /**
@@ -532,13 +518,12 @@ public class EventTest {
 //    @Test
 //    public void testTestAcceptanceRate50() {
 //        System.out.println("testAcceptanceRate50");
-//        String a = "";
-//        Event instance = new Event();
-//        String expResult = "";
+//        String a = "abc";
+//        Event instance = e;
+//        String expResult = e.testAcceptanceRate50(a);
 //        String result = instance.testAcceptanceRate50(a);
 //        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
+//
 //    }
 //
 //    /**
@@ -547,28 +532,25 @@ public class EventTest {
 //    @Test
 //    public void testTestDifferenceTwoEventsAccepRate50() {
 //        System.out.println("testDifferenceTwoEventsAccepRate50");
-//        Event e = null;
-//        String a = "";
-//        Event instance = new Event();
-//        String expResult = "";
+//        String a = "abc";
+//        Event instance = e;
+//        String expResult = e.testDifferenceTwoEventsAccepRate50(e, a);
 //        String result = instance.testDifferenceTwoEventsAccepRate50(e, a);
 //        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
+//  
 //    }
-//
-//    /**
-//     * Test of setFAEList method, of class Event.
-//     */
-//    @Test
-//    public void testSetFAEList() {
-//        System.out.println("setFAEList");
-//        FAEList faelist = null;
-//        Event instance = new Event();
-//        instance.setFAEList(faelist);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
+
+    /**
+     * Test of setFAEList method, of class Event.
+     */
+    @Test
+    public void testSetFAEList() {
+        System.out.println("setFAEList");
+        FAEList faelist = new FAEList();
+        Event instance = e;
+        instance.setFAEList(faelist);
+
+    }
 //
 //    /**
 //     * Test of checkIFUserIsFAE method, of class Event.
@@ -576,13 +558,12 @@ public class EventTest {
 //    @Test
 //    public void testCheckIFUserIsFAE() {
 //        System.out.println("checkIFUserIsFAE");
-//        User u = null;
-//        Event instance = new Event();
-//        boolean expResult = false;
+//        User u = new User();
+//        Event instance = e;
+//        boolean expResult = e.checkIFUserIsFAE(u);
 //        boolean result = instance.checkIFUserIsFAE(u);
 //        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
+//
 //    }
 //
 //    /**
@@ -591,83 +572,77 @@ public class EventTest {
 //    @Test
 //    public void testCheckIFUserIsOrganizer() {
 //        System.out.println("checkIFUserIsOrganizer");
-//        User u = null;
-//        Event instance = new Event();
-//        boolean expResult = false;
+//        User u = new User();
+//        Event instance = e;
+//        boolean expResult = e.checkIFUserIsFAE(u);
 //        boolean result = instance.checkIFUserIsOrganizer(u);
 //        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
 //
-//    /**
-//     * Test of addArea method, of class Event.
-//     */
-//    @Test
-//    public void testAddArea() {
-//        System.out.println("addArea");
-//        int area = 0;
-//        Event instance = new Event();
-//        instance.addArea(area);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
 //    }
-//
-//    /**
-//     * Test of setKeywordList method, of class Event.
-//     */
-//    @Test
-//    public void testSetKeywordList() {
-//        System.out.println("setKeywordList");
-//        List<Keyword> keywordList = null;
-//        Event instance = new Event();
-//        instance.setKeywordList(keywordList);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-//
+
+    /**
+     * Test of addArea method, of class Event.
+     */
+    @Test
+    public void testAddArea() {
+        System.out.println("addArea");
+        int area = 30;
+        Event instance = e;
+        instance.addArea(area);
+
+    }
+
+    /**
+     * Test of setKeywordList method, of class Event.
+     */
+    @Test
+    public void testSetKeywordList() {
+        System.out.println("setKeywordList");
+        List<Keyword> keywordList = new ArrayList<>();
+        Event instance = e;
+        instance.setKeywordList(keywordList);
+
+    }
+
 //    /**
 //     * Test of getFAEAtri method, of class Event.
 //     */
 //    @Test
 //    public void testGetFAEAtri() {
 //        System.out.println("getFAEAtri");
-//        int i = 0;
-//        Event instance = new Event();
-//        FAE expResult = null;
+//        int i = 2;
+//        Event instance = e;
+//        FAE expResult = e.getFAEAtri(i);
 //        FAE result = instance.getFAEAtri(i);
 //        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
 //
-//    /**
-//     * Test of getK method, of class Event.
-//     */
-//    @Test
-//    public void testGetK() {
-//        System.out.println("getK");
-//        int num = 0;
-//        Event instance = new Event();
-//        int expResult = 0;
-//        int result = instance.getK(num);
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
 //    }
-//
+
+    /**
+     * Test of getK method, of class Event.
+     */
+    @Test
+    public void testGetK() {
+        System.out.println("getK");
+        int num = 1;
+        Event instance = e;
+        int expResult = e.getK(num);
+        int result = instance.getK(num);
+        assertEquals(expResult, result);
+
+    }
+
 //    /**
 //     * Test of determineInterspaceOfTable method, of class Event.
 //     */
 //    @Test
 //    public void testDetermineInterspaceOfTable() {
 //        System.out.println("determineInterspaceOfTable");
-//        Event instance = new Event();
-//        int expResult = 0;
+//        Event instance = e;
+//        int expResult = e.determineInterspaceOfTable();
 //        int result = instance.determineInterspaceOfTable();
 //        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
+//  
 //    }
 
 }

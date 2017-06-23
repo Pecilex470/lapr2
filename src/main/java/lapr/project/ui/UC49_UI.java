@@ -6,6 +6,8 @@
 package lapr.project.ui;
 
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import static javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE;
 import javax.swing.table.DefaultTableModel;
@@ -13,6 +15,7 @@ import lapr.project.controller.UC49_Controller;
 import lapr.project.model.EventCenter;
 import lapr.project.model.FAE;
 import lapr.project.model.User;
+import lapr.project.utils.ExportData;
 
 /**
  *
@@ -43,9 +46,14 @@ public class UC49_UI extends javax.swing.JFrame {
         this.addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
             public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+               
                 if (JOptionPane.showConfirmDialog(UC49_UI.this, "Do you wish to exit without saving?", "Close", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
-                    new EventManagerActions_UI(ec, u);
                     dispose();
+                    try {
+                        ExportData.serialization(ec);
+                    } catch (Exception ex) {
+                        Logger.getLogger(EventManagerActions_UI.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
             }
         });
@@ -157,10 +165,10 @@ public class UC49_UI extends javax.swing.JFrame {
         DefaultTableModel val = (DefaultTableModel) Table1.getModel();
         List<FAE> allFAE = c.getFaeThatEvaluatedApplications(ec);
         for (FAE fae : allFAE) {
-            String nome = fae.getName();
+            String nome = fae.getEncryptedName();
             int nSub = ec.getEvaluatedApplicationsFAE(nome).size();
             double mRa = ec.getMeanRatingF(nome);
-            double dMean = ec.getMeanDeviation(fae.getName());
+            double dMean = ec.getMeanDeviation(fae.getEncryptedName());
             double sMean = ec.getStandardDeviation(nome);
             double z = ec.getZ(fae);
             String dec = ec.testTheDifferenceBetweenTheMeanDeviationAndATheoreticalValue1ForAFAEAverageRating(a, fae);

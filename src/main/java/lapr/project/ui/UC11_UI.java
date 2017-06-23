@@ -468,11 +468,12 @@ public class UC11_UI extends javax.swing.JFrame {
 
         try {
             this.selectedEvent = c.getEventsWhereRepresentativeHasApplications(u).get(listEvent.getSelectedIndex());
+            
         } catch (Exception e) {
 
         }
 
-        try {
+        
             listApplication.setModel(new javax.swing.AbstractListModel<String>() {
                 static final long serialVersionUID = -3387516993124229948L;
 
@@ -488,9 +489,7 @@ public class UC11_UI extends javax.swing.JFrame {
             });
 
             maxAreaAvailableStand.setText("" + selectedEvent.getAvailableArea());
-        } catch (Exception e) {
-
-        }
+       
 
         cleanTextFields();
 
@@ -584,7 +583,7 @@ public class UC11_UI extends javax.swing.JFrame {
 
         int cont = 0;
         for (Event e : c.getEventsWhereRepresentativeHasApplications(u)) {
-
+           
             eventList[cont] = c.getEventsWhereRepresentativeHasApplications(u).get(cont).getTitle();
             cont++;
         }
