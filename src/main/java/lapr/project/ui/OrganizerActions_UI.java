@@ -180,9 +180,10 @@ public class OrganizerActions_UI extends javax.swing.JFrame {
     }//GEN-LAST:event_uc40ButtonActionPerformed
 
     private void uc2ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uc2ButtonActionPerformed
+        new UC2_UI(ec, u);
         dispose();
 
-        new UC2_UI(ec, u);
+        
     }//GEN-LAST:event_uc2ButtonActionPerformed
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
