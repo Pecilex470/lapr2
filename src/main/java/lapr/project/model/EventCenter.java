@@ -128,21 +128,26 @@ public class EventCenter implements Serializable {
      */
     public double getGlobalAcceptanceRate() {
 
-        double globalAcceptanceRate = 0;
+        int nApplicationsTotal = 0;
+        int nApplicationsAccepted = 0;
 
-        int count = 0;
+        for (Event e : getEventRegister().getEventList()) {
 
-        for (Event e : er.getEventList()) {
-            if (!e.getApplicationList().getApplications().isEmpty()) {
-                globalAcceptanceRate += e.getAcceptanceRate();
-                count++;
-            }
+            nApplicationsAccepted += e.getApplicationList().getAcceptedApplicationRegister().size();
+            nApplicationsTotal += e.getApplicationList().getApplications().size();
 
         }
-        if (count != 0) {
-            return globalAcceptanceRate / count;
+
+        
+        double acceptanceRounded = 0;
+        
+        if (nApplicationsTotal != 0) {
+            int acceptance = (int) (((nApplicationsAccepted * 100) / nApplicationsTotal) * 100);
+            acceptanceRounded = (double) acceptance / 100;
         }
-        return 0;
+
+        return acceptanceRounded;
+
     }
 
     /**
