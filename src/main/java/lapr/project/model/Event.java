@@ -477,4 +477,18 @@ public class Event implements Serializable {
         return (getAreaOfBiggestStand() - getAreaOfSmallest() / getK(getNumberOfStands()));
     }
 
+    public Application getApplicationByName (String companyName){
+        
+        Application a = new Application();
+        
+        for(Application app: applicationList.getApplications()){
+            System.out.println("231312");
+            if (app.getCompanyName().equals(a.getCompanyName())) {
+                a = app;
+            }
+            
+        }
+        return a;
+    }
+    
 }
